@@ -22,10 +22,10 @@ public class Category {
     String id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    String name;
 
-    private String description;
+    String description;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<Phone> phones = new ArrayList<>();
+    List<Phone> phones = new ArrayList<>();
 }
