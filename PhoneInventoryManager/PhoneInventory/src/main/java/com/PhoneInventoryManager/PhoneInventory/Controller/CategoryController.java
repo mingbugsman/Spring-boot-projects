@@ -40,7 +40,7 @@ public class CategoryController {
     public ResponseEntity<List<CategoryStockDTO>> getCategoriesWithPhoneCount() {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategoriesWithPhoneCount());
     }
-    @GetMapping("/CategoryWithPhoneCount/${categoryName}")
+    @GetMapping("/CategoryWithPhoneCount/{categoryName}")
     public ResponseEntity<CategoryStockDTO> getCategoryWithPhoneCount(@PathVariable String categoryName) {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategoryWithPhoneCount(categoryName));
     }
@@ -48,7 +48,6 @@ public class CategoryController {
     public ResponseEntity<List<CategoryStockDTO>> findPopularCategories() {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.findPopularCategories());
     }
-
 
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody @Valid CategoryRequest request) {

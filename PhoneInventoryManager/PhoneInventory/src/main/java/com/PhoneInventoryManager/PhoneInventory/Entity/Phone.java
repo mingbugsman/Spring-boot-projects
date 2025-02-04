@@ -40,7 +40,7 @@ public class Phone {
 
 
     // relationship
-    @OneToOne(mappedBy = "phone", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "phone", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Specification specification;
 
 
@@ -52,11 +52,10 @@ public class Phone {
     // time stamp
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    LocalDateTime createdAt;
+    LocalDateTime createdAt = LocalDateTime.now();
 
     @UpdateTimestamp
     @Column(name = "updated_At")
     LocalDateTime updatedAt;
-
 
 }

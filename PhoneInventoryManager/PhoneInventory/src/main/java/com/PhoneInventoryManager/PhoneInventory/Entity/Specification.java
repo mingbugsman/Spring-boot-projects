@@ -20,7 +20,7 @@ public class Specification {
     String id;
 
     @OneToOne
-    @JoinColumn(name = "phone_id", nullable = false)
+    @JoinColumn(name = "phone_id")
     private Phone phone;
 
     private String storage;

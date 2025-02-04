@@ -10,5 +10,4 @@ public class PhoneInventoryApplication {
 
 		SpringApplication.run(PhoneInventoryApplication.class, args);
 	}
-
 }
