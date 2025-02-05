@@ -16,16 +16,16 @@ public interface CategoryMapper {
     @Mapping(target = "phones", ignore = true)
     Category toCategory (CategoryRequest request);
 
+
     CategoryDTO toCategoryResponse(Category category);
 
-    default CategoryStockDTO toCategoryStockDTO(Object[] object) {
-        if (object == null || object.length < 2) {
-            return null;
-        }
-        return new CategoryStockDTO(
-                (String) object[0],
-                ((Number) object[1]).longValue()
-        );
+
+    default CategoryStockDTO toCategoryStockDTO(Object[] data) {
+        CategoryStockDTO categoryStockDTO = new CategoryStockDTO();
+        categoryStockDTO.setCategoryName((String)data[0]);
+        categoryStockDTO.setTotalStock((Long)data[1]);
+        return categoryStockDTO;
     }
+
 
 }

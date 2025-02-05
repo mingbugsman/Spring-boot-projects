@@ -4,6 +4,7 @@ package com.PhoneInventoryManager.PhoneInventory.Service;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Category.CategoryDTO;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Request.CategoryRequest;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Category.CategoryStockDTO;
+import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Phone.PhoneDTO;
 import com.PhoneInventoryManager.PhoneInventory.Entity.Category;
 import com.PhoneInventoryManager.PhoneInventory.Mapper.CategoryMapper;
 import com.PhoneInventoryManager.PhoneInventory.Repository.PhoneCategoryRepository;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,12 +35,20 @@ public class CategoryService {
     public List<CategoryStockDTO> getCategoriesWithPhoneCount() {
         return categoryRepository.getCategoriesWithPhoneCount().stream().map(mapper::toCategoryStockDTO).toList();
     }
+    public CategoryStockDTO getCategoryWithPhoneCount(String categoryName) throws Exception {
+        Object[] result =(Object[])  categoryRepository.getCategoryWithPhoneCount(categoryName);
+        if (result == null) {
+            throw new Exception("Not found specification category with name " + categoryName);
+        }
+        return mapper.toCategoryStockDTO(result);
+    }
 
     public List<CategoryStockDTO> findPopularCategories() {
         return categoryRepository.findPopularCategories().stream().map(mapper::toCategoryStockDTO).toList();
     }
-    public CategoryStockDTO getCategoryWithPhoneCount(String categoryName) {
-        return mapper.toCategoryStockDTO(categoryRepository.getCategoryWithPhoneCount(categoryName));
+
+    public List<CategoryStockDTO> getStockByCategory() {
+        return categoryRepository.getStockByCategory().stream().map(mapper::toCategoryStockDTO).toList();
     }
 
     public CategoryDTO createCategory( CategoryRequest request) {
