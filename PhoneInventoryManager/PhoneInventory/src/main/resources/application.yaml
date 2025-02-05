@@ -7,6 +7,7 @@ spring:
     username: root
     password: m/ng2k56
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,3 +17,4 @@ spring:
     multipart:
       max-file-size: 500KB
       max-request-size: 500KB
+

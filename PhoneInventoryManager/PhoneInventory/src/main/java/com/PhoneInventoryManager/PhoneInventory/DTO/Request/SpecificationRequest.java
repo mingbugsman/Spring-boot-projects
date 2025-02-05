@@ -16,6 +16,7 @@ public class SpecificationRequest {
     String ram;
     @DecimalMin("2.0")
     Double screenSize;
+    private String camera;
     String battery;
     String os;
 

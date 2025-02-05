@@ -30,6 +30,8 @@ public class PhoneRequest {
     @NotNull
     String categoryId;
 
+    Integer soldQuantity;
+
     SpecificationRequest specification;
 
 }

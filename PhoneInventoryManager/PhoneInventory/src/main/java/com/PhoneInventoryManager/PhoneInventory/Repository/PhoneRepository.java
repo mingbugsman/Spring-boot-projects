@@ -7,8 +7,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 
 @Repository
@@ -21,7 +22,7 @@ public interface PhoneRepository extends JpaRepository<Phone, String> {
             "LEFT JOIN FETCH p.specification " +
             "LEFT JOIN FETCH p.category " +
             "WHERE p.id = :id")
-    List<Phone> findPhoneWithDetails(@Param("id") String id);
+    Phone findPhoneWithDetails(@Param("id") String phone_id);
 
     // find phone with catalog and price range
     @Query("SELECT p from Phone p " +
@@ -34,10 +35,13 @@ public interface PhoneRepository extends JpaRepository<Phone, String> {
             @Param("maxPrice") BigDecimal maxPrice
     );
 
-    // Inventory statistics by category (GROUP BY + JOIN)
-    @Query("SELECT c.name AS category, SUM(p.stockQuantity) AS totalStock " +
-            "FROM Phone p " +
-            "JOIN p.category c " +
-            "GROUP BY c.name")
-    List<Object[]> getStockByCategory();
+
+    @Query("SELECT p FROM Phone p WHERE p.createdAt >= :oneWeekAgo")
+    List<Phone> findPhonesCreatedLastMonth(@Param("oneWeekAgo") LocalDateTime oneWeekAgo);
+
+    List<Phone> findTop10ByOrderBySoldQuantityDesc();
+
+    @Query("SELECT p FROM Phone p WHERE p.createdAt >= :startDate ORDER BY p.soldQuantity DESC")
+    List<Phone> findTopSellingPhonesLastMonth(@Param("startDate") LocalDateTime startDate);
+
 }

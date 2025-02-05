@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PhoneDTO {
     String id;
@@ -21,6 +21,9 @@ public class PhoneDTO {
     String brand;
     BigDecimal price;
     Integer stockQuantity;
+
+    @Builder.Default
+    int soldQuantity = 0;
     SpecificationDTO specification;
     List<PhoneImageDTO> images;
     LocalDateTime createdAt;

@@ -23,10 +23,11 @@ public interface PhoneCategoryRepository extends JpaRepository<Category, String>
 
     @Query("SELECT c.name, COUNT(p.id) " +
             "FROM Category c " +
-            "LEFT JOIN c.phones p " +
-            "WHERE c.name = :category_name " +
+            "JOIN c.phones p " +
+            "WHERE c.name = :categoryName " +
             "GROUP BY c.name")
-    Object[] getCategoryWithPhoneCount(@Param("category_name") String categoryName);
+    Object getCategoryWithPhoneCount(@Param("categoryName") String categoryName);
+
 
 
     // Top three popular categories
@@ -37,4 +38,11 @@ public interface PhoneCategoryRepository extends JpaRepository<Category, String>
             "ORDER BY phoneCount DESC " +
             "LIMIT 3")
     List<Object[]> findPopularCategories();
+
+    // Inventory statistics by category (GROUP BY + JOIN)
+    @Query("SELECT c.name AS category, SUM(p.stockQuantity) AS totalStock " +
+            "FROM Phone p " +
+            "JOIN p.category c " +
+            "GROUP BY c.name")
+    List<Object[]> getStockByCategory();
 }

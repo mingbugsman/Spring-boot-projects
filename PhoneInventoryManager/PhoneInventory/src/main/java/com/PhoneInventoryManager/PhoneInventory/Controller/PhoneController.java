@@ -11,10 +11,10 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/phones")
@@ -25,8 +25,49 @@ public class PhoneController {
 
     PhoneService phoneService;
 
+    @GetMapping("/{phone_id}")
+    public ResponseEntity<PhoneDTO> getPhone(@PathVariable String phone_id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(phoneService.getPhone(phone_id));
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<PhoneDTO>> getPhones() {
+        return ResponseEntity.status(HttpStatus.OK).body(phoneService.getAllPhones());
+    }
+
+    public ResponseEntity< List<PhoneDTO>> findByCategoryAndPriceRange(String categoryName, BigDecimal minPrice, BigDecimal maxPrice) {
+        return ResponseEntity.status(HttpStatus.OK).body(phoneService.findByCategoryAndPriceRange(categoryName,minPrice, maxPrice));
+    }
+    @GetMapping("/recentPhones")
+    public ResponseEntity<List<PhoneDTO>> findPhonesCreatedLastWeek() {
+        return ResponseEntity.ok(phoneService.findPhonesCreatedLastWeek());
+    }
+    @GetMapping("/top-selling")
+    public ResponseEntity<List<PhoneDTO>> getTopSellingPhones() {
+        return ResponseEntity.ok(phoneService.getTopSellingPhones());
+    }
+
+    @GetMapping("/top-selling/month")
+    public ResponseEntity<List<PhoneDTO>> getTopSellingPhonesLastMonth() {
+        return ResponseEntity.ok(phoneService.getTopSellingPhonesLastMonth());
+    }
+
+
     @PostMapping
     public ResponseEntity<PhoneDTO> createNewPhone(@RequestBody @Valid PhoneRequest request) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(phoneService.createNewPhone(request));
+    }
+
+
+    @PutMapping("/{phone_id}")
+        public ResponseEntity<PhoneDTO> updatePhone(@PathVariable String phone_id, @RequestBody @Valid PhoneRequest request) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(phoneService.updatePhone(phone_id, request));
+    }
+
+    @DeleteMapping("/{phone_id}")
+    public ResponseEntity<String> deletePhone(@PathVariable String phone_id) throws Exception {
+        phoneService.deletePhone(phone_id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully delete phone");
     }
 }

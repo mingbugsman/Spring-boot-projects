@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Phone {
-
     // properties entity
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -38,7 +37,9 @@ public class Phone {
     @Column(name = "image_Path")
     String imagePath;
 
-
+    @Builder.Default
+    @Column(nullable = false)
+    Integer soldQuantity = 0;
     // relationship
     @OneToOne(mappedBy = "phone", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Specification specification;

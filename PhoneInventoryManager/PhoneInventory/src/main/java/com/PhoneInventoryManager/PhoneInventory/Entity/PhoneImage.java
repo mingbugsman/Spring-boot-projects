@@ -25,6 +25,7 @@ public class PhoneImage {
     @Column(name = "image_url",nullable = false)
     String imageUrl;
 
+    @Builder.Default
     @Column(name = "is_primary")
     boolean isPrimary = false;
 }
