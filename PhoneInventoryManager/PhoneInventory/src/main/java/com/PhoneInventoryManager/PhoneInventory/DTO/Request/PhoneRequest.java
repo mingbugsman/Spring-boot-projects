@@ -1,4 +1,5 @@
 package com.PhoneInventoryManager.PhoneInventory.DTO.Request;
+import com.PhoneInventoryManager.PhoneInventory.DTO.Response.PhoneImage.PhoneImageDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -6,6 +7,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +27,7 @@ public class PhoneRequest {
     @PositiveOrZero
     Integer stockQuantity;
 
-    String imagePath;
+    List<PhoneImageDTO> images;
 
     @NotNull
     String categoryId;

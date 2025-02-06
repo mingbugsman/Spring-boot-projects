@@ -25,8 +25,8 @@ public class PhoneDTO {
     @Builder.Default
     int soldQuantity = 0;
     SpecificationDTO specification;
+
     List<PhoneImageDTO> images;
     LocalDateTime createdAt;
-
     String categoryName;
 }

@@ -3,6 +3,7 @@ package com.PhoneInventoryManager.PhoneInventory.Controller;
 
 import com.PhoneInventoryManager.PhoneInventory.DTO.Request.PhoneRequest;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Phone.PhoneDTO;
+import com.PhoneInventoryManager.PhoneInventory.Service.PhoneImageService;
 import com.PhoneInventoryManager.PhoneInventory.Service.PhoneService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -12,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,10 +27,16 @@ import java.util.List;
 public class PhoneController {
 
     PhoneService phoneService;
+    PhoneImageService phoneImageService;
 
     @GetMapping("/{phone_id}")
     public ResponseEntity<PhoneDTO> getPhone(@PathVariable String phone_id) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(phoneService.getPhone(phone_id));
+    }
+
+    @GetMapping("/detail/{phone_id}")
+    public ResponseEntity<PhoneDTO> getPhoneWithDetail(@PathVariable String phone_id) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(phoneImageService.findPhoneWithDetails(phone_id));
     }
 
 
@@ -70,4 +79,22 @@ public class PhoneController {
         phoneService.deletePhone(phone_id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully delete phone");
     }
+
+
+    // Creating Image
+    @PostMapping("/{phoneId}/images")
+    public ResponseEntity<String> uploadImages(@PathVariable String phoneId, @RequestParam("files")MultipartFile[] files) {
+        try {
+            // Lưu ảnh vào cơ sở dữ liệu
+            phoneImageService.createImages(phoneId, files);
+            return ResponseEntity.ok("Images uploaded successfully.");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error uploading images: " + e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
+    }
+
 }

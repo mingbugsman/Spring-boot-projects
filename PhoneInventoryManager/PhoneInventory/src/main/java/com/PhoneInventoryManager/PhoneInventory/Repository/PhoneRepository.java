@@ -21,6 +21,7 @@ public interface PhoneRepository extends JpaRepository<Phone, String> {
     @Query("SELECT p FROM Phone p " +
             "LEFT JOIN FETCH p.specification " +
             "LEFT JOIN FETCH p.category " +
+            "LEFT JOIN FETCH p.images " +
             "WHERE p.id = :id")
     Phone findPhoneWithDetails(@Param("id") String phone_id);
 

@@ -8,6 +8,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Phones")
@@ -34,12 +36,13 @@ public class Phone {
     @Column(name = "stock_quantity", nullable = false)
     Integer stockQuantity;
 
-    @Column(name = "image_Path")
-    String imagePath;
+    @OneToMany(mappedBy = "phone", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<PhoneImage> images = new ArrayList<>();
 
     @Builder.Default
     @Column(nullable = false)
     Integer soldQuantity = 0;
+
     // relationship
     @OneToOne(mappedBy = "phone", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Specification specification;

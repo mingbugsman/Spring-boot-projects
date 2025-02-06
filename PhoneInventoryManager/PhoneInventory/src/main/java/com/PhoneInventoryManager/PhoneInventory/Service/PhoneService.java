@@ -48,6 +48,7 @@ public class PhoneService {
         return phoneRepository.findAll().stream().map(phoneMapper::toPhoneResponse).toList();
     }
 
+
     /**
      * @return the list {@code PhoneDTO} After completing the query, the products belong to a certain category
      * and have the price range that the user wants
@@ -96,15 +97,14 @@ public class PhoneService {
         if (phoneRepository.existsByModelAndBrand(request.getModel(), request.getBrand())) {
             throw new Exception("phone is existed");
         }
-
-        Phone phone = phoneMapper.toPhone(request);
+        // mapping
+        Phone phone = phoneMapper.toCreationPhone(request);
         // check category exist ?
         Category category = phoneCategoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new Exception("not found category "));
+
+        // set value for ignored attributes
         phone.setCategory(category);
 
-
-        log.info(phone.toString());
-        // specification
         SpecificationRequest specificationPhoneRequest = request.getSpecification();
         Specification specification = specificationMapper.toSpecification(specificationPhoneRequest);
 
@@ -126,8 +126,11 @@ public class PhoneService {
     public PhoneDTO updatePhone(String phone_id, PhoneRequest request) throws Exception {
         Phone phone = phoneRepository.findById(phone_id).orElseThrow(() -> new Exception("Not found phone"));
 
+        // mapping
         phoneMapper.updatePhone(phone, request);
         Category category = phoneCategoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new Exception("not found category "));
+
+        // set value for ignored attributes
         phone.setCategory(category);
         phone.setUpdatedAt(LocalDateTime.now());
 
@@ -135,10 +138,12 @@ public class PhoneService {
         if (specification == null) {
             specification = specificationMapper.toSpecification(request.getSpecification()); // Nếu chưa có, tạo mới
         } else {
-            specificationMapper.updateSpecification(specification, request.getSpecification()); // Cập nhật nếu đã có
+            specificationMapper.updateSpecification(specification, request.getSpecification()); // Update if it already is existed
         }
+
         phone.setSpecification(specification);
 
+        // Update !!!
         phone = phoneRepository.save(phone);
         return  phoneMapper.toPhoneResponse(phone);
     }
