@@ -7,8 +7,6 @@ import com.PhoneInventoryManager.PhoneInventory.Entity.Category;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
-import java.util.Objects;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {

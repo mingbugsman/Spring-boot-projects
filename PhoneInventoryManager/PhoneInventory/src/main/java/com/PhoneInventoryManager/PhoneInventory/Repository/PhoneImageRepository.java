@@ -12,6 +12,5 @@ import java.util.Optional;
 
 @Repository
 public interface PhoneImageRepository extends JpaRepository<PhoneImage,String> {
-    Optional<PhoneImage> findByPhoneIdAndIsPrimaryTrue(String phoneId);
     List<PhoneImage> findByPhoneId(String phoneId);
 }

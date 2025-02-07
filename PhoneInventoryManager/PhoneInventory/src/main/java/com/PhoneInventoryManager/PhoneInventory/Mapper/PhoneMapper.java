@@ -3,11 +3,16 @@ package com.PhoneInventoryManager.PhoneInventory.Mapper;
 
 import com.PhoneInventoryManager.PhoneInventory.DTO.Request.PhoneRequest;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Phone.PhoneDTO;
+import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Phone.PhoneSummaryDTO;
 import com.PhoneInventoryManager.PhoneInventory.Entity.Phone;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
 @Mapper(componentModel = "spring", uses = SpecificationMapper.class, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PhoneMapper {
@@ -51,5 +56,22 @@ public interface PhoneMapper {
     @Mapping(target = "specification", ignore = true)
     @Mapping(target = "images", ignore = true)
     void updatePhone(@MappingTarget Phone phone, PhoneRequest request);
+
+    default PhoneSummaryDTO toPHONE_SUMMARY_DTO(Object[] data) {
+        if (data == null) {
+            return null;
+        }
+        String categoryName, model, os, brand, imageData;
+        categoryName = model = brand = imageData = os = null;
+        if (data.length >= 5) {
+                 categoryName = (String) data[0]; // c.name
+                 model = (String) data[1]; // p.model
+                 os = (String) data[2]; // s.os
+                 brand = (String) data[3]; // p.brand
+                 imageData = Base64.getEncoder().encodeToString((byte[])data[4]); // pi.data_image
+            }
+
+        return new PhoneSummaryDTO(categoryName, model, os, brand, imageData);
+    }
 
 }

@@ -2,6 +2,7 @@ package com.PhoneInventoryManager.PhoneInventory.Service;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Request.PhoneRequest;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Request.SpecificationRequest;
 import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Phone.PhoneDTO;
+import com.PhoneInventoryManager.PhoneInventory.DTO.Response.Phone.PhoneSummaryDTO;
 import com.PhoneInventoryManager.PhoneInventory.Entity.Category;
 import com.PhoneInventoryManager.PhoneInventory.Entity.Phone;
 import com.PhoneInventoryManager.PhoneInventory.Entity.Specification;
@@ -13,6 +14,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -48,6 +53,18 @@ public class PhoneService {
         return phoneRepository.findAll().stream().map(phoneMapper::toPhoneResponse).toList();
     }
 
+    /**
+     *
+     * @param lastCreatedAt createdAt value of previous page footer record (null if first page)
+     * @param size number of records per page
+     * @return phoneSummaryDTO
+     */
+    public Page<PhoneSummaryDTO> getNextPhonesPage(LocalDateTime lastCreatedAt, int size) {
+        Pageable pageable = PageRequest.of(0, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        return phoneRepository.findNextPage(lastCreatedAt == null ? LocalDateTime.now() : lastCreatedAt, pageable)
+                .map(phoneMapper::toPHONE_SUMMARY_DTO);
+
+    }
 
     /**
      * @return the list {@code PhoneDTO} After completing the query, the products belong to a certain category
@@ -161,5 +178,8 @@ public class PhoneService {
         }
         phoneRepository.deleteById(phone_id);
     }
+
+
+
 
 }

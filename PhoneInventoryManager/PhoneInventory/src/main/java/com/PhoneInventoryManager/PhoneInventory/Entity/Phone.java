@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Phones")
+@Table(name = "phones", indexes = {
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 @Data
 @Builder
 @NoArgsConstructor
@@ -55,8 +58,9 @@ public class Phone {
 
     // time stamp
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
 
     @UpdateTimestamp
     @Column(name = "updated_At")

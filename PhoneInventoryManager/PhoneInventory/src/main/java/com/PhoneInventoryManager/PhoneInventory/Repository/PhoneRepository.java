@@ -1,6 +1,8 @@
 package com.PhoneInventoryManager.PhoneInventory.Repository;
 
 import com.PhoneInventoryManager.PhoneInventory.Entity.Phone;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,8 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-
-
 
 @Repository
 public interface PhoneRepository extends JpaRepository<Phone, String> {
@@ -44,5 +44,16 @@ public interface PhoneRepository extends JpaRepository<Phone, String> {
 
     @Query("SELECT p FROM Phone p WHERE p.createdAt >= :startDate ORDER BY p.soldQuantity DESC")
     List<Phone> findTopSellingPhonesLastMonth(@Param("startDate") LocalDateTime startDate);
+
+
+
+
+    @Query("SELECT c.name, p.model, s.os, p.brand, pi.dataImage " +
+            "FROM Phone p " +
+            "JOIN p.category c " +
+            "JOIN p.specification s " +
+            "JOIN p.images pi " +
+            "WHERE pi.isPrimary = true AND p.createdAt < :lastCreatedAt")
+    Page<Object[]> findNextPage(@Param("lastCreatedAt") LocalDateTime lastCreatedAt, Pageable pageable);
 
 }
