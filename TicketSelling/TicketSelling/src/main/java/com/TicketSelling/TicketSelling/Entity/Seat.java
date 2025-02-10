@@ -25,6 +25,9 @@ public class Seat {
     @Column(name = "Seat_Status", nullable = false)
     SeatStatus seatStatus = SeatStatus.AVAILABLE;
 
+    @Column(nullable = false, columnDefinition = "DECIMAL")
+    private Double price; // Giá vé theo ghế
+
     @Column(name = "row_no", nullable = false)
     Integer rowNumber;
 

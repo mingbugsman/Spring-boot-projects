@@ -23,6 +23,9 @@ public class Concert {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    @JoinColumn(name = "concert_name", nullable = false)
+    String concertName;
+
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "concert_status", nullable = false)
     ConcertStatus concertStatus = ConcertStatus.SCHEDULED;

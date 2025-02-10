@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+
 
 @Entity
 @Getter
@@ -37,4 +39,8 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "booking_id", nullable = false)
     Booking booking;
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_price_id", nullable = false)
+    TicketPrice ticketPrice;
 }
