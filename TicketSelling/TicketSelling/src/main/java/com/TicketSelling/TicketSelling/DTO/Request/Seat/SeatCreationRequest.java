@@ -1,8 +1,9 @@
-package com.TicketSelling.TicketSelling.DTO.Request.Ticket;
+package com.TicketSelling.TicketSelling.DTO.Request.Seat;
 
-import com.TicketSelling.TicketSelling.Enum.TicketStatus;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,21 +16,20 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TicketUpdateRequest {
-    @NotNull(message = "Seat ID is required")
-    String seatId;
-
-    @NotNull(message = "ConcertID is required")
-    String concertId;
-
-    @NotNull(message = "Booking ID is required")
-    String bookingId;
-
+public class SeatCreationRequest {
     @NotNull(message = "Price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
     BigDecimal price;
 
+    @NotNull(message = "row number is required")
+    @PositiveOrZero
+    Integer rowNumber;
 
-    TicketStatus ticketStatus;
 
+    @NotNull(message = "seat number is required")
+    @PositiveOrZero
+    Integer seatNumber;
+
+    @NotNull(message = "Hall Id is required")
+    String hallId;
 }

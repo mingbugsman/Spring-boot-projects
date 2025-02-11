@@ -19,5 +19,4 @@ public class ConcertCreationRequest {
     LocalDateTime date; // created date event
     LocalDateTime startDate; // event start date;
     String concertName;
-    ConcertStatus concertStatus;
 }

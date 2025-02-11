@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -28,7 +29,7 @@ public class Seat {
     SeatStatus seatStatus = SeatStatus.AVAILABLE;
 
     @Column(nullable = false, columnDefinition = "DECIMAL")
-    private Double price; // Giá vé theo ghế
+    private BigDecimal price; // Giá vé theo ghế
 
     @Column(name = "row_no", nullable = false)
     Integer rowNumber;

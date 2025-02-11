@@ -1,18 +1,11 @@
 package com.TicketSelling.TicketSelling.DTO.Response.Customer;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CustomerCreationResponse {
-    String id;
-    String name;
-    String address;
-    String birthDate;
-}
+
+
+public record CustomerCreationResponse (
+        String id,
+        String name,
+        String address,
+        String birthDate
+) {}

@@ -27,11 +27,11 @@ public class Band {
     @JoinColumn(name = "band_status", nullable = false)
     BandStatus bandStatus = BandStatus.ACTIVE;
 
-    @Column(name = "name", columnDefinition = "TEXT",nullable = false)
-    String name;
+    @Column(name = "band_name", columnDefinition = "TEXT",nullable = false)
+    String bandName;
 
-    @Column(name = "address", columnDefinition = "TEXT",nullable = false)
-    String address;
+    @Column(name = "band_information", columnDefinition = "TEXT",nullable = false)
+    String bandInformation;
 
     @ManyToMany
     @JoinTable(name = "band_playing",

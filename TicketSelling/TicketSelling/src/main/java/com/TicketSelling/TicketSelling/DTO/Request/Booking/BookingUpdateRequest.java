@@ -17,7 +17,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingUpdateRequest {
     @NotNull(message = "Booking status is required")
-    private BookingStatus bookingStatus;
+    BookingStatus bookingStatus;
 
-    private List<String> ticketIds; // ticket list if needed
+    List<String> ticketIds; // ticket list if needed
 }

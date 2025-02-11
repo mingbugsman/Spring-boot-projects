@@ -27,7 +27,7 @@ public class Customer {
     String id;
 
     @Column(name = "name", columnDefinition = "TEXT")
-    String name;
+    String customerName;
 
     @Column(name = "email",nullable = false, unique = true)
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Invalid email format")

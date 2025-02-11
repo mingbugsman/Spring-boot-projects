@@ -28,7 +28,7 @@ public class Hall {
     HallStatus hallStatus = HallStatus.AVAILABLE;
 
     @Column(name = "name", columnDefinition = "TEXT", nullable = false)
-    String name;
+    String hallName;
 
     @Column(name = "address", columnDefinition = "TEXT", nullable = false)
     String address;

@@ -1,20 +1,14 @@
 package com.TicketSelling.TicketSelling.DTO.Response.Customer;
 
-import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailResponse;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
+
+import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
+
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class CustomerConcertHistoryResponse {
-    String id;
-    String name;
-    List<ConcertDetailResponse> concerts;
-}
+
+public record CustomerConcertHistoryResponse (
+    String id,
+    String name,
+    List<ConcertResponse> concerts
+){}
