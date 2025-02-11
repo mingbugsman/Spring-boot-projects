@@ -2,6 +2,7 @@ package com.TicketSelling.TicketSelling.DTO.Response.Hall;
 
 
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailResponse;
+import com.TicketSelling.TicketSelling.Enum.HallStatus;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public record HallDetailResponse(
         String id,
         String hallName,
+        HallStatus hallStatus,
         String informationHall,
         Integer seatCount,
         Integer concertCount,
