@@ -2,12 +2,12 @@ package com.TicketSelling.TicketSelling.Entity;
 
 import com.TicketSelling.TicketSelling.Enum.BandStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -15,7 +15,8 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class Band {
 
     @Id
@@ -37,5 +38,16 @@ public class Band {
     joinColumns = @JoinColumn(name = "band_id"),
     inverseJoinColumns = @JoinColumn(name = "concert_id"))
     Set<Concert> concerts;
+
+
+    // date adđ band
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
+    // date update band
+    @UpdateTimestamp
+    @Column(name = "updated_At")
+    LocalDateTime updatedAt;
 
 }

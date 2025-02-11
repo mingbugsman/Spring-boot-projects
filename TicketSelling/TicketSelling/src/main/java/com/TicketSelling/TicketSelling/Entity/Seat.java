@@ -2,11 +2,12 @@ package com.TicketSelling.TicketSelling.Entity;
 
 import com.TicketSelling.TicketSelling.Enum.SeatStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -14,7 +15,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class Seat {
 
     @Id
@@ -38,4 +40,13 @@ public class Seat {
     @JoinColumn(name = "hall_id", nullable = false)
     Hall hall;
 
+    // date create new seat
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
+    // date update seat
+    @UpdateTimestamp
+    @Column(name = "updated_At")
+    LocalDateTime updatedAt;
 }

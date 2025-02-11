@@ -5,8 +5,11 @@ import com.TicketSelling.TicketSelling.Enum.TicketStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -43,4 +46,14 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "ticket_price_id", nullable = false)
     TicketPrice ticketPrice;
+
+    // date adđ new ticket
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
+    // date update ticket
+    @UpdateTimestamp
+    @Column(name = "updated_At")
+    LocalDateTime updatedAt;
 }

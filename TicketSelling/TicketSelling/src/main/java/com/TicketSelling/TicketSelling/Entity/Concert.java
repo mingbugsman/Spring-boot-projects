@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -32,12 +34,12 @@ public class Concert {
 
     // created date event
     @CreationTimestamp
-    @Column(name = "date", columnDefinition = "DATE", updatable = false)
-    Date date;
+    @Column(name = "date", updatable = false)
+    LocalDateTime date;
 
     // event start date
-    @Column(name = "start_time", columnDefinition = "TIMESTAMP")
-    Timestamp startDate;
+    @Column(name = "start_time")
+    LocalDateTime startDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hall_id", nullable = false)
@@ -45,4 +47,9 @@ public class Concert {
 
     @ManyToMany(mappedBy = "concerts")
     Set<Band> bands;
+
+
+    @UpdateTimestamp
+    @Column(name = "updated_At")
+    LocalDateTime updatedAt;
 }

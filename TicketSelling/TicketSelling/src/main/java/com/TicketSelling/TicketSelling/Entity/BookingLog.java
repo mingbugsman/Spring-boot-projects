@@ -1,48 +1,44 @@
 package com.TicketSelling.TicketSelling.Entity;
 
+import com.TicketSelling.TicketSelling.Enum.BookingLogAction;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
-@Table(name = "ticket_price")
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TicketPrice {
-
+public class BookingLog {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "concert_id", nullable = false)
-    Concert concert;
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "log_action", nullable = false)
+    BookingLogAction action;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_id", nullable = false)
-    Seat seat;
+    @Column(columnDefinition = "TEXT", name = "detail")
+    String details;
 
+    String CustomerId;
+    String TicketId;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    BigDecimal price;
-
-    // date add ticketPrice
+    // date add log
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
-    // date update ticketPrice
+    // date update log
     @UpdateTimestamp
     @Column(name = "updated_At")
     LocalDateTime updatedAt;
+
+
 }

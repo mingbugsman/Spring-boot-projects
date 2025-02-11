@@ -1,21 +1,25 @@
 package com.TicketSelling.TicketSelling.Entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+
 
 @Entity
 @Table(name = "customer")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class Customer {
 
     @Id
@@ -25,11 +29,28 @@ public class Customer {
     @Column(name = "name", columnDefinition = "TEXT")
     String name;
 
+    @Column(name = "email",nullable = false, unique = true)
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Invalid email format")
+    String email;
+
+    @Column(name = "phone_number", columnDefinition = "VARCHAR(20)")
+    Integer phoneNumber;
+
     @Column(name = "address", columnDefinition = "TEXT")
     String address;
 
-    @Column(name = "birth_date", columnDefinition = "DATE")
-    Date birthDate;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private LocalDateTime createdAt;
+
+
+    @UpdateTimestamp
+    @Column(name = "updated_At")
+    LocalDateTime updatedAt;
+
+
+    @Column(name = "birth_date")
+    LocalDateTime birthDate;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
     List<Booking> bookings;
