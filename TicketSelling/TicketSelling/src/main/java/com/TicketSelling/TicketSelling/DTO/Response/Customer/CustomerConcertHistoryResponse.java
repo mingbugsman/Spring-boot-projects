@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserConcertHistoryResponse {
+public class CustomerConcertHistoryResponse {
     String id;
     String name;
     List<ConcertDetailResponse> concerts;

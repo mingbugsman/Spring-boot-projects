@@ -17,10 +17,10 @@ import java.io.Serializable;
 @Data
 public class TicketPK implements Serializable {
 
-    @Column(name = "belongs_to")
+    @Column(name = "seat_id")
     String seatId;
 
-    @Column(name = "for_concert")
+    @Column(name = "concert_id")
     String concertId;
 
 }

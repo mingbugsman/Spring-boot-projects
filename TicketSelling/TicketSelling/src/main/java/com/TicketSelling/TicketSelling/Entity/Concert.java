@@ -7,9 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 @Entity

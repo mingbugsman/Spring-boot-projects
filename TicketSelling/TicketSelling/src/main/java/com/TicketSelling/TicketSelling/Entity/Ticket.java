@@ -30,12 +30,14 @@ public class Ticket {
 
     // belongs to seat
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "belongs_to", nullable = false, insertable = false, updatable = false)
+    @MapsId("seatId")
+    @JoinColumn(name = "seat_id", nullable = false, insertable = false, updatable = false)
     Seat seat;
 
     // ticket for concert
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "for_concert", nullable = false, insertable = false,updatable = false)
+    @MapsId("concertId")
+    @JoinColumn(name = "concert_id", nullable = false, insertable = false,updatable = false)
     Concert concert;
 
     // book_id for ticket
@@ -43,9 +45,8 @@ public class Ticket {
     @JoinColumn(name = "booking_id", nullable = false)
     Booking booking;
 
-    @ManyToOne
-    @JoinColumn(name = "ticket_price_id", nullable = false)
-    TicketPrice ticketPrice;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
     // date adđ new ticket
     @CreationTimestamp

@@ -1,6 +1,6 @@
 package com.TicketSelling.TicketSelling.DTO.Request.Concert;
 
-import com.TicketSelling.TicketSelling.Enum.ConcertStatus;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,16 +8,19 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-
-
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ConcertCreationRequest {
-    LocalDateTime date; // created date event
-    LocalDateTime startDate; // event start date;
+public class ConcertUpdateRequest {
+    @NotBlank
     String concertName;
-    ConcertStatus concertStatus;
+
+    @NotBlank
+    LocalDateTime startDate; // event start date
+
+    String hallId;
+    List<String> bandId;
 }
