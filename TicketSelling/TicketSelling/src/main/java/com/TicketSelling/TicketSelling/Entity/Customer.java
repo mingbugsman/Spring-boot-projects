@@ -8,8 +8,8 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 
@@ -30,7 +30,8 @@ public class Customer {
     String customerName;
 
     @Column(name = "email",nullable = false, unique = true)
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Invalid email format")
+    @Email(regexp ="^(?=.{1,64}@)[A-Za-z0-9\\+_-]+(\\.[A-Za-z0-9\\+_-]+)*@"
+            + "[^-][A-Za-z0-9\\+-]+(\\.[A-Za-z0-9\\+-]+)*(\\.[A-Za-z]{2,})$",message = "Invalid email format")
     String email;
 
     @Column(name = "phone_number", columnDefinition = "VARCHAR(20)")
@@ -50,7 +51,7 @@ public class Customer {
 
 
     @Column(name = "birth_date")
-    LocalDateTime birthDate;
+    LocalDate birthDate;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
     List<Booking> bookings;

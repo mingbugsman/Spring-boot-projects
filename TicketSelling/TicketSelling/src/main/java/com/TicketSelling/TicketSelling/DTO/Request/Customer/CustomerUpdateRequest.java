@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Data
@@ -32,6 +32,6 @@ public class CustomerUpdateRequest {
     private String address;
 
     @Past(message = "Birth date must be in the past")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 }
 
