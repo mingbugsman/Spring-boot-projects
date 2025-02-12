@@ -6,9 +6,10 @@ import java.time.LocalDateTime;
 
 public record BandResponse(
         String id,
-        BandStatus bandStatus,
         String bandName,
+        BandStatus bandStatus,
         String bandInformation,
-        LocalDateTime updateAt
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }

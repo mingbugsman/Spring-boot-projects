@@ -16,6 +16,6 @@ public record ConcertDetailResponse (
     ConcertStatus concertStatus,
     String hallName,
     String bandName,
-    List<BandResponse> bandDetailList,
-    LocalDateTime updatedAt // last updated
+    LocalDateTime updatedAt, // last updated
+    List<BandResponse> bandDetailList
 ) {}

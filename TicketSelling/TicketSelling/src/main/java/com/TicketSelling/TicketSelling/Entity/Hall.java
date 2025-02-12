@@ -24,7 +24,7 @@ public class Hall {
     String id;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "Hall_Status", nullable = false)
+    @Column(name = "Hall_Status", nullable = false)
     HallStatus hallStatus = HallStatus.AVAILABLE;
 
     @Column(name = "name", columnDefinition = "TEXT", nullable = false)
@@ -34,7 +34,7 @@ public class Hall {
     String address;
 
     @Column(name = "information_hall", columnDefinition = "TEXT")
-    String informationHall;
+    String hallInformation;
 
     @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Seat> seats;

@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HallCreationRequest {
     @NotBlank(message = "Hall name is required")
-    String name;
+    String hallName;
 
     @NotBlank(message = "Hall address is required")
     String address;

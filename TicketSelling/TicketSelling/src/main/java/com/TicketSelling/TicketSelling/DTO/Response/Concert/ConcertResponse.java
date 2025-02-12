@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 
 public record ConcertResponse(
         String id,
+        String hallId,
         String concertName,
+        String hallName,
         ConcertStatus concertStatus,
         LocalDateTime createdDate,
         LocalDateTime startDate,

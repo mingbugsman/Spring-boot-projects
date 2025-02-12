@@ -9,6 +9,6 @@ import java.util.List;
 
 public record CustomerConcertHistoryResponse (
     String id,
-    String name,
+    String customerName,
     List<ConcertResponse> concerts
 ){}

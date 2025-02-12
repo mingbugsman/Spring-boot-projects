@@ -26,7 +26,7 @@ public class Ticket {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Ticket_Status", nullable = false)
-    TicketStatus status = TicketStatus.ACTIVE;
+    TicketStatus ticketStatus = TicketStatus.PENDING;
 
     // belongs to seat
     @ManyToOne(fetch = FetchType.LAZY)

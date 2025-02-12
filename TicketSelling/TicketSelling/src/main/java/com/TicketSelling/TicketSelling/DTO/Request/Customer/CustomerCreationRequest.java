@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class CustomerCreationRequest {
 
     @NotBlank(message = "Name cannot be blank")
-    private String name;
+    private String customerName;
 
     @NotBlank(message = "Email is required")
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$", message = "Invalid email format")

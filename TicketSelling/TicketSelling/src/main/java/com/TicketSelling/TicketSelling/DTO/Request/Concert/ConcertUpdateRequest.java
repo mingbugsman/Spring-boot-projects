@@ -17,6 +17,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ConcertUpdateRequest {
     String concertName;
+    String concertInformation;
     LocalDateTime startDate; // event start date
     ConcertStatus concertStatus;
     String hallId;

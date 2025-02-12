@@ -6,11 +6,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record TicketResponse(
+
         String concertId,
         TicketStatus ticketStatus,
         String seatId,
         String bookingId,
         BigDecimal price,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime lastUpdated
 ) {
 }

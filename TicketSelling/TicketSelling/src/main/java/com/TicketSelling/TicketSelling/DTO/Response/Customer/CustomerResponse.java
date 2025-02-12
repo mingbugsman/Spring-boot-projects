@@ -1,11 +1,9 @@
 package com.TicketSelling.TicketSelling.DTO.Response.Customer;
 
 
-
-
-public record CustomerCreationResponse (
+public record CustomerResponse (
         String id,
-        String name,
+        String customerName,
         String address,
         String birthDate
 ) {}

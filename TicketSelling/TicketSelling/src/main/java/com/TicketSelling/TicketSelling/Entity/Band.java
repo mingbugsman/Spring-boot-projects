@@ -24,7 +24,7 @@ public class Band {
     String id;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "band_status", nullable = false)
+    @Column(name = "band_status", nullable = false)
     BandStatus bandStatus = BandStatus.ACTIVE;
 
     @Column(name = "band_name", columnDefinition = "TEXT",nullable = false)

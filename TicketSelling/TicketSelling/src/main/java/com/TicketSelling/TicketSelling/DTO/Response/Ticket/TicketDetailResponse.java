@@ -14,6 +14,7 @@ public record TicketDetailResponse (
         ConcertDetailResponse concert,
         BookingResponse booking,
         BigDecimal price,
-        LocalDateTime createdAt
+        LocalDateTime createdAt,
+        LocalDateTime lastUpdate
 )
 { }

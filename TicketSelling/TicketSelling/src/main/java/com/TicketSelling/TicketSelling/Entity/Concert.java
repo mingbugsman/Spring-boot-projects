@@ -23,11 +23,14 @@ public class Concert {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @JoinColumn(name = "concert_name", nullable = false)
+    @Column(name = "concert_name", nullable = false)
     String concertName;
 
+    @Column(name = "concert_information", nullable = true)
+    String concertInformation;
+
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "concert_status", nullable = false)
+    @Column(name = "concert_status", nullable = false)
     ConcertStatus concertStatus = ConcertStatus.SCHEDULED;
 
     // created date event

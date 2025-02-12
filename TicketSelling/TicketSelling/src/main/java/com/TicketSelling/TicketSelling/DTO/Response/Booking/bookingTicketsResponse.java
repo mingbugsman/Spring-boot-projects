@@ -6,7 +6,7 @@ import com.TicketSelling.TicketSelling.Enum.BookingStatus;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record bookingTicketsResponse(
+public record BookingTicketsResponse(
         String id,
         BookingStatus bookingStatus,
         LocalDateTime createdAt,

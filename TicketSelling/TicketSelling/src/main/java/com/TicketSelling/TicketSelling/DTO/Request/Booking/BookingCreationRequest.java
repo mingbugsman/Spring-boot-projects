@@ -19,6 +19,4 @@ public class BookingCreationRequest {
     @NotNull(message = "Customer ID is required")
     private String customerId;
 
-    private List<String> ticketIds; // ticket list if needed
-
 }

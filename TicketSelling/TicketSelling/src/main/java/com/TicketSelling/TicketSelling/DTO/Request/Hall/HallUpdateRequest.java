@@ -16,7 +16,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class HallUpdateRequest {
 
-    String name;
+    String hallName;
     String address;
     String hallInformation;
     HallStatus hallStatus;

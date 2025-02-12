@@ -1,6 +1,5 @@
 package com.TicketSelling.TicketSelling.DTO.Response.Band;
 
-import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
 import com.TicketSelling.TicketSelling.Enum.BandStatus;
 
@@ -12,7 +11,7 @@ public record BandDetailResponse(
         String bandName,
         BandStatus bandStatus,
         String bandInformation,
-        List<ConcertResponse> concerList,
-        LocalDateTime updatedAt // last updated
+        LocalDateTime updatedAt,
+        List<ConcertResponse> concerList// last updated
 ) {
 }

@@ -24,7 +24,7 @@ public class Booking {
     String id;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "booking_status", nullable = false)
+    @Column(name = "booking_status", nullable = false)
     BookingStatus bookingStatus = BookingStatus.PENDING;
 
     @ManyToOne(fetch = FetchType.LAZY)

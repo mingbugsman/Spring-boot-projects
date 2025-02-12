@@ -2,10 +2,14 @@ package com.TicketSelling.TicketSelling.DTO.Response.Hall;
 
 import com.TicketSelling.TicketSelling.Enum.HallStatus;
 
-public record HallCreationResponse(
+import java.time.LocalDateTime;
+
+public record HallResponse(
         String id,
         String hallName,
         HallStatus hallStatus,
-        String informationHall
+        String hallInformation,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
 ) {
 }
