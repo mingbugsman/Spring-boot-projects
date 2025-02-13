@@ -16,7 +16,7 @@ import org.mapstruct.MappingTarget;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {BookingMapper.class, SeatMapper.class, ConcertMapper.class})
 public interface TicketMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -42,18 +42,13 @@ public interface TicketMapper {
     @Mapping(target = "updatedAt", ignore = true)
     void updateTicket(@MappingTarget Ticket ticket, TicketUpdateRequest request);
 
-    default TicketDetailResponse toTicketDetailResponse(Object[] data) {
-        if (data == null || data.length <6) {
-            return null;
-        }
-        return new TicketDetailResponse(
-                (TicketStatus) data[0],
-                (SeatResponse) data[1],
-                (ConcertDetailResponse) data[2],
-                (BookingResponse) data[3],
-                (BigDecimal) data[4],
-                (LocalDateTime) data[5],
-                (LocalDateTime) data[6]
-        );
-    }
+
+/*
+    @Mapping(target = "concert", source = "concert")
+    @Mapping(target = "seat", source = "seat")
+    @Mapping(target = "booking", source = "booking")
+    @Mapping(target = "lastUpdate", source = "updatedAt")
+    TicketDetailResponse toTicketDetailResponse(Ticket ticket);
+    */
+
 }

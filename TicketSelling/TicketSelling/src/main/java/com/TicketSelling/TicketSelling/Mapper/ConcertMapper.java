@@ -2,19 +2,14 @@ package com.TicketSelling.TicketSelling.Mapper;
 
 import com.TicketSelling.TicketSelling.DTO.Request.Concert.ConcertCreationRequest;
 import com.TicketSelling.TicketSelling.DTO.Request.Concert.ConcertUpdateRequest;
-import com.TicketSelling.TicketSelling.DTO.Response.Band.BandResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
-import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
-import com.TicketSelling.TicketSelling.Enum.ConcertStatus;
-import com.TicketSelling.TicketSelling.Utils.CastingUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import java.time.LocalDateTime;
 
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface ConcertMapper {
@@ -43,21 +38,10 @@ public interface ConcertMapper {
     void updateConcert(@MappingTarget Concert concert, ConcertUpdateRequest request);
 
 
-    default ConcertDetailResponse toConcertDetailResponse(Object[] data) {
-        if (data == null || data.length < 8) {
-            return null;
-        };
-        return new ConcertDetailResponse(
-                (String) data[0],
-                (LocalDateTime) data[1],
-                (LocalDateTime) data[2],
-                (ConcertStatus) data[3],
-                (String) data[4],
-                (String) data[5],
-                (LocalDateTime) data[6],
-                CastingUtil.safeCastList(data[7], BandResponse.class)
-        );
-    }
+    @Mapping(target = "bandDetailList", ignore = true)
+    @Mapping(target = "hallName", source = "hall.hallName")
+    ConcertDetailResponse toConcertDetailResponse(Concert concert);
+
     default int getTotalBands(Concert concert) {
         return (concert.getBands() != null) ? concert.getBands().size() : 0;
     }

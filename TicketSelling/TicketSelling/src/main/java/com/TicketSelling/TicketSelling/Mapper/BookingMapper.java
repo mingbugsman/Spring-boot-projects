@@ -4,17 +4,13 @@ import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingCreationReques
 import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingTicketsResponse;
-import com.TicketSelling.TicketSelling.DTO.Response.Ticket.TicketResponse;
 import com.TicketSelling.TicketSelling.Entity.Booking;
-import com.TicketSelling.TicketSelling.Enum.BookingStatus;
-import com.TicketSelling.TicketSelling.Utils.CastingUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import java.time.LocalDateTime;
-
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE, uses = {TicketMapper.class})
 public interface BookingMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -35,15 +31,10 @@ public interface BookingMapper {
     @Mapping(target = "id", ignore = true)
     void updateBooking(@MappingTarget Booking booking, BookingUpdateRequest request);
 
-    default BookingTicketsResponse toBookingTicketsResponse(Object[] data) {
-        if (data == null || data.length < 4) {
-            return null;
-        }
-        return new BookingTicketsResponse(
-                (String) data[0],
-                (BookingStatus) data[1],
-                (LocalDateTime) data[2],
-                CastingUtil.safeCastList(data[3], TicketResponse.class)
-        );
-    }
+/*
+    @Mapping(target = "lastUpdate", source = "updatedAt")
+    @Mapping(target = "tickets", source = "tickets")
+    BookingTicketsResponse toBookingTicketsResponse(Booking booking);
+*/
+
 }

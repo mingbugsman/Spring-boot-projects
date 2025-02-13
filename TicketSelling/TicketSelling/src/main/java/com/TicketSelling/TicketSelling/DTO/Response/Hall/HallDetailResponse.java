@@ -11,10 +11,11 @@ import java.util.List;
 public record HallDetailResponse(
         String id,
         String hallName,
+        String address,
         HallStatus hallStatus,
-        String hallInformationa,
-        Integer seatCount,
-        Integer concertCount,
+        String hallInformation,
+        Integer totalSeats,
+        Integer totalConcerts,
         List<ConcertResponse> concerts
 ) {
 }

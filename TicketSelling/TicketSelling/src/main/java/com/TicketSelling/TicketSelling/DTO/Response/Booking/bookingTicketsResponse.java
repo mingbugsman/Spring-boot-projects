@@ -10,6 +10,7 @@ public record BookingTicketsResponse(
         String id,
         BookingStatus bookingStatus,
         LocalDateTime createdAt,
-        List<TicketResponse> ticketList
+        LocalDateTime lastUpdate,
+        List<TicketResponse> tickets
 ) {
 }
