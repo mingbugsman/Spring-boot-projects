@@ -24,6 +24,7 @@ public interface ConcertMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "hall", ignore = true)
     @Mapping(target = "bands", ignore = true)
+    @Mapping(target = "concertStatus", ignore = true)
     Concert toConcert(ConcertCreationRequest request);
 
     @Mapping(target = "hallName", source = "hall.hallName")

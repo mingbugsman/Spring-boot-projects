@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_KEY(1001, "Uncategorized", HttpStatus.BAD_REQUEST ),
-    CUSTOMER_EXISTED(1002, "Customer is existed", HttpStatus.BAD_REQUEST),
+    EMAIL_EXISTED(1002, "Email is existed", HttpStatus.BAD_REQUEST),
     NOT_FOUND_ID(1003,"Id is not existed",HttpStatus.NOT_FOUND);
 
 

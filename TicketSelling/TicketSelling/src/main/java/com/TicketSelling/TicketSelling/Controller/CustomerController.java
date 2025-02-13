@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/customer")
@@ -18,6 +20,12 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
     CustomerService customerService;
 
+    @GetMapping
+    public ApiResponse<List<CustomerResponse>> getAllCustomers() {
+        return ApiResponse.<List<CustomerResponse>>builder()
+                .result(customerService.getAllCustomers())
+                .build();
+    }
 
     @GetMapping("/{customerId}")
     public ApiResponse<CustomerResponse> getCustomerById(@PathVariable String customerId) {

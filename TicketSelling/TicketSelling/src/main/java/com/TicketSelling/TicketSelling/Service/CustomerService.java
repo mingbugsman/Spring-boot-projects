@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -25,10 +27,14 @@ public class CustomerService {
                 new ApplicationException(ErrorCode.NOT_FOUND_ID)));
     }
 
+    public List<CustomerResponse> getAllCustomers() {
+        return customerRepository.findAll().stream().map(customerMapper::toCustomerResponse).toList();
+    }
+
     // POST
     public CustomerResponse createNewCustomer(CustomerCreationRequest request) {
         if (customerRepository.existsByEmail(request.getEmail())) {
-            throw new ApplicationException(ErrorCode.CUSTOMER_EXISTED);
+            throw new ApplicationException(ErrorCode.EMAIL_EXISTED);
         }
         Customer customer = customerMapper.toCustomer(request);
         customer = customerRepository.save(customer);
