@@ -2,6 +2,7 @@ package com.TicketSelling.TicketSelling.Service;
 
 
 import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerCreationRequest;
+import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
 import com.TicketSelling.TicketSelling.Entity.Customer;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
@@ -23,8 +24,7 @@ public class CustomerService {
     CustomerMapper customerMapper;
 
     public CustomerResponse getCustomer(String customerId) {
-        return customerMapper.toCustomerResponse(customerRepository.findById(customerId).orElseThrow(() ->
-                new ApplicationException(ErrorCode.NOT_FOUND_ID)));
+        return customerMapper.toCustomerResponse(getCustomerById(customerId));
     }
 
     public List<CustomerResponse> getAllCustomers() {
@@ -41,9 +41,27 @@ public class CustomerService {
         return customerMapper.toCustomerResponse(customer);
     }
 
-    private boolean checkIfUserExists(String customerId) {
-        return customerRepository.existsById(customerId);
+    // PUT / PATCH
+    public CustomerResponse updateCustomer(String customerId, CustomerUpdateRequest request) {
+
+        var customer = getCustomerById(customerId);
+        customerMapper.updateCustomer(customer, request);
+        customer = customerRepository.save(customer);
+        return customerMapper.toCustomerResponse(customer);
+
     }
+
+    // DELETE
+    public void deleteCustomer(String customerId) {
+        Customer customer = getCustomerById(customerId);
+        customerRepository.delete(customer);
+    }
+
+    private Customer getCustomerById(String customerId) {
+        return customerRepository.findById(customerId).orElseThrow(() ->
+                new ApplicationException(ErrorCode.NOT_FOUND_ID));
+    }
+
 
 
 }

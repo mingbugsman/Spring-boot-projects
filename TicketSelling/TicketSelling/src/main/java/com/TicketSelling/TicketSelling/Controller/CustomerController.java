@@ -2,6 +2,7 @@ package com.TicketSelling.TicketSelling.Controller;
 
 
 import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerCreationRequest;
+import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.ApiResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
 import com.TicketSelling.TicketSelling.Service.CustomerService;
@@ -38,6 +39,20 @@ public class CustomerController {
     public ApiResponse<CustomerResponse> createNewCustomer(@Valid @RequestBody CustomerCreationRequest request) {
         return ApiResponse.<CustomerResponse>builder()
                 .result(customerService.createNewCustomer(request))
+                .build();
+    }
+    @PutMapping("/{customerId}")
+    public ApiResponse<CustomerResponse> updateCustomer(@PathVariable String customerId ,@Valid @RequestBody CustomerUpdateRequest request) {
+        return ApiResponse.<CustomerResponse>builder()
+                .result(customerService.updateCustomer(customerId, request))
+                .build();
+    }
+
+    @DeleteMapping("/{customerId}")
+    public ApiResponse<CustomerResponse> deleteCustomer(@PathVariable String customerId) {
+        customerService.deleteCustomer(customerId);
+        return ApiResponse.<CustomerResponse>builder()
+                .message("successfully delete customer with id : "+ customerId)
                 .build();
     }
 }
