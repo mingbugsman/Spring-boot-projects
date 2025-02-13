@@ -10,32 +10,36 @@ import com.TicketSelling.TicketSelling.Entity.Customer;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.BookingMapper;
+import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomCustomerMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomerMapper;
 import com.TicketSelling.TicketSelling.Repository.CustomerRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerService {
     CustomerRepository customerRepository;
     CustomerMapper customerMapper;
-    BookingMapper bookingMapper;
+    CustomCustomerMapper customCustomerMapper;
 
-   /* public CustomerConcertHistoryResponse getCustomerConcertHistory(String customerId) {
-        Customer customer = getCustomerById(customerId);
 
-    }*/
-/*
+    public CustomerConcertHistoryResponse getCustomerConcertHistory(String customerId) {
+        Object[] rawData = customerRepository.getCustomerConcerts(customerId);
+        return customCustomerMapper.toCustomerConcertHistoryResponse(rawData);
+
+    }
+
     public CustomerBookingsResponse getCustomerBookingResponse(String customerId) {
         Customer customer = getCustomerById(customerId);
-        return customerMapper.toCustomerBookingResponse(customer);
-    }*/
+        return customCustomerMapper.toCustomerBookingsResponse(customer);
+    }
 
     public CustomerResponse getCustomer(String customerId) {
         return customerMapper.toCustomerResponse(getCustomerById(customerId));

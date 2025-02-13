@@ -31,11 +31,5 @@ public interface CustomerMapper {
     @Mapping(target = "updatedAt", ignore = true)
     void updateCustomer(@MappingTarget Customer customer, CustomerUpdateRequest request);
 
-/*
 
-    @Mapping(target = "bookings", source = "bookings")
-    CustomerBookingsResponse toCustomerBookingResponse (Customer customer);
-*/
-
-   // CustomerConcertHistoryResponse toCustomerConcertHistoryResponse(Customer customer);
 }

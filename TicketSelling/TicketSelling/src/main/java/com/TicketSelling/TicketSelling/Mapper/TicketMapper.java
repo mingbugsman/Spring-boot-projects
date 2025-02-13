@@ -43,12 +43,4 @@ public interface TicketMapper {
     void updateTicket(@MappingTarget Ticket ticket, TicketUpdateRequest request);
 
 
-/*
-    @Mapping(target = "concert", source = "concert")
-    @Mapping(target = "seat", source = "seat")
-    @Mapping(target = "booking", source = "booking")
-    @Mapping(target = "lastUpdate", source = "updatedAt")
-    TicketDetailResponse toTicketDetailResponse(Ticket ticket);
-    */
-
 }

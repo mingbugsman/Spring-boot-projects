@@ -11,4 +11,15 @@ public interface CustomerRepository extends JpaRepository<Customer, String> {
     boolean existsByEmail(String email);
 
 
+    @Query(
+            "SELECT c.id, c.customerName, co " +
+                    "FROM Customer c " +
+                    "JOIN c.bookings b " +
+                    "JOIN b.tickets t " +
+                    "JOIN t.concert co " +
+                    "WHERE c.id = :customerId"
+    )
+    Object[] getCustomerConcerts(@Param("customerId") String customerId);
+
+
 }
