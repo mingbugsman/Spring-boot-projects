@@ -9,12 +9,9 @@ import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
 import com.TicketSelling.TicketSelling.Entity.Customer;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
-import com.TicketSelling.TicketSelling.Mapper.BookingMapper;
-import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomCustomerMapper;
-import com.TicketSelling.TicketSelling.Mapper.CustomerMapper;
-import com.TicketSelling.TicketSelling.Repository.CustomerRepository;
+
+import com.TicketSelling.TicketSelling.Repository.ICustomerRepository;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
@@ -25,60 +22,43 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerService {
-    CustomerRepository customerRepository;
-    CustomerMapper customerMapper;
-    CustomCustomerMapper customCustomerMapper;
+    ICustomerRepository customerRepository;
 
 
     public CustomerConcertHistoryResponse getCustomerConcertHistory(String customerId) {
-        Object[] rawData = customerRepository.getCustomerConcerts(customerId);
-        return customCustomerMapper.toCustomerConcertHistoryResponse(rawData);
+        return customerRepository.getCustomerConcertHistory(customerId);
 
     }
 
     public CustomerBookingsResponse getCustomerBookingResponse(String customerId) {
-        Customer customer = getCustomerById(customerId);
-        return customCustomerMapper.toCustomerBookingsResponse(customer);
+        return customerRepository.getCustomerBookingResponse(customerId);
     }
 
     public CustomerResponse getCustomer(String customerId) {
-        return customerMapper.toCustomerResponse(getCustomerById(customerId));
+        return customerRepository.getCustomer(customerId);
     }
 
     public List<CustomerResponse> getAllCustomers() {
-        return customerRepository.findAll().stream().map(customerMapper::toCustomerResponse).toList();
+        return customerRepository.getAllCustomers();
     }
 
     // POST
     public CustomerResponse createNewCustomer(CustomerCreationRequest request) {
-        if (customerRepository.existsByEmail(request.getEmail())) {
-            throw new ApplicationException(ErrorCode.EMAIL_EXISTED);
-        }
-        Customer customer = customerMapper.toCustomer(request);
-        customer = customerRepository.save(customer);
-        return customerMapper.toCustomerResponse(customer);
+        return customerRepository.createNewResponse(request);
     }
 
     // PUT / PATCH
     public CustomerResponse updateCustomer(String customerId, CustomerUpdateRequest request) {
-
-        var customer = getCustomerById(customerId);
-        customerMapper.updateCustomer(customer, request);
-        customer = customerRepository.save(customer);
-        return customerMapper.toCustomerResponse(customer);
+        return customerRepository.updateCustomer(customerId, request);
 
     }
 
     // DELETE
     public void deleteCustomer(String customerId) {
-        Customer customer = getCustomerById(customerId);
-        customerRepository.delete(customer);
+        customerRepository.deleteCustomer(customerId);
     }
 
-    private Customer getCustomerById(String customerId) {
-        return customerRepository.findById(customerId).orElseThrow(() ->
-                new ApplicationException(ErrorCode.NOT_FOUND_ID));
-    }
+
 
 
 

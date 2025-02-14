@@ -31,10 +31,5 @@ public interface BookingMapper {
     @Mapping(target = "id", ignore = true)
     void updateBooking(@MappingTarget Booking booking, BookingUpdateRequest request);
 
-/*
-    @Mapping(target = "lastUpdate", source = "updatedAt")
-    @Mapping(target = "tickets", source = "tickets")
-    BookingTicketsResponse toBookingTicketsResponse(Booking booking);
-*/
 
 }

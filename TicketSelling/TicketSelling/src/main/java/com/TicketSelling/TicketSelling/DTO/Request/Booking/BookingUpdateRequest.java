@@ -1,6 +1,7 @@
 package com.TicketSelling.TicketSelling.DTO.Request.Booking;
 
 
+import com.TicketSelling.TicketSelling.Entity.TicketPK;
 import com.TicketSelling.TicketSelling.Enum.BookingStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -19,5 +20,5 @@ public class BookingUpdateRequest {
     @NotNull(message = "Booking status is required")
     BookingStatus bookingStatus;
 
-    List<String> ticketIds; // ticket list if needed
+    List<TicketPK> ticketIds; // ticket list if needed
 }
