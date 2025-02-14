@@ -33,6 +33,15 @@ public class Band {
     @Column(name = "band_information", columnDefinition = "TEXT",nullable = false)
     String bandInformation;
 
+    @Column(name = "genre", columnDefinition = "VARCHAR(100)", nullable = false)
+    String genre;
+
+    @Column(name = "founding_year")
+    Integer foundingYear;
+
+    @Column(name = "country", columnDefinition = "VARCHAR(100)", nullable = false)
+    String country;
+
     @ManyToMany
     @JoinTable(name = "band_playing",
     joinColumns = @JoinColumn(name = "band_id"),

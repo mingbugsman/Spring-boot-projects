@@ -10,10 +10,9 @@ import java.util.List;
 
 
 public interface IBookingRepository {
+    Booking save(Booking booking);
     Booking getBookingById(String bookingId);
-    BookingResponse getBooking(String bookingId);
-    List<BookingResponse> getAllBookings(TypedSort typedSort);
-    BookingResponse createNewBooking(BookingCreationRequest request);
-    BookingResponse updateBooking(String bookingId, BookingUpdateRequest request);
-    public void deleteBooking(String bookingId);
+    List<Booking> getAllBookings(TypedSort typedSort);
+    void deleteBookingById(String bookingId);
+    boolean existsById(String bookingId);
 }

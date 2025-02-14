@@ -31,8 +31,7 @@ public interface BandMapper {
     void updateBand(@MappingTarget Band band, BandUpdateRequest request);
 
 
-    @Mapping(target = "concertList", ignore = true)
-    BandDetailResponse toBandDetailResponse(Band band);
+
 
 
 }

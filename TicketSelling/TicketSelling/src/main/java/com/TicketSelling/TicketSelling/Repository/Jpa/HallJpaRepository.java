@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HallJpaRepository extends JpaRepository<Hall,String> {
+    boolean existsByAddress(String addressHall);
 }

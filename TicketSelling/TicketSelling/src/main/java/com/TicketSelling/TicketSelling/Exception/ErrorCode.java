@@ -13,10 +13,12 @@ public enum ErrorCode {
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
 
     INVALID_KEY(1001, "Uncategorized", HttpStatus.BAD_REQUEST ),
+    ADDRESS_EXISTED(1002, "ADDRESS IS EXISTED", HttpStatus.BAD_REQUEST),
     EMAIL_EXISTED(1003, "Email is existed", HttpStatus.BAD_REQUEST),
-    NOT_FOUND_ID(1004,"Id is not existed",HttpStatus.NOT_FOUND);
-
-
+    NOT_FOUND_ID(1004,"Id is not existed",HttpStatus.NOT_FOUND),
+    BAND_EXISTED(1005, "Band is existed",HttpStatus.BAD_REQUEST ),
+    CONCERT_EXISTED(1006, "Concert is existed", HttpStatus.BAD_REQUEST),
+    SEAT_EXISTED(1007, "Seat is existed", HttpStatus.BAD_REQUEST);
     int code;
     String message;
     HttpStatus statusCode;

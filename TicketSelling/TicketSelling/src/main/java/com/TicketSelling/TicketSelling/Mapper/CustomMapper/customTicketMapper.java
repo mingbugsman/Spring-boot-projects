@@ -23,7 +23,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 
-public class customTicketMapper {
+public class CustomTicketMapper {
     SeatMapper seatMapper;
     ConcertMapper concertMapper;
     BookingMapper bookingMapper;

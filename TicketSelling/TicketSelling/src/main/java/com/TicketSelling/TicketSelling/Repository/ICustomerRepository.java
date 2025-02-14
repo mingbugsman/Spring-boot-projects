@@ -6,8 +6,10 @@ import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerBookingsRes
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerConcertHistoryResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
 import com.TicketSelling.TicketSelling.Entity.Customer;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 
 public interface ICustomerRepository {
     CustomerConcertHistoryResponse getCustomerConcertHistory(String customerId);

@@ -27,11 +27,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingRepositoryImp implements IBookingRepository {
-    ICustomerRepository customerRepository;
-    ITicketRepository ticketRepository;
     BookingJpaRepository bookingJpaRepository;
-    BookingMapper bookingMapper;
 
+
+
+    @Override
+    public Booking save(Booking booking) {
+        return bookingJpaRepository.save(booking);
+    }
 
     @Override
     public Booking getBookingById(String bookingId) {
@@ -39,56 +42,33 @@ public class BookingRepositoryImp implements IBookingRepository {
                 .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
 
-    @Override
-    public BookingResponse getBooking(String bookingId) {
-        Booking foundBooking = getBookingById(bookingId);
-        return bookingMapper.toBookingResponse(foundBooking);
-    }
 
     @Override
-    public List<BookingResponse> getAllBookings(TypedSort typedSort) {
-        List<BookingResponse> bookingResponses = bookingJpaRepository.findAll()
+    public List<Booking> getAllBookings(TypedSort typedSort) {
+        List<Booking> bookingResponses = bookingJpaRepository.findAll()
                 .stream()
-                .map(bookingMapper::toBookingResponse)
                 .toList(); // Materialize stream first
 
         return switch (typedSort) {
             case ASCENDING -> bookingResponses.stream()
-                    .sorted(Comparator.comparing(BookingResponse::createdAt))
+                    .sorted(Comparator.comparing(Booking::getCreatedAt))
                     .toList();
             case DESCENDING -> bookingResponses.stream()
-                    .sorted(Comparator.comparing(BookingResponse::createdAt).reversed())
+                    .sorted(Comparator.comparing(Booking::getCreatedAt).reversed())
                     .toList();
             case DEFAULT -> bookingResponses;
         };
     }
 
+
     @Override
-    public BookingResponse createNewBooking(BookingCreationRequest request) {
-        Customer customer = customerRepository.getCustomerById(request.getCustomerId());
-        Booking booking = bookingMapper.toBooking(request);
-        booking.setCustomer(customer);
-        return bookingMapper.toBookingResponse(bookingJpaRepository.save(booking));
+    public boolean existsById(String bookingId) {
+        return bookingJpaRepository.existsById(bookingId);
     }
 
-    @Override
-    public BookingResponse updateBooking(String bookingId, BookingUpdateRequest request) {
-        Booking booking = getBookingById(bookingId);
-        bookingMapper.updateBooking(booking, request);
-        List<TicketPK> ticketIds = request.getTicketIds();
-        for (var ticketId :ticketIds) {
-            Ticket ticket = ticketRepository.findTicketById(ticketId);
-            booking.getTickets().add(ticket);
-        }
-        return bookingMapper.toBookingResponse(booking);
-
-    }
 
     @Override
-    public void deleteBooking(String bookingId) {
-        if (!bookingJpaRepository.existsById(bookingId)) {
-            throw new ApplicationException(ErrorCode.NOT_FOUND_ID);
-        }
+    public void deleteBookingById(String bookingId) {
         bookingJpaRepository.deleteById(bookingId);
     }
 }

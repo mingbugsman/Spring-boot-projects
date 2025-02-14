@@ -21,5 +21,5 @@ public class ConcertUpdateRequest {
     LocalDateTime startDate; // event start date
     ConcertStatus concertStatus;
     String hallId;
-    List<String> bandId;
+    List<String> bandIds;
 }
