@@ -38,9 +38,11 @@ public class Booking {
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
-
     @UpdateTimestamp
     @Column(name = "updated_At")
     LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at", nullable = true)
+    LocalDateTime deletedAt;
 
 }

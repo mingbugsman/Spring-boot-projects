@@ -8,15 +8,18 @@ import com.TicketSelling.TicketSelling.Entity.Seat;
 import java.util.List;
 
 public interface ISeatRepository {
-    List<SeatResponse> getAllSeats();
+    List<Seat> getAllSeats();
 
-    SeatResponse getSeat(String seatId);
+    Seat save(Seat seat);
 
-    SeatResponse createNewSeat(SeatCreationRequest request);
-
-    SeatResponse updateSeat(String seatId, SeatUpdateRequest request);
-
-    void deleteSeat(String seatId);
+    void deleteSeat(Seat seat);
 
     Seat findSeatById(String seatId);
+
+    boolean existsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId);
+
+
+    List<Seat> getAllSeatsByConcertId(String concertId) ;
+
+
 }

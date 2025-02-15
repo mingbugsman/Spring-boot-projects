@@ -5,6 +5,11 @@ import com.TicketSelling.TicketSelling.DTO.Request.Hall.HallCreationRequest;
 import com.TicketSelling.TicketSelling.DTO.Request.Hall.HallUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Hall.HallDetailResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Hall.HallResponse;
+import com.TicketSelling.TicketSelling.Entity.Hall;
+import com.TicketSelling.TicketSelling.Exception.ApplicationException;
+import com.TicketSelling.TicketSelling.Exception.ErrorCode;
+import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomCustomerMapper;
+import com.TicketSelling.TicketSelling.Mapper.HallMapper;
 import com.TicketSelling.TicketSelling.Repository.IHallRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -15,27 +20,41 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HallService {
     IHallRepository hallRepository;
+    HallMapper hallMapper;
 
     HallDetailResponse getHallDetail(String hallId) {
-        return hallRepository.getHallDetail(hallId);
+        Hall hall = hallRepository.findHallById(hallId);
+        return hallMapper.toHallDetailResponse(hall);
     }
 
     List<HallResponse> getAllHalls() {
-        return hallRepository.getAllHalls();
+        return hallRepository.getAllHalls()
+                .stream()
+                .map(hallMapper::toHallResponse).toList();
     }
 
     HallResponse createNewHall(HallCreationRequest request) {
-        return hallRepository.createNewHall(request);
+        if (hallRepository.existsByAddress(request.getAddress())) {
+            throw new ApplicationException(ErrorCode.ADDRESS_EXISTED);
+        }
+        Hall createdhall = hallMapper.toHall(request);
+        createdhall = hallRepository.save(createdhall);
+        return hallMapper.toHallResponse(createdhall);
     }
 
     HallResponse updateHall(String hallId, HallUpdateRequest request) {
-        return hallRepository.updateHall(hallId, request);
+        Hall foundHall = hallRepository.findHallById(hallId);
+
+        hallMapper.updateHall(foundHall, request);
+        foundHall = hallRepository.save(foundHall);
+        return hallMapper.toHallResponse(foundHall);
     }
 
     void deleteHall(String hallId) {
-        hallRepository.deleteHall(hallId);
+        var hall = hallRepository.findHallById(hallId);
+        hallRepository.deleteHall(hall);
     }
 }

@@ -57,4 +57,7 @@ public class Ticket {
     @UpdateTimestamp
     @Column(name = "updated_At")
     LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at", nullable = true)
+    LocalDateTime deletedAt;
 }

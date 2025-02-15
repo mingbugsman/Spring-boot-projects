@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TicketUpdateRequest {
 
+
+
     @NotNull(message = "Booking ID is required")
     String bookingId;
 

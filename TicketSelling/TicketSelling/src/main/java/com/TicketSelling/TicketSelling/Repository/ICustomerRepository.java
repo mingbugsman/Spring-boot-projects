@@ -6,18 +6,23 @@ import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerBookingsRes
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerConcertHistoryResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
 import com.TicketSelling.TicketSelling.Entity.Customer;
+import com.TicketSelling.TicketSelling.Enum.SortOrder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
 public interface ICustomerRepository {
-    CustomerConcertHistoryResponse getCustomerConcertHistory(String customerId);
-    CustomerBookingsResponse getCustomerBookingResponse(String customerId);
-    CustomerResponse getCustomer(String customerId);
-    List<CustomerResponse> getAllCustomers();
-    CustomerResponse createNewResponse(CustomerCreationRequest request);
-    CustomerResponse updateCustomer(String customerId, CustomerUpdateRequest request);
-    void deleteCustomer(String customerId);
+    Customer save(Customer customer);
+    Object[] getCustomerConcertHistory(String customerId);
+    Customer getCustomerBookingResponse(String customerId);
+    List<Customer> getAllCustomers();
+    List<Customer> getAllCustomersByConcertId(String concertId, LocalDateTime lastCreatedAt, String sortOrder, Pageable pageSize);
+    void deleteCustomer(Customer customer);
     Customer getCustomerById(String customerId);
+    boolean checkExistsByEmail(String email);
 }

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -22,28 +23,26 @@ public class TicketRepositoryImp implements ITicketRepository {
     TicketJpaRepository ticketJpaRepository;
 
     @Override
-    public List<TicketResponse> getAllTickets() {
-        return List.of();
+    public List<Ticket> getAllTickets() {
+        return ticketJpaRepository.findAll();
     }
 
     @Override
-    public TicketDetailResponse getDetailTicket() {
-        return null;
+    public List<Ticket> getAllTicketsByCustomerId(String customerId) {
+        return ticketJpaRepository.findAllTicketsByCustomerId(customerId);
     }
 
+
     @Override
-    public TicketResponse createNewTicket(Ticket ticket) {
-        return null;
+    public Ticket save(Ticket ticket) {
+        return ticketJpaRepository.save(ticket);
     }
 
-    @Override
-    public TicketResponse updateTicket(Ticket ticket) {
-        return null;
-    }
+
 
     @Override
-    public void deleteTicket(TicketPK ticketPK) {
-
+    public void deleteTicket(Ticket ticket) {
+        ticket.setDeletedAt(LocalDateTime.now());
     }
 
     @Override

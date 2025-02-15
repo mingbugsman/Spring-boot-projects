@@ -16,6 +16,7 @@ public interface SeatMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "seatStatus", ignore = true)
     @Mapping(target = "hall",ignore = true )
+    @Mapping(target ="deletedAt", ignore = true)
     Seat toSeat(SeatCreationRequest request);
 
     @Mapping(target = "hallName", source = "hall.hallName")
@@ -25,5 +26,6 @@ public interface SeatMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "hall", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     void updateSeat(@MappingTarget Seat seat, SeatUpdateRequest request);
 }

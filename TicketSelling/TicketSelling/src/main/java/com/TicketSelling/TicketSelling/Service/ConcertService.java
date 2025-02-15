@@ -7,13 +7,17 @@ import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailRespons
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
 import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
+import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.ConcertMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomConcertMapper;
 import com.TicketSelling.TicketSelling.Repository.IBandRepository;
 import com.TicketSelling.TicketSelling.Repository.IConcertRepository;
+import com.TicketSelling.TicketSelling.Utils.SortUtils;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ConcertService  {
     private final IConcertRepository concertRepository;
     private final IBandRepository bandRepository;
@@ -34,7 +39,9 @@ public class ConcertService  {
     }
 
     public List<ConcertResponse> getAllConcerts() {
-        return concertRepository.getAllConcerts().stream().map(concertMapper::toConcertResponse).collect(Collectors.toList());
+        var sortedConcerts = SortUtils.sortList(concertRepository.getAllConcerts(),
+                SortOrder.DESC, Concert::getStartDate);
+        return sortedConcerts.stream().map(concertMapper::toConcertResponse).collect(Collectors.toList());
     }
 
     public ConcertResponse createNewConcert(ConcertCreationRequest request) {
@@ -60,9 +67,7 @@ public class ConcertService  {
         return concertMapper.toConcertResponse(concert);
     }
     public void deleteConcert(String concertId) {
-        if (concertRepository.existsById(concertId)) {
-            throw new ApplicationException(ErrorCode.NOT_FOUND_ID);
-        }
-        concertRepository.deleteConcertById(concertId);
+        Concert concert = concertRepository.findConcertById(concertId);
+        concertRepository.deleteConcert(concert);
     }
 }

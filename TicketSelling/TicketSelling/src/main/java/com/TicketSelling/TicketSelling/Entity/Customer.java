@@ -56,4 +56,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
     List<Booking> bookings;
 
+    @Column(name = "deleted_at", nullable = true)
+    LocalDateTime deletedAt;
 }

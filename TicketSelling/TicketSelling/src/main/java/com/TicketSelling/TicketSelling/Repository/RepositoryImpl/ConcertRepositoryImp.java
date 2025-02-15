@@ -6,6 +6,7 @@ import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailRespons
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
 import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
+import com.TicketSelling.TicketSelling.Entity.Seat;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.ConcertMapper;
@@ -40,8 +41,8 @@ public class ConcertRepositoryImp implements IConcertRepository {
     }
 
     @Override
-    public void deleteConcertById(String concertId) {
-        concertJpaRepository.deleteById(concertId);
+    public void deleteConcert(Concert concert) {
+        concert.setDeletedAt(LocalDateTime.now());
     }
 
     @Override
@@ -51,12 +52,15 @@ public class ConcertRepositoryImp implements IConcertRepository {
 
     @Override
     public Concert findByConcertNameAndStartDate(String concertName, LocalDateTime startDate) {
-        return null;
+        return concertJpaRepository.findByConcertNameAndStartDate(concertName, startDate);
     }
 
     @Override
     public boolean existsById(String concertId) {
         return concertJpaRepository.existsById(concertId);
     }
+
+
+
 
 }

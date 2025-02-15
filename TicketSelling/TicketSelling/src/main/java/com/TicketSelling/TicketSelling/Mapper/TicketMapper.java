@@ -26,6 +26,7 @@ public interface TicketMapper {
     @Mapping(target = "concert", ignore = true)
     @Mapping(target = "seat", ignore = true)
     @Mapping(target = "ticketStatus", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     Ticket toTicket(TicketCreationRequest request);
 
     @Mapping(target = "concertId", source = "id.concertId")
@@ -40,6 +41,7 @@ public interface TicketMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     void updateTicket(@MappingTarget Ticket ticket, TicketUpdateRequest request);
 
 

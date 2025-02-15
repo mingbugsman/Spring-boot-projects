@@ -19,6 +19,7 @@ public interface BandMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "bandStatus",ignore = true)
     @Mapping(target = "concerts", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     Band toBand(BandCreationRequest request);
 
 
@@ -28,9 +29,8 @@ public interface BandMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     void updateBand(@MappingTarget Band band, BandUpdateRequest request);
-
-
 
 
 

@@ -19,6 +19,7 @@ public interface HallMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "hallStatus", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     Hall toHall(HallCreationRequest request);
 
 
@@ -30,6 +31,7 @@ public interface HallMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     void updateHall(@MappingTarget Hall hall, HallUpdateRequest request);
 
 

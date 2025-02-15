@@ -1,7 +1,7 @@
 package com.TicketSelling.TicketSelling.Enum;
 
-public enum TypedSort {
-    ASCENDING,
-    DESCENDING,
+public enum SortOrder {
+    ASC,
+    DESC,
     DEFAULT
 }

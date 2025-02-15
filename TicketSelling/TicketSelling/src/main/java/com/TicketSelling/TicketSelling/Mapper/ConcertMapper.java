@@ -19,6 +19,7 @@ public interface ConcertMapper {
     @Mapping(target = "hall", ignore = true)
     @Mapping(target = "bands", ignore = true)
     @Mapping(target = "concertStatus", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     Concert toConcert(ConcertCreationRequest request);
 
     @Mapping(target = "hallName", source = "hall.hallName")
@@ -33,7 +34,7 @@ public interface ConcertMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "hall", ignore = true)
     @Mapping(target = "bands", ignore = true)
-
+    @Mapping(target ="deletedAt", ignore = true)
     void updateConcert(@MappingTarget Concert concert, ConcertUpdateRequest request);
 
 

@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,52 +24,36 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class SeatRepositoryImp implements ISeatRepository {
-    IHallRepository hallRepository;
     SeatJpaRepository seatJpaRepository;
-    SeatMapper seatMapper;
 
     @Override
-    public List<SeatResponse> getAllSeats() {
-        return seatJpaRepository.findAll().stream().map(seatMapper::toSeatResponse).collect(Collectors.toList());
+    public List<Seat> getAllSeats() {
+        return seatJpaRepository.findAll();
     }
 
     @Override
-    public SeatResponse getSeat(String seatId) {
-        return seatMapper.toSeatResponse(findSeatById(seatId));
+    public Seat save(Seat seat) {
+        return seatJpaRepository.save(seat);
     }
 
-    @Override
-    public SeatResponse createNewSeat(SeatCreationRequest request) {
-        if (seatJpaRepository.findByRowNumberAndSeatNumberAndHallId(
-                request.getSeatNumber(),
-                request.getSeatNumber(),
-                request.getHallId()
-        ) != null) {
-            throw new ApplicationException(ErrorCode.SEAT_EXISTED);
-        }
-        Seat seat = seatMapper.toSeat(request);
-        seat = seatJpaRepository.save(seat);
-        return seatMapper.toSeatResponse(seat);
-    }
 
     @Override
-    public SeatResponse updateSeat(String seatId, SeatUpdateRequest request) {
-        Seat seat = findSeatById(seatId);
-        seatMapper.updateSeat(seat,request);
-        seat.setHall(hallRepository.findHallById(request.getHallId()));
-        return seatMapper.toSeatResponse(seat);
-    }
-
-    @Override
-    public void deleteSeat(String seatId) {
-        if (!seatJpaRepository.existsById(seatId)) {
-            throw new ApplicationException(ErrorCode.NOT_FOUND_ID);
-        }
-        seatJpaRepository.deleteById(seatId);
+    public void deleteSeat(Seat seat) {
+        seat.setDeletedAt(LocalDateTime.now());
     }
 
     @Override
     public Seat findSeatById(String seatId) {
         return seatJpaRepository.findById(seatId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
+    }
+
+    @Override
+    public boolean existsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId) {
+        return seatJpaRepository.exitsByRowNumberAndSeatNumberAndHallId(rowNumber, seatNumber, hallId);
+    }
+
+    @Override
+    public List<Seat> getAllSeatsByConcertId(String concertId) {
+        return seatJpaRepository.getAllSeatsByConcertId(concertId);
     }
 }

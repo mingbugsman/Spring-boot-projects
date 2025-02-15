@@ -8,12 +8,14 @@ import com.TicketSelling.TicketSelling.DTO.Response.Band.BandDetailResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Band.BandResponse;
 import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
+import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.BandMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomBandMapper;
 import com.TicketSelling.TicketSelling.Repository.IBandRepository;
 import com.TicketSelling.TicketSelling.Repository.IConcertRepository;
+import com.TicketSelling.TicketSelling.Utils.SortUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
@@ -38,7 +40,8 @@ public class BandService {
         return customBandMapper.toBandDetailResponse(bandRepository.findBandById(bandId));
     }
     List<BandResponse> getAllBands() {
-        return bandRepository.getAllBands().stream().map(bandMapper::toBandResponse).collect(Collectors.toList());
+        List<Band> sortedBand = SortUtils.sortList(bandRepository.getAllBands(), SortOrder.DESC, Band::getFoundingYear);
+        return sortedBand.stream().map(bandMapper::toBandResponse).collect(Collectors.toList());
     }
 
     // POST
@@ -70,8 +73,8 @@ public class BandService {
 
     // DELETE
     void deleteBand(String bandId) {
-        bandRepository.deleteBand(bandId);
+        Band band = bandRepository.findBandById(bandId);
+        bandRepository.deleteBand(band);
     }
-
 
 }

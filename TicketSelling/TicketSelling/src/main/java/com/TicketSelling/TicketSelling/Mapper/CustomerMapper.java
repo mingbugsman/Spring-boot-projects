@@ -19,6 +19,7 @@ public interface CustomerMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "bookings",ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     Customer toCustomer(CustomerCreationRequest request);
 
 
@@ -29,6 +30,7 @@ public interface CustomerMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target ="deletedAt", ignore = true)
     void updateCustomer(@MappingTarget Customer customer, CustomerUpdateRequest request);
 
 

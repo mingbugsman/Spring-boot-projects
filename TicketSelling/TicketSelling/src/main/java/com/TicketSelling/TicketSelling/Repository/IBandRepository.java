@@ -13,6 +13,6 @@ public interface IBandRepository {
     Band save(Band band);
     List<Band> getAllBands();
     Band findByBandNameAndCountryAndFoundingYear(String bandName, String country, int foundingYear);
-    void deleteBand(String bandId);
+    void deleteBand(Band band);
     Band findBandById(String bandId);
 }

@@ -17,8 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -45,11 +45,8 @@ public class BandRepositoryImp implements IBandRepository {
 
 
     @Override
-    public void deleteBand(String bandId) {
-        if (bandJpaRepository.existsById(bandId)) {
-            throw new ApplicationException(ErrorCode.NOT_FOUND_ID);
-        }
-        bandJpaRepository.deleteById(bandId);
+    public void deleteBand(Band band) {
+        band.setDeletedAt(LocalDateTime.now());
     }
 
     @Override
