@@ -5,13 +5,17 @@ import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerCreationRequ
 import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.ApiResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
+import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -33,6 +37,24 @@ public class CustomerController {
         return ApiResponse.<CustomerResponse>builder()
                 .result(customerService.getCustomer(customerId))
                 .build();
+    }
+
+    @GetMapping("/{concertId}/list")
+    public ApiResponse<List<CustomerResponse>> getCustomersByConcertId(
+            @PathVariable String concertId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime lastCreatedAt,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "ASC") SortOrder sortOrder) {
+
+
+
+        return ApiResponse.<List<CustomerResponse>>builder()
+                .result(
+                        customerService.getAllCustomersByConcertId(concertId, lastCreatedAt, sortOrder, pageSize)
+                ).build();
+
+
+
     }
 
     @PostMapping

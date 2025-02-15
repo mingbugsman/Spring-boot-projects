@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface SeatJpaRepository extends JpaRepository<Seat,String> {
-    boolean exitsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId);
+    boolean existsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId);
 
     @Query("SELECT s FROM Concert c " +
             "JOIN c.hall h " +

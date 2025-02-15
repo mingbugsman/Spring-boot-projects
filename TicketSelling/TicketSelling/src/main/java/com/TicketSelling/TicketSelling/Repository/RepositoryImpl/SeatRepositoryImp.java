@@ -49,7 +49,7 @@ public class SeatRepositoryImp implements ISeatRepository {
 
     @Override
     public boolean existsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId) {
-        return seatJpaRepository.exitsByRowNumberAndSeatNumberAndHallId(rowNumber, seatNumber, hallId);
+        return seatJpaRepository.existsByRowNumberAndSeatNumberAndHallId(rowNumber, seatNumber, hallId);
     }
 
     @Override

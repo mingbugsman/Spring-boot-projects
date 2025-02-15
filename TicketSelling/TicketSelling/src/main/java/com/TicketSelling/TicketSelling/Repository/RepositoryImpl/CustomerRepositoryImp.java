@@ -46,10 +46,11 @@ public class CustomerRepositoryImp implements ICustomerRepository {
     }
 
     @Override
-    public List<Customer> getAllCustomersByConcertId(String concertId, LocalDateTime lastCreatedAt, String sortDirection, Pageable pageable) {
-        return customerJpaRepository.getCustomersByConcertIdSeekPagination(
-                concertId,lastCreatedAt,sortDirection, pageable
-                );
+    public List<Customer> getAllCustomersByConcertId(String concertId, LocalDateTime lastCreatedAt,String sortDirection, Pageable pageable) {
+
+            return customerJpaRepository.getCustomersByConcertIdSeekPagination(
+                    concertId,lastCreatedAt, sortDirection,pageable);
+
     }
 
 

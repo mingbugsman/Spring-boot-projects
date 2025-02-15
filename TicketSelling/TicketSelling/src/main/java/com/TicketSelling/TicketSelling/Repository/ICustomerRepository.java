@@ -21,7 +21,7 @@ public interface ICustomerRepository {
     Object[] getCustomerConcertHistory(String customerId);
     Customer getCustomerBookingResponse(String customerId);
     List<Customer> getAllCustomers();
-    List<Customer> getAllCustomersByConcertId(String concertId, LocalDateTime lastCreatedAt, String sortOrder, Pageable pageSize);
+    List<Customer> getAllCustomersByConcertId(String concertId, LocalDateTime lastCreatedAt, String sortDirection,Pageable pageSize);
     void deleteCustomer(Customer customer);
     Customer getCustomerById(String customerId);
     boolean checkExistsByEmail(String email);

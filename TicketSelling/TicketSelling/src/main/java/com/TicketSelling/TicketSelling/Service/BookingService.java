@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -53,7 +54,8 @@ public class BookingService {
 
     public List<BookingResponse> getAllBookings(String customerId, LocalDateTime lastCreatedAt,
                                                 SortOrder sortOrder, int pageSize) {
-        Pageable pageable = PageRequest.of(0, pageSize);
+        Sort.Direction direction = sortOrder.toSpringSortOrder();
+        Pageable pageable = PageRequest.of(0, pageSize, Sort.by(direction, "createdAt"));
         return bookingRepository.getBookingsByCustomerId(customerId, lastCreatedAt, sortOrder.name(), pageable).stream().map(bookingMapper::toBookingResponse).collect(Collectors.toList());
     }
 

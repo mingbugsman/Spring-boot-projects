@@ -32,17 +32,21 @@ public interface CustomerJpaRepository extends JpaRepository<Customer, String> {
     JOIN b.tickets t
     JOIN t.concert co
     WHERE co.id = :concertId
-    AND (:lastCreatedAt IS NULL OR\s
-        (:sortDirection = 'ASC' AND c.createdAt > :lastCreatedAt) OR\s
+    AND (:lastCreatedAt IS NULL OR 
+        (:sortDirection = 'ASC' AND c.createdAt > :lastCreatedAt) OR 
         (:sortDirection = 'DESC' AND c.createdAt < :lastCreatedAt))
-    ORDER BY c.createdAt :sortDirection
-   \s""")
+    ORDER BY 
+        CASE WHEN :sortDirection = 'ASC' THEN c.createdAt END ASC,
+        CASE WHEN :sortDirection = 'DESC' THEN c.createdAt END DESC
+    """)
     List<Customer> getCustomersByConcertIdSeekPagination(
             @Param("concertId") String concertId,
             @Param("lastCreatedAt") LocalDateTime lastCreatedAt,
             @Param("sortDirection") String sortDirection,
             Pageable pageable
     );
+
+
 
 
 

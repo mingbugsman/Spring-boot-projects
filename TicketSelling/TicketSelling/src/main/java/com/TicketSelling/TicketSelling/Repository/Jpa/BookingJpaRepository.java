@@ -14,19 +14,20 @@ import java.util.List;
 public interface BookingJpaRepository extends JpaRepository<Booking, String> {
 
     @Query("""
-            SELECT c FROM Customer c
-            JOIN c.bookings
-            WHERE c.id = :customerId
-            AND ( :lastCreatedAt IS NULL OR \s
-                ( :sortDirection = 'ASC' AND c.createdAt > :lastCreatedAt) OR \s
-                (:sortDirection = 'DESC' AND c.createdAt < :lastCreatedAt))
-            
-            ORDER BY c.createdAt :sortDirection
-            \s""")
+        SELECT b FROM Booking b
+        WHERE b.customer.id = :customerId
+        AND (:lastCreatedAt IS NULL OR \s
+            (:sortDirection = 'ASC' AND b.createdAt > :lastCreatedAt) OR
+            (:sortDirection = 'DESC' AND b.createdAt < :lastCreatedAt))
+        ORDER BY \s
+            CASE WHEN :sortDirection = 'ASC' THEN b.createdAt END ASC,
+            CASE WHEN :sortDirection = 'DESC' THEN b.createdAt END DESC
+        """)
     List<Booking> getBookingsByCustomerId(
             @Param("customerId") String customerId,
             @Param("lastCreatedAt") LocalDateTime lastCreatedAt,
             @Param("sortDirection") String sortDirection,
             Pageable pageable
-            );
+    );
+
 }
