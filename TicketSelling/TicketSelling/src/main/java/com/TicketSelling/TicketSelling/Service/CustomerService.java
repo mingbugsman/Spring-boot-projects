@@ -82,7 +82,12 @@ public class CustomerService {
     // DELETE
     public void deleteCustomer(String customerId) {
         Customer customer = customerRepository.getCustomerById(customerId);
-        customerRepository.deleteCustomer(customer);
+        if (customer.getDeletedAt() == null) {
+            customerRepository.deleteCustomer(customer);
+        } else {
+            throw new ApplicationException(ErrorCode.ENTITY_IS_ALREADY_DELETED);
+        }
+
     }
 
 

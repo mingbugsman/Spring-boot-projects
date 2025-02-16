@@ -13,6 +13,10 @@ spring:
       ddl-auto: update
       format-sql: true
     show-sql: true
+    logging:
+      level:
+        org.hibernate.SQL: DEBUG
+        org.hibernate.type.descriptor.sql: TRACE
   servlet:
     multipart:
       max-file-size: 500KB

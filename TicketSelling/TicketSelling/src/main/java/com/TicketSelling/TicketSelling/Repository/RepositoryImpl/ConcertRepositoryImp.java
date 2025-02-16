@@ -31,7 +31,7 @@ public class ConcertRepositoryImp implements IConcertRepository {
 
     @Override
     public List<Concert> getAllConcerts() {
-        return concertJpaRepository.findAll();
+        return concertJpaRepository.getAllConcerts();
     }
 
     @Override
@@ -43,6 +43,7 @@ public class ConcertRepositoryImp implements IConcertRepository {
     @Override
     public void deleteConcert(Concert concert) {
         concert.setDeletedAt(LocalDateTime.now());
+        concertJpaRepository.save(concert);
     }
 
     @Override

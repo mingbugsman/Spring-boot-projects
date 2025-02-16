@@ -19,7 +19,12 @@ public enum ErrorCode {
     BAND_EXISTED(1005, "Band is existed",HttpStatus.BAD_REQUEST ),
     CONCERT_EXISTED(1006, "Concert is existed", HttpStatus.BAD_REQUEST),
     SEAT_EXISTED(1007, "Seat is existed", HttpStatus.BAD_REQUEST),
-    TICKET_EXISTED(1008, "Ticket is existed", HttpStatus.BAD_REQUEST);
+    TICKET_EXISTED(1008, "Ticket is existed", HttpStatus.BAD_REQUEST),
+
+
+    ENTITY_IS_ALREADY_DELETED(1020,"ENTITY HAS BEEN DELETED", HttpStatus.BAD_REQUEST);
+
+
     int code;
     String message;
     HttpStatus statusCode;

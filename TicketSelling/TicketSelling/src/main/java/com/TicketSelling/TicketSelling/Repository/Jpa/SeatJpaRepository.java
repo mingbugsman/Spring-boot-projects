@@ -15,6 +15,10 @@ public interface SeatJpaRepository extends JpaRepository<Seat,String> {
     @Query("SELECT s FROM Concert c " +
             "JOIN c.hall h " +
             "JOIN h.seats s " +
-            "WHERE c.id = :concertId")
+            "WHERE c.id = :concertId AND c.deletedAt IS NULL AND h.deletedAt IS NULL AND s.deletedAt IS NULL")
     List<Seat> getAllSeatsByConcertId(@Param("concertId") String concertId);
+
+    @Query("SELECT s FROM Seat s " +
+            "WHERE s.deletedAt IS NULL")
+    List<Seat> getAllSeats();
 }

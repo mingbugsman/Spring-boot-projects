@@ -47,7 +47,7 @@ public class BookingRepositoryImp implements IBookingRepository {
 
     @Override
     public List<Booking> getAllBookings() {
-        return bookingJpaRepository.findAll();
+        return bookingJpaRepository.getAllBookings();
     }
 
 
@@ -60,5 +60,6 @@ public class BookingRepositoryImp implements IBookingRepository {
     @Override
     public void deleteBooking(Booking booking) {
         booking.setDeletedAt(LocalDateTime.now());
+        bookingJpaRepository.save(booking);
     }
 }

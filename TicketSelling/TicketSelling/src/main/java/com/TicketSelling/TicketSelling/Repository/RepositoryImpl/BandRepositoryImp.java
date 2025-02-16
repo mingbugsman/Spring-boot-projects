@@ -30,7 +30,7 @@ public class BandRepositoryImp implements IBandRepository {
 
     @Override
     public List<Band> getAllBands() {
-        return bandJpaRepository.findAll();
+        return bandJpaRepository.findAllBand();
     }
 
     @Override
@@ -47,6 +47,7 @@ public class BandRepositoryImp implements IBandRepository {
     @Override
     public void deleteBand(Band band) {
         band.setDeletedAt(LocalDateTime.now());
+        bandJpaRepository.save(band);
     }
 
     @Override

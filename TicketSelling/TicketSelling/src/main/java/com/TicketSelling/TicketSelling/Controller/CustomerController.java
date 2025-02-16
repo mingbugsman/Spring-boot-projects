@@ -11,7 +11,6 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,15 +45,10 @@ public class CustomerController {
             @RequestParam(defaultValue = "10") int pageSize,
             @RequestParam(defaultValue = "ASC") SortOrder sortOrder) {
 
-
-
         return ApiResponse.<List<CustomerResponse>>builder()
                 .result(
                         customerService.getAllCustomersByConcertId(concertId, lastCreatedAt, sortOrder, pageSize)
                 ).build();
-
-
-
     }
 
     @PostMapping

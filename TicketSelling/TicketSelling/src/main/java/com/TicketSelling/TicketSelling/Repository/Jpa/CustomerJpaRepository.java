@@ -31,11 +31,11 @@ public interface CustomerJpaRepository extends JpaRepository<Customer, String> {
     JOIN c.bookings b
     JOIN b.tickets t
     JOIN t.concert co
-    WHERE co.id = :concertId
-    AND (:lastCreatedAt IS NULL OR 
-        (:sortDirection = 'ASC' AND c.createdAt > :lastCreatedAt) OR 
+    WHERE co.id = :concertId AND co.deletedAt IS NULL AND c.deletedAt IS NULL AND b.deletedAt IS NULL AND t.deletedAt IS NULL
+    AND (:lastCreatedAt IS NULL OR
+        (:sortDirection = 'ASC' AND c.createdAt > :lastCreatedAt) OR
         (:sortDirection = 'DESC' AND c.createdAt < :lastCreatedAt))
-    ORDER BY 
+    ORDER BY
         CASE WHEN :sortDirection = 'ASC' THEN c.createdAt END ASC,
         CASE WHEN :sortDirection = 'DESC' THEN c.createdAt END DESC
     """)
@@ -45,6 +45,10 @@ public interface CustomerJpaRepository extends JpaRepository<Customer, String> {
             @Param("sortDirection") String sortDirection,
             Pageable pageable
     );
+
+    @Query("SELECT c FROM Customer c " +
+            "WHERE c.deletedAt IS NULL")
+    List<Customer> getAllCustomers();
 
 
 

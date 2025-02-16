@@ -15,7 +15,7 @@ public interface BookingJpaRepository extends JpaRepository<Booking, String> {
 
     @Query("""
         SELECT b FROM Booking b
-        WHERE b.customer.id = :customerId
+        WHERE b.customer.id = :customerId AND b.deletedAt IS NULL
         AND (:lastCreatedAt IS NULL OR \s
             (:sortDirection = 'ASC' AND b.createdAt > :lastCreatedAt) OR
             (:sortDirection = 'DESC' AND b.createdAt < :lastCreatedAt))
@@ -29,5 +29,9 @@ public interface BookingJpaRepository extends JpaRepository<Booking, String> {
             @Param("sortDirection") String sortDirection,
             Pageable pageable
     );
+
+    @Query("SELECT b from Booking b " +
+            "WHERE b.deletedAt IS NULL")
+    List<Booking> getAllBookings();
 
 }

@@ -23,7 +23,7 @@ public class HallRepositoryImp implements IHallRepository {
 
     @Override
     public List<Hall> getAllHalls() {
-        return hallJpaRepository.findAll();
+        return hallJpaRepository.getAllHalls();
     }
 
     @Override
@@ -34,6 +34,7 @@ public class HallRepositoryImp implements IHallRepository {
     @Override
     public void deleteHall(Hall hall) {
         hall.setDeletedAt(LocalDateTime.now());
+        hallJpaRepository.save(hall);
     }
 
     @Override

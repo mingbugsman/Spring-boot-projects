@@ -28,7 +28,7 @@ public class SeatRepositoryImp implements ISeatRepository {
 
     @Override
     public List<Seat> getAllSeats() {
-        return seatJpaRepository.findAll();
+        return seatJpaRepository.getAllSeats();
     }
 
     @Override
@@ -40,6 +40,7 @@ public class SeatRepositoryImp implements ISeatRepository {
     @Override
     public void deleteSeat(Seat seat) {
         seat.setDeletedAt(LocalDateTime.now());
+        seatJpaRepository.save(seat);
     }
 
     @Override

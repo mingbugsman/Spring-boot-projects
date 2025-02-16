@@ -35,7 +35,7 @@ public class Customer {
     String email;
 
     @Column(name = "phone_number", columnDefinition = "VARCHAR(20)")
-    Integer phoneNumber;
+    String phoneNumber;
 
     @Column(name = "address", columnDefinition = "TEXT")
     String address;

@@ -48,7 +48,7 @@ public class Band {
     inverseJoinColumns = @JoinColumn(name = "concert_id"))
     Set<Concert> concerts;
 
-    @Column(name = "deleted_at", nullable = true)
+    @Column(name = "deleted_at")
     LocalDateTime deletedAt;
 
     // date adđ band

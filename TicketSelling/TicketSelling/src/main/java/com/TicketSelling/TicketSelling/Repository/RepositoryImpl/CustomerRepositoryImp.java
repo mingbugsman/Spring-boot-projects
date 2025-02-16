@@ -42,7 +42,7 @@ public class CustomerRepositoryImp implements ICustomerRepository {
 
     @Override
     public List<Customer> getAllCustomers() {
-        return customerJpaRepository.findAll();
+        return customerJpaRepository.getAllCustomers();
     }
 
     @Override
@@ -57,6 +57,8 @@ public class CustomerRepositoryImp implements ICustomerRepository {
     @Override
     public void deleteCustomer(Customer customer) {
         customer.setDeletedAt(LocalDateTime.now());
+        System.out.println("Deleting customer: " + customer.getId() + ", deletedAt=" + customer.getDeletedAt());
+        customerJpaRepository.save(customer);
     }
 
     @Override

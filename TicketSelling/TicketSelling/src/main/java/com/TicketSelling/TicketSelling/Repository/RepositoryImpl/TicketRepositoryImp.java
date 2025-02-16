@@ -24,7 +24,7 @@ public class TicketRepositoryImp implements ITicketRepository {
 
     @Override
     public List<Ticket> getAllTickets() {
-        return ticketJpaRepository.findAll();
+        return ticketJpaRepository.getAllTickets();
     }
 
     @Override
@@ -43,6 +43,7 @@ public class TicketRepositoryImp implements ITicketRepository {
     @Override
     public void deleteTicket(Ticket ticket) {
         ticket.setDeletedAt(LocalDateTime.now());
+        ticketJpaRepository.save(ticket);
     }
 
     @Override

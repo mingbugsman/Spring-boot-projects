@@ -14,5 +14,8 @@ import java.util.List;
 public interface ConcertJpaRepository extends JpaRepository<Concert, String> {
     Concert findByConcertNameAndStartDate(String concertName, LocalDateTime startDate);
 
+    @Query("SELECT c FROM Concert c " +
+            "WHERE c.deletedAt IS NULL")
+    List<Concert> getAllConcerts();
 
 }
