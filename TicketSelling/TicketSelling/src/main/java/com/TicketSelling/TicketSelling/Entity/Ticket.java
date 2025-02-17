@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class Ticket {
     @EmbeddedId
     TicketPK id;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "Ticket_Status", nullable = false)
     TicketStatus ticketStatus = TicketStatus.PENDING;

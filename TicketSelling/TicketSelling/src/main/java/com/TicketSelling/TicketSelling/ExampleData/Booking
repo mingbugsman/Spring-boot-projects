@@ -1,0 +1,78 @@
+{
+  "customerId": "c001",
+  "concertId": "con001",
+  "tickets": [
+    { "seatId": "s001", "bookingId": "b001", "price": 45.00 },
+    { "seatId": "s002", "bookingId": "b001", "price": 50.00 }
+  ]
+}
+
+{
+  "customerId": "c002",
+  "concertId": "con002",
+  "tickets": [
+    { "seatId": "s003", "bookingId": "b002", "price": 60.00 },
+    { "seatId": "s004", "bookingId": "b002", "price": 70.00 }
+  ]
+}
+
+{
+  "customerId": "c003",
+  "concertId": "con003",
+  "tickets": [
+    { "seatId": "s005", "bookingId": "b003", "price": 80.00 }
+  ]
+}
+
+{
+  "customerId": "c004",
+  "concertId": "con004",
+  "tickets": [
+    { "seatId": "s006", "bookingId": "b004", "price": 90.00 },
+    { "seatId": "s007", "bookingId": "b004", "price": 100.00 },
+    { "seatId": "s008", "bookingId": "b004", "price": 110.00 }
+  ]
+}
+
+{
+  "customerId": "c005",
+  "concertId": "con005",
+  "tickets": [
+    { "seatId": "s009", "bookingId": "b005", "price": 120.00 }
+  ]
+}
+
+{
+   "customerId": "c006",
+   "concertId": "con006",
+   "tickets": [
+     { "seatId": "s010", "bookingId": "b006", "price": 130.00 },
+     { "seatId": "s011", "bookingId": "b006", "price": 140.00 }
+   ]
+}
+
+{
+  "customerId": "c007",
+  "concertId": "con007",
+  "tickets": [
+    { "seatId": "s012", "bookingId": "b007", "price": 150.00 },
+    { "seatId": "s013", "bookingId": "b007", "price": 160.00 }
+  ]
+}
+
+{
+  "customerId": "c009",
+  "concertId": "con009",
+  "tickets": [
+    { "seatId": "s015", "bookingId": "b009", "price": 180.00 }
+  ]
+}
+
+{
+  "customerId": "c010",
+  "concertId": "con010",
+  "tickets": [
+    { "seatId": "s016", "bookingId": "b010", "price": 190.00 },
+    { "seatId": "s017", "bookingId": "b010", "price": 200.00 }
+  ]
+}

@@ -9,28 +9,37 @@ import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.SeatMapper;
 import com.TicketSelling.TicketSelling.Repository.IHallRepository;
 import com.TicketSelling.TicketSelling.Repository.ISeatRepository;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SeatService {
     ISeatRepository seatRepository;
     IHallRepository hallRepository;
     SeatMapper seatMapper;
 
 
-    List<SeatResponse> getAllSeats() {
+    public List<SeatResponse> getAllSeats() {
         return seatRepository.getAllSeats().stream().map(seatMapper::toSeatResponse).toList();
     }
 
-    List<SeatResponse> getAllSeatsByConcertId(String concertId) {
+    public List<SeatResponse> getAllSeatsByConcertId(String concertId) {
         return seatRepository.getAllSeatsByConcertId(concertId)
                 .stream()
                 .map(seatMapper::toSeatResponse)
                 .toList();
     }
-    SeatResponse getSeat(String seatId) {
+    public SeatResponse getSeat(String seatId) {
         return seatMapper.toSeatResponse(seatRepository.findSeatById(seatId));
     }
+
+
 
     public SeatResponse createNewSeat(SeatCreationRequest request) {
 

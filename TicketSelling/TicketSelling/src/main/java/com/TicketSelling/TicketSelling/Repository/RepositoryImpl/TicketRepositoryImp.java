@@ -50,4 +50,9 @@ public class TicketRepositoryImp implements ITicketRepository {
     public Ticket findTicketById(TicketPK ticketPK) {
         return ticketJpaRepository.findByTickPK(ticketPK.getConcertId(), ticketPK.getConcertId()).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
+
+    @Override
+    public void saveAll(List<Ticket> tickets) {
+        ticketJpaRepository.saveAll(tickets);
+    }
 }

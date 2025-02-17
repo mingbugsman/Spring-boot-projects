@@ -1,7 +1,9 @@
 package com.TicketSelling.TicketSelling.DTO.Request.Booking;
 
 
-import jakarta.validation.constraints.NotBlank;
+
+import com.TicketSelling.TicketSelling.DTO.Request.Ticket.TicketCreationRequest;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,7 +18,14 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingCreationRequest {
-    @NotNull(message = "Customer ID is required")
-    private String customerId;
 
+    @NotNull(message = "Customer ID is required")
+    String customerId;
+
+    @NotNull(message = "Concert ID is required")
+    String concertId;
+
+    @NotEmpty(message = "At least one seat must be selected")
+    List<TicketCreationRequest> tickets;
 }
+

@@ -14,4 +14,5 @@ public interface ITicketRepository {
     Ticket save(Ticket ticket);
     void deleteTicket(Ticket ticket);
     Ticket findTicketById(TicketPK ticketPK);
+    void saveAll(List<Ticket> tickets );
 }

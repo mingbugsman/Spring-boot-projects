@@ -39,13 +39,13 @@ public class BandService {
 
         return customBandMapper.toBandDetailResponse(bandRepository.findBandById(bandId));
     }
-    List<BandResponse> getAllBands() {
+    public List<BandResponse> getAllBands() {
         List<Band> sortedBand = SortUtils.sortList(bandRepository.getAllBands(), SortOrder.DESC, Band::getFoundingYear);
         return sortedBand.stream().map(bandMapper::toBandResponse).collect(Collectors.toList());
     }
 
     // POST
-    BandResponse createNewBand(BandCreationRequest request) {
+    public BandResponse createNewBand(BandCreationRequest request) {
         if (bandRepository.findByBandNameAndCountryAndFoundingYear(request.getBandName(), request.getCountry(), request.getFoundingYear()) != null) {
             throw new ApplicationException(ErrorCode.BAND_EXISTED);
         }
@@ -55,7 +55,7 @@ public class BandService {
     }
 
     // PUT/PATCH
-    BandResponse updateBand(String bandId, BandUpdateRequest request) {
+    public BandResponse updateBand(String bandId, BandUpdateRequest request) {
         Band band = bandRepository.findBandById(bandId);
 
 
@@ -72,7 +72,7 @@ public class BandService {
     }
 
     // DELETE
-    void deleteBand(String bandId) {
+    public void deleteBand(String bandId) {
         Band band = bandRepository.findBandById(bandId);
         bandRepository.deleteBand(band);
     }

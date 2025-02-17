@@ -5,17 +5,13 @@ import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingCreationReques
 import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingTicketsResponse;
-import com.TicketSelling.TicketSelling.Entity.Booking;
-import com.TicketSelling.TicketSelling.Entity.Customer;
-import com.TicketSelling.TicketSelling.Entity.Ticket;
-import com.TicketSelling.TicketSelling.Entity.TicketPK;
+import com.TicketSelling.TicketSelling.Entity.*;
 import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Mapper.BookingMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomBookingMapper;
-import com.TicketSelling.TicketSelling.Repository.IBookingRepository;
+import com.TicketSelling.TicketSelling.Mapper.TicketMapper;
+import com.TicketSelling.TicketSelling.Repository.*;
 
-import com.TicketSelling.TicketSelling.Repository.ICustomerRepository;
-import com.TicketSelling.TicketSelling.Repository.ITicketRepository;
 import com.TicketSelling.TicketSelling.Utils.SortUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,11 +30,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingService {
+    IConcertRepository concertRepository;
     ITicketRepository ticketRepository;
     ICustomerRepository customerRepository;
     IBookingRepository bookingRepository;
+    ISeatRepository seatRepository;
     BookingMapper bookingMapper;
     CustomBookingMapper customBookingMapper;
+    TicketMapper ticketMapper;
 
     // GET
 
@@ -52,7 +52,7 @@ public class BookingService {
         return sortedBooking.stream().map(bookingMapper::toBookingResponse).toList();
     }
 
-    public List<BookingResponse> getAllBookings(String customerId, LocalDateTime lastCreatedAt,
+    public List<BookingResponse> getAllBookingsByCustomerId(String customerId, LocalDateTime lastCreatedAt,
                                                 SortOrder sortOrder, int pageSize) {
         Sort.Direction direction = sortOrder.toSpringSortOrder();
         Pageable pageable = PageRequest.of(0, pageSize, Sort.by(direction, "createdAt"));
@@ -60,11 +60,27 @@ public class BookingService {
     }
 
     // POST
-    public BookingResponse createNewBooking(BookingCreationRequest request) {
+    public BookingTicketsResponse createNewBooking(BookingCreationRequest request) {
+        Concert concert = concertRepository.findConcertById(request.getConcertId());
         Customer customer = customerRepository.getCustomerById(request.getCustomerId());
         Booking booking = bookingMapper.toBooking(request);
+        bookingRepository.save(booking);
         booking.setCustomer(customer);
-        return bookingMapper.toBookingResponse(bookingRepository.save(booking));
+
+        List<Ticket> tickets = new ArrayList<>();
+        for ( var ticketCreationRequest : request.getTickets()) {
+            Seat seat = seatRepository.findSeatById(ticketCreationRequest.getSeatId());
+            Ticket ticket = Ticket.builder()
+                    .booking(booking)
+                    .concert(concert)
+                    .price(ticketCreationRequest.getPrice())
+                    .seat(seat)
+                    .build();
+            tickets.add(ticket);
+        }
+        ticketRepository.saveAll(tickets);
+
+        return customBookingMapper.toBookingTicketsResponse(booking);
 
     }
 
@@ -72,11 +88,14 @@ public class BookingService {
     public BookingResponse updateBooking(String bookingId, BookingUpdateRequest request) {
         Booking booking = bookingRepository.getBookingById(bookingId);
         bookingMapper.updateBooking(booking, request);
-        List<TicketPK> ticketIds = request.getTicketIds();
-        for (var ticketId :ticketIds) {
-            Ticket ticket = ticketRepository.findTicketById(ticketId);
-            booking.getTickets().add(ticket);
+        if (request.getTicketIds() != null ) {
+            List<TicketPK> ticketIds = request.getTicketIds();
+            for (var ticketId :ticketIds) {
+                Ticket ticket = ticketRepository.findTicketById(ticketId);
+                booking.getTickets().add(ticket);
+            }
         }
+
         return bookingMapper.toBookingResponse(booking);
     }
 
@@ -85,5 +104,7 @@ public class BookingService {
         Booking booking = bookingRepository.getBookingById(bookingId);
         bookingRepository.deleteBooking(booking);
     }
+
+
 
 }

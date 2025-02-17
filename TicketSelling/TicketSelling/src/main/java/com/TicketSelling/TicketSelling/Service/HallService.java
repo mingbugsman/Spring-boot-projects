@@ -25,18 +25,18 @@ public class HallService {
     IHallRepository hallRepository;
     HallMapper hallMapper;
 
-    HallDetailResponse getHallDetail(String hallId) {
+    public HallDetailResponse getHallDetail(String hallId) {
         Hall hall = hallRepository.findHallById(hallId);
         return hallMapper.toHallDetailResponse(hall);
     }
 
-    List<HallResponse> getAllHalls() {
+    public List<HallResponse> getAllHalls() {
         return hallRepository.getAllHalls()
                 .stream()
                 .map(hallMapper::toHallResponse).toList();
     }
 
-    HallResponse createNewHall(HallCreationRequest request) {
+    public HallResponse createNewHall(HallCreationRequest request) {
         if (hallRepository.existsByAddress(request.getAddress())) {
             throw new ApplicationException(ErrorCode.ADDRESS_EXISTED);
         }
@@ -45,7 +45,7 @@ public class HallService {
         return hallMapper.toHallResponse(createdhall);
     }
 
-    HallResponse updateHall(String hallId, HallUpdateRequest request) {
+    public HallResponse updateHall(String hallId, HallUpdateRequest request) {
         Hall foundHall = hallRepository.findHallById(hallId);
 
         hallMapper.updateHall(foundHall, request);
@@ -53,7 +53,7 @@ public class HallService {
         return hallMapper.toHallResponse(foundHall);
     }
 
-    void deleteHall(String hallId) {
+    public void deleteHall(String hallId) {
         var hall = hallRepository.findHallById(hallId);
         hallRepository.deleteHall(hall);
     }

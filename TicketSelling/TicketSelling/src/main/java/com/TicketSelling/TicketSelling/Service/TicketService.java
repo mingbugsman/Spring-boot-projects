@@ -44,16 +44,17 @@ public class TicketService {
                         ticketRepository.findTicketById(ticketPK)
                 );
     }
-
-    TicketResponse createNewTicket(TicketCreationRequest request) {
+    /*
+    Ticket createNewTicket(TicketCreationRequest request) {
         TicketPK ticketPK = createTicketPK(request.getConcertId(), request.getSeatId());
         if (ticketRepository.findTicketById(ticketPK) != null) {
             throw new ApplicationException(ErrorCode.TICKET_EXISTED);
         }
         Ticket ticket = ticketMapper.toTicket(request);
         ticket = ticketRepository.save(ticket);
-        return ticketMapper.toTicketResponse(ticket);
-    }
+        return ticket;
+    }*/
+
     TicketResponse updateTicket(String concertId, String seatId, TicketUpdateRequest request) {
         TicketPK ticketPK = TicketPK.builder()
                 .concertId(concertId)
@@ -70,10 +71,7 @@ public class TicketService {
         Ticket ticket = ticketRepository.findTicketById(ticketPK);
         ticketRepository.deleteTicket(ticket);
     }
-
     private TicketPK createTicketPK(String concertId, String seatId) {
         return TicketPK.builder().seatId(seatId).concertId(concertId).build();
     }
-
-
 }

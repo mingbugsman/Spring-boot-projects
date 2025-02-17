@@ -21,9 +21,6 @@ public class TicketCreationRequest {
     String seatId;
 
 
-    @NotNull(message = "Concert ID is required")
-    String concertId;
-
     @NotNull(message = "Booking ID is required")
     String bookingId;
 
