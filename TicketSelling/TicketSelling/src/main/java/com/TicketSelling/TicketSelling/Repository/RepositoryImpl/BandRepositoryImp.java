@@ -52,7 +52,8 @@ public class BandRepositoryImp implements IBandRepository {
 
     @Override
     public Band findBandById(String bandId) {
-        return bandJpaRepository.findById(bandId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
+        System.out.println("execute finding " + bandId);
+        return bandJpaRepository.findBandById(bandId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
 
 }

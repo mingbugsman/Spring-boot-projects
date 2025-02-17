@@ -3,6 +3,7 @@ package com.TicketSelling.TicketSelling.Service;
 import com.TicketSelling.TicketSelling.DTO.Request.Seat.SeatCreationRequest;
 import com.TicketSelling.TicketSelling.DTO.Request.Seat.SeatUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Seat.SeatResponse;
+import com.TicketSelling.TicketSelling.Entity.Hall;
 import com.TicketSelling.TicketSelling.Entity.Seat;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,19 +44,34 @@ public class SeatService {
 
 
     public SeatResponse createNewSeat(SeatCreationRequest request) {
+        System.out.println("Seat Information : " + request.getRow() + " - " + request.getSeatNumber() + " - " + request.getHallId() + " + " + request.getSeatType().name() + " + " + request.getPrice());
 
-        if (seatRepository.existsByRowNumberAndSeatNumberAndHallId(
-                request.getRowNumber(),
+        if (seatRepository.existsByRowAndSeatNumberAndHallId(
+                request.getRow(),
                 request.getSeatNumber(),
                 request.getHallId()
         )) {
             throw new ApplicationException(ErrorCode.SEAT_EXISTED);
         }
+
         Seat seat = seatMapper.toSeat(request);
+
+        Hall hall = hallRepository.findHallById(request.getHallId());
+        seat.setHall(hall);
         seat = seatRepository.save(seat);
         return seatMapper.toSeatResponse(seat);
     }
 
+    public List<SeatResponse> createListSeat(String hallId, List<SeatCreationRequest> requests) {
+        Hall hall = hallRepository.findHallById(hallId);
+        List<SeatResponse> seatResponses = new ArrayList<>();
+        for (var request : requests) {
+            request.setHallId(hall.getId());;
+
+            seatResponses.add(createNewSeat(request));
+        }
+        return seatResponses;
+    }
 
     public SeatResponse updateSeat(String seatId, SeatUpdateRequest request) {
         Seat seat = seatRepository.findSeatById(seatId);

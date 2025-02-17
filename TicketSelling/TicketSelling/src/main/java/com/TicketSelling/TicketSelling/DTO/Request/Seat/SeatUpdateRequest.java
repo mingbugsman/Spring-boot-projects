@@ -1,6 +1,7 @@
 package com.TicketSelling.TicketSelling.DTO.Request.Seat;
 
 import com.TicketSelling.TicketSelling.Enum.SeatStatus;
+import com.TicketSelling.TicketSelling.Enum.SeatType;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -21,13 +22,11 @@ public class SeatUpdateRequest {
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
     BigDecimal price;
 
-    @PositiveOrZero
-    Integer rowNumber;
+    String row;
 
-    @PositiveOrZero
     Integer seatNumber;
 
     SeatStatus seatStatus;
-
+    SeatType seatType;
     String hallId;
 }

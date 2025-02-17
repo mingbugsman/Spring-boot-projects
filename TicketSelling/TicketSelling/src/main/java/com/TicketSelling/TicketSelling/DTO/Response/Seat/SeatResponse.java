@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public record SeatResponse (
         String id,
         SeatStatus seatStatus,
-        Integer rowNumber,
+        String row,
         Integer seatNumber,
         String hallName,
         LocalDateTime createdAt,

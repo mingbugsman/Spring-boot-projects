@@ -27,4 +27,5 @@ public interface TicketJpaRepository extends JpaRepository<Ticket, String> {
     @Query("SELECT t FROM Ticket t " +
             "WHERE t.deletedAt IS NULL" )
     List<Ticket> getAllTickets();
+
 }

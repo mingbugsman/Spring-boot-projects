@@ -15,6 +15,7 @@ public interface SeatMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "seatStatus", ignore = true)
+    @Mapping(target = "seatType", ignore = true)
     @Mapping(target = "hall",ignore = true )
     @Mapping(target ="deletedAt", ignore = true)
     Seat toSeat(SeatCreationRequest request);

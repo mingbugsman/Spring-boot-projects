@@ -26,7 +26,7 @@ public class Concert {
     @Column(name = "concert_name", nullable = false)
     String concertName;
 
-    @Column(name = "concert_information", nullable = true)
+    @Column(name = "concert_information", columnDefinition = "TEXT", nullable = true)
     String concertInformation;
 
     @Enumerated(EnumType.STRING)
@@ -46,7 +46,10 @@ public class Concert {
     @JoinColumn(name = "hall_id", nullable = false)
     Hall hall;
 
-    @ManyToMany(mappedBy = "concerts")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "band_playing",
+            joinColumns = @JoinColumn(name = "concert_id"),
+            inverseJoinColumns = @JoinColumn(name = "band_id"))
     Set<Band> bands;
 
     @UpdateTimestamp

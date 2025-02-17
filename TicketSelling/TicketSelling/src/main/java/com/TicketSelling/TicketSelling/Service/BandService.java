@@ -57,16 +57,17 @@ public class BandService {
     // PUT/PATCH
     public BandResponse updateBand(String bandId, BandUpdateRequest request) {
         Band band = bandRepository.findBandById(bandId);
-
-
         bandMapper.updateBand(band, request);
 
-        Set<Concert> concerts = request.getConcertIds().stream()
-                .map(concertRepository::findConcertById)
-                .collect(Collectors.toSet());
+        if (request.getConcertIds() != null) {
+            Set<Concert> concerts = request.getConcertIds().stream()
+                    .map(concertRepository::findConcertById)
+                    .collect(Collectors.toSet());
+            band.setConcerts(concerts);
+        }
 
-        band.setConcerts(concerts);
         bandRepository.save(band);
+
 
         return bandMapper.toBandResponse(band);
     }

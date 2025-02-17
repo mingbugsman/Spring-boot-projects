@@ -45,6 +45,7 @@ public class ConcertController {
 
     @PutMapping("/{concertId}")
     public ApiResponse<ConcertResponse> updateConcert(@PathVariable String concertId, @RequestBody ConcertUpdateRequest request) {
+        System.out.println("update concert with id : " + concertId);
         return ApiResponse.<ConcertResponse>builder()
                 .result(concertService.updateConcert(concertId, request))
                 .build();

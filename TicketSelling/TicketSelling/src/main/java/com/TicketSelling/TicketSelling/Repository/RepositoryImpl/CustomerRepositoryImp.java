@@ -63,7 +63,7 @@ public class CustomerRepositoryImp implements ICustomerRepository {
 
     @Override
     public Customer getCustomerById(String customerId) {
-        return customerJpaRepository.findById(customerId).orElseThrow(() ->
+        return customerJpaRepository.findCustomerById(customerId).orElseThrow(() ->
                 new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
 

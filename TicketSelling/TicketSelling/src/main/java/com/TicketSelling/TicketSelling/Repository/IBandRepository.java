@@ -1,9 +1,6 @@
 package com.TicketSelling.TicketSelling.Repository;
 
-import com.TicketSelling.TicketSelling.DTO.Request.Band.BandCreationRequest;
-import com.TicketSelling.TicketSelling.DTO.Request.Band.BandUpdateRequest;
-import com.TicketSelling.TicketSelling.DTO.Response.Band.BandDetailResponse;
-import com.TicketSelling.TicketSelling.DTO.Response.Band.BandResponse;
+
 import com.TicketSelling.TicketSelling.Entity.Band;
 
 import java.util.List;

@@ -45,12 +45,12 @@ public class SeatRepositoryImp implements ISeatRepository {
 
     @Override
     public Seat findSeatById(String seatId) {
-        return seatJpaRepository.findById(seatId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
+        return seatJpaRepository.findSeatById(seatId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
 
     @Override
-    public boolean existsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId) {
-        return seatJpaRepository.existsByRowNumberAndSeatNumberAndHallId(rowNumber, seatNumber, hallId);
+    public boolean existsByRowAndSeatNumberAndHallId(String row, Integer seatNumber, String hallId) {
+        return seatJpaRepository.existsByRowAndSeatNumberAndHallId(row, seatNumber, hallId);
     }
 
     @Override

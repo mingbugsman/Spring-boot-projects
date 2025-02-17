@@ -25,4 +25,7 @@ public class ConcertCreationRequest {
     String concertName;
 
     String concertInformation;
+
+    @NotNull(message = "hall ID is required")
+    String hallId;
 }

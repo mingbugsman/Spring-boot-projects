@@ -7,6 +7,7 @@ import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailRespons
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
 import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
+import com.TicketSelling.TicketSelling.Entity.Hall;
 import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
@@ -14,6 +15,7 @@ import com.TicketSelling.TicketSelling.Mapper.ConcertMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomConcertMapper;
 import com.TicketSelling.TicketSelling.Repository.IBandRepository;
 import com.TicketSelling.TicketSelling.Repository.IConcertRepository;
+import com.TicketSelling.TicketSelling.Repository.IHallRepository;
 import com.TicketSelling.TicketSelling.Utils.SortUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +30,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ConcertService  {
-    private final IConcertRepository concertRepository;
-    private final IBandRepository bandRepository;
-    private final ConcertMapper concertMapper;
+    IConcertRepository concertRepository;
+    IBandRepository bandRepository;
+    IHallRepository hallRepository;
+    ConcertMapper concertMapper;
     CustomConcertMapper customConcertMapper;
 
     public ConcertDetailResponse getConcertDetail(String concertId) {
@@ -48,7 +51,9 @@ public class ConcertService  {
         if (concertRepository.findByConcertNameAndStartDate(request.getConcertName(),request.getStartDate()) != null) {
             throw new ApplicationException(ErrorCode.CONCERT_EXISTED);
         }
+        Hall hall = hallRepository.findHallById(request.getHallId());
         Concert concert = concertMapper.toConcert(request);
+        concert.setHall(hall);
         concert = concertRepository.save(concert);
         return concertMapper.toConcertResponse(concert);
     }
@@ -56,12 +61,17 @@ public class ConcertService  {
     public ConcertResponse updateConcert(String concertId, ConcertUpdateRequest request) {
         Concert concert = concertRepository.findConcertById(concertId);
 
+        if (request.getHallId() != null) {
+            Hall hall = hallRepository.findHallById(request.getHallId());
+            concert.setHall(hall);
+        }
         concertMapper.updateConcert(concert, request);
-        Set<Band> bands = request.getBandIds().stream()
-                .map(bandRepository::findBandById)
-                .collect(Collectors.toSet());
-
-        concert.setBands(bands);
+        if (request.getBandIds() != null) {
+            Set<Band> bands = request.getBandIds().stream()
+                    .map(bandRepository::findBandById)
+                    .collect(Collectors.toSet());
+            concert.setBands(bands);
+        }
         concertRepository.save(concert);
 
         return concertMapper.toConcertResponse(concert);

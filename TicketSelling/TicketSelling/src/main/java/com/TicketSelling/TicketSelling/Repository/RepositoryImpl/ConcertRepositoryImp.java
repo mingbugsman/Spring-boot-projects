@@ -48,7 +48,7 @@ public class ConcertRepositoryImp implements IConcertRepository {
 
     @Override
     public Concert findConcertById(String concertId) {
-        return concertJpaRepository.findById(concertId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
+        return concertJpaRepository.findConcertById(concertId).orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
 
     @Override

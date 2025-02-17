@@ -1,7 +1,6 @@
 package com.TicketSelling.TicketSelling.Repository.Jpa;
 
 import com.TicketSelling.TicketSelling.Entity.Concert;
-import com.TicketSelling.TicketSelling.Entity.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ConcertJpaRepository extends JpaRepository<Concert, String> {
@@ -17,5 +17,9 @@ public interface ConcertJpaRepository extends JpaRepository<Concert, String> {
     @Query("SELECT c FROM Concert c " +
             "WHERE c.deletedAt IS NULL")
     List<Concert> getAllConcerts();
+
+    @Query("SELECT co from Concert co " +
+            "WHERE co.deletedAt IS NULL AND co.id = :concertId")
+    Optional<Concert> findConcertById(@Param("concertId") String concertId);
 
 }

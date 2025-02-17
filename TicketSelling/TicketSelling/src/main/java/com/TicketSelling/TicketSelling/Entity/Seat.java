@@ -1,6 +1,7 @@
 package com.TicketSelling.TicketSelling.Entity;
 
 import com.TicketSelling.TicketSelling.Enum.SeatStatus;
+import com.TicketSelling.TicketSelling.Enum.SeatType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -32,10 +33,15 @@ public class Seat {
     private BigDecimal price; // Giá vé theo ghế
 
     @Column(name = "row_no", nullable = false)
-    Integer rowNumber;
+    String row;
 
     @Column(name = "no", nullable = false)
     Integer seatNumber;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Seat_Type", nullable = false)
+    SeatType seatType = SeatType.STANDARD;
+
 
     @ManyToOne
     @JoinColumn(name = "hall_id", nullable = false)

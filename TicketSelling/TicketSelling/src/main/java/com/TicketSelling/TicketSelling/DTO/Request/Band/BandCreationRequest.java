@@ -3,6 +3,7 @@ package com.TicketSelling.TicketSelling.DTO.Request.Band;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -24,7 +25,7 @@ public class BandCreationRequest {
     @NotBlank
     String genre;
 
-    @NotBlank
+    @Positive
     Integer foundingYear;
 
 }

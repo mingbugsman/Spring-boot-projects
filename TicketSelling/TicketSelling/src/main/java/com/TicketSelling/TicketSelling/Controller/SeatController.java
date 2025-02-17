@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/hall/seat")
+@RequestMapping("/api/seat")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SeatController {
 
@@ -34,10 +34,17 @@ public class SeatController {
                 .build();
     }
 
-    @PostMapping
+    @PostMapping("/{hallId}")
     public ApiResponse<SeatResponse> createNewSeat(@Valid @RequestBody  SeatCreationRequest request) {
         return ApiResponse.<SeatResponse>builder()
                 .result(seatService.createNewSeat(request))
+                .build();
+    }
+
+    @PostMapping("/list/{hallId}")
+    public ApiResponse<List<SeatResponse>> createListSeat(@PathVariable String hallId, @RequestBody  List<SeatCreationRequest> request) {
+        return ApiResponse.<List<SeatResponse>>builder()
+                .result(seatService.createListSeat(hallId,request))
                 .build();
     }
 

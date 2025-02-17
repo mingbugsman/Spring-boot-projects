@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerJpaRepository extends JpaRepository<Customer, String> {
@@ -50,6 +51,9 @@ public interface CustomerJpaRepository extends JpaRepository<Customer, String> {
             "WHERE c.deletedAt IS NULL")
     List<Customer> getAllCustomers();
 
+    @Query("SELECT c FROM Customer c " +
+            "WHERE c.id = :customerId AND c.deletedAt IS NULL")
+    Optional<Customer> findCustomerById(@Param("customerId") String customerId);
 
 
 

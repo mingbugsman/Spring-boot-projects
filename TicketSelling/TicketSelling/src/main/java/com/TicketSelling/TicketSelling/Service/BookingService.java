@@ -37,7 +37,6 @@ public class BookingService {
     ISeatRepository seatRepository;
     BookingMapper bookingMapper;
     CustomBookingMapper customBookingMapper;
-    TicketMapper ticketMapper;
 
     // GET
 

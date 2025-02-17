@@ -39,7 +39,8 @@ public class HallRepositoryImp implements IHallRepository {
 
     @Override
     public Hall findHallById(String hallId) {
-        return hallJpaRepository.findById(hallId).orElseThrow(
+        System.out.println(hallId);
+        return hallJpaRepository.findHallById(hallId).orElseThrow(
                 () -> new ApplicationException(ErrorCode.NOT_FOUND_ID)
         );
     }

@@ -16,7 +16,7 @@ public interface ISeatRepository {
 
     Seat findSeatById(String seatId);
 
-    boolean existsByRowNumberAndSeatNumberAndHallId(Integer rowNumber, Integer seatNumber, String hallId);
+    boolean existsByRowAndSeatNumberAndHallId(String row, Integer seatNumber, String hallId);
 
 
     List<Seat> getAllSeatsByConcertId(String concertId) ;

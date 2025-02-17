@@ -42,7 +42,7 @@ public class Band {
     @Column(name = "country", columnDefinition = "VARCHAR(100)", nullable = false)
     String country;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "band_playing",
     joinColumns = @JoinColumn(name = "band_id"),
     inverseJoinColumns = @JoinColumn(name = "concert_id"))

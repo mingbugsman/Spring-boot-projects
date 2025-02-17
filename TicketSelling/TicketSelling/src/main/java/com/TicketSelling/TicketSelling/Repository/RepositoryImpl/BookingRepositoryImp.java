@@ -1,7 +1,6 @@
 package com.TicketSelling.TicketSelling.Repository.RepositoryImpl;
 
 import com.TicketSelling.TicketSelling.Entity.Booking;
-import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Repository.IBookingRepository;
@@ -30,7 +29,7 @@ public class BookingRepositoryImp implements IBookingRepository {
 
     @Override
     public Booking getBookingById(String bookingId) {
-        return bookingJpaRepository.findById(bookingId)
+        return bookingJpaRepository.findBookingById(bookingId)
                 .orElseThrow(() -> new ApplicationException(ErrorCode.NOT_FOUND_ID));
     }
 
