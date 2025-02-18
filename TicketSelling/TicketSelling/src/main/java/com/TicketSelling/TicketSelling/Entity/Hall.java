@@ -37,7 +37,7 @@ public class Hall {
     String hallInformation;
 
     @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Seat> seats;
+    List<SeatCategory> seatCategories;
 
     @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Concert> concerts;

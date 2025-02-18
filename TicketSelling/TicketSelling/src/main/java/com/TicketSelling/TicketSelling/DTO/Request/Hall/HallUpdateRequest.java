@@ -20,7 +20,7 @@ public class HallUpdateRequest {
     String address;
     String hallInformation;
     HallStatus hallStatus;
-    List<String> seatId;
-    List<String> concertId;
+    List<String> seatCategoryIds;
+    List<String> concertIds;
 
 }

@@ -5,10 +5,12 @@ import com.TicketSelling.TicketSelling.DTO.Request.Seat.SeatUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Seat.SeatResponse;
 import com.TicketSelling.TicketSelling.Entity.Hall;
 import com.TicketSelling.TicketSelling.Entity.Seat;
+import com.TicketSelling.TicketSelling.Entity.SeatCategory;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.SeatMapper;
 import com.TicketSelling.TicketSelling.Repository.IHallRepository;
+import com.TicketSelling.TicketSelling.Repository.ISeatCategoryRepository;
 import com.TicketSelling.TicketSelling.Repository.ISeatRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SeatService {
     ISeatRepository seatRepository;
-    IHallRepository hallRepository;
+    ISeatCategoryRepository seatCategoryRepository;
     SeatMapper seatMapper;
 
 
@@ -31,8 +33,8 @@ public class SeatService {
         return seatRepository.getAllSeats().stream().map(seatMapper::toSeatResponse).toList();
     }
 
-    public List<SeatResponse> getAllSeatsByConcertId(String concertId) {
-        return seatRepository.getAllSeatsByConcertId(concertId)
+    public List<SeatResponse> getAllSeatsBySeatCategoryId(String seatCategoryId) {
+        return seatRepository.getAllSeatsBySeatCategoryId(seatCategoryId)
                 .stream()
                 .map(seatMapper::toSeatResponse)
                 .toList();
@@ -44,29 +46,28 @@ public class SeatService {
 
 
     public SeatResponse createNewSeat(SeatCreationRequest request) {
-        System.out.println("Seat Information : " + request.getRow() + " - " + request.getSeatNumber() + " - " + request.getHallId() + " + " + request.getSeatType().name() + " + " + request.getPrice());
+        System.out.println("Seat Information : "  + request.getSeatNumber() + " + " + request.getSeatCategoryId());
 
-        if (seatRepository.existsByRowAndSeatNumberAndHallId(
-                request.getRow(),
+        if (seatRepository.existsBySeatNumberAndSeatCategoryId(
                 request.getSeatNumber(),
-                request.getHallId()
+                request.getSeatCategoryId()
         )) {
             throw new ApplicationException(ErrorCode.SEAT_EXISTED);
         }
 
         Seat seat = seatMapper.toSeat(request);
 
-        Hall hall = hallRepository.findHallById(request.getHallId());
-        seat.setHall(hall);
+        SeatCategory seatCategory = seatCategoryRepository.findSeatCategoryById(request.getSeatCategoryId());
+        seat.setSeatCategory(seatCategory);
         seat = seatRepository.save(seat);
         return seatMapper.toSeatResponse(seat);
     }
 
-    public List<SeatResponse> createListSeat(String hallId, List<SeatCreationRequest> requests) {
-        Hall hall = hallRepository.findHallById(hallId);
+    public List<SeatResponse> createListSeat(String seatCategoryId, List<SeatCreationRequest> requests) {
+        SeatCategory seatCategory = seatCategoryRepository.findSeatCategoryById(seatCategoryId);
         List<SeatResponse> seatResponses = new ArrayList<>();
         for (var request : requests) {
-            request.setHallId(hall.getId());;
+            request.setSeatCategoryId(seatCategory.getId());;
 
             seatResponses.add(createNewSeat(request));
         }
@@ -76,7 +77,7 @@ public class SeatService {
     public SeatResponse updateSeat(String seatId, SeatUpdateRequest request) {
         Seat seat = seatRepository.findSeatById(seatId);
         seatMapper.updateSeat(seat,request);
-        seat.setHall(hallRepository.findHallById(request.getHallId()));
+        seat.setSeatCategory(seatCategoryRepository.findSeatCategoryById(request.getSeatCategoryId()));
         return seatMapper.toSeatResponse(seat);
     }
 

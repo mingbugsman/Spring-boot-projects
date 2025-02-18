@@ -1,8 +1,5 @@
 package com.TicketSelling.TicketSelling.Repository;
 
-import com.TicketSelling.TicketSelling.DTO.Request.Seat.SeatCreationRequest;
-import com.TicketSelling.TicketSelling.DTO.Request.Seat.SeatUpdateRequest;
-import com.TicketSelling.TicketSelling.DTO.Response.Seat.SeatResponse;
 import com.TicketSelling.TicketSelling.Entity.Seat;
 
 import java.util.List;
@@ -16,10 +13,10 @@ public interface ISeatRepository {
 
     Seat findSeatById(String seatId);
 
-    boolean existsByRowAndSeatNumberAndHallId(String row, Integer seatNumber, String hallId);
+    boolean existsBySeatNumberAndSeatCategoryId(Integer seatNumber, String seatCategoryId);
 
 
-    List<Seat> getAllSeatsByConcertId(String concertId) ;
+    List<Seat> getAllSeatsBySeatCategoryId(String seatCategoryId) ;
 
 
 }

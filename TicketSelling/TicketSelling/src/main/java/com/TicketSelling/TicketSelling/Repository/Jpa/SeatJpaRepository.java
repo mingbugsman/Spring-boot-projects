@@ -11,13 +11,12 @@ import java.util.Optional;
 
 @Repository
 public interface SeatJpaRepository extends JpaRepository<Seat,String> {
-    boolean existsByRowAndSeatNumberAndHallId(String row, Integer seatNumber, String hallId);
+    boolean existsBySeatNumberAndSeatCategoryId( Integer seatNumber,  String seatCategoryId );
 
-    @Query("SELECT s FROM Concert c " +
-            "JOIN c.hall h " +
-            "JOIN h.seats s " +
-            "WHERE c.id = :concertId AND c.deletedAt IS NULL AND h.deletedAt IS NULL AND s.deletedAt IS NULL")
-    List<Seat> getAllSeatsByConcertId(@Param("concertId") String concertId);
+    @Query("SELECT s FROM SeatCategory sc " +
+            "JOIN sc.seats s " +
+            "WHERE sc.id = :seatCategoryId AND s.deletedAt IS NULL AND sc.deletedAt IS NULL")
+    List<Seat> getAllSeatsBySeatCategoryId(@Param("seatCategoryId") String seatCategoryId);
 
     @Query("SELECT s FROM Seat s " +
             "WHERE s.deletedAt IS NULL")

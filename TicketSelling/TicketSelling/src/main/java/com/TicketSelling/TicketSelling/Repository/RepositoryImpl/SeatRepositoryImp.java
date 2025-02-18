@@ -49,12 +49,14 @@ public class SeatRepositoryImp implements ISeatRepository {
     }
 
     @Override
-    public boolean existsByRowAndSeatNumberAndHallId(String row, Integer seatNumber, String hallId) {
-        return seatJpaRepository.existsByRowAndSeatNumberAndHallId(row, seatNumber, hallId);
+    public boolean existsBySeatNumberAndSeatCategoryId( Integer seatNumber, String seatCategoryId) {
+        return seatJpaRepository.existsBySeatNumberAndSeatCategoryId( seatNumber, seatCategoryId);
     }
 
     @Override
-    public List<Seat> getAllSeatsByConcertId(String concertId) {
-        return seatJpaRepository.getAllSeatsByConcertId(concertId);
+    public List<Seat> getAllSeatsBySeatCategoryId(String seatCategoryId) {
+        return seatJpaRepository.getAllSeatsBySeatCategoryId(seatCategoryId);
     }
+
+
 }

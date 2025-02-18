@@ -13,7 +13,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring", uses = {ConcertMapper.class}, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface HallMapper {
 
-    @Mapping(target = "seats", ignore = true)
+    @Mapping(target = "seatCategories", ignore = true)
     @Mapping(target = "concerts", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
@@ -26,7 +26,7 @@ public interface HallMapper {
 
     HallResponse toHallResponse(Hall hall);
 
-    @Mapping(target = "seats", ignore = true)
+    @Mapping(target = "seatCategories", ignore = true)
     @Mapping(target = "concerts", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
@@ -37,12 +37,12 @@ public interface HallMapper {
 
 
     @Mapping(target = "concerts", source = "concerts")
-    @Mapping(target = "totalSeats", expression = "java(getTotalSeats(hall))")
+    @Mapping(target = "totalSeats", expression = "java(getTotalSeatCategories(hall))")
     @Mapping(target = "totalConcerts", expression = "java(getTotalConcerts(hall))")
     HallDetailResponse toHallDetailResponse(Hall hall);
 
-    default int getTotalSeats(Hall hall) {
-        return (hall.getSeats() != null) ? hall.getSeats().size() : 0;
+    default int getTotalSeatCategories(Hall hall) {
+        return (hall.getSeatCategories() != null) ? hall.getSeatCategories().size() : 0;
     }
 
     default int getTotalConcerts(Hall hall) {

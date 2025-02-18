@@ -22,11 +22,10 @@ public class SeatUpdateRequest {
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
     BigDecimal price;
 
-    String row;
-
     Integer seatNumber;
 
     SeatStatus seatStatus;
-    SeatType seatType;
-    String hallId;
+
+    String seatCategoryId;
+
 }

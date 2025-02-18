@@ -22,16 +22,11 @@ import java.math.BigDecimal;
         @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than 0")
         BigDecimal price;
 
-        @NotNull(message = "row is required")
-        String row;
-
 
         @NotNull(message = "seat number is required")
         @PositiveOrZero
         Integer seatNumber;
 
-        @NotNull
-        SeatType seatType;
-
-        String hallId;
+        @NotNull(message = "seat category id is required")
+        String seatCategoryId;
     }

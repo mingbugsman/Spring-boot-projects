@@ -15,18 +15,17 @@ public interface SeatMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "seatStatus", ignore = true)
-    @Mapping(target = "seatType", ignore = true)
-    @Mapping(target = "hall",ignore = true )
+    @Mapping(target = "seatCategory", ignore = true)
     @Mapping(target ="deletedAt", ignore = true)
     Seat toSeat(SeatCreationRequest request);
 
-    @Mapping(target = "hallName", source = "hall.hallName")
+    @Mapping(target = "hallName", source = "seatCategory.hall.hallName")
     SeatResponse toSeatResponse(Seat seat);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "hall", ignore = true)
+    @Mapping(target = "seatCategory", ignore = true)
     @Mapping(target ="deletedAt", ignore = true)
     void updateSeat(@MappingTarget Seat seat, SeatUpdateRequest request);
 }

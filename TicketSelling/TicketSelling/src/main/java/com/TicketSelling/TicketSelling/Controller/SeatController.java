@@ -49,9 +49,9 @@ public class SeatController {
     }
 
     @PutMapping("/{seatId}")
-    public ApiResponse<SeatResponse> updateSeat(@PathVariable String seatId,@RequestBody SeatUpdateRequest request) {
+    public ApiResponse<SeatResponse> updateSeat(@PathVariable String seatCategoryId,@RequestBody SeatUpdateRequest request) {
         return ApiResponse.<SeatResponse>builder()
-                .result(seatService.updateSeat(seatId,request))
+                .result(seatService.updateSeat(seatCategoryId,request))
                 .build();
     }
 
