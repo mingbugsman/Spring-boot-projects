@@ -2,6 +2,7 @@ package com.TicketSelling.TicketSelling.Repository.RepositoryImpl;
 
 import com.TicketSelling.TicketSelling.Entity.Seat;
 import com.TicketSelling.TicketSelling.Entity.SeatCategory;
+import com.TicketSelling.TicketSelling.Enum.SeatStatus;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Repository.ISeatCategoryRepository;
@@ -31,6 +32,11 @@ public class SeatCategoryRepositoryImp implements ISeatCategoryRepository {
     }
 
     @Override
+    public List<Seat> getStatusSeats(String seatCategoryId, SeatStatus seatStatus) {
+        return seatCategoryJpaRepository.getStatusSeats(seatCategoryId, seatStatus);
+    }
+
+    @Override
     public SeatCategory save(SeatCategory seatCategory) {
         return seatCategoryJpaRepository.save(seatCategory);
     }
@@ -53,7 +59,13 @@ public class SeatCategoryRepositoryImp implements ISeatCategoryRepository {
     }
 
     @Override
+    public boolean isSeatAvailable(String rowLabel, Integer seatNumber, String seatCategoryId) {
+        return seatCategoryJpaRepository.isSeatAvailable(rowLabel, seatNumber, seatCategoryId);
+    }
+
+    @Override
     public List<SeatCategory> getAllSeatCategoriesByConcertId(String concertId) {
-        return List.of();
+
+        return seatCategoryJpaRepository.getAllSeatCategoriesByConcertId(concertId);
     }
 }

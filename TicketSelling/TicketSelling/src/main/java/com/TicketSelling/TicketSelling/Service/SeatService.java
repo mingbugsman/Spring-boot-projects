@@ -25,6 +25,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SeatService {
     ISeatRepository seatRepository;
+    IHallRepository hallRepository;
     ISeatCategoryRepository seatCategoryRepository;
     SeatMapper seatMapper;
 
@@ -45,31 +46,34 @@ public class SeatService {
 
 
 
-    public SeatResponse createNewSeat(SeatCreationRequest request) {
-        System.out.println("Seat Information : "  + request.getSeatNumber() + " + " + request.getSeatCategoryId());
+    public SeatResponse createNewSeat(String seatCategoryId, int seatNumber) {
+        System.out.println("Seat Information : "  + seatNumber + " + " + seatCategoryId);
 
         if (seatRepository.existsBySeatNumberAndSeatCategoryId(
-                request.getSeatNumber(),
-                request.getSeatCategoryId()
+                seatNumber,
+                seatCategoryId
         )) {
             throw new ApplicationException(ErrorCode.SEAT_EXISTED);
         }
 
-        Seat seat = seatMapper.toSeat(request);
+        Seat seat = Seat.builder()
+                .seatNumber(seatNumber)
+                .build();
 
-        SeatCategory seatCategory = seatCategoryRepository.findSeatCategoryById(request.getSeatCategoryId());
+        SeatCategory seatCategory = seatCategoryRepository.findSeatCategoryById(seatCategoryId);
         seat.setSeatCategory(seatCategory);
         seat = seatRepository.save(seat);
         return seatMapper.toSeatResponse(seat);
     }
 
-    public List<SeatResponse> createListSeat(String seatCategoryId, List<SeatCreationRequest> requests) {
-        SeatCategory seatCategory = seatCategoryRepository.findSeatCategoryById(seatCategoryId);
+    public List<SeatResponse> createListSeat(String hallId, String seatCategoryId, int totalSeats) {
+        System.out.println(seatCategoryId);
+        System.out.println(hallId);
+        System.out.println(totalSeats);
+        Hall hall = hallRepository.findHallById(hallId);
         List<SeatResponse> seatResponses = new ArrayList<>();
-        for (var request : requests) {
-            request.setSeatCategoryId(seatCategory.getId());;
-
-            seatResponses.add(createNewSeat(request));
+        for (int seatNumber = 1; seatNumber <= totalSeats; seatNumber++) {
+            seatResponses.add(createNewSeat(seatCategoryId, seatNumber ));
         }
         return seatResponses;
     }

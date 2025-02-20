@@ -23,6 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -69,6 +70,15 @@ public class CustomerService {
         Customer customer = customerMapper.toCustomer(request);
         customer = customerRepository.save(customer);
         return customerMapper.toCustomerResponse(customer);
+    }
+
+    public List<CustomerResponse> createList(List<CustomerCreationRequest> requests) {
+        List<CustomerResponse> customerResponses = new ArrayList<>();
+        for (var req : requests) {
+            var customerResponse = createNewCustomer(req);
+            customerResponses.add(customerResponse);
+        }
+        return customerResponses;
     }
 
     // PUT / PATCH

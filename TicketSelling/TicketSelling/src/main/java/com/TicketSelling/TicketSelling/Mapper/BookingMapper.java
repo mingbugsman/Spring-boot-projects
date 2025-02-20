@@ -19,6 +19,7 @@ public interface BookingMapper {
     @Mapping(target = "customer", ignore = true)
     @Mapping(target = "tickets", ignore = true)
     @Mapping(target = "bookingStatus", ignore = true)
+    @Mapping(target = "expiredPaymentTime", ignore = true)
     @Mapping(target ="deletedAt", ignore = true)
     Booking toBooking(BookingCreationRequest request);
 
@@ -30,6 +31,7 @@ public interface BookingMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "expiredPaymentTime", ignore = true)
     @Mapping(target ="deletedAt", ignore = true)
     void updateBooking(@MappingTarget Booking booking, BookingUpdateRequest request);
 

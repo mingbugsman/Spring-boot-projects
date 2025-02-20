@@ -20,6 +20,8 @@ public interface SeatMapper {
     Seat toSeat(SeatCreationRequest request);
 
     @Mapping(target = "hallName", source = "seatCategory.hall.hallName")
+    @Mapping(target = "rowLabel", source = "seatCategory.rowLabel")
+    @Mapping(target = "price", source = "seatCategory.price")
     SeatResponse toSeatResponse(Seat seat);
 
     @Mapping(target = "id", ignore = true)

@@ -17,12 +17,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "Seat_Status", nullable = false)
     SeatStatus seatStatus = SeatStatus.AVAILABLE;

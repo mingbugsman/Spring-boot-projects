@@ -52,6 +52,16 @@ public class HallService {
         return hallMapper.toHallResponse(createdhall);
     }
 
+    public List<HallResponse> createNewListHall(List<HallCreationRequest> requests) {
+        List<HallResponse> hallResponses = new ArrayList<>();
+        for (var req : requests) {
+            var hallResponse = createNewHall(req);
+            hallResponses.add(hallResponse);
+        }
+        return hallResponses;
+    }
+
+
     public HallResponse updateHall(String hallId, HallUpdateRequest request) {
         Hall foundHall = hallRepository.findHallById(hallId);
         hallMapper.updateHall(foundHall, request);

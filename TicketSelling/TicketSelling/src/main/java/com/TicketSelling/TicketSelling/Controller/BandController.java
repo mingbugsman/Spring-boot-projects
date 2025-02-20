@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/band")
+@RequestMapping("/api/bands")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BandController {
 
@@ -29,10 +29,10 @@ public class BandController {
                 .build();
     }
 
-    @GetMapping("/{seatId}")
-    public ApiResponse<BandDetailResponse> getBand(@PathVariable String seatId) {
+    @GetMapping("/{bandId}")
+    public ApiResponse<BandDetailResponse> getBand(@PathVariable String bandId) {
         return ApiResponse.<BandDetailResponse>builder()
-                .result(bandService.getBandDetail(seatId))
+                .result(bandService.getBandDetail(bandId))
                 .build();
     }
 
@@ -42,19 +42,25 @@ public class BandController {
                 .result(bandService.createNewBand(request))
                 .build();
     }
-
-    @PutMapping("/{seatId}")
-    public ApiResponse<BandResponse> updateBand(@PathVariable String seatId,@RequestBody BandUpdateRequest request) {
-        return ApiResponse.<BandResponse>builder()
-                .result(bandService.updateBand(seatId,request))
+    @PostMapping("/list")
+    public ApiResponse<List<BandResponse>> createNewListBand(@Valid @RequestBody List<BandCreationRequest> requests) {
+        return ApiResponse.<List<BandResponse>>builder()
+                .result(bandService.createNewListBand(requests))
                 .build();
     }
 
-    @DeleteMapping("/{seatId}")
-    public ApiResponse<String> deleteBand(@PathVariable String seatId) {
-        bandService.deleteBand(seatId);
+    @PutMapping("/{bandId}")
+    public ApiResponse<BandResponse> updateBand(@PathVariable String bandId,@RequestBody BandUpdateRequest request) {
+        return ApiResponse.<BandResponse>builder()
+                .result(bandService.updateBand(bandId,request))
+                .build();
+    }
+
+    @DeleteMapping("/{bandId}")
+    public ApiResponse<String> deleteBand(@PathVariable String bandId) {
+        bandService.deleteBand(bandId);
         return ApiResponse.<String>builder()
-                .result(seatId + " is successfully deleted")
+                .result(bandId + " is successfully deleted")
                 .build();
     }
 }

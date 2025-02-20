@@ -6,6 +6,7 @@ import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingTicketsResponse;
 import com.TicketSelling.TicketSelling.Entity.*;
+import com.TicketSelling.TicketSelling.Enum.SeatStatus;
 import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Mapper.BookingMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomBookingMapper;
@@ -66,21 +67,25 @@ public class BookingService {
         bookingRepository.save(booking);
         booking.setCustomer(customer);
 
-        List<Ticket> tickets = new ArrayList<>();
-        for ( var ticketCreationRequest : request.getTickets()) {
-            Seat seat = seatRepository.findSeatById(ticketCreationRequest.getSeatId());
-            Ticket ticket = Ticket.builder()
-                    .booking(booking)
-                    .concert(concert)
-                    .price(ticketCreationRequest.getPrice())
-                    .seat(seat)
-                    .build();
-            tickets.add(ticket);
+
+        if (request.getTickets() != null) {
+            List<Ticket> tickets = new ArrayList<>();
+            for ( var ticketCreationRequest : request.getTickets()) {
+                Seat seat = seatRepository.findSeatById(ticketCreationRequest.getSeatId());
+                seat.setSeatStatus(SeatStatus.RESERVED);
+                Ticket ticket = Ticket.builder()
+                        .booking(booking)
+                        .concert(concert)
+                        .price(ticketCreationRequest.getPrice())
+                        .seat(seat)
+                        .build();
+                seatRepository.save(seat);
+                tickets.add(ticket);
+            }
+            ticketRepository.saveAll(tickets);
         }
-        ticketRepository.saveAll(tickets);
 
         return customBookingMapper.toBookingTicketsResponse(booking);
-
     }
 
     // PUT /PATCH

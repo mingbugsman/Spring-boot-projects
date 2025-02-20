@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/customer")
+@RequestMapping("/api/customers")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerController {
     CustomerService customerService;
@@ -31,14 +32,14 @@ public class CustomerController {
                 .build();
     }
 
-    @GetMapping("/{customerId}")
-    public ApiResponse<CustomerResponse> getCustomerById(@PathVariable String customerId) {
+    @GetMapping("/{id}")
+    public ApiResponse<CustomerResponse> getCustomerById(@PathVariable String id) {
         return ApiResponse.<CustomerResponse>builder()
-                .result(customerService.getCustomer(customerId))
+                .result(customerService.getCustomer(id))
                 .build();
     }
 
-    @GetMapping("/{concertId}/list")
+    @GetMapping("/by-concert/{concertId}")
     public ApiResponse<List<CustomerResponse>> getCustomersByConcertId(
             @PathVariable String concertId,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime lastCreatedAt,
@@ -46,9 +47,8 @@ public class CustomerController {
             @RequestParam(defaultValue = "ASC") SortOrder sortOrder) {
 
         return ApiResponse.<List<CustomerResponse>>builder()
-                .result(
-                        customerService.getAllCustomersByConcertId(concertId, lastCreatedAt, sortOrder, pageSize)
-                ).build();
+                .result(customerService.getAllCustomersByConcertId(concertId, lastCreatedAt, sortOrder, pageSize))
+                .build();
     }
 
     @PostMapping
@@ -57,18 +57,26 @@ public class CustomerController {
                 .result(customerService.createNewCustomer(request))
                 .build();
     }
-    @PutMapping("/{customerId}")
-    public ApiResponse<CustomerResponse> updateCustomer(@PathVariable String customerId ,@Valid @RequestBody CustomerUpdateRequest request) {
-        return ApiResponse.<CustomerResponse>builder()
-                .result(customerService.updateCustomer(customerId, request))
+
+    @PostMapping("/list")
+    public ApiResponse<List<CustomerResponse>> createList(@Valid @RequestBody List<CustomerCreationRequest> requests) {
+        return ApiResponse.<List<CustomerResponse>>builder()
+                .result(customerService.createList(requests))
                 .build();
     }
 
-    @DeleteMapping("/{customerId}")
-    public ApiResponse<CustomerResponse> deleteCustomer(@PathVariable String customerId) {
-        customerService.deleteCustomer(customerId);
+    @PutMapping("/{id}")
+    public ApiResponse<CustomerResponse> updateCustomer(@PathVariable String id, @Valid @RequestBody CustomerUpdateRequest request) {
         return ApiResponse.<CustomerResponse>builder()
-                .message("successfully delete customer with id : "+ customerId)
+                .result(customerService.updateCustomer(id, request))
+                .build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<String> deleteCustomer(@PathVariable String id) {
+        customerService.deleteCustomer(id);
+        return ApiResponse.<String>builder()
+                .message("Successfully deleted customer with ID: " + id)
                 .build();
     }
 }

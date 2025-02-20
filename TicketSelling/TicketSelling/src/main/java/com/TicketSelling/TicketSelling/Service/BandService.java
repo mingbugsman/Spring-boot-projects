@@ -16,12 +16,15 @@ import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomBandMapper;
 import com.TicketSelling.TicketSelling.Repository.IBandRepository;
 import com.TicketSelling.TicketSelling.Repository.IConcertRepository;
 import com.TicketSelling.TicketSelling.Utils.SortUtils;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -52,6 +55,15 @@ public class BandService {
         Band band = bandMapper.toBand(request);
         band = bandRepository.save(band);
         return bandMapper.toBandResponse(band);
+    }
+
+    public List<BandResponse> createNewListBand( List<BandCreationRequest> requests) {
+        List<BandResponse> bandResponses = new ArrayList<>();
+        for (var req : requests) {
+            var res = createNewBand(req);
+            bandResponses.add(res);
+        }
+        return bandResponses;
     }
 
     // PUT/PATCH

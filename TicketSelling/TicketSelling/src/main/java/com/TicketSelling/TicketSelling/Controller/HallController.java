@@ -6,6 +6,7 @@ import com.TicketSelling.TicketSelling.DTO.Response.ApiResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Hall.HallDetailResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Hall.HallResponse;
 import com.TicketSelling.TicketSelling.Service.HallService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/hall")
+@RequestMapping("/api/halls")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HallController {
@@ -36,9 +37,15 @@ public class HallController {
     }
 
     @PostMapping
-    public ApiResponse<HallResponse> createNewHall(@RequestBody HallCreationRequest request) {
+    public ApiResponse<HallResponse> createNewHall(@Valid @RequestBody HallCreationRequest request) {
         return ApiResponse.<HallResponse>builder()
                 .result(hallService.createNewHall(request))
+                .build();
+    }
+    @PostMapping("/list")
+    public ApiResponse<List<HallResponse>> createListHall(@RequestBody List<HallCreationRequest> requests) {
+        return ApiResponse.<List<HallResponse>>builder()
+                .result(hallService.createNewListHall(requests))
                 .build();
     }
 

@@ -12,15 +12,15 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/seat")
+@RequestMapping("/api/seats")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SeatController {
 
     SeatService seatService;
 
+    @GetMapping
     public ApiResponse<List<SeatResponse>> getAllSeats() {
         return ApiResponse.<List<SeatResponse>>builder()
                 .result(seatService.getAllSeats())
@@ -34,24 +34,31 @@ public class SeatController {
                 .build();
     }
 
-    @PostMapping("/{hallId}")
-    public ApiResponse<SeatResponse> createNewSeat(@Valid @RequestBody  SeatCreationRequest request) {
+    @PostMapping("/{seatCategoryId}")
+    public ApiResponse<SeatResponse> createNewSeat(
+            @PathVariable String seatCategoryId,
+            @RequestParam int seatNumber) {
         return ApiResponse.<SeatResponse>builder()
-                .result(seatService.createNewSeat(request))
+                .result(seatService.createNewSeat(seatCategoryId ,seatNumber))
                 .build();
     }
 
-    @PostMapping("/list/{hallId}")
-    public ApiResponse<List<SeatResponse>> createListSeat(@PathVariable String hallId, @RequestBody  List<SeatCreationRequest> request) {
+    @PostMapping("/list/by-hall/{hallId}/seat-category/{seatCategoryId}")
+    public ApiResponse<List<SeatResponse>> createListSeat(
+            @PathVariable String seatCategoryId,
+            @PathVariable String hallId,
+            @RequestParam int totalSeats) {
         return ApiResponse.<List<SeatResponse>>builder()
-                .result(seatService.createListSeat(hallId,request))
+                .result(seatService.createListSeat(hallId, seatCategoryId ,totalSeats))
                 .build();
     }
 
     @PutMapping("/{seatId}")
-    public ApiResponse<SeatResponse> updateSeat(@PathVariable String seatCategoryId,@RequestBody SeatUpdateRequest request) {
+    public ApiResponse<SeatResponse> updateSeat(
+            @PathVariable String seatId,
+            @Valid @RequestBody SeatUpdateRequest request) {
         return ApiResponse.<SeatResponse>builder()
-                .result(seatService.updateSeat(seatCategoryId,request))
+                .result(seatService.updateSeat(seatId, request))
                 .build();
     }
 
@@ -59,7 +66,7 @@ public class SeatController {
     public ApiResponse<String> deleteSeat(@PathVariable String seatId) {
         seatService.deleteSeat(seatId);
         return ApiResponse.<String>builder()
-                .result(seatId + " is successfully deleted")
+                .message("Seat with ID " + seatId + " is successfully deleted")
                 .build();
     }
 }

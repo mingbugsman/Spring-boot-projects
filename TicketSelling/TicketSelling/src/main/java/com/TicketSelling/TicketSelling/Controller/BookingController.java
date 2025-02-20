@@ -20,38 +20,37 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/booking")
+@RequestMapping("/api/bookings")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingController {
 
     BookingService bookingService;
 
-
     @GetMapping
     public ApiResponse<List<BookingResponse>> getAllBookings(
-         @RequestParam(required = false) SortOrder typedSort) {
+            @RequestParam(required = false) SortOrder typedSort) {
         return ApiResponse.<List<BookingResponse>>builder()
-                .result(bookingService.getAllBookings(typedSort)).build();
-    }
-
-    @GetMapping("/{customerId}/list")
-    public ApiResponse<List<BookingResponse>> getAllBookingsByCustomerId(
-            @PathVariable String customerId,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime lastCreatedAt,
-            @RequestParam(defaultValue = "10") int pageSize,
-            @RequestParam(defaultValue = "ASC") SortOrder sortOrder
-            ) {
-        return ApiResponse.<List<BookingResponse>>builder()
-                .result(bookingService.getAllBookingsByCustomerId(customerId,lastCreatedAt,sortOrder,pageSize))
+                .result(bookingService.getAllBookings(typedSort))
                 .build();
     }
 
-    @GetMapping("/{bookingId}")
-    public ApiResponse<BookingTicketsResponse> getBookingById(@PathVariable String bookingId) {
+    @GetMapping("/by-customer/{customerId}")
+    public ApiResponse<List<BookingResponse>> getAllBookingsByCustomerId(
+            @PathVariable String customerId,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime lastCreatedAt,
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(defaultValue = "ASC") SortOrder sortOrder) {
+        return ApiResponse.<List<BookingResponse>>builder()
+                .result(bookingService.getAllBookingsByCustomerId(customerId, lastCreatedAt, sortOrder, pageSize))
+                .build();
+    }
+
+    @GetMapping("/{id}")
+    public ApiResponse<BookingTicketsResponse> getBookingById(@PathVariable String id) {
         return ApiResponse.<BookingTicketsResponse>builder()
-                .result(bookingService.getBookingById(bookingId))
-                .build() ;
-    };
+                .result(bookingService.getBookingById(id))
+                .build();
+    }
 
     @PostMapping
     public ApiResponse<BookingTicketsResponse> createNewBooking(
@@ -61,18 +60,19 @@ public class BookingController {
                 .build();
     }
 
-    @PutMapping("/{bookingId}")
-    public ApiResponse<BookingResponse> createNewBooking(@PathVariable String bookingId,@Valid @RequestBody BookingUpdateRequest request) {
+    @PutMapping("/{id}")
+    public ApiResponse<BookingResponse> updateBooking(
+            @PathVariable String id, @Valid @RequestBody BookingUpdateRequest request) {
         return ApiResponse.<BookingResponse>builder()
-                .result(bookingService.updateBooking(bookingId,request))
+                .result(bookingService.updateBooking(id, request))
                 .build();
     }
 
-    @DeleteMapping("/{bookingId}")
-    public ApiResponse<String> deleteBooking(@PathVariable String bookingId) {
-        bookingService.deleteBooking(bookingId);
+    @DeleteMapping("/{id}")
+    public ApiResponse<String> deleteBooking(@PathVariable String id) {
+        bookingService.deleteBooking(id);
         return ApiResponse.<String>builder()
-                .result(bookingId+" is successfully deleted").build();
+                .message("Booking with ID " + id + " is successfully deleted")
+                .build();
     }
 }
-

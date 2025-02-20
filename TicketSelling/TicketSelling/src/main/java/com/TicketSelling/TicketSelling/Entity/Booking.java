@@ -35,8 +35,13 @@ public class Booking {
     List<Ticket> tickets;
 
     @CreationTimestamp
+    @Column(name = "expired_payment_time", updatable = false, nullable = false)
+    private LocalDateTime expiredPaymentTime;
+
+    @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
+
 
     @UpdateTimestamp
     @Column(name = "updated_At")
@@ -44,5 +49,7 @@ public class Booking {
 
     @Column(name = "deleted_at", nullable = true)
     LocalDateTime deletedAt;
+
+
 
 }
