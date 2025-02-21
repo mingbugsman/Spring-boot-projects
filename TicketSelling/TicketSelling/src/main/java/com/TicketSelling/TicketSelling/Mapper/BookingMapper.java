@@ -24,6 +24,7 @@ public interface BookingMapper {
     Booking toBooking(BookingCreationRequest request);
 
     @Mapping(target = "customerId", source = "customer.id")
+    @Mapping(target = "customerName", source = "customer.customerName")
     BookingResponse toBookingResponse(Booking booking);
 
     @Mapping(target = "tickets", ignore = true)

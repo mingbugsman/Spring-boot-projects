@@ -8,6 +8,8 @@ import java.util.List;
 
 public record BookingTicketsResponse(
         String id,
+        String customerId,
+        String customerName,
         BookingStatus bookingStatus,
         LocalDateTime createdAt,
         LocalDateTime lastUpdate,

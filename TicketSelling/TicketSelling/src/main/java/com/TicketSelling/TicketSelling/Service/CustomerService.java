@@ -6,13 +6,16 @@ import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerUpdateReques
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerBookingsResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerConcertHistoryResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
+import com.TicketSelling.TicketSelling.DTO.Response.Ticket.TicketDetailResponse;
 import com.TicketSelling.TicketSelling.Entity.Customer;
 import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomCustomerMapper;
+import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomTicketMapper;
 import com.TicketSelling.TicketSelling.Mapper.CustomerMapper;
 import com.TicketSelling.TicketSelling.Repository.ICustomerRepository;
+import com.TicketSelling.TicketSelling.Repository.ITicketRepository;
 import com.TicketSelling.TicketSelling.Utils.SortUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CustomerService {
+    ITicketRepository ticketRepository;
+    CustomTicketMapper customTicketMapper;
     ICustomerRepository customerRepository;
     CustomerMapper customerMapper;
     CustomCustomerMapper customCustomerMapper;
@@ -53,6 +58,12 @@ public class CustomerService {
 
     public List<CustomerResponse> getAllCustomers() {
         return customerRepository.getAllCustomers().stream().map(customerMapper::toCustomerResponse).toList();
+    }
+
+
+    public List<TicketDetailResponse> getAllTicketsByCustomerId(String customerId) {
+        return ticketRepository.getAllTicketsByCustomerId(customerId)
+                .stream().map(customTicketMapper::toTicketDetailResponse).toList();
     }
 
     public List<CustomerResponse> getAllCustomersByConcertId(String concertId, LocalDateTime lastCreatedAt,SortOrder sortOrder, int pageSize) {

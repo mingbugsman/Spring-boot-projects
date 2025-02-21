@@ -47,7 +47,7 @@ public class SeatController {
     public ApiResponse<List<SeatResponse>> createListSeat(
             @PathVariable String seatCategoryId,
             @PathVariable String hallId,
-            @RequestParam int totalSeats) {
+            @RequestBody int totalSeats) {
         return ApiResponse.<List<SeatResponse>>builder()
                 .result(seatService.createListSeat(hallId, seatCategoryId ,totalSeats))
                 .build();

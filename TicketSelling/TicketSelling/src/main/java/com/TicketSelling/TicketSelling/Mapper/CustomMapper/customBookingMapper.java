@@ -19,6 +19,8 @@ public class CustomBookingMapper {
     public BookingTicketsResponse toBookingTicketsResponse(Booking booking) {
         return new BookingTicketsResponse(
                 booking.getId(),
+                booking.getCustomer().getId(),
+                booking.getCustomer().getCustomerName(),
                 booking.getBookingStatus(),
                 booking.getCreatedAt(),
                 booking.getUpdatedAt(),

@@ -10,11 +10,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class BookingLog {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,8 +27,8 @@ public class BookingLog {
     @Column(columnDefinition = "TEXT", name = "detail")
     String details;
 
-    String CustomerId;
-    String TicketId;
+    String customerId;
+    String ticketId;
 
     // date add log
     @CreationTimestamp

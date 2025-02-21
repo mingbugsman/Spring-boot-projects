@@ -5,8 +5,10 @@ import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerCreationRequ
 import com.TicketSelling.TicketSelling.DTO.Request.Customer.CustomerUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.ApiResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Customer.CustomerResponse;
+import com.TicketSelling.TicketSelling.DTO.Response.Ticket.TicketDetailResponse;
 import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Service.CustomerService;
+import com.TicketSelling.TicketSelling.Service.TicketService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,12 @@ public class CustomerController {
                 .build();
     }
 
+    @GetMapping("/tickets/{customerId}")
+    public ApiResponse<List<TicketDetailResponse>> getAllTicketsByCustomerId(String customerId) {
+        return ApiResponse.<List<TicketDetailResponse>>builder()
+                .result(customerService.getAllTicketsByCustomerId(customerId))
+                .build();
+    }
     @GetMapping("/{id}")
     public ApiResponse<CustomerResponse> getCustomerById(@PathVariable String id) {
         return ApiResponse.<CustomerResponse>builder()

@@ -3,6 +3,7 @@ package com.TicketSelling.TicketSelling.Controller;
 
 import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingCreationRequest;
 import com.TicketSelling.TicketSelling.DTO.Request.Booking.BookingUpdateRequest;
+import com.TicketSelling.TicketSelling.DTO.Request.Booking.ListBookingCreationRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.ApiResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Booking.BookingTicketsResponse;
@@ -52,11 +53,21 @@ public class BookingController {
                 .build();
     }
 
-    @PostMapping
+    @PostMapping("/{concertId}")
     public ApiResponse<BookingTicketsResponse> createNewBooking(
+            @PathVariable String concertId,
             @Valid @RequestBody BookingCreationRequest request) {
         return ApiResponse.<BookingTicketsResponse>builder()
-                .result(bookingService.createNewBooking(request))
+                .result(bookingService.createNewBooking(concertId,request))
+                .build();
+    }
+
+    @PostMapping("/list")
+    public ApiResponse<List<BookingTicketsResponse>> createNewListBooking (
+            @Valid @RequestBody List<ListBookingCreationRequest> requests
+    ) {
+        return ApiResponse.<List<BookingTicketsResponse>>builder()
+                .result(bookingService.createNewListBooking(requests))
                 .build();
     }
 
