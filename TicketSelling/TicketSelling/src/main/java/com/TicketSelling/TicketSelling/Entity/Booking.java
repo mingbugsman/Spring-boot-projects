@@ -34,9 +34,9 @@ public class Booking {
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Ticket> tickets;
 
-    @CreationTimestamp
+
     @Column(name = "expired_payment_time", updatable = false, nullable = false)
-    private LocalDateTime expiredPaymentTime;
+    private LocalDateTime expiredPaymentTime = LocalDateTime.now().plusMinutes(10);
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

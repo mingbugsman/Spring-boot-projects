@@ -53,24 +53,6 @@ public class BookingController {
                 .build();
     }
 
-    @PostMapping("/{concertId}")
-    public ApiResponse<BookingTicketsResponse> createNewBooking(
-            @PathVariable String concertId,
-            @Valid @RequestBody BookingCreationRequest request) {
-        return ApiResponse.<BookingTicketsResponse>builder()
-                .result(bookingService.createNewBooking(concertId,request))
-                .build();
-    }
-
-    @PostMapping("/list")
-    public ApiResponse<List<BookingTicketsResponse>> createNewListBooking (
-            @Valid @RequestBody List<ListBookingCreationRequest> requests
-    ) {
-        return ApiResponse.<List<BookingTicketsResponse>>builder()
-                .result(bookingService.createNewListBooking(requests))
-                .build();
-    }
-
     @PutMapping("/{id}")
     public ApiResponse<BookingResponse> updateBooking(
             @PathVariable String id, @Valid @RequestBody BookingUpdateRequest request) {

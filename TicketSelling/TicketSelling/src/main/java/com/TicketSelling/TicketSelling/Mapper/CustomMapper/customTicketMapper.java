@@ -25,7 +25,6 @@ import java.util.Set;
 
 public class CustomTicketMapper {
     SeatMapper seatMapper;
-    ConcertMapper concertMapper;
     BookingMapper bookingMapper;
     BandMapper bandMapper;
 

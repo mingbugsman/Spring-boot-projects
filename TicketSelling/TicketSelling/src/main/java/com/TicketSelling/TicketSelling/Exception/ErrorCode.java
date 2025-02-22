@@ -22,9 +22,12 @@ public enum ErrorCode {
     TICKET_EXISTED(1008, "Ticket is existed", HttpStatus.BAD_REQUEST),
 
 
-    ENTITY_IS_ALREADY_DELETED(1020,"ENTITY HAS BEEN DELETED", HttpStatus.BAD_REQUEST);
 
-
+    ENTITY_IS_ALREADY_DELETED(1020,"ENTITY HAS BEEN DELETED", HttpStatus.BAD_REQUEST),
+    TICKET_ALREADY_BOUGHT(1050, "Ticket is already bought", HttpStatus.BAD_REQUEST),
+    SEAT_NOT_AVAILABLE(1070, "Seat is occupied", HttpStatus.BAD_REQUEST),
+    PAYMENT_TIMEOUT_ERROR(1111, "The user has missed the payment period", HttpStatus.BAD_REQUEST),
+    PAYMENT_REQUIRED_MONEY_ERROR(1112, "The amount is not enough to pay", HttpStatus.BAD_REQUEST);
     int code;
     String message;
     HttpStatus statusCode;

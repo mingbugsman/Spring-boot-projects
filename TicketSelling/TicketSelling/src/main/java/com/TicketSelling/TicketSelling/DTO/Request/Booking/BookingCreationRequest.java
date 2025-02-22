@@ -20,6 +20,9 @@ public class BookingCreationRequest {
     @NotNull(message = "Customer ID is required")
     String customerId;
 
+    @NotNull(message = "concert ID is required")
+    String concertId;
+
     @NotEmpty(message = "At least one seat must be selected")
     List<TicketCreationRequest> tickets;
 }

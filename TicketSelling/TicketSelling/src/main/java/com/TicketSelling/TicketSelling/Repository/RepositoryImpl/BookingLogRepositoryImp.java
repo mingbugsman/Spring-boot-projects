@@ -3,12 +3,16 @@ package com.TicketSelling.TicketSelling.Repository.RepositoryImpl;
 import com.TicketSelling.TicketSelling.Entity.BookingLog;
 import com.TicketSelling.TicketSelling.Repository.IBookingLogRepository;
 import com.TicketSelling.TicketSelling.Repository.Jpa.BookingLogJpaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Repository
+@RequiredArgsConstructor
 public class BookingLogRepositoryImp implements IBookingLogRepository {
-    BookingLogJpaRepository bookingLogJpaRepository;
+    private final BookingLogJpaRepository bookingLogJpaRepository;
     @Override
     public BookingLog save(BookingLog bookingLog) {
         return bookingLogJpaRepository.save(bookingLog);
@@ -25,7 +29,7 @@ public class BookingLogRepositoryImp implements IBookingLogRepository {
     }
 
     @Override
-    public BookingLog findBookingLog(String customerId, String ticketId) {
-        return bookingLogJpaRepository.findByTicketIdAndCustomerId(customerId, ticketId);
+    public BookingLog findBookingLog(String customerId, String bookingId) {
+        return bookingLogJpaRepository.findByBookingIdAndCustomerId(customerId, bookingId);
     }
 }

@@ -9,11 +9,15 @@ import java.time.LocalDateTime;
 
 
 @Builder
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@Getter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class BookingLogRequest {
     BookingLogAction action;
     BookingStatus bookingStatus;
-    int totalTickets;
+    String customerId;
+    String bookingId;
     LocalDateTime ExpiredTimePayment;
+    String detail;
 }

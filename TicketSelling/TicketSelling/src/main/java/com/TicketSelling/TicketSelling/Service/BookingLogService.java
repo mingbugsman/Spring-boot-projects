@@ -14,23 +14,19 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-
 public class BookingLogService {
 
     private  final IBookingLogRepository bookingLogRepository;
 
-    public void createNewBookingLog(String customerId, String ticketId, BookingLogRequest bookingLogRequest) {
+    public void createNewBookingLog(BookingLogRequest bookingLogRequest) {
+        System.out.println("thuc hien tao booking log");
         BookingLog bookingLog = BookingLog.builder()
-                .customerId(customerId)
-                .ticketId(ticketId)
+                .customerId(bookingLogRequest.getCustomerId())
+                .details(bookingLogRequest.getDetail())
+                .bookingId(bookingLogRequest.getBookingId())
                 .action(BookingLogAction.BOOKING)
                 .build();
-        bookingLogRepository.save(bookingLog);
-    }
-    public void updateBookingLog(String customerId, String ticketId, BookingLogRequest request) {
-        BookingLog bookingLog = bookingLogRepository.findBookingLog(customerId, ticketId);
-        bookingLog.setAction(request.getAction());
-     //   bookingLog.setDetails(request.getClass());
+        System.out.println("thuc hien save");
         bookingLogRepository.save(bookingLog);
     }
 
@@ -40,8 +36,6 @@ public class BookingLogService {
     public List<BookingLog> findBookingLogByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
         return bookingLogRepository.findBookingLogByDateRange(startDate,endDate);
     }
-    private String createLogDetail(BookingLogRequest request) {
-        return "";
-    }
+
 }
 

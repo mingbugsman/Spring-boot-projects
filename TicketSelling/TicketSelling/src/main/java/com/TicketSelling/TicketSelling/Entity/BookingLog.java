@@ -26,9 +26,11 @@ public class BookingLog {
 
     @Column(columnDefinition = "TEXT", name = "detail")
     String details;
-
+    @Column(name = "booking_id", nullable = false)
+    String bookingId;
+    @Column(name = "customer_id", nullable = false)
     String customerId;
-    String ticketId;
+
 
     // date add log
     @CreationTimestamp
