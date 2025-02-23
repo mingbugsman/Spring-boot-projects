@@ -11,7 +11,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "hall")
+@Table(name = "hall",
+        indexes = {
+                @Index(name = "idx_hall_name", columnList = "hall_name"),
+                @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+                @Index(name = "idx_created_at", columnList = "created_at")
+        })
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +32,7 @@ public class Hall {
     @Column(name = "Hall_Status", nullable = false)
     HallStatus hallStatus = HallStatus.AVAILABLE;
 
-    @Column(name = "name", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "hall_name", columnDefinition = "VARCHAR(100)", nullable = false)
     String hallName;
 
     @Column(name = "address", columnDefinition = "TEXT", nullable = false)

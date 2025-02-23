@@ -14,7 +14,10 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer",indexes = {
+        @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+        @Index(name = "idx_deleted_at", columnList = "created_at")
+})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor

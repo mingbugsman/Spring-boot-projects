@@ -7,6 +7,7 @@ import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
 import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
 import com.TicketSelling.TicketSelling.Entity.Seat;
+import com.TicketSelling.TicketSelling.Enum.ConcertStatus;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
 import com.TicketSelling.TicketSelling.Mapper.ConcertMapper;
@@ -57,11 +58,8 @@ public class ConcertRepositoryImp implements IConcertRepository {
     }
 
     @Override
-    public boolean existsById(String concertId) {
-        return concertJpaRepository.existsById(concertId);
+    public List<Concert> searchConcertByKeyWordAndConcertStatus(String KeyWord, ConcertStatus concertStatus) {
+        return concertJpaRepository.searchByKeyWord(KeyWord, concertStatus.name());
     }
-
-
-
 
 }

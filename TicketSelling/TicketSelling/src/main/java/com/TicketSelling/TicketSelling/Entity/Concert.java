@@ -16,7 +16,12 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "concerts")
+@Table(name = "concerts",
+        indexes = {
+            @Index(name = "idx_concert_name", columnList = "concert_name"),
+                @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+                @Index(name = "idx_created_at", columnList = "created_at")
+        })
 public class Concert {
 
     @Id
@@ -35,7 +40,7 @@ public class Concert {
 
     // created date event
     @CreationTimestamp
-    @Column(name = "date", updatable = false)
+    @Column(name = "created_at", updatable = false)
     LocalDateTime date;
 
     // event start date

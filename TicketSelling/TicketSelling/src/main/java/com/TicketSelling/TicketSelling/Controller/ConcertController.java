@@ -6,6 +6,7 @@ import com.TicketSelling.TicketSelling.DTO.Request.Concert.ConcertUpdateRequest;
 import com.TicketSelling.TicketSelling.DTO.Response.ApiResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailResponse;
 import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
+import com.TicketSelling.TicketSelling.Enum.ConcertStatus;
 import com.TicketSelling.TicketSelling.Service.ConcertService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -27,6 +28,16 @@ public class ConcertController {
     public ApiResponse<List<ConcertResponse>> getAllConcerts() {
         return ApiResponse.<List<ConcertResponse>>builder()
                 .result(concertService.getAllConcerts())
+                .build();
+    }
+    @GetMapping("/search")
+    public ApiResponse<List<ConcertResponse>> searchConcert(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "SCHEDULED")ConcertStatus concertStatus
+            ) {
+
+        return ApiResponse.<List<ConcertResponse>>builder()
+                .result(concertService.getAllConcertOnStatus(keyword, concertStatus))
                 .build();
     }
 

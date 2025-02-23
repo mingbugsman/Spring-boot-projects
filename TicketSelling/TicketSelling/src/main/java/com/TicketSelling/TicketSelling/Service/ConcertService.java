@@ -9,6 +9,7 @@ import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
 import com.TicketSelling.TicketSelling.Entity.Band;
 import com.TicketSelling.TicketSelling.Entity.Concert;
 import com.TicketSelling.TicketSelling.Entity.Hall;
+import com.TicketSelling.TicketSelling.Enum.ConcertStatus;
 import com.TicketSelling.TicketSelling.Enum.SortOrder;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
@@ -18,12 +19,10 @@ import com.TicketSelling.TicketSelling.Repository.IBandRepository;
 import com.TicketSelling.TicketSelling.Repository.IConcertRepository;
 import com.TicketSelling.TicketSelling.Repository.IHallRepository;
 import com.TicketSelling.TicketSelling.Utils.SortUtils;
-import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +48,14 @@ public class ConcertService  {
         var sortedConcerts = SortUtils.sortList(concertRepository.getAllConcerts(),
                 SortOrder.DESC, Concert::getStartDate);
         return sortedConcerts.stream().map(concertMapper::toConcertResponse).collect(Collectors.toList());
+    }
+
+    public List<ConcertResponse> getAllConcertOnStatus(String keyword, ConcertStatus concertStatus) {
+        System.out.println(keyword);
+        System.out.println(concertStatus);
+        var concertOnScheduled = concertRepository.searchConcertByKeyWordAndConcertStatus(keyword, concertStatus);
+        System.out.println(concertOnScheduled.size());
+        return concertOnScheduled.stream().map(concertMapper::toConcertResponse).toList();
     }
 
     public ConcertResponse createNewConcert(ConcertCreationRequest request) {

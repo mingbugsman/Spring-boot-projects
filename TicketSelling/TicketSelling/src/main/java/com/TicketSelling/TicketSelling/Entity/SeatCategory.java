@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "seat_category")
+@Table(name = "seat_category", indexes = {
+        @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor

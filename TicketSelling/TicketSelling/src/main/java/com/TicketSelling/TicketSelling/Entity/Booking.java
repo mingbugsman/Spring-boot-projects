@@ -11,7 +11,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "booking", indexes = {
+        @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor

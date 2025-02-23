@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
+@Table(name = "booking_log", indexes = {
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 public class BookingLog {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

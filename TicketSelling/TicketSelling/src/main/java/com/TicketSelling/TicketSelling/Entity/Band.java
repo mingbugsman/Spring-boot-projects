@@ -11,7 +11,11 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "band")
+@Table(name = "band", indexes = {
+        @Index(name = "idx_band_name", columnList = "band_name"),
+        @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +31,7 @@ public class Band {
     @Column(name = "band_status", nullable = false)
     BandStatus bandStatus = BandStatus.ACTIVE;
 
-    @Column(name = "band_name", columnDefinition = "TEXT",nullable = false)
+    @Column(name = "band_name", columnDefinition = "VARCHAR(100)",nullable = false)
     String bandName;
 
     @Column(name = "band_information", columnDefinition = "TEXT",nullable = false)

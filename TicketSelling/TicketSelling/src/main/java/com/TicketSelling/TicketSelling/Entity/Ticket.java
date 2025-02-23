@@ -19,7 +19,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "ticket")
+@Table(name = "ticket", indexes = {
+        @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+        @Index(name = "idx_created_at", columnList = "created_at")
+})
 public class Ticket {
 
     @EmbeddedId
