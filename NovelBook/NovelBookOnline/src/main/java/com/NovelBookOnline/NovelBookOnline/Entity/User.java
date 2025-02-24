@@ -44,6 +44,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     List<Like> likes;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    List<Comment> comments;
 
 
     @CreationTimestamp

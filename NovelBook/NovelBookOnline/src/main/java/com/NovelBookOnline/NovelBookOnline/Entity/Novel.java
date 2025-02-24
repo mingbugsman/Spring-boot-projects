@@ -51,6 +51,8 @@ public class Novel {
 
     @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     List<Like> likes;
+    @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    List<Comment> comments;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "category_novel",
