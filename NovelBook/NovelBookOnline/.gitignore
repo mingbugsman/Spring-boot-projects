@@ -1,4 +1,4 @@
-Ticket_Selling.md
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -13,16 +13,12 @@ target/
 .springBeans
 .sts4-cache
 
-
-TicketSelling/TicketSelling/src/main/resources/application.yaml
-
-
-
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

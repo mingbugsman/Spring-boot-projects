@@ -1,17 +1,10 @@
 package com.TicketSelling.TicketSelling.Repository.RepositoryImpl;
 
-import com.TicketSelling.TicketSelling.DTO.Request.Concert.ConcertCreationRequest;
-import com.TicketSelling.TicketSelling.DTO.Request.Concert.ConcertUpdateRequest;
-import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertDetailResponse;
-import com.TicketSelling.TicketSelling.DTO.Response.Concert.ConcertResponse;
-import com.TicketSelling.TicketSelling.Entity.Band;
+
 import com.TicketSelling.TicketSelling.Entity.Concert;
-import com.TicketSelling.TicketSelling.Entity.Seat;
 import com.TicketSelling.TicketSelling.Enum.ConcertStatus;
 import com.TicketSelling.TicketSelling.Exception.ApplicationException;
 import com.TicketSelling.TicketSelling.Exception.ErrorCode;
-import com.TicketSelling.TicketSelling.Mapper.ConcertMapper;
-import com.TicketSelling.TicketSelling.Mapper.CustomMapper.CustomConcertMapper;
 import com.TicketSelling.TicketSelling.Repository.IConcertRepository;
 import com.TicketSelling.TicketSelling.Repository.Jpa.ConcertJpaRepository;
 import lombok.AccessLevel;
@@ -21,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Repository
 @RequiredArgsConstructor
