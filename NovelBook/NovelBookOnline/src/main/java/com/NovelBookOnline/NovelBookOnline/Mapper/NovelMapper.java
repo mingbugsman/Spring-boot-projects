@@ -13,6 +13,7 @@ public interface NovelMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "totalReading", ignore = true)
+    @Mapping(target = "novelCoverImage", ignore = true)
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "chapters", ignore = true)
     @Mapping(target = "categories", ignore = true)
@@ -32,6 +33,7 @@ public interface NovelMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "deletedAt", ignore =true)
+    @Mapping(target = "novelCoverImage", ignore = true)
     void updateEntity(@MappingTarget Novel novel, NovelRequest updateRequest);
 
 }

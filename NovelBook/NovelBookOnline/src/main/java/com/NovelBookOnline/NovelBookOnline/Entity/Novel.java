@@ -26,7 +26,6 @@ public class Novel {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-
     @Column(name = "novel_name", nullable = false, columnDefinition = "VARCHAR(255)")
     String novelName;
 

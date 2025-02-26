@@ -7,6 +7,8 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryRespon
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import org.springframework.data.domain.Page;
 
+import java.io.IOException;
+
 
 public interface INovelService {
     Page<NovelSummaryResponse> findNovelsByPagination( SortOrder sortOrder, int page, int size);
@@ -14,7 +16,7 @@ public interface INovelService {
 
     NovelDetailResponse getDetailNovel(String id);
 
-    NovelSummaryResponse createNovel(NovelRequest creationRequest);
-    NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest);
+    NovelSummaryResponse createNovel(NovelRequest creationRequest) throws IOException;
+    NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest) throws IOException;
     void deleteNovel(String id);
 }

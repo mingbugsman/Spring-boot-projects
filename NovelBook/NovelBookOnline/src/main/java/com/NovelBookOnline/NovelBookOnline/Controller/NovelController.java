@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/novels")
 @RequiredArgsConstructor
@@ -59,7 +61,7 @@ public class NovelController {
      * add new novel
      */
     @PostMapping
-    public ResponseEntity<NovelSummaryResponse> createNovel(@RequestBody @Valid NovelRequest request) {
+    public ResponseEntity<NovelSummaryResponse> createNovel(@RequestBody @Valid NovelRequest request) throws IOException {
         NovelSummaryResponse novel = novelService.createNovel(request);
         return novel != null ? ResponseEntity.status(HttpStatus.CREATED).body(novel)
                 : ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -69,7 +71,7 @@ public class NovelController {
      * update novel by id
      */
     @PutMapping("/{id}")
-    public ResponseEntity<NovelSummaryResponse> updateNovel(@PathVariable String id, @RequestBody @Valid NovelRequest request) {
+    public ResponseEntity<NovelSummaryResponse> updateNovel(@PathVariable String id, @RequestBody @Valid NovelRequest request) throws IOException {
         NovelSummaryResponse updatedNovel = novelService.updateNovel(id, request);
         return updatedNovel != null ? ResponseEntity.ok(updatedNovel)
                 : ResponseEntity.notFound().build();

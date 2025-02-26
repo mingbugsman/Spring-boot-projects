@@ -3,10 +3,9 @@ package com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
-import com.NovelBookOnline.NovelBookOnline.Entity.Category;
-import com.NovelBookOnline.NovelBookOnline.Entity.Chapter;
-import com.NovelBookOnline.NovelBookOnline.Entity.Comment;
-import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
+import com.NovelBookOnline.NovelBookOnline.Entity.*;
 import com.NovelBookOnline.NovelBookOnline.Mapper.ChapterMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +24,27 @@ import java.util.List;
 public final class CustomerMappingHelper {
     ChapterMapper chapterMapper;
 
+    public UserSummaryResponse toSummaryUser(User user) {
+        return new UserSummaryResponse(
+                user.getId(),
+                user.getUsername(),
+                Base64.getEncoder().encodeToString(user.getUserImageData()),
+                user.getCreatedAt()
+        );
+    }
+
+    public UserDetailResponse toUserDetail(User user) {
+
+        return new UserDetailResponse(
+                user.getId(),
+                user.getUsername(),
+                Base64.getEncoder().encodeToString(user.getUserImageData()),
+                user.getGender(),
+                user.getLikes().size(),
+                user.getComments().size(),
+                user.getNovels().stream().map(this::toNovelSummary).toList()
+        );
+    }
 
     public NovelSummaryResponse toNovelSummary(Novel novel) {
         return new NovelSummaryResponse(

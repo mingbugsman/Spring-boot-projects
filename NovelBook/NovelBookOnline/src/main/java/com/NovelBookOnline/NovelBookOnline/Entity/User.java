@@ -23,21 +23,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(name = "username", nullable = false ,columnDefinition = "VARCHAR(15)")
-    String username;
-
     @Column(name = "email", nullable = false ,columnDefinition = "VARCHAR(100)")
     String email;
 
     @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(255)")
     String password;
 
+    @Column(name = "username", nullable = false ,columnDefinition = "VARCHAR(15)")
+    String username;
+
     @Column(name = "gender",columnDefinition = "BIT",nullable = false)
     Boolean gender;
 
     @Lob
     @Column(name = "user_image_data", nullable = true, columnDefinition = "LONGBLOB")
-    byte[] userImageDate;
+    byte[] userImageData;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     List<Novel> novels;

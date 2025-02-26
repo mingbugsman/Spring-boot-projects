@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,22 +60,26 @@ public class NovelService implements INovelService {
     }
 
     @Override
-    public NovelSummaryResponse createNovel(NovelRequest creationRequest) {
+    public NovelSummaryResponse createNovel(NovelRequest creationRequest) throws IOException {
         if (novelRepository.existsByAuthorIdAndNovelName(creationRequest.getAuthor_id(), creationRequest.getNovelName())) {
             return null;
         }
+        byte[] dataImage = creationRequest.getImageNovel().getBytes();
         Novel novel = novelMapper.toEntity(creationRequest);
+        novel.setNovelCoverImage(dataImage);
         novelRepository.save(novel);
         return customMappingHelper.toNovelSummary(novel);
     }
 
     @Override
-    public NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest) {
+    public NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest) throws IOException {
         if (!novelRepository.existsById(id)) {
             return null;
         }
+        byte[] dataImage = updateRequest.getImageNovel().getBytes();
         Novel novel = novelRepository.findNovelById(id);
         novelMapper.updateEntity(novel, updateRequest);
+        novel.setNovelCoverImage(dataImage);
         return customMappingHelper.toNovelSummary(novelRepository.save(novel));
     }
 
