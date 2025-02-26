@@ -24,6 +24,9 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    @Column(name = "total_read_chapter", nullable = false)
+    Integer totalReadChapter;
+
     @Column(name = "chapter_name", nullable = false)
     String chapterName;
 

@@ -31,10 +31,10 @@ public class Novel {
     String novelName;
 
     @Lob
-    @Column(name = "novel_cover_image", nullable = false, columnDefinition = "LONGBLOB")
+    @Column(name = "novel_cover_image", columnDefinition = "LONGBLOB")
     byte[] novelCoverImage;
 
-    @Column(name = "novel_description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "novel_description", columnDefinition = "TEXT")
     String novelDescription;
 
     @Column(name = "total_reading", nullable = false)
