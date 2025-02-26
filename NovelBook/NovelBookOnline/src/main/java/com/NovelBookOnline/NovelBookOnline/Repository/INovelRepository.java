@@ -1,16 +1,18 @@
 package com.NovelBookOnline.NovelBookOnline.Repository;
 
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
+import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.time.LocalDateTime;
+import java.util.List;
 
 public interface INovelRepository {
-    Novel getNovelById(String id);
-    Page<Novel> getAllNovelsByPageAsc(LocalDateTime lastCreatedAt, Pageable pageable);
-    Page<Novel> getAllNovelsByPageDesc(LocalDateTime lastCreatedAt, Pageable pageable);
+    List<String> findAllIds();
+    Page<String> findNovelIdsByKeyword(String keyword, Pageable pageable);
+    List<Novel> findNovelsByIds(SortOrder sortOrder, List<String> novelIds);
+    Novel findNovelById( String id);
     Novel save(Novel novel);
     void deleteNovel(Novel novel);
     boolean existsById(String id);
+    boolean existsByAuthorIdAndNovelName(String authorId, String novelName);
 }

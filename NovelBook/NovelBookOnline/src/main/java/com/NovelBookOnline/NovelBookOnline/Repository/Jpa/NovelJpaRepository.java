@@ -9,31 +9,41 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface NovelJpaRepository extends JpaRepository<Novel,String> {
+
     boolean existsById(String id);
 
-    @Query("""
-        SELECT n FROM Novel n
-        WHERE n.deletedAt IS NULL
-        AND (:lastCreatedAt IS NULL OR n.createdAt > :lastCreatedAt)
-        ORDER BY n.createdAt ASC
-        """)
-    Page<Novel> getAllNovelByPageAsc(
-            @Param("lastCreatedAt") LocalDateTime lastCreatedAt,
-            Pageable pageable
-    );
+    @Query(value = """
+            SELECT 1 FROM novels n
+            JOIN users u
+            WHERE u.username = :authorName AND n.novel_name = :novelName
+            """, nativeQuery = true)
+    boolean existsByAuthorIdAndNovelName(String authorName, String novelName);
+
+    @Query(value = """
+            SELECT n.id FROM novels
+            WHERE novels.deleted_at IS NULL
+            """, nativeQuery = true)
+    List<String> getAllIds();
 
     @Query("""
-        SELECT n FROM Novel n
+        SELECT n.id FROM Novel n
         WHERE n.deletedAt IS NULL
-        AND (:lastCreatedAt IS NULL OR n.createdAt < :lastCreatedAt)
+        AND LOWER(n.novelName) LIKE LOWER(CONCAT('%', :keyword, '%'))
         ORDER BY n.createdAt DESC
-        """)
-    Page<Novel> getAllNovelByPageDesc(
-            @Param("lastCreatedAt") LocalDateTime lastCreatedAt,
-            Pageable pageable
-    );
+    """)
+    Page<String> findNovelIdsByKeyword(@Param("keyword") String keyword, Pageable pageable);
+
+    @Query("""
+    SELECT n FROM Novel n
+    WHERE n.id IN :novelIds
+    ORDER BY
+        CASE WHEN :sortOrder = 'ASC' THEN n.createdAt END ASC,
+        CASE WHEN :sortOrder = 'DESC' THEN n.createdAt END DESC
+    """)
+    List<Novel> findNovelsByIds(@Param("sortOrder") String sortOrder,@Param("novelIds") List<String> novelIds);
 
 }
