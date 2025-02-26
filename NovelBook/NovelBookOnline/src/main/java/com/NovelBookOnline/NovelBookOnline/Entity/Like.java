@@ -26,8 +26,8 @@ public class Like {
     User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "novel_id", nullable = false)
-    Novel novel;
+    @JoinColumn(name = "chapter_id", nullable = false)
+    Chapter chapter;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

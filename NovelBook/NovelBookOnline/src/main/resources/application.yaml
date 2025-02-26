@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create drop
       format-sql: true
     show-sql: true
   servlet:

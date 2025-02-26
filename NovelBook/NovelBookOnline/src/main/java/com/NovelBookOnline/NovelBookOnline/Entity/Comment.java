@@ -34,8 +34,8 @@ public class Comment {
     User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "novel_id", nullable = false)
-    Novel novel;
+    @JoinColumn(name = "chapter", nullable = false)
+    Chapter chapter;
 
 
     @CreationTimestamp

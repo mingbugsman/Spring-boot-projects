@@ -18,7 +18,9 @@ import java.util.Set;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "novels")
+@Table(name = "novels", indexes = {
+        @Index(name = "idx_novel_name", columnList = "novel_name")
+})
 public class Novel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -30,13 +32,10 @@ public class Novel {
 
     @Lob
     @Column(name = "novel_cover_image", nullable = false, columnDefinition = "LONGBLOB")
-    String novelCoverImage;
+    byte[] novelCoverImage;
 
     @Column(name = "novel_description", nullable = false, columnDefinition = "TEXT")
     String novelDescription;
-
-    @Column(name = "novel_content", nullable = false, columnDefinition = "LONGTEXT")
-    String novelContent;
 
     @Column(name = "total_reading", nullable = false)
     Integer totalReading = 0;
@@ -49,10 +48,9 @@ public class Novel {
     @JoinColumn(name = "author_id", nullable = false)
     User user;
 
-    @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
-    List<Like> likes;
-    @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
-    List<Comment> comments;
+
+    @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    List<Chapter> chapters;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "category_novel",
@@ -60,12 +58,13 @@ public class Novel {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     Set<Category> categories;
 
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
     LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name =  "updated_at", updatable = false, nullable = false)
+    @Column(name =  "updated_at", nullable = false)
     LocalDateTime updatedAt;
 
     @Column(name = "deleted_at")
