@@ -1,6 +1,6 @@
 package com.NovelBookOnline.NovelBookOnline.Controller;
 
-import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserCreationRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.RegisterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserUpdateRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok(service.getSummaryUser(id));
     }
     @PostMapping
-    ResponseEntity<Boolean> createNewUser(@RequestBody @Valid UserCreationRequest request){
+    ResponseEntity<Boolean> createNewUser(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.ok(service.createNewUser(request));
     }
     @PutMapping("/setup-profile/{id}")

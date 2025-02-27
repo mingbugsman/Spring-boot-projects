@@ -17,3 +17,8 @@ spring:
     multipart:
       max-file-size: 500KB
       max-request-size: 500KB
+
+  jwt:
+    SIGNER-KEY: "1TjXchW5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
+    VALID-DURATION: 15
+    REFRESHABLE-DURATION: 120

@@ -1,8 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Mapper;
 
-import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserCreationRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.RegisterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserUpdateRequest;
-import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.User;
 import org.mapstruct.Mapper;
@@ -22,7 +21,7 @@ public interface UserMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "deletedAt", ignore = true)
-    User toEntity(UserCreationRequest request);
+    User toEntity(RegisterRequest request);
 
 
     void updateUser(@MappingTarget User user, UserUpdateRequest request);

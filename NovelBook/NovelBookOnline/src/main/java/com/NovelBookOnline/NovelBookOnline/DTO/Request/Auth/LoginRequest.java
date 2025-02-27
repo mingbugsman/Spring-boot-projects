@@ -1,4 +1,4 @@
-package com.NovelBookOnline.NovelBookOnline.DTO.Request.User;
+package com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -8,12 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserCreationRequest {
-
+public class LoginRequest {
     @NotNull(message = "email is required")
     @Email(regexp = "^(?=.{1,64}@)[A-Za-z0-9\\+_-]+(\\.[A-Za-z0-9\\+_-]+)*@"
             + "[^-][A-Za-z0-9\\+-]+(\\.[A-Za-z0-9\\+-]+)*(\\.[A-Za-z]{2,})$",message = "Invalid email format")
@@ -21,5 +21,6 @@ public class UserCreationRequest {
 
     @NotNull(message = "password is required")
     String password;
+
 
 }

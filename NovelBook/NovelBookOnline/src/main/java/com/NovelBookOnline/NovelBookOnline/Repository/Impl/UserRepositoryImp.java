@@ -31,6 +31,16 @@ public class UserRepositoryImp  implements IUserRepository {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+        return userJpaRepository.findByUsername(username).orElseThrow();
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userJpaRepository.findByEmail(email).orElseThrow();
+    }
+
+    @Override
     public void save(User user) {
         userJpaRepository.save(user);
     }

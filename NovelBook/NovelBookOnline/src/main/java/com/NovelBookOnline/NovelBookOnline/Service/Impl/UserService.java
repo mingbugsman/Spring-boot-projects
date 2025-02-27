@@ -1,7 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Service.Impl;
 
 
-import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserCreationRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.RegisterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserUpdateRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
@@ -37,7 +37,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean createNewUser(UserCreationRequest request) {
+    public boolean createNewUser(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             return false;
         }
