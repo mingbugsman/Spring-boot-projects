@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(HttpServletRequest httpServletRequest, @Valid @RequestBody  LoginRequest request) {
+    public ResponseEntity<AuthenticationResponse> login(HttpServletRequest httpServletRequest, @Valid @RequestBody  LoginRequest request) throws ParseException, JOSEException {
         return ResponseEntity.ok(authenticationService.authenticate(httpServletRequest, request));
     }
 

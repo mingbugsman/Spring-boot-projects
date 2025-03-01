@@ -15,16 +15,16 @@ public class InvalidTokenRepositoryImpl  implements IInvalidTokenRepository {
     private final InvalidTokenJpaRepository invalidTokenJpaRepository;
 
     @Override
-    public void revokeAccessToken(String token) {
+    public void revokeAccessToken(String jwtId) {
         InvalidToken invalidToken = InvalidToken.builder()
-                .accessToken(token)
+                .jwtId(jwtId)
                 .revocationDate(LocalDateTime.now())
                 .build();
         invalidTokenJpaRepository.save(invalidToken);
     }
 
     @Override
-    public boolean checkRevocationToken(String token) {
-        return invalidTokenJpaRepository.findRevokedToken(token) != null;
+    public boolean checkRevocationToken(String jwtId) {
+        return invalidTokenJpaRepository.findRevokedToken(jwtId) != null;
     }
 }

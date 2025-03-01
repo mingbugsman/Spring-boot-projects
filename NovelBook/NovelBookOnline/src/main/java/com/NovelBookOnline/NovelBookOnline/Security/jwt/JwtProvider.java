@@ -85,10 +85,12 @@ public class JwtProvider {
         } catch (JOSEException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-
+    public String getJwtIdWithValidation(String accessToken) throws ParseException, JOSEException {
+        var signToken = validateAccessToken(accessToken);
+        return signToken.getJWTClaimsSet().getJWTID();
+    }
     private String buildScope(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         System.out.println(user.toString());

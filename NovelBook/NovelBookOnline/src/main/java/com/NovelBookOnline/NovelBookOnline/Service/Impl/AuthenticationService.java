@@ -60,7 +60,7 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     @Override
-    public AuthenticationResponse authenticate(HttpServletRequest httpServletRequest, LoginRequest request) {
+    public AuthenticationResponse authenticate(HttpServletRequest httpServletRequest, LoginRequest request) throws ParseException, JOSEException {
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         User user = userRepository.findUserByEmail(request.getEmail());
@@ -72,11 +72,14 @@ public class AuthenticationService implements IAuthenticationService {
         }
         // check access token
         String existingAccessToken = getAccessTokenFromHeader(httpServletRequest);
-        boolean isRevoked = blacklist.checkRevocationToken(existingAccessToken);
-        if (isRevoked) {
-            throw new IllegalArgumentException("UNAUTHENTICATED");
+        if (existingAccessToken != null) {
+            var signToken = jwtProvider.validateAccessToken(existingAccessToken);
+            String jwtId = signToken.getJWTClaimsSet().getJWTID();
+            boolean isRevoked = blacklist.checkRevocationToken(jwtId);
+            if (isRevoked) {
+                throw new IllegalArgumentException("UNAUTHENTICATED");
+            }
         }
-
         String accessToken = jwtProvider.generateAccessToken(user);
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(user);
 

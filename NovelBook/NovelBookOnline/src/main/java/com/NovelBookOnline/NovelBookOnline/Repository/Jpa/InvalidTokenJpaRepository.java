@@ -12,10 +12,10 @@ public interface InvalidTokenJpaRepository extends JpaRepository<InvalidToken,St
     @Query("""
         SELECT i
         FROM InvalidToken i
-        WHERE i.accessToken = :accessToken 
+        WHERE i.jwtId = :jwtId
         AND i.revocationDate IS NOT NULL
     """)
-    InvalidToken findRevokedToken(@Param("accessToken") String accessToken);
+    InvalidToken findRevokedToken(@Param("jwtId") String jwtId);
 
 
 }

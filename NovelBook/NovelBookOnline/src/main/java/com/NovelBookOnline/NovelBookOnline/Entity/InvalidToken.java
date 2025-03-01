@@ -21,8 +21,8 @@ import java.time.LocalDateTime;
 public class InvalidToken {
 
     @Id
-    @Column(name = "access_token", nullable = false)
-    String accessToken;
+    @Column(name = "jwt_id", nullable = false)
+    String jwtId;
 
     @Column(name = "revocation_date", nullable = false)
     LocalDateTime revocationDate;
