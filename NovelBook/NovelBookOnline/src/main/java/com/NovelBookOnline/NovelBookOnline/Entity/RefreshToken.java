@@ -13,10 +13,21 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "invalidated_token")
-public class InvalidatedToken {
+@Table(name = "refresh_token")
+public class RefreshToken {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     String id;
-    @Column(name = "expiry_time", nullable = false)
-    Date expiryTime;
+
+    @Column(name = "expiration_time")
+    Date expirationTime;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
+
+    @Column(nullable = false)
+    String token;
+
+
 }

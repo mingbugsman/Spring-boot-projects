@@ -3,7 +3,9 @@ package com.NovelBookOnline.NovelBookOnline.Security.jwt;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.IntrospectRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.IntrospectResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.User;
-import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.InvalidatedTokenJpaRepository;
+import com.NovelBookOnline.NovelBookOnline.Repository.IInvalidTokenRepository;
+import com.NovelBookOnline.NovelBookOnline.Repository.IRefreshTokenRepository;
+
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
@@ -29,49 +31,50 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class JwtProvider {
-    InvalidatedTokenJpaRepository invalidatedTokenJpaRepository;
+    IInvalidTokenRepository blackList;
 
     @NonFinal
     @Value("${jwt.SIGNER-KEY}")
     protected String jwtSecret;
 
     @NonFinal
-    @Value("${jwt.VALID-DURATION}")
-    protected long VALID_DURATION;
+    @Value("${jwt.accessTokenExpirationMs}")
+    protected long accessTokenExpirationMs;
 
-    @NonFinal
-    @Value("${jwt.REFRESHABLE-DURATION}")
-    protected long REFRESHABLE_DURATION;
 
-    public SignedJWT validateJwtToken(String token, boolean isRefresh) throws ParseException, JOSEException {
-        JWSVerifier verifier = new MACVerifier(jwtSecret.getBytes());
+    public SignedJWT validateAccessToken(String token) throws ParseException, JOSEException {
         SignedJWT signedJWT = SignedJWT.parse(token);
-        Date expiryTime = (isRefresh) ? new Date(signedJWT.getJWTClaimsSet().getIssueTime().toInstant().plus(REFRESHABLE_DURATION, ChronoUnit.SECONDS).toEpochMilli())
-                : signedJWT.getJWTClaimsSet().getExpirationTime();
-        var verified = signedJWT.verify(verifier);
-        if (!(verified) && expiryTime.after(new Date())) {
-            throw new IllegalArgumentException("UNAUTHENTICATED");
+        String jwtID = signedJWT.getJWTClaimsSet().getJWTID();
+
+        // Check if the token is on the blacklist (has it been revoked yet)
+        if (blackList.checkRevocationToken(jwtID)) {
+            throw new IllegalArgumentException("TOKEN REVOKED");
         }
-        else if (invalidatedTokenJpaRepository.existsById(signedJWT.getJWTClaimsSet().getJWTID())) {
-            throw new IllegalArgumentException("UNAUTHENTICATED");
+
+        // check signature
+        JWSVerifier verifier = new MACVerifier(jwtSecret.getBytes());
+        if (!signedJWT.verify(verifier)) {
+            throw new IllegalArgumentException("INVALID TOKEN");
         }
+
+        // Check the expiration time
+        Date expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+        if (expiryTime.before(new Date())) {
+            throw new IllegalArgumentException("TOKEN EXPIRED");
+        }
+
         return signedJWT;
     }
 
+
     public IntrospectResponse introspect(IntrospectRequest request)throws JOSEException, ParseException {
         var token = request.getToken();
-        boolean isValid = true;
+        boolean isValid = validateAccessToken(token) != null;
 
-        try {
-            validateJwtToken(token, false);
-        } catch (Exception e) {
-            isValid = false;
-        }
         return IntrospectResponse.builder().valid(isValid).build();
     }
 
-    public String generateToken(User user) {
-
+    public String generateAccessToken(User user) {
 
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
         Payload payload = createPayLoad(user);
@@ -85,10 +88,6 @@ public class JwtProvider {
 
     }
 
-    public String getUsernameFromJwtToken(String token) throws JOSEException, ParseException {
-        SignedJWT signedJWT = SignedJWT.parse(token);
-        return signedJWT.getJWTClaimsSet().getSubject();
-    }
 
     private String buildScope(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
@@ -107,7 +106,7 @@ public class JwtProvider {
                 .subject(user.getUsername())
                 .issuer("Tran Tuan Minh")
                 .issueTime(new Date())
-                .expirationTime(new Date(Instant.now().plus(VALID_DURATION, ChronoUnit.SECONDS).toEpochMilli()))
+                .expirationTime(new Date(Instant.now().plus(accessTokenExpirationMs, ChronoUnit.SECONDS).toEpochMilli()))
                 .jwtID(UUID.randomUUID().toString())
                 .claim("scope", buildScope(user))
                 .build();

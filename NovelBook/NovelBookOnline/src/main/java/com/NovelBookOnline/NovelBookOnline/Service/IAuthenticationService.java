@@ -7,11 +7,12 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.RegisterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.AuthenticationResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.RegisterResponse;
 import com.nimbusds.jose.JOSEException;
+import jakarta.servlet.http.HttpServletRequest;
 
 import java.text.ParseException;
 
 public interface IAuthenticationService {
-    void logout(LogoutRequest request);
+    void logout(HttpServletRequest httpServletRequest, LogoutRequest logRequest);
     AuthenticationResponse authenticate(LoginRequest request);
     AuthenticationResponse refreshToken(RefreshTokenRequest request) throws ParseException, JOSEException;
     RegisterResponse register(RegisterRequest request);

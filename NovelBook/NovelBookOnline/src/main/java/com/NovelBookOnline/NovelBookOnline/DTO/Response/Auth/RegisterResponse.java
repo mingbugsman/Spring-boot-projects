@@ -6,7 +6,8 @@ public record RegisterResponse(
         String id,
         String username,
         String email,
-        String token,
+        String accessToken,
+        String refreshToken,
         LocalDateTime createdAt
 ) {
 }

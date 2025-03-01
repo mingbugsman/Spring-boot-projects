@@ -9,6 +9,7 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.AuthenticationRespo
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.RegisterResponse;
 import com.NovelBookOnline.NovelBookOnline.Service.IAuthenticationService;
 import com.nimbusds.jose.JOSEException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,8 @@ public class AuthController {
     private final IAuthenticationService authenticationService;
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestBody @Valid LogoutRequest request) {
-        authenticationService.logout(request);
+    public ResponseEntity<String> logout(HttpServletRequest httpServletRequest, @RequestBody @Valid LogoutRequest logoutRequest) {
+        authenticationService.logout(httpServletRequest, logoutRequest);
         return ResponseEntity.ok("Successfully log out");
     }
 

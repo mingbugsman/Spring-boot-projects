@@ -24,7 +24,7 @@ public class CustomJwtDecoder implements JwtDecoder {
 
     @NonFinal
     @Value("${jwt.SIGNER-KEY}")
-    private String signerKey;
+    private  String signerKey;
 
     @NonFinal
     private NimbusJwtDecoder nimbusJwtDecoder = null;

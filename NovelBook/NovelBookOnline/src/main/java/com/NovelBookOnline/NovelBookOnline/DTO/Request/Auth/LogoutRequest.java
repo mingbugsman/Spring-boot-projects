@@ -12,5 +12,5 @@ import org.hibernate.validator.constraints.Length;
 public class LogoutRequest {
 
     @NotNull(message = "token is required")
-    private String token;
+    private String refreshToken;
 }
