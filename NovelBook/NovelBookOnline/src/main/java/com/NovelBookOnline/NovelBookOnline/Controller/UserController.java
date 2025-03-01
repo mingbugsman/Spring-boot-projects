@@ -8,6 +8,7 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,9 @@ public class UserController {
     ResponseEntity<Boolean> createNewUser(@RequestBody @Valid RegisterRequest request){
         return ResponseEntity.ok(service.createNewUser(request));
     }
-    @PutMapping("/setup-profile/{id}")
-    ResponseEntity<UserUpdateResponse> updateUser(@PathVariable String id, @RequestBody @Valid UserUpdateRequest request) throws IOException{
+    @PutMapping(value = "/setup-profile/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    ResponseEntity<UserUpdateResponse> updateUser(@PathVariable String id, @ModelAttribute @Valid UserUpdateRequest request) throws IOException{
+        System.out.println("update user...");
         return ResponseEntity.ok(service.updateUser(id, request));
     }
     @DeleteMapping

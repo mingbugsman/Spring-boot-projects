@@ -1,14 +1,16 @@
 package com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class LogoutRequest {
+
+    @NotNull(message = "token is required")
     private String token;
 }

@@ -13,13 +13,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.security.cert.X509CertSelector;
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -32,11 +29,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class JwtProvider {
-    static  Logger logger = LoggerFactory.getLogger(JwtProvider.class);
     InvalidatedTokenJpaRepository invalidatedTokenJpaRepository;
 
     @NonFinal
-    @Value("${jwt. SIGNER-KEY}")
+    @Value("${jwt.SIGNER-KEY}")
     protected String jwtSecret;
 
     @NonFinal
@@ -77,7 +73,7 @@ public class JwtProvider {
     public String generateToken(User user) {
 
 
-        JWSHeader header = new JWSHeader(JWSAlgorithm.ES256);
+        JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
         Payload payload = createPayLoad(user);
         JWSObject jwsObject = new JWSObject(header, payload);
         try {
@@ -99,7 +95,7 @@ public class JwtProvider {
         System.out.println(user.toString());
         if (!CollectionUtils.isEmpty(user.getRoles())) {
             user.getRoles().forEach(role -> {
-                stringJoiner.add("ROLE_" + role.getName());
+                stringJoiner.add("ROLE_" + role.getTypeRole());
             });
         }
         System.out.println("Generated scope: " + stringJoiner);

@@ -7,14 +7,16 @@ import com.NovelBookOnline.NovelBookOnline.Entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "username", source = "email")
+    @Mapping(target = "username", ignore = true)
     @Mapping(target = "gender", ignore = true)
     @Mapping(target = "userImageData", ignore = true)
+    @Mapping(target = "description", ignore = true)
     @Mapping(target = "novels", ignore = true)
     @Mapping(target = "likes", ignore = true)
     @Mapping(target = "comments", ignore = true)
@@ -24,10 +26,8 @@ public interface UserMapper {
     User toEntity(RegisterRequest request);
 
 
+    @Mapping(target = "userImageData", ignore = true)
     void updateUser(@MappingTarget User user, UserUpdateRequest request);
-
-    @Mapping(target = "imageBase64", ignore = true)
-    UserUpdateResponse toUpdateResponse(User user);
 
 
 

@@ -35,15 +35,18 @@ public class User {
     @Column(name = "password", nullable = false, columnDefinition = "VARCHAR(255)")
     String password;
 
-    @Column(name = "username", nullable = false ,columnDefinition = "VARCHAR(15)")
+    @Column(name = "username", columnDefinition = "VARCHAR(12)")
     String username;
 
-    @Column(name = "gender",columnDefinition = "BIT",nullable = false)
+    @Column(name = "gender",columnDefinition = "BIT")
     Boolean gender;
 
     @Lob
     @Column(name = "user_image_data", nullable = true, columnDefinition = "LONGBLOB")
     byte[] userImageData;
+
+    @Column(name = "description", columnDefinition = "VARCHAR(50)")
+    String description;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     List<Novel> novels;

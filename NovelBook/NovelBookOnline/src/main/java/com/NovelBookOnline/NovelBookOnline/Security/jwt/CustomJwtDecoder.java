@@ -29,7 +29,6 @@ public class CustomJwtDecoder implements JwtDecoder {
     @NonFinal
     private NimbusJwtDecoder nimbusJwtDecoder = null;
 
-    @Autowired
     private final JwtProvider jwtProvider;
 
 

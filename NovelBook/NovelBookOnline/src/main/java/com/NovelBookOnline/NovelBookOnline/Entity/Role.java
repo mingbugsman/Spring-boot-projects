@@ -24,7 +24,7 @@ public class Role {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    TypeRole name;
+    TypeRole typeRole;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles",

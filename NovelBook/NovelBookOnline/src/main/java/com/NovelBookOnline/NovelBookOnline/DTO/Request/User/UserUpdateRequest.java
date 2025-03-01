@@ -14,15 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
+
     @NotNull(message = "Username is required")
     String username;
 
-    @NotNull(message = "email is required")
-    String email;
 
     @NotNull(message = "gender is required")
     boolean gender;
 
 
-    MultipartFile userImageDate;
+    String description;
+    MultipartFile userImageData;
 }

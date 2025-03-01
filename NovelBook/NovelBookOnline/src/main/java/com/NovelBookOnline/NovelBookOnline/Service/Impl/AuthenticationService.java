@@ -38,31 +38,35 @@ public class AuthenticationService implements IAuthenticationService {
     public void logout(LogoutRequest request) {
         try {
             String token = request.getToken();
-            var signToken = jwtProvider.validateJwtToken(token,false);
+            var signToken = jwtProvider.validateJwtToken(token, false);
             String jwtId = signToken.getJWTClaimsSet().getJWTID();
             Date expiryTime = signToken.getJWTClaimsSet().getExpirationTime();
 
-            InvalidatedToken invalidatedToken = InvalidatedToken.builder()
-                    .id(jwtId)
-                    .expiryTime(expiryTime)
-                    .build();
-            invalidatedTokenRepository.save(invalidatedToken);
+            if (!invalidatedTokenRepository.existsById(jwtId)) {
+                InvalidatedToken invalidatedToken = InvalidatedToken.builder()
+                        .id(jwtId)
+                        .expiryTime(expiryTime)
+                        .build();
+                invalidatedTokenRepository.save(invalidatedToken);
 
-        } catch (Exception e) {
+            }
+        } catch (JOSEException | ParseException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     public AuthenticationResponse authenticate(LoginRequest request) {
+        System.out.println("thuc hien authenticate...");
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         var user = userRepository.findUserByEmail(request.getEmail());
-
+        System.out.println(request.getEmail() + " - " + request.getPassword());
         boolean authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
         if (!authenticated) {
             throw new IllegalArgumentException("UNAUTHENTICATED");
         }
         String token = jwtProvider.generateToken(user);
+        System.out.println(token);
         return AuthenticationResponse.builder()
                 .authenticated(true)
                 .token(token)

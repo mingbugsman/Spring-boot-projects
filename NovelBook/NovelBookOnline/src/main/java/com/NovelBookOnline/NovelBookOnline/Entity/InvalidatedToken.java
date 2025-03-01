@@ -16,7 +16,6 @@ import java.util.Date;
 @Table(name = "invalidated_token")
 public class InvalidatedToken {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     String id;
     @Column(name = "expiry_time", nullable = false)
     Date expiryTime;

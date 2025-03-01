@@ -3,9 +3,14 @@ package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 import com.NovelBookOnline.NovelBookOnline.Entity.InvalidatedToken;
 import com.NovelBookOnline.NovelBookOnline.Repository.IInvalidatedTokenRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.InvalidatedTokenJpaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+
+@Repository
+@RequiredArgsConstructor
 public class InvalidatedTokenRepositoryImpl implements IInvalidatedTokenRepository {
-    InvalidatedTokenJpaRepository invalidatedTokenJpaRepository;
+    private final InvalidatedTokenJpaRepository invalidatedTokenJpaRepository;
 
     @Override
     public boolean existsById(String id) {

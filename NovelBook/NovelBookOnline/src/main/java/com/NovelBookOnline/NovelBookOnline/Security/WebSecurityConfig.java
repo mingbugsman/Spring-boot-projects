@@ -20,13 +20,17 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig {
 
     @NonFinal
-    private final String[] PUBLIC_AUTH_ENDPOINT = {"/auth/register","auth/login","/auth/introspect","/auth/refreshToken"};
+    private final String[] PUBLIC_AUTH_ENDPOINT = {
+            "/api/auth/register",
+            "/api/auth/login",
+            "/api/auth/introspect",
+            "/api/auth/refresh-token"};
+
     @NonFinal
-    private final String[] PUBLIC_NOVEL_ENDPOINT = {"/novels", "/novels/{id}","/novels/search"};
+    private final String[] PUBLIC_NOVEL_ENDPOINT = {"/api/novels", "/api/novels/{id}","/api/novels/search"};
 
 
-
-    private final CustomJwtDecoder customJwtDecoder;
+    private CustomJwtDecoder customJwtDecoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -36,6 +40,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST,PUBLIC_AUTH_ENDPOINT).permitAll()
                         .requestMatchers(HttpMethod.GET,PUBLIC_NOVEL_ENDPOINT).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwtConfigurer -> jwtConfigurer.decoder(customJwtDecoder)
@@ -45,7 +50,7 @@ public class WebSecurityConfig {
 
 
     @Bean
-    private JwtAuthenticationConverter jwtAuthenticationConverter() {
+    JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =  new JwtGrantedAuthoritiesConverter();
         jwtGrantedAuthoritiesConverter.setAuthorityPrefix("");
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();

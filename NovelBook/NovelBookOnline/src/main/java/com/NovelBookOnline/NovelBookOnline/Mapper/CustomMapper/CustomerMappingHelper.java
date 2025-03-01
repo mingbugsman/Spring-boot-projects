@@ -5,6 +5,7 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailRespons
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.*;
 import com.NovelBookOnline.NovelBookOnline.Mapper.ChapterMapper;
 import lombok.AccessLevel;
@@ -32,7 +33,16 @@ public final class CustomerMappingHelper {
                 user.getCreatedAt()
         );
     }
-
+    public UserUpdateResponse toUpdateResponse(User user) {
+        return new UserUpdateResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getGender(),
+                Base64.getEncoder().encodeToString(user.getUserImageData()),
+                user.getUpdatedAt()
+        );
+    }
     public UserDetailResponse toUserDetail(User user) {
 
         return new UserDetailResponse(

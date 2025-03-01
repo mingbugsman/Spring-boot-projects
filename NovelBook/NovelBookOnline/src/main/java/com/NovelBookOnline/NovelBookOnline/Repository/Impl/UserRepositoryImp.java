@@ -37,7 +37,7 @@ public class UserRepositoryImp  implements IUserRepository {
 
     @Override
     public User findUserByEmail(String email) {
-        return userJpaRepository.findByEmail(email).orElseThrow();
+        return userJpaRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("NOT FOUND EMAIL"));
     }
 
     @Override
