@@ -13,7 +13,7 @@ import java.text.ParseException;
 
 public interface IAuthenticationService {
     void logout(HttpServletRequest httpServletRequest, LogoutRequest logRequest);
-    AuthenticationResponse authenticate(LoginRequest request);
+    AuthenticationResponse authenticate(HttpServletRequest httpServletRequest, LoginRequest loginRequest);
     AuthenticationResponse refreshToken(RefreshTokenRequest request) throws ParseException, JOSEException;
     RegisterResponse register(RegisterRequest request);
 }

@@ -25,6 +25,6 @@ public class InvalidTokenRepositoryImpl  implements IInvalidTokenRepository {
 
     @Override
     public boolean checkRevocationToken(String token) {
-        return invalidTokenJpaRepository.checkRevocationToken(token);
+        return invalidTokenJpaRepository.findRevokedToken(token) != null;
     }
 }

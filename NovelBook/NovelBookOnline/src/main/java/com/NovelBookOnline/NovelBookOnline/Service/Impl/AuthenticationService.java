@@ -42,12 +42,10 @@ public class AuthenticationService implements IAuthenticationService {
     @Transactional
     public void logout(HttpServletRequest httpServletRequest, LogoutRequest logoutRequest) {
         // 1. Lấy Access Token từ Header
-        String authorizationHeader = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+        String accessToken = getAccessTokenFromHeader(httpServletRequest);
+        if (accessToken == null) {
             throw new IllegalArgumentException("Invalid authorization header");
         }
-        String accessToken = authorizationHeader.substring(7); // Cắt "Bearer "
-
         // 2. Thu hồi (BlackList) Access Token
         try {
             var signToken = jwtProvider.validateAccessToken(accessToken);
@@ -62,15 +60,23 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     @Override
-    public AuthenticationResponse authenticate(LoginRequest request) {
+    public AuthenticationResponse authenticate(HttpServletRequest httpServletRequest, LoginRequest request) {
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
         User user = userRepository.findUserByEmail(request.getEmail());
 
-        boolean authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
-        if (!authenticated) {
+        // check password
+        boolean isMatchedPassword = passwordEncoder.matches(request.getPassword(), user.getPassword());
+        if (!isMatchedPassword) {
+            throw new IllegalArgumentException("WRONG PASSWORD");
+        }
+        // check access token
+        String existingAccessToken = getAccessTokenFromHeader(httpServletRequest);
+        boolean isRevoked = blacklist.checkRevocationToken(existingAccessToken);
+        if (isRevoked) {
             throw new IllegalArgumentException("UNAUTHENTICATED");
         }
+
         String accessToken = jwtProvider.generateAccessToken(user);
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(user);
 
@@ -108,5 +114,12 @@ public class AuthenticationService implements IAuthenticationService {
         String accessToken = jwtProvider.generateAccessToken(user);
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(user);
         return new RegisterResponse(user.getId(), user.getUsername(), user.getEmail(), accessToken, refreshToken.getToken(), user.getCreatedAt());
+    }
+    private String getAccessTokenFromHeader(HttpServletRequest httpServletRequest) {
+        String authorizationHeader = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+           return null;
+        }
+        return authorizationHeader.substring(7); // Cắt "Bearer "
     }
 }
