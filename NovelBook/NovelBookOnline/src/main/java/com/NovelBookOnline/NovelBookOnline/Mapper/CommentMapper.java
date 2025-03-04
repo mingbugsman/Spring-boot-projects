@@ -12,6 +12,8 @@ public interface CommentMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "chapter", ignore = true)
+    @Mapping(target = "replies", ignore = true)
+    @Mapping(target = "parent", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "deletedAt", ignore = true)

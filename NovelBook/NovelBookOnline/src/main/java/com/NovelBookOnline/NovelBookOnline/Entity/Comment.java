@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,6 +39,12 @@ public class Comment {
     @JoinColumn(name = "chapter", nullable = false)
     Chapter chapter;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    Column parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Comment> replies = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

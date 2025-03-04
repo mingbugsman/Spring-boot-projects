@@ -2,6 +2,7 @@ package com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentRecentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
@@ -36,6 +37,7 @@ public final class CustomerMappingHelper {
         );
     }
 
+    // USER
     public UserSummaryResponse toSummaryUser(User user) {
         return new UserSummaryResponse(
                 user.getId(),
@@ -44,6 +46,7 @@ public final class CustomerMappingHelper {
                 user.getCreatedAt()
         );
     }
+
     public UserUpdateResponse toUserUpdateResponse(User user) {
         return new UserUpdateResponse(
                 user.getId(),
@@ -67,6 +70,8 @@ public final class CustomerMappingHelper {
         );
     }
 
+
+    // NOVEL
     public NovelSummaryResponse toNovelSummary(Novel novel) {
         return new NovelSummaryResponse(
                 novel.getId(),
@@ -75,6 +80,7 @@ public final class CustomerMappingHelper {
                 novel.getCreatedAt()
         );
     }
+
     public NovelDetailResponse toNovelDetail(Novel novel) {
         String base64Data = Base64.getEncoder().encodeToString(novel.getNovelCoverImage());
         List<String> categoryNames = novel.getCategories().stream().map(Category::getCategoryName).toList();
@@ -100,14 +106,25 @@ public final class CustomerMappingHelper {
         );
     }
 
+
+    // COMMENT
     public CommentResponse toCommentResponse(Comment comment) {
         return new CommentResponse(
                 comment.getUser().getUsername(),
                 comment.getContent(),
-                Base64.getEncoder().encodeToString(comment.getFileDataComment())
+                Base64.getEncoder().encodeToString(comment.getFileDataComment()),
+                comment.getReplies().size()
         );
     }
 
+    public CommentRecentResponse toCommentRecentResponse(Chapter chapter) {
+        return new CommentRecentResponse(
+                chapter.getId(),
+                chapter.getComments().stream().map(this::toCommentResponse).toList()
+        );
+    }
+
+    // CATEGORY
     public CategoryDetailResponse toCategoryDetailResponse(Category category) {
         int totalNovelsOfCategory = category.getNovels().size();
         List<NovelSummaryResponse> novels = category
