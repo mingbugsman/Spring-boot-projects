@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "comment")
+@Table(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,6 +25,9 @@ public class Comment {
 
     @Column(name = "comment_content", nullable = false)
     String content;
+
+    @Column(name = "total_like")
+    int totalLikes = 0;
 
     @Lob
     @Column(name = "file_data_comment", columnDefinition = "LONGBLOB")

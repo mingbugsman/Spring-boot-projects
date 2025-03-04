@@ -86,7 +86,9 @@ public final class CustomerMappingHelper {
         List<String> categoryNames = novel.getCategories().stream().map(Category::getCategoryName).toList();
         int totalReading = novel.getChapters().stream().map(Chapter::getTotalReadChapter).mapToInt(Integer::intValue).sum();
         int totalLikes = novel.getChapters().stream().map(Chapter::getLikes).map(List::size).reduce(0, Integer::sum);
-        List<CommentResponse> allComments = novel.getChapters().stream()
+        List<CommentResponse> allComments = novel.getChapters()
+                .stream()
+                .filter(c -> c.getDeletedAt() != null)
                 .map(Chapter::getComments)   // list comments for chapter
                 .flatMap(Collection::stream)
                 .map(this::toCommentResponse)
@@ -113,14 +115,14 @@ public final class CustomerMappingHelper {
                 comment.getUser().getUsername(),
                 comment.getContent(),
                 Base64.getEncoder().encodeToString(comment.getFileDataComment()),
-                comment.getReplies().size()
+                comment.getReplies().stream().filter(c -> c.getDeletedAt() != null).toList().size()
         );
     }
 
     public CommentRecentResponse toCommentRecentResponse(Chapter chapter) {
         return new CommentRecentResponse(
                 chapter.getId(),
-                chapter.getComments().stream().map(this::toCommentResponse).toList()
+                chapter.getComments().stream().filter(c-> c.getDeletedAt() != null).map(this::toCommentResponse).toList()
         );
     }
 
