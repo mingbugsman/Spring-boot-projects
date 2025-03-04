@@ -22,6 +22,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    @Column(name = "category_name", unique = true)
     String categoryName;
 
     String categoryInformation;
@@ -39,4 +40,7 @@ public class Category {
     @UpdateTimestamp
     @Column(name =  "updated_at", updatable = false, nullable = false)
     LocalDateTime updatedAt;
+
+    @Column(name = "delete_at")
+    LocalDateTime deleteAt;
 }

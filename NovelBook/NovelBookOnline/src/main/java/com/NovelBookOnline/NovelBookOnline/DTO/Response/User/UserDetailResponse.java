@@ -11,6 +11,6 @@ public record UserDetailResponse (
         boolean gender,
         int totalReactions,
         int totalComments,
-        List<NovelSummaryResponse> novelSummaryResponseList
+        List<NovelSummaryResponse> summaryNovels
 
 ) {}

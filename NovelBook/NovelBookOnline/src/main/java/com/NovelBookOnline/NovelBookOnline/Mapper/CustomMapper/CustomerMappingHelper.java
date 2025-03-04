@@ -1,5 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper;
 
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
@@ -8,6 +10,7 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.*;
 import com.NovelBookOnline.NovelBookOnline.Mapper.ChapterMapper;
+import com.NovelBookOnline.NovelBookOnline.Mapper.NovelMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,6 +28,14 @@ import java.util.List;
 public final class CustomerMappingHelper {
     ChapterMapper chapterMapper;
 
+    public AuthorDetailResponse toAuthorDetailResponse(Author author) {
+        return new AuthorDetailResponse(
+                author.getId(),
+                author.getAuthorName(),
+                author.getNovels().stream().map(this::toNovelSummary).toList()
+        );
+    }
+
     public UserSummaryResponse toSummaryUser(User user) {
         return new UserSummaryResponse(
                 user.getId(),
@@ -33,7 +44,7 @@ public final class CustomerMappingHelper {
                 user.getCreatedAt()
         );
     }
-    public UserUpdateResponse toUpdateResponse(User user) {
+    public UserUpdateResponse toUserUpdateResponse(User user) {
         return new UserUpdateResponse(
                 user.getId(),
                 user.getUsername(),
@@ -52,7 +63,7 @@ public final class CustomerMappingHelper {
                 user.getGender(),
                 user.getLikes().size(),
                 user.getComments().size(),
-                user.getNovels().stream().map(this::toNovelSummary).toList()
+                user.getAuthor().getNovels().stream().map(this::toNovelSummary).toList()
         );
     }
 
@@ -75,13 +86,12 @@ public final class CustomerMappingHelper {
                 .map(this::toCommentResponse)
                 .toList();
 
-
         return new NovelDetailResponse(
                 novel.getId(),
                 base64Data,
                 novel.getNovelName(),
                 novel.getNovelDescription(),
-                novel.getUser().getUsername(),
+                novel.getAuthor().getAuthorName(),
                 categoryNames,
                 totalReading,
                 totalLikes,
@@ -95,6 +105,20 @@ public final class CustomerMappingHelper {
                 comment.getUser().getUsername(),
                 comment.getContent(),
                 Base64.getEncoder().encodeToString(comment.getFileDataComment())
+        );
+    }
+
+    public CategoryDetailResponse toCategoryDetailResponse(Category category) {
+        int totalNovelsOfCategory = category.getNovels().size();
+        List<NovelSummaryResponse> novels = category
+                .getNovels()
+                .stream().map(this::toNovelSummary).toList();
+        return new CategoryDetailResponse(
+                category.getId(),
+                category.getCategoryName(),
+                category.getCategoryInformation(),
+                totalNovelsOfCategory,
+                novels
         );
     }
 }

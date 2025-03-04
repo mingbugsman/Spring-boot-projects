@@ -20,6 +20,6 @@ public class RoleRepositoryImpl implements IRoleRepository {
 
     @Override
     public Role findByTypeRole(TypeRole typeRole) {
-        return roleJpaRepository.findByTypeRole(typeRole).orElseThrow();
+        return roleJpaRepository.findByTypeRole(typeRole).orElse(null);
     }
 }

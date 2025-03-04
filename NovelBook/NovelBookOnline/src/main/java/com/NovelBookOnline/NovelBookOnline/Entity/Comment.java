@@ -45,4 +45,7 @@ public class Comment {
     @UpdateTimestamp
     @Column(name =  "updated_at", updatable = false, nullable = false)
     LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    LocalDateTime deletedAt;
 }

@@ -76,7 +76,7 @@ public class UserService implements IUserService {
         }
 
         userRepository.save(user);
-        return customerMappingHelper.toUpdateResponse(user);
+        return customerMappingHelper.toUserUpdateResponse(user);
 
     }
 

@@ -14,7 +14,7 @@ public interface NovelMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "totalReading", ignore = true)
     @Mapping(target = "novelCoverImage", ignore = true)
-    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "author", ignore = true)
     @Mapping(target = "chapters", ignore = true)
     @Mapping(target = "categories", ignore = true)
     @Mapping(target = "novelStatus", ignore = true)
@@ -26,7 +26,7 @@ public interface NovelMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "totalReading", ignore = true)
-    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "author", ignore = true)
     @Mapping(target = "chapters", ignore = true)
     @Mapping(target = "novelStatus", ignore = true)
     @Mapping(target = "categories", ignore = true)

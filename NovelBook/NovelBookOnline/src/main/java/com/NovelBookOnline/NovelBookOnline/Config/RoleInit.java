@@ -19,7 +19,7 @@ public class RoleInit {
     @Bean
     public ApplicationRunner initRole() {
         return args -> {
-            List<TypeRole> roles = List.of(TypeRole.ADMIN, TypeRole.USER, TypeRole.GUEST);
+            List<TypeRole> roles = List.of(TypeRole.ADMIN, TypeRole.USER, TypeRole.GUEST,TypeRole.AUTHOR);
 
             for (TypeRole typeRole : roles) {
                 if (roleRepository.findByTypeRole(typeRole) == null) {

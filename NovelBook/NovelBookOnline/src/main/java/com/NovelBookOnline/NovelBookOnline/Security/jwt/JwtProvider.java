@@ -4,8 +4,6 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.IntrospectRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.IntrospectResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.User;
 import com.NovelBookOnline.NovelBookOnline.Repository.IInvalidTokenRepository;
-import com.NovelBookOnline.NovelBookOnline.Repository.IRefreshTokenRepository;
-
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;

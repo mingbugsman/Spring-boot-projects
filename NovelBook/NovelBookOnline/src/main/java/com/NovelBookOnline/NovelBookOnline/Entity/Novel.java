@@ -44,8 +44,10 @@ public class Novel {
     NovelStatus novelStatus = NovelStatus.UPDATING;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    User user;
+    @JoinColumn(name = "author_id")
+    Author author;
+
+
 
 
     @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})

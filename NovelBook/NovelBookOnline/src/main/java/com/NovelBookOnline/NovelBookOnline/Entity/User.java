@@ -48,8 +48,9 @@ public class User {
     @Column(name = "description", columnDefinition = "VARCHAR(50)")
     String description;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    List<Novel> novels;
+    @OneToOne
+    @JoinColumn(name = "author_id")
+    Author author;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     List<Like> likes;
