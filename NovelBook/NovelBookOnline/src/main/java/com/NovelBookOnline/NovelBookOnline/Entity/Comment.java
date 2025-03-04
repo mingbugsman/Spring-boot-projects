@@ -41,7 +41,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
-    Column parent;
+    Comment parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comment> replies = new ArrayList<>();
