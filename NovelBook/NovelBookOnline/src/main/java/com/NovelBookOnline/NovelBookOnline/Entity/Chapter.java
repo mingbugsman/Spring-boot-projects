@@ -1,6 +1,8 @@
 package com.NovelBookOnline.NovelBookOnline.Entity;
 
 
+import com.NovelBookOnline.NovelBookOnline.Entity.Like.Like;
+import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeChapter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,7 +36,7 @@ public class Chapter {
     String ChapterContent;
 
     @OneToMany(mappedBy = "chapter", cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.REMOVE})
-    List<Like> likes;
+    List<LikeChapter> likes;
     @OneToMany(mappedBy = "chapter", cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.REMOVE})
     List<Comment> comments;
 

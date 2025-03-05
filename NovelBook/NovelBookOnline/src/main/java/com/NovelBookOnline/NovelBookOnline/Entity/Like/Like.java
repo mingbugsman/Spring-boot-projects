@@ -1,6 +1,7 @@
-package com.NovelBookOnline.NovelBookOnline.Entity;
+package com.NovelBookOnline.NovelBookOnline.Entity.Like;
 
 
+import com.NovelBookOnline.NovelBookOnline.Entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,20 +15,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
-@Table(name = "like_list")
+@Table(name = "likes")
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
+    @Column(name = "is_liked", nullable = false)
+    boolean isLiked = false;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     User user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chapter_id", nullable = false)
-    Chapter chapter;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

@@ -1,5 +1,6 @@
 package com.NovelBookOnline.NovelBookOnline.Entity;
 
+import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeAuthor;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +22,11 @@ public class Author {
     @Column(nullable = false)
     String authorName;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     List<Novel> novels;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    List<LikeAuthor> likeAuthors;
+
 
 }

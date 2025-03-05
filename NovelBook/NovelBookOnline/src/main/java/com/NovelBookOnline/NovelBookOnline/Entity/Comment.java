@@ -1,6 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Entity;
 
 
+import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeComment;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,8 +27,7 @@ public class Comment {
     @Column(name = "comment_content", nullable = false)
     String content;
 
-    @Column(name = "total_like")
-    int totalLikes = 0;
+
 
     @Lob
     @Column(name = "file_data_comment", columnDefinition = "LONGBLOB")
@@ -48,6 +48,9 @@ public class Comment {
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comment> replies = new ArrayList<>();
+
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<LikeComment> likeComments;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)

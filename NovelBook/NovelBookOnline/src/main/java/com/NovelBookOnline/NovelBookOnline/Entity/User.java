@@ -1,6 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Entity;
 
 
+import com.NovelBookOnline.NovelBookOnline.Entity.Like.Like;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -52,8 +53,9 @@ public class User {
     @JoinColumn(name = "author_id")
     Author author;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Like> likes;
+
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     List<Comment> comments;
 

@@ -5,9 +5,9 @@ import com.NovelBookOnline.NovelBookOnline.Repository.ICommentRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.CommentJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,10 +28,6 @@ public class CommentRepositoryImpl implements ICommentRepository {
         return commentJpaRepository.getAllCommentByChapterId(chapterId, pageable);
     }
 
-    @Override
-    public Page<Comment> getAllCommentsByTotalLike(String chapterId, Pageable pageable) {
-        return commentJpaRepository.getAllCommentsByTotalLike(chapterId, pageable);
-    }
 
     @Override
     public List<Comment> getAllSubCommentsByParentComment(String commentId) {
@@ -46,15 +42,13 @@ public class CommentRepositoryImpl implements ICommentRepository {
 
     @Override
     public void likeComment(Comment comment) {
-        int minus = comment.getTotalLikes();
-        comment.setTotalLikes(++minus);
-        commentJpaRepository.save(comment);
+
     }
 
     @Override
     public void unLikeComment(Comment comment) {
-        int minus = comment.getTotalLikes();
-        comment.setTotalLikes(--minus);
-        commentJpaRepository.save(comment);
+
     }
+
+
 }

@@ -115,6 +115,7 @@ public final class CustomerMappingHelper {
                 comment.getUser().getUsername(),
                 comment.getContent(),
                 Base64.getEncoder().encodeToString(comment.getFileDataComment()),
+                comment.getLikeComments().size(),
                 comment.getReplies().stream().filter(c -> c.getDeletedAt() != null).toList().size()
         );
     }
