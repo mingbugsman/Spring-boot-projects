@@ -19,7 +19,9 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "novels", indexes = {
-        @Index(name = "idx_novel_name", columnList = "novel_name")
+        @Index(name = "idx_novel_name", columnList = "novel_name"),
+        @Index(name = "idx_deleted_at", columnList = "deleted_at"),
+        @Index(name = "idx_novel_id_deletedAt", columnList = "id, deleted_at")
 })
 public class Novel {
     @Id

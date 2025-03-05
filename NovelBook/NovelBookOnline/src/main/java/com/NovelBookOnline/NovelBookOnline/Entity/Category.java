@@ -16,7 +16,11 @@ import java.util.Set;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "categories")
+@Table(name = "categories", indexes = {
+        @Index(name = "idx_category_id_deletedAt",columnList = "id, deleted_at"),
+        @Index(name = "idx_deletedAt", columnList = "deleted_at"),
+        @Index(name = "idx_category_name", columnList = "category_name")
+})
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -41,6 +45,6 @@ public class Category {
     @Column(name =  "updated_at", updatable = false, nullable = false)
     LocalDateTime updatedAt;
 
-    @Column(name = "delete_at")
+    @Column(name = "deleted_at")
     LocalDateTime deleteAt;
 }

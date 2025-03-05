@@ -3,6 +3,7 @@ package com.NovelBookOnline.NovelBookOnline.Controller;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Category.CategoryRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategorySummaryResponse;
+import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import com.NovelBookOnline.NovelBookOnline.Service.ICategoryService;
 
 import lombok.RequiredArgsConstructor;
@@ -45,13 +46,18 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.addNovelsToCategory(id, novelIds));
     }
 
+    // nên chuyển qua categories service !!!!!
     @GetMapping("/novels/{novelId}")
     public ResponseEntity<List<CategorySummaryResponse>> NovelWithCategories(@PathVariable String novelId) {
         return ResponseEntity.ok(categoryService.NovelWithCategories(novelId));
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDetailResponse>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.getAllCategories());
+    public ResponseEntity<List<CategoryDetailResponse>> getAllCategories(
+            @RequestParam(defaultValue = "ASC")SortOrder sortOrder,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+            ) {
+        return ResponseEntity.ok(categoryService.getAllCategories(sortOrder, page, size));
     }
 }

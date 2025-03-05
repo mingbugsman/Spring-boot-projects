@@ -7,5 +7,9 @@ import java.util.List;
 public record AuthorDetailResponse (
         String id,
         String authorName,
+        String authorAvatarBase64,
+        String authorDescription,
+        int totalLikes,
+        int totalReading,
         List<NovelSummaryResponse> novels
 ) {}

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface NovelJpaRepository extends JpaRepository<Novel,String> {
@@ -45,5 +46,11 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
         CASE WHEN :sortOrder = 'DESC' THEN n.createdAt END DESC
     """)
     List<Novel> findNovelsByIds(@Param("sortOrder") String sortOrder,@Param("novelIds") List<String> novelIds);
+
+    @Query(value = """
+            SELECT n FROM novels
+            WHERE n.id = :novelId AND deleted_at IS NULL
+            """, nativeQuery = true)
+    Optional<Novel> findNovel(@Param("novelId") String novelId);
 
 }

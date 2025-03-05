@@ -1,6 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentRecentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
@@ -29,15 +30,33 @@ import java.util.List;
 public final class CustomerMappingHelper {
     ChapterMapper chapterMapper;
 
+    // AUTHOR
+
+    // Summary
+    public AuthorSummaryResponse toAuthorSummaryResponse(Author author) {
+        return new AuthorSummaryResponse(
+                author.getId(),
+                author.getAuthorName(),
+                Base64.getEncoder().encodeToString(author.getAuthorAvatar()),
+                author.getAuthorDescription()
+        );
+    }
+    // Detail
     public AuthorDetailResponse toAuthorDetailResponse(Author author) {
         return new AuthorDetailResponse(
                 author.getId(),
                 author.getAuthorName(),
+                Base64.getEncoder().encodeToString(author.getAuthorAvatar()),
+                author.getAuthorDescription(),
+                author.getLikeAuthors().size(),
+                author.getNovels().stream().map(Novel::getChapters).flatMap(Collection::stream).map(Chapter::getTotalReadChapter).mapToInt(Integer::intValue).sum(),
                 author.getNovels().stream().map(this::toNovelSummary).toList()
         );
     }
 
     // USER
+
+    // Summary
     public UserSummaryResponse toSummaryUser(User user) {
         return new UserSummaryResponse(
                 user.getId(),
@@ -46,7 +65,7 @@ public final class CustomerMappingHelper {
                 user.getCreatedAt()
         );
     }
-
+    // Update response
     public UserUpdateResponse toUserUpdateResponse(User user) {
         return new UserUpdateResponse(
                 user.getId(),
@@ -57,6 +76,7 @@ public final class CustomerMappingHelper {
                 user.getUpdatedAt()
         );
     }
+    // Detail
     public UserDetailResponse toUserDetail(User user) {
 
         return new UserDetailResponse(
@@ -72,6 +92,8 @@ public final class CustomerMappingHelper {
 
 
     // NOVEL
+
+    // Summary
     public NovelSummaryResponse toNovelSummary(Novel novel) {
         return new NovelSummaryResponse(
                 novel.getId(),
@@ -81,6 +103,7 @@ public final class CustomerMappingHelper {
         );
     }
 
+    // Detail
     public NovelDetailResponse toNovelDetail(Novel novel) {
         String base64Data = Base64.getEncoder().encodeToString(novel.getNovelCoverImage());
         List<String> categoryNames = novel.getCategories().stream().map(Category::getCategoryName).toList();

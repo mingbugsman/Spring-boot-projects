@@ -4,7 +4,10 @@ import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeAuthor;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -13,14 +16,23 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "authors")
+@Table(name = "authors", indexes = {
+        @Index(columnList = "deleted_at")
+})
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(nullable = false)
+    @Column(name = "author_name", nullable = false)
     String authorName;
+
+    @Column(name = "author_description")
+    String authorDescription;
+
+    @Lob
+    @Column(name = "author_avatar", columnDefinition = "LONGBLOB")
+    byte[] authorAvatar;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     List<Novel> novels;
@@ -28,5 +40,14 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     List<LikeAuthor> likeAuthors;
 
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    LocalDateTime createdAt;
 
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    LocalDateTime deletedAt;
 }

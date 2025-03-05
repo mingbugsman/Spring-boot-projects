@@ -41,7 +41,7 @@ public class NovelRepositoryImpl implements INovelRepository {
 
     @Override
     public Novel findNovelById(String id) {
-        return novelJpaRepository.findById(id).orElseThrow();
+        return novelJpaRepository.findNovel(id).orElseThrow();
     }
 
 

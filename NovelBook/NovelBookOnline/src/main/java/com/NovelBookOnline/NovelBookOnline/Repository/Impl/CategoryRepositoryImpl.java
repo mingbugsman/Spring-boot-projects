@@ -4,6 +4,8 @@ import com.NovelBookOnline.NovelBookOnline.Entity.Category;
 import com.NovelBookOnline.NovelBookOnline.Repository.ICategoryRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.CategoryJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -33,13 +35,13 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 
     @Override
     public Category getCategory(String id) {
-        return categoryJpaRepository.findById(id).orElseThrow();
+        return categoryJpaRepository.getNonDeletedCategory(id).orElseThrow();
     }
 
     @Override
-    public List<Category> getCategories() {
-        List<String> ids= categoryJpaRepository.getAllCategoryIds();
-        return categoryJpaRepository.findAllById(ids).stream().toList();
+    public Page<Category> getCategories(String sortOrder, Pageable pageable) {
+        List<String> ids= categoryJpaRepository.getAllNonDeletedCategoryIds();
+        return categoryJpaRepository.getAllNonDeletedCategoryByIds(sortOrder, ids, pageable);
     }
 
     @Override

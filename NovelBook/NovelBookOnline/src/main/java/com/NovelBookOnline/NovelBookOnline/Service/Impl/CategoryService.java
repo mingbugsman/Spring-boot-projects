@@ -5,6 +5,7 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailR
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategorySummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.Category;
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
+import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CategoryMapper;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper.CustomerMappingHelper;
 import com.NovelBookOnline.NovelBookOnline.Repository.ICategoryRepository;
@@ -13,6 +14,8 @@ import com.NovelBookOnline.NovelBookOnline.Service.ICategoryService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -72,8 +75,9 @@ public class CategoryService implements ICategoryService {
         return novel.getCategories().stream().map(categoryMapper::toSummaryEntity).toList();
     }
     @Override
-    public List<CategoryDetailResponse> getAllCategories() {
-        return categoryRepository.getCategories().stream()
+    public List<CategoryDetailResponse> getAllCategories(SortOrder sortOrder, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return categoryRepository.getCategories(sortOrder.name(), pageable).stream()
                 .map(customerMappingHelper::toCategoryDetailResponse)
                 .toList();
     }
