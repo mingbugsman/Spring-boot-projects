@@ -17,7 +17,8 @@ public class UserRepositoryImp  implements IUserRepository {
 
     @Override
     public boolean existsByEmail(String email) {
-        return userJpaRepository.existsByEmail(email);
+        User foundUser= userJpaRepository.findByEmail(email).orElse(null);
+        return foundUser != null && foundUser.getDeletedAt() != null;
     }
 
     @Override

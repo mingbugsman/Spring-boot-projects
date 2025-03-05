@@ -20,6 +20,9 @@ import java.util.Set;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "users",
+        indexes = {
+          @Index(name = "idx_deletedAt", columnList = "deleted_at")
+        },
         uniqueConstraints = {
             @UniqueConstraint(columnNames = "username"),
             @UniqueConstraint(columnNames = "email")}
