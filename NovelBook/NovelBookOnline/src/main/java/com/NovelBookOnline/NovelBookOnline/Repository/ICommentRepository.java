@@ -13,7 +13,5 @@ public interface ICommentRepository {
   //  Page<Comment> getAllCommentsByTotalLike(String chapterId, Pageable page);
     List<Comment> getAllSubCommentsByParentComment(String commentId);
     void delete(Comment comment);
-    // like comment
-    void likeComment(Comment comment);
-    void unLikeComment(Comment comment);
+
 }

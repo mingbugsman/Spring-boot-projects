@@ -40,15 +40,7 @@ public class CommentRepositoryImpl implements ICommentRepository {
         commentJpaRepository.save(comment);
     }
 
-    @Override
-    public void likeComment(Comment comment) {
 
-    }
-
-    @Override
-    public void unLikeComment(Comment comment) {
-
-    }
 
 
 }

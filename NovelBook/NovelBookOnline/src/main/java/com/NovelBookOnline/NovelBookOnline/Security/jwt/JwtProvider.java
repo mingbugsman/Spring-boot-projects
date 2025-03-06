@@ -85,10 +85,7 @@ public class JwtProvider {
         }
     }
 
-    public String getJwtIdWithValidation(String accessToken) throws ParseException, JOSEException {
-        var signToken = validateAccessToken(accessToken);
-        return signToken.getJWTClaimsSet().getJWTID();
-    }
+
     private String buildScope(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         System.out.println(user.toString());
@@ -103,7 +100,7 @@ public class JwtProvider {
 
     private Payload createPayLoad(User user) {
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getUsername())
+                .subject(user.getId())
                 .issuer("Tran Tuan Minh")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(accessTokenExpirationMs, ChronoUnit.SECONDS).toEpochMilli()))
