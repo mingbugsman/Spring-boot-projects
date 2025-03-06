@@ -9,8 +9,9 @@ import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeChapter;
 import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeComment;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface LikeMapper {
 
     @Mapping(target = "id", ignore = true)
