@@ -13,8 +13,5 @@ public interface ILikeService {
         LikeResponse updateLikeStatusComment(LikeCommentRequest request);
         LikeResponse updateLikeStatusChapter(LikeChapterRequest request);
 
-        // create like for the first time when user click like (upvote/downvote)
-        LikeResponse createLikeAuthor(LikeAuthorRequest request);
-        LikeResponse createLikeComment(LikeCommentRequest request);
-        LikeResponse createLikeChapter(LikeChapterRequest request);
+
 }

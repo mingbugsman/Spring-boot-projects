@@ -79,8 +79,8 @@ public class LikeService implements ILikeService {
         return toLikeResponse(request.getLikeStatus());
     }
 
-    @Override
-    public LikeResponse createLikeAuthor(LikeAuthorRequest request) {
+
+    private LikeResponse createLikeAuthor(LikeAuthorRequest request) {
         String userId = getCurrentUserId();
 
         LikeAuthor likeAuthor = likeMapper.toLikeAuthor(request);
@@ -90,8 +90,8 @@ public class LikeService implements ILikeService {
         return toLikeResponse(request.getLikeStatus());
     }
 
-    @Override
-    public LikeResponse createLikeComment(LikeCommentRequest request) {
+
+    private LikeResponse createLikeComment(LikeCommentRequest request) {
         String userId = getCurrentUserId();
 
         LikeComment likeComment = likeMapper.toLikeComment(request);
@@ -101,8 +101,7 @@ public class LikeService implements ILikeService {
         return toLikeResponse(request.getLikeStatus());
     }
 
-    @Override
-    public LikeResponse createLikeChapter(LikeChapterRequest request) {
+    private LikeResponse createLikeChapter(LikeChapterRequest request) {
         String userId = getCurrentUserId();
 
         LikeChapter likeChapter = likeMapper.toLikeChapter(request);
@@ -115,4 +114,5 @@ public class LikeService implements ILikeService {
     private LikeResponse toLikeResponse(LikeStatus likeStatus) {
         return new LikeResponse(likeStatus);
     }
+
 }
