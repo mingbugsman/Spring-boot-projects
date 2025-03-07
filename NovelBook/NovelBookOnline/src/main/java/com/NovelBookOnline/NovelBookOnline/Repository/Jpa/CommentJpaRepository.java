@@ -13,7 +13,11 @@ import java.util.List;
 @Repository
 public interface CommentJpaRepository extends JpaRepository<Comment,String> {
 
-
+    @Query(value = """
+            SELECT co FROM comments
+            WHERE co.id = :id AND co.deleted_at IS NULL
+            """, nativeQuery = true)
+    Comment getCommentById(@Param("id")String id);
 
     @Query("SELECT co FROM Chapter c " +
             "JOIN Comment co " +
@@ -26,5 +30,5 @@ public interface CommentJpaRepository extends JpaRepository<Comment,String> {
     @Query("SELECT c FROM Comment c " +
             "WHERE c.parent.id = :commentId AND c.deletedAt IS NULL " +
             "ORDER BY c.createdAt DESC")
-    List<Comment> getAllSubCommentByParentComment(@Param("commentId") String commentId);
+    Page<Comment> getAllSubCommentByParentComment(@Param("commentId") String commentId, Pageable pageable);
 }

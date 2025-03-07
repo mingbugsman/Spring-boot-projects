@@ -1,7 +1,6 @@
 package com.NovelBookOnline.NovelBookOnline.Entity;
 
 
-import com.NovelBookOnline.NovelBookOnline.Entity.Like.Like;
 import com.NovelBookOnline.NovelBookOnline.Entity.Like.LikeChapter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

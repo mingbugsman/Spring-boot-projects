@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -17,6 +18,11 @@ import java.util.List;
 public class CommentRepositoryImpl implements ICommentRepository {
 
     private final CommentJpaRepository commentJpaRepository;
+
+    @Override
+    public Comment findCommentById(String id) {
+        return commentJpaRepository.getCommentById(id);
+    }
 
     @Override
     public void save(Comment comment) {
@@ -30,8 +36,8 @@ public class CommentRepositoryImpl implements ICommentRepository {
 
 
     @Override
-    public List<Comment> getAllSubCommentsByParentComment(String commentId) {
-        return commentJpaRepository.getAllSubCommentByParentComment(commentId);
+    public Page<Comment> getAllSubCommentsByParentComment(String commentId, Pageable pageable) {
+        return commentJpaRepository.getAllSubCommentByParentComment(commentId, pageable);
     }
 
     @Override
