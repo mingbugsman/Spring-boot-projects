@@ -1,6 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Security;
 
 import com.NovelBookOnline.NovelBookOnline.Security.jwt.CustomJwtDecoder;
+import com.NovelBookOnline.NovelBookOnline.Security.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.NonFinal;
 import org.springframework.context.annotation.Bean;
@@ -43,8 +44,11 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwtConfigurer -> jwtConfigurer.decoder(customJwtDecoder)
-                                .jwtAuthenticationConverter(jwtAuthenticationConverter())));
+                        .jwt(jwtConfigurer -> jwtConfigurer
+                                .decoder(customJwtDecoder)
+                                .jwtAuthenticationConverter(jwtAuthenticationConverter()))
+                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
+
         return http.build();
     }
 
