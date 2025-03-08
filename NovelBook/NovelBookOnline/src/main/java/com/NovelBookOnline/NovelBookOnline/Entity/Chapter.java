@@ -29,9 +29,6 @@ public class Chapter {
     String id;
 
 
-    @Column(name = "total_read_chapter", nullable = false)
-    int totalReadChapter;
-
     @Column(name = "chapter_name")
     String chapterName;
 
@@ -45,6 +42,9 @@ public class Chapter {
     List<LikeChapter> likes;
     @OneToMany(mappedBy = "chapter", cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.REMOVE})
     List<Comment> comments;
+
+    @OneToMany(mappedBy = "chapter", cascade = {CascadeType.ALL})
+    List<DailyRead> dailyReads;
 
     @ManyToOne
     @JoinColumn(name = "novel_id", nullable = false)

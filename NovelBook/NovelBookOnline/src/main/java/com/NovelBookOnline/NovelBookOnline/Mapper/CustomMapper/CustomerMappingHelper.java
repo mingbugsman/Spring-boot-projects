@@ -11,15 +11,14 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.*;
+import com.NovelBookOnline.NovelBookOnline.Helper.CountHelper;
 import com.NovelBookOnline.NovelBookOnline.Mapper.ChapterMapper;
-import com.NovelBookOnline.NovelBookOnline.Mapper.NovelMapper;
+
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
@@ -49,7 +48,7 @@ public final class CustomerMappingHelper {
                 Base64.getEncoder().encodeToString(author.getAuthorAvatar()),
                 author.getAuthorDescription(),
                 author.getLikeAuthors().size(),
-                author.getNovels().stream().map(Novel::getChapters).flatMap(Collection::stream).map(Chapter::getTotalReadChapter).mapToInt(Integer::intValue).sum(),
+                CountHelper.countTotalReadingNovelsOfAuthor(author),
                 author.getNovels().stream().map(this::toNovelSummary).toList()
         );
     }
@@ -106,9 +105,13 @@ public final class CustomerMappingHelper {
     // Detail
     public NovelDetailResponse toNovelDetail(Novel novel) {
         String base64Data = Base64.getEncoder().encodeToString(novel.getNovelCoverImage());
+
         List<String> categoryNames = novel.getCategories().stream().map(Category::getCategoryName).toList();
-        int totalReading = novel.getChapters().stream().map(Chapter::getTotalReadChapter).mapToInt(Integer::intValue).sum();
-        int totalLikes = novel.getChapters().stream().map(Chapter::getLikes).map(List::size).reduce(0, Integer::sum);
+
+        int totalReading = CountHelper.countTotalReadingOfNovel(novel);
+
+        int totalLikes = CountHelper.countTotalLikeOfNovel(novel);
+
         List<CommentResponse> allComments = novel.getChapters()
                 .stream()
                 .filter(c -> c.getDeletedAt() != null)
@@ -139,11 +142,11 @@ public final class CustomerMappingHelper {
                 comment.getContent(),
                 Base64.getEncoder().encodeToString(comment.getFileDataComment()),
                 comment.getLikeComments().size(),
-                comment.getReplies().stream().filter(c -> c.getDeletedAt() != null).toList().size()
+                CountHelper.countSubComment(comment)
         );
     }
 
-    public ListCommentResponse toCommentRecentResponse(Chapter chapter) {
+    public ListCommentResponse toListCommentResponse(Chapter chapter) {
         return new ListCommentResponse(
                 chapter.getId(),
                 chapter.getComments().stream().filter(c-> c.getDeletedAt() != null).map(this::toCommentResponse).toList()
@@ -164,4 +167,5 @@ public final class CustomerMappingHelper {
                 novels
         );
     }
+
 }
