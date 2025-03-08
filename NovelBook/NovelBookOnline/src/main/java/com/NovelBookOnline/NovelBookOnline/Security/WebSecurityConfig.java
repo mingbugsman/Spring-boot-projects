@@ -28,8 +28,38 @@ public class WebSecurityConfig {
             "/api/auth/refresh-token"};
 
     @NonFinal
-    private final String[] PUBLIC_NOVEL_ENDPOINT = {"/api/novels", "/api/novels/{id}","/api/novels/search"};
+    private final String[] PUBLIC_NOVEL_ENDPOINT = {
+            "/api/novels/trending",
+            "/api/novels/{id}",
+            "/api/novels/search",
+            "/api/{novelId}/chapters",
+            "/api/novels/{novelId}/categories",
+            "api/novels/search/by-category-names"
+    };
+    @NonFinal
+    private final String[] PUBLIC_CHAPTER_ENDPOINT = {
+            "/api/chapters/detail/{chapterId}",
+            "/api/chapters/hottest",
+            "/api/chapters/updates"
+    };
 
+    @NonFinal
+    private final String[] PUBLIC_CATEGORY_ENDPOINT = {
+            "/api/categories"
+    };
+
+    @NonFinal
+    private final String[] PUBLIC_COMMENT_ENDPOINT = {
+            "/api/comments/{chapterId}",
+            "/sub/{commentId}"
+    };
+
+    @NonFinal
+    private final String[] PUBLIC_AUTHOR_ENDPOINT = {
+            "/api/authors",
+            "/api/authors/top-rating",
+            "/api/authors/search"
+    };
 
     private CustomJwtDecoder customJwtDecoder;
 
@@ -41,6 +71,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST,PUBLIC_AUTH_ENDPOINT).permitAll()
                         .requestMatchers(HttpMethod.GET,PUBLIC_NOVEL_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,PUBLIC_CHAPTER_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,PUBLIC_CATEGORY_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,PUBLIC_COMMENT_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,PUBLIC_AUTHOR_ENDPOINT).permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

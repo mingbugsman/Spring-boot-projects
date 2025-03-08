@@ -15,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface NovelJpaRepository extends JpaRepository<Novel,String> {
 
-    boolean existsById(String id);
 
     @Query(value = """
             SELECT 1 FROM novels n
@@ -23,6 +22,17 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
             WHERE u.username = :authorName AND n.novel_name = :novelName
             """, nativeQuery = true)
     boolean existsByAuthorIdAndNovelName(String authorName, String novelName);
+
+    @Query(value = """
+        SELECT DISTINCT n.id
+        FROM novels n
+        WHERE EXISTS (
+            SELECT 1 FROM category_novel cn
+            JOIN categories c ON cn.category_id = c.id
+            WHERE cn.novel_id = n.id AND c.name IN :listCategoryName
+        )
+    """, nativeQuery = true)
+    List<String> getAllIdsByListCategoryName(@Param("listCategoryName") List<String> listCategoryName);
 
     @Query(value = """
         SELECT n.id

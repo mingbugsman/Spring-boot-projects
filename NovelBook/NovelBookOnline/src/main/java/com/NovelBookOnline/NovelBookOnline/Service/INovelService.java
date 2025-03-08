@@ -16,7 +16,7 @@ public interface INovelService {
     Page<NovelSummaryResponse> searchNovelsByKeyword(String keyword, int page, int size, SortOrder sortOrder);
     List<NovelSummaryResponse> getTrendingNovels();
     NovelDetailResponse getDetailNovel(String id);
-
+    Page<NovelSummaryResponse> getNovelsByListCategoryName(List<String> listCategoryName, int page, int size);
     NovelSummaryResponse createNovel(NovelRequest creationRequest) throws IOException;
     NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest) throws IOException;
     void deleteNovel(String id);

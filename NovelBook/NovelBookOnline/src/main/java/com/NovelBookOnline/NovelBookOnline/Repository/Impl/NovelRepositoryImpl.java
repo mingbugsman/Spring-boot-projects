@@ -23,6 +23,12 @@ public class NovelRepositoryImpl implements INovelRepository {
 
 
     @Override
+    public Page<Novel> NovelWithCategoryName(List<String> listCategoryName, Pageable pageable) {
+        var ids = novelJpaRepository.getAllIdsByListCategoryName(listCategoryName);
+        return novelJpaRepository.findNovelsByIds(ids, pageable);
+    }
+
+    @Override
     public Page<Novel> findNovelsByKeyword(String keyword, Pageable pageable) {
         List<String> ids =  novelJpaRepository.findNovelIdsByKeyword(keyword);
         return novelJpaRepository.findNovelsByIds(ids, pageable);
@@ -55,7 +61,7 @@ public class NovelRepositoryImpl implements INovelRepository {
 
     @Override
     public boolean existsById(String id) {
-        return novelJpaRepository.existsById(id);
+        return findNovelById(id).getDeletedAt() == null;
     }
 
     @Override

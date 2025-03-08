@@ -2,10 +2,12 @@ package com.NovelBookOnline.NovelBookOnline.Controller;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter.ChapterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategorySummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
+import com.NovelBookOnline.NovelBookOnline.Service.ICategoryService;
 import com.NovelBookOnline.NovelBookOnline.Service.IChapterService;
 import com.NovelBookOnline.NovelBookOnline.Service.INovelService;
 import jakarta.validation.Valid;
@@ -104,5 +106,11 @@ public class NovelController {
     }
 
 
+    @GetMapping("/search/by-category-names")
+    public ResponseEntity<Page<NovelSummaryResponse>> NovelWithCategoryName(@RequestBody List<String> listCategoryName,
+                                                                            @RequestParam(defaultValue = "1") int page,
+                                                                            @RequestParam(defaultValue = "20") int size) {
+        return ResponseEntity.ok(novelService.getNovelsByListCategoryName(listCategoryName, page, size));
+    }
 
 }

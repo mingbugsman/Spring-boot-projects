@@ -23,7 +23,7 @@ public class UserRepositoryImp  implements IUserRepository {
 
     @Override
     public boolean existsById(String id) {
-        return userJpaRepository.existsById(id);
+        return findUserById(id) != null;
     }
 
     @Override

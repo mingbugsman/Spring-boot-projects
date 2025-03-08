@@ -51,6 +51,12 @@ public class NovelService implements INovelService {
     }
 
     @Override
+    public Page<NovelSummaryResponse> getNovelsByListCategoryName(List<String> listCategoryName, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return novelRepository.NovelWithCategoryName(listCategoryName, pageable).map(customMappingHelper::toNovelSummary);
+    }
+
+    @Override
     public NovelSummaryResponse createNovel(NovelRequest creationRequest) throws IOException {
         if (novelRepository.existsByAuthorIdAndNovelName(creationRequest.getAuthor_id(), creationRequest.getNovelName())) {
             return null;

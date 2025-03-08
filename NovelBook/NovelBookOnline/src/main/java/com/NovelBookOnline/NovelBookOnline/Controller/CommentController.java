@@ -29,7 +29,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getAllCommentsByChapterId(chapterId, pageNumber, pageSize));
     }
 
-    @GetMapping("/sub/{commentId}")
+    @GetMapping("/{commentId}/sub")
     public ResponseEntity<Page<CommentResponse>> getAllSubComments(@PathVariable String commentId,
                                                                    @RequestParam(defaultValue = "1") int pageNumber,
                                                                    @RequestParam(defaultValue = "10") int pageSize) {

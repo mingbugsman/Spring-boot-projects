@@ -25,7 +25,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
     @Override
     public boolean existsById(String id) {
 
-        return categoryJpaRepository.existsById(id);
+        return getCategory(id) != null;
     }
 
     @Override

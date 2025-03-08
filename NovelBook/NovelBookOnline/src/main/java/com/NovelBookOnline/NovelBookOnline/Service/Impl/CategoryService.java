@@ -6,6 +6,8 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategorySummary
 import com.NovelBookOnline.NovelBookOnline.Entity.Category;
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CategoryMapper;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper.CustomerMappingHelper;
 import com.NovelBookOnline.NovelBookOnline.Repository.ICategoryRepository;
@@ -66,14 +68,6 @@ public class CategoryService implements ICategoryService {
         return customerMappingHelper.toCategoryDetailResponse(category);
     }
 
-    @Override
-    public List<CategorySummaryResponse> NovelWithCategories(String novelId) {
-        if (novelRepository.existsById(novelId)) {
-            return null;
-        }
-        Novel novel = novelRepository.findNovelById(novelId);
-        return novel.getCategories().stream().map(categoryMapper::toSummaryEntity).toList();
-    }
     @Override
     public List<CategoryDetailResponse> getAllCategories(SortOrder sortOrder, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);

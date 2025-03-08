@@ -13,6 +13,5 @@ public interface ICategoryService {
     CategoryDetailResponse updateCategory(String id, CategoryRequest request);
     void deleteCategory(String id);
     CategoryDetailResponse addNovelsToCategory(String id, List<String> novelIds);
-    List<CategorySummaryResponse> NovelWithCategories(String novelId);
     List<CategoryDetailResponse> getAllCategories(SortOrder sortOrder, int page, int size);
 }

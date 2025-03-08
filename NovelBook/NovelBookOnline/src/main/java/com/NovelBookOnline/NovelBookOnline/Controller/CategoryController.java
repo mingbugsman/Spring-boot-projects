@@ -15,14 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
-
+@RequiredArgsConstructor
 public class CategoryController {
 
     private final ICategoryService categoryService;
-
-    public CategoryController(ICategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @PostMapping
     public ResponseEntity<CategoryDetailResponse> addCategory(@RequestBody CategoryRequest request) {
@@ -46,11 +42,6 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.addNovelsToCategory(id, novelIds));
     }
 
-    // nên chuyển qua categories service !!!!!
-    @GetMapping("/novels/{novelId}")
-    public ResponseEntity<List<CategorySummaryResponse>> NovelWithCategories(@PathVariable String novelId) {
-        return ResponseEntity.ok(categoryService.NovelWithCategories(novelId));
-    }
 
     @GetMapping
     public ResponseEntity<List<CategoryDetailResponse>> getAllCategories(
@@ -60,4 +51,6 @@ public class CategoryController {
             ) {
         return ResponseEntity.ok(categoryService.getAllCategories(sortOrder, page, size));
     }
+
+
 }
