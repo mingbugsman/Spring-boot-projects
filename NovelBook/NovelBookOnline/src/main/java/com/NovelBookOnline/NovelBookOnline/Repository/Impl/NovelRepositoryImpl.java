@@ -23,19 +23,24 @@ public class NovelRepositoryImpl implements INovelRepository {
 
 
     @Override
-    public List<String> findAllIds() {
-        return novelJpaRepository.getAllIds();
-    }
-
-    @Override
-    public Page<String> findNovelIdsByKeyword(String keyword, Pageable pageable) {
-        return novelJpaRepository.findNovelIdsByKeyword(keyword, pageable);
+    public Page<Novel> findNovelsByKeyword(String keyword, Pageable pageable) {
+        List<String> ids =  novelJpaRepository.findNovelIdsByKeyword(keyword);
+        return novelJpaRepository.findNovelsByIds(ids, pageable);
 
     }
 
     @Override
-    public List<Novel> findNovelsByIds(SortOrder sortOrder,List<String> novelIds) {
-        return novelJpaRepository.findNovelsByIds(sortOrder.name(), novelIds);
+    public Page<Novel> getNewUpdateNovels(Pageable pageable) {
+        List<String> ids = novelJpaRepository.getAllIdsByDaily();
+        return novelJpaRepository.findNovelsByIds(ids, pageable);
+    }
+
+
+
+    @Override
+    public List<Novel> getTrendingNovel() {
+        List<String> ids =  novelJpaRepository.getAllIdsByLikeAndTotalReadChapter();
+        return novelJpaRepository.findNovelsByIds(ids);
     }
 
 

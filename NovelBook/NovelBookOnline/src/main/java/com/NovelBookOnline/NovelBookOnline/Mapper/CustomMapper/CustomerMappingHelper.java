@@ -3,8 +3,8 @@ package com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
-import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentRecentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.ListCommentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
@@ -143,8 +143,8 @@ public final class CustomerMappingHelper {
         );
     }
 
-    public CommentRecentResponse toCommentRecentResponse(Chapter chapter) {
-        return new CommentRecentResponse(
+    public ListCommentResponse toCommentRecentResponse(Chapter chapter) {
+        return new ListCommentResponse(
                 chapter.getId(),
                 chapter.getComments().stream().filter(c-> c.getDeletedAt() != null).map(this::toCommentResponse).toList()
         );

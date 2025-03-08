@@ -25,11 +25,15 @@ public class Chapter {
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
 
-    @Column(name = "total_read_chapter", nullable = false)
-    Integer totalReadChapter;
 
-    @Column(name = "chapter_name", nullable = false)
+    @Column(name = "total_read_chapter", nullable = false)
+    int totalReadChapter;
+
+    @Column(name = "chapter_name")
     String chapterName;
+
+    @Column(name = "chapter_number", nullable = false)
+    int chapterNumber;
 
     @Column(name = "chapter_content", nullable = false, columnDefinition = "LONGTEXT")
     String ChapterContent;

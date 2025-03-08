@@ -1,5 +1,12 @@
 package com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter;
 
-public class ChapterDetailResponse {
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.ListCommentResponse;
 
-}
+public record ChapterDetailResponse (
+    String id,
+    int totalReadChapter,
+    String chapterName,
+    String chapterContent,
+    int totalLikes,
+    ListCommentResponse listCommentResponse
+){}

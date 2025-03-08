@@ -13,13 +13,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -33,24 +31,23 @@ public class NovelService implements INovelService {
     CustomerMappingHelper customMappingHelper;
 
     @Override
-    public Page<NovelSummaryResponse> findNovelsByPagination( SortOrder sortOrder, int page, int size) {
+    public Page<NovelSummaryResponse> getUpdateNovels( int page, int size) {
         Pageable pageable = PageRequest.of(page,size);
-        List<String> novelIds = novelRepository.findAllIds();
-        List<NovelSummaryResponse> novels = novelRepository.findNovelsByIds(sortOrder, novelIds).stream().map(customMappingHelper::toNovelSummary).toList();;
+        return novelRepository.getNewUpdateNovels(pageable).map(customMappingHelper::toNovelSummary);
 
-        return new PageImpl<>(novels, pageable, novelIds.size());
     }
+
+
 
     @Override
     public Page<NovelSummaryResponse> searchNovelsByKeyword(String keyword, int page, int size, SortOrder sortOrder) {
         Pageable pageable = PageRequest.of(page, size);
+        return novelRepository.findNovelsByKeyword(keyword, pageable).map(customMappingHelper::toNovelSummary);
+    }
 
-        Page<String> novelIdsPage = novelRepository.findNovelIdsByKeyword(keyword, pageable);
-        List<String> novelIds = novelIdsPage.getContent();
-
-        List<NovelSummaryResponse> novels = novelRepository.findNovelsByIds(sortOrder, novelIds).stream().map(customMappingHelper::toNovelSummary).toList();
-
-        return new PageImpl<>(novels, pageable, novelIdsPage.getTotalElements());
+    @Override
+    public List<NovelSummaryResponse> getTrendingNovels() {
+        return novelRepository.getTrendingNovel().stream().map(customMappingHelper::toNovelSummary).toList();
     }
 
 

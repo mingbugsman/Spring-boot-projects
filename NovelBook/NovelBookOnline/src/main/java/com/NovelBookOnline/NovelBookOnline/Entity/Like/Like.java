@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "likes", indexes = {
-        @Index(name = "idx_like_status", columnList = "name_status")
+        @Index(name = "idx_like_status", columnList = "like_status")
 })
 public class Like {
     @Id
@@ -27,7 +27,7 @@ public class Like {
     String id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "name_status", nullable = false)
+    @Column(name = "like_status", nullable = false)
     LikeStatus likeStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)

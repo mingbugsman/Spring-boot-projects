@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,10 +25,38 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
     boolean existsByAuthorIdAndNovelName(String authorName, String novelName);
 
     @Query(value = """
-            SELECT n.id FROM novels
-            WHERE novels.deleted_at IS NULL
-            """, nativeQuery = true)
-    List<String> getAllIds();
+        SELECT n.id
+        FROM novels n
+        WHERE n.deleted_at IS NULL
+          AND n.created_at >= NOW() - INTERVAL 1 DAY
+    """, nativeQuery = true)
+    List<String> getAllIdsByDaily();
+
+
+    @Query(value = """
+        SELECT n.id
+        FROM novels n
+        LEFT JOIN (
+            SELECT lc.chapter_id, COUNT(*) AS total_likes
+            FROM like_chapter lc
+            JOIN like l ON lc.id = l.id AND l.like_status = 'UPVOTE'
+            GROUP BY lc.chapter_id
+        ) likes ON n.id = likes.chapter_id
+        LEFT JOIN (
+            SELECT novel_id, COUNT(*) AS total_chapters
+            FROM chapter
+            WHERE deleted IS NULL
+            GROUP BY novel_id
+            HAVING total_chapters < 50
+        ) c ON n.id = c.novel_id
+        WHERE n.deleted IS NULL
+        GROUP BY n.id
+        ORDER BY SUM(COALESCE(likes.total_likes, 0)) DESC, n.total_read DESC
+        LIMIT 50
+    """, nativeQuery = true)
+    List<String> getAllIdsByLikeAndTotalReadChapter();
+
+
 
     @Query("""
         SELECT n.id FROM Novel n
@@ -36,16 +64,22 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
         AND LOWER(n.novelName) LIKE LOWER(CONCAT('%', :keyword, '%'))
         ORDER BY n.createdAt DESC
     """)
-    Page<String> findNovelIdsByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    List<String> findNovelIdsByKeyword(@Param("keyword") String keyword);
 
     @Query("""
     SELECT n FROM Novel n
     WHERE n.id IN :novelIds
-    ORDER BY
-        CASE WHEN :sortOrder = 'ASC' THEN n.createdAt END ASC,
-        CASE WHEN :sortOrder = 'DESC' THEN n.createdAt END DESC
+    ORDER BY n.createdAt DESC,
     """)
-    List<Novel> findNovelsByIds(@Param("sortOrder") String sortOrder,@Param("novelIds") List<String> novelIds);
+    Page<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds, Pageable pageable);
+
+    @Query("""
+    SELECT n FROM Novel n
+    WHERE n.id IN :novelIds
+    ORDER BY n.createdAt DESC,
+    """)
+    List<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds);
+
 
     @Query(value = """
             SELECT n FROM novels

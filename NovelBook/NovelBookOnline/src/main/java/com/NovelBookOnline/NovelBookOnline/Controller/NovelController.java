@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/novels")
@@ -22,15 +23,22 @@ public class NovelController {
     private final INovelService novelService;
 
     /**
+     *
+     */
+    @GetMapping("/trending")
+    public ResponseEntity<List<NovelSummaryResponse>> getTrendingNovels() {
+        return ResponseEntity.ok(novelService.getTrendingNovels());
+    }
+
+    /**
      * Get the list of novels by pagination and sort order
      */
     @GetMapping
-    public ResponseEntity<Page<NovelSummaryResponse>> getNovels(
-            @RequestParam(defaultValue = "ASC") SortOrder sortOrder,
+    public ResponseEntity<Page<NovelSummaryResponse>> getUpdateNovels(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
-        Page<NovelSummaryResponse> novels = novelService.findNovelsByPagination(sortOrder, page, size);
+        Page<NovelSummaryResponse> novels = novelService.getUpdateNovels(page, size);
         return ResponseEntity.ok(novels);
     }
 

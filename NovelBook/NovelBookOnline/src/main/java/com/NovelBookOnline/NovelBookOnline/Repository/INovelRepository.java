@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface INovelRepository {
-    List<String> findAllIds();
-    Page<String> findNovelIdsByKeyword(String keyword, Pageable pageable);
-    List<Novel> findNovelsByIds(SortOrder sortOrder, List<String> novelIds);
+    Page<Novel> findNovelsByKeyword(String keyword, Pageable pageable);
+    Page<Novel> getNewUpdateNovels(Pageable pageable);
+    List<Novel> getTrendingNovel();
     Novel findNovelById( String id);
     Novel save(Novel novel);
     void deleteNovel(Novel novel);
