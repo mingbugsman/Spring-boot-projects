@@ -2,10 +2,7 @@ package com.NovelBookOnline.NovelBookOnline.Entity.Like;
 
 
 import com.NovelBookOnline.NovelBookOnline.Entity.Chapter;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "like_chapter")
+@Table(name = "like_chapter", indexes = {
+        @Index(name = "idx_chapter_likes", columnList = "chapter_id")
+})
 public class LikeChapter extends Like{
 
     @ManyToOne

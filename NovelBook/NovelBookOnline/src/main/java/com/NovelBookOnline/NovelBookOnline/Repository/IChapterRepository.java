@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface IChapterRepository {
     Page<Chapter> getNewUpdateChapter(Pageable pageable);
-    List<Chapter> getTop10ChapterOfTheWeek();
+    List<Chapter> getTop25HottestChapters();
     Page<Chapter> getChaptersByNovelId(String novelId, Pageable pageable);
     Chapter findChapterById(String id);
     void delete(Chapter chapter);
-    void add(Chapter chapter);
+    void save(Chapter chapter);
+    boolean existsByChapterNameAndChapterNumber(String chapterName, int chapterNumber);
 }

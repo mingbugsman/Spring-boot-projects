@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "daily_read", indexes = {
-        @Index(name = "idx_createdAt", columnList = "created_at"),
-        @Index(name = "idx_chapterId", columnList = "chapter_id")
+        @Index(name = "idx_id_createdAt", columnList = "chapter_id,created_at"),
+        @Index(name = "idx_daily_read", columnList = "chapter_id, created_at, read_count")
 })
 public class DailyRead {
 
@@ -31,7 +31,7 @@ public class DailyRead {
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false, nullable = false)
-    LocalDateTime createdAt;
+    LocalDate createdAt;
 
     @Column(name = "read_count", nullable = false)
     int readCount;

@@ -5,21 +5,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import com.NovelBookOnline.NovelBookOnline.Entity.Chapter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ChapterJpaRepository extends JpaRepository<Chapter, String> {
+
+    boolean existsByChapterNameAndChapterNumber(String chapterName, int chapterNumber);
 
     // GET SPECIFIC CHAPTER
     @Query(value = """
             SELECT c FROM chapters
              WHERE c.id = :id AND c.delete_at IS NULL""", nativeQuery = true)
-    Chapter getChapterById(@Param("id")String id);
+    Optional<Chapter> getChapterById(@Param("id")String id);
 
 
     // GET ID BY BUSINESS
@@ -36,10 +38,16 @@ public interface ChapterJpaRepository extends JpaRepository<Chapter, String> {
     List<String> getAllIdsByDaily(@Param("oneDayAgo") LocalDateTime oneDayAgo);
 
 
-    // BY TOP 10
-    List<String> getTop10ChapterOfTheWeek();
+    // BY TOP 10 HOTTEST CHAPTERS (base on first 12 days + total likes)
+    @Query("SELECT c.id FROM Chapter c " +
+            "LEFT JOIN DailyRead dr ON dr.chapter = c AND dr.readDate BETWEEN c.createdAt.toLocalDate() AND c.createdAt.toLocalDate().plusDays(11) " +
+            "WHERE c.createdAt <= :twelveDaysAgo AND c.deletedAt IS NULL " +
+            "GROUP BY c.id " +
+            "ORDER BY COALESCE(SUM(dr.readCount), 0) + SIZE(c.likes) DESC " +
+            "LIMIT 25")
+    List<String> findTop25HottestChapterIds(@Param("twelveDaysAgo") LocalDateTime twelveDaysAgo);
 
-    //
+
 
     // GET NOVELS BY Ids
     @Query(value = """

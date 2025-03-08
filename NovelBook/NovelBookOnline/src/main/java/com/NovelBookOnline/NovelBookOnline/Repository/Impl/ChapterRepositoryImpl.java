@@ -1,4 +1,4 @@
-package com.NovelBookOnline.NovelBookOnline.Service.Impl;
+package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 
 import com.NovelBookOnline.NovelBookOnline.Repository.IChapterRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.ChapterJpaRepository;
@@ -27,8 +27,10 @@ public class ChapterRepositoryImpl implements IChapterRepository {
     }
 
     @Override
-    public List<Chapter> getTop10ChapterOfTheWeek() {
-        return List.of();
+    public List<Chapter> getTop25HottestChapters() {
+        LocalDateTime twelveDaysAgo = LocalDateTime.now().minusDays(11);
+        List<String> ids =  chapterJpaRepository.findTop25HottestChapterIds(twelveDaysAgo);
+        return chapterJpaRepository.getChaptersByIds(ids);
     }
 
     @Override
@@ -38,7 +40,7 @@ public class ChapterRepositoryImpl implements IChapterRepository {
     }
 
     public Chapter findChapterById(String id) {
-        return chapterJpaRepository.getChapterById(id);
+        return chapterJpaRepository.getChapterById(id).orElseThrow();
     }
 
     @Override
@@ -48,7 +50,12 @@ public class ChapterRepositoryImpl implements IChapterRepository {
     }
 
     @Override
-    public void add(Chapter chapter) {
+    public void save(Chapter chapter) {
         chapterJpaRepository.save(chapter);
+    }
+
+    @Override
+    public boolean existsByChapterNameAndChapterNumber(String chapterName, int chapterNumber) {
+        return chapterJpaRepository.existsByChapterNameAndChapterNumber(chapterName, chapterNumber);
     }
 }

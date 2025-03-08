@@ -6,9 +6,6 @@ public record ChapterSummaryResponse (
         String chapterId,
         String novelName,
         String novelCoverImageBase64,
-        int chapterNumber,
-        String chapterName,
-        String totalReadChapter,
-        LocalDateTime createdAt
+        int chapterNumber
 )
 {}

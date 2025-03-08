@@ -1,6 +1,6 @@
 package com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel;
 
-import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryDTO;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public record NovelDetailResponse (
         List<String> categoryNames,
         int totalReads,
         int totalLikes,
-        List<ChapterSummaryDTO> chapterSummaryDTOS,
+        List<ChapterSummaryResponse> chapterSummaryDTOS,
         List<CommentResponse> comment
 ) {
 }

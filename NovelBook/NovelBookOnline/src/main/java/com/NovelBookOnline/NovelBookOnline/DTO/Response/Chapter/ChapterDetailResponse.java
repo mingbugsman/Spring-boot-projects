@@ -6,6 +6,7 @@ public record ChapterDetailResponse (
     String id,
     int totalReadChapter,
     String chapterName,
+    int chapterNumber,
     String chapterContent,
     int totalLikes,
     ListCommentResponse listCommentResponse

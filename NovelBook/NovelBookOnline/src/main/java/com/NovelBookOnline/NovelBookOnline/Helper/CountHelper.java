@@ -29,6 +29,13 @@ public class CountHelper {
                 .sum();
     }
 
+    public static int countTotalReadingOfChapter(Chapter chapter) {
+        return chapter.getDailyReads().stream()
+                .map(DailyRead::getReadCount)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     // count Like
     public static int countTotalLikeOfNovel(Novel novel) {
         return novel.getChapters()
@@ -38,12 +45,15 @@ public class CountHelper {
                 .reduce(0, Integer::sum);
     }
 
+
     // count comment
     public static int countSubComment(Comment comment) {
        return comment.getReplies().stream()
                .filter(c -> c.getDeletedAt() != null)
                .toList().size();
     }
+
+
 
 
 

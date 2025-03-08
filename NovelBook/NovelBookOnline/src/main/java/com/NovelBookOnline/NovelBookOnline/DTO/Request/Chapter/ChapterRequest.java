@@ -1,4 +1,4 @@
-package com.NovelBookOnline.NovelBookOnline.DTO.Request;
+package com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

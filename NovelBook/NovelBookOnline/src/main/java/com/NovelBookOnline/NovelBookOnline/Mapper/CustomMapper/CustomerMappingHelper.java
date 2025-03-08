@@ -3,6 +3,8 @@ package com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.CommentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Comment.ListCommentResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
@@ -129,7 +131,7 @@ public final class CustomerMappingHelper {
                 categoryNames,
                 totalReading,
                 totalLikes,
-                novel.getChapters().stream().map(chapterMapper::toSummaryEntity).toList(),
+                novel.getChapters().stream().map(this::toChapterSummaryResponse).toList(),
                 allComments
         );
     }
@@ -168,4 +170,28 @@ public final class CustomerMappingHelper {
         );
     }
 
+
+
+    // CHAPTER : SUMMARY - DETAIL
+    public ChapterSummaryResponse toChapterSummaryResponse(Chapter chapter) {
+        Novel novel = chapter.getNovel();
+        return new ChapterSummaryResponse(
+                chapter.getId(),
+                novel.getNovelName(),
+                Base64.getEncoder().encodeToString(novel.getNovelCoverImage()),
+                chapter.getChapterNumber()
+        );
+    }
+
+    public ChapterDetailResponse toChapterDetailResponse(Chapter chapter) {
+        return new ChapterDetailResponse(
+                chapter.getId(),
+                CountHelper.countTotalReadingOfChapter(chapter),
+                chapter.getChapterName(),
+                chapter.getChapterNumber(),
+                chapter.getChapterContent(),
+                chapter.getLikes().size(),
+                toListCommentResponse(chapter)
+        );
+    }
 }
