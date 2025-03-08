@@ -5,9 +5,12 @@ import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.ChapterJpaRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import com.NovelBookOnline.NovelBookOnline.Entity.Chapter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -17,18 +20,21 @@ public class ChapterRepositoryImpl implements IChapterRepository {
     ChapterJpaRepository chapterJpaRepository;
 
     @Override
-    public List<Chapter> getNewUpdateChapter() {
+    public Page<Chapter> getNewUpdateChapter(Pageable pageable) {
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(1);
+        List<String> ids = chapterJpaRepository.getAllIdsByDaily(oneDayAgo);
+        return chapterJpaRepository.getChaptersByIds(ids, pageable);
+    }
+
+    @Override
+    public List<Chapter> getTop10ChapterOfTheWeek() {
         return List.of();
     }
 
     @Override
-    public List<Chapter> getBestChapterOfTheWeek() {
-        return List.of();
-    }
-
-    @Override
-    public List<Chapter> getChaptersByNovelId(String novelId) {
-        return List.of();
+    public Page<Chapter> getChaptersByNovelId(String novelId, Pageable pageable) {
+        var ids = chapterJpaRepository.getAllIdsByNovelId(novelId);
+        return chapterJpaRepository.getChaptersByIds(ids, pageable);
     }
 
     public Chapter findChapterById(String id) {
@@ -37,11 +43,12 @@ public class ChapterRepositoryImpl implements IChapterRepository {
 
     @Override
     public void delete(Chapter chapter) {
-
+        chapter.setDeletedAt(LocalDateTime.now());
+        chapterJpaRepository.save(chapter);
     }
 
     @Override
     public void add(Chapter chapter) {
-
+        chapterJpaRepository.save(chapter);
     }
 }

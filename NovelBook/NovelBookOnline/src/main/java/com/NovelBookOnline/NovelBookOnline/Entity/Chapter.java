@@ -18,7 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "chapters")
+@Table(name = "chapters", indexes = {
+        @Index(name = "idx_deletedAt", columnList = "deleted_at"),
+        @Index(name = "idx_createdAt", columnList = "created_at")
+})
 public class Chapter {
 
     @Id

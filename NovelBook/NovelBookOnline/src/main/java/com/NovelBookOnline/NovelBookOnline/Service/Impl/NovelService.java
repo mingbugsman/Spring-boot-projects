@@ -30,12 +30,6 @@ public class NovelService implements INovelService {
     NovelMapper novelMapper;
     CustomerMappingHelper customMappingHelper;
 
-    @Override
-    public Page<NovelSummaryResponse> getUpdateNovels( int page, int size) {
-        Pageable pageable = PageRequest.of(page,size);
-        return novelRepository.getNewUpdateNovels(pageable).map(customMappingHelper::toNovelSummary);
-
-    }
 
 
 

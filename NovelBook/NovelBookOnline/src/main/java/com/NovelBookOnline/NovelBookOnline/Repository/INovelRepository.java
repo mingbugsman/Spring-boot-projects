@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface INovelRepository {
     Page<Novel> findNovelsByKeyword(String keyword, Pageable pageable);
-    Page<Novel> getNewUpdateNovels(Pageable pageable);
     List<Novel> getTrendingNovel();
     Novel findNovelById( String id);
     Novel save(Novel novel);

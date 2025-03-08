@@ -30,14 +30,6 @@ public class NovelRepositoryImpl implements INovelRepository {
     }
 
     @Override
-    public Page<Novel> getNewUpdateNovels(Pageable pageable) {
-        List<String> ids = novelJpaRepository.getAllIdsByDaily();
-        return novelJpaRepository.findNovelsByIds(ids, pageable);
-    }
-
-
-
-    @Override
     public List<Novel> getTrendingNovel() {
         List<String> ids =  novelJpaRepository.getAllIdsByLikeAndTotalReadChapter();
         return novelJpaRepository.findNovelsByIds(ids);

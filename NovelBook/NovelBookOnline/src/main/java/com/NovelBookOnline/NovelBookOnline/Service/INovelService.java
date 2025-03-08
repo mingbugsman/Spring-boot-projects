@@ -13,7 +13,6 @@ import java.util.List;
 
 
 public interface INovelService {
-    Page<NovelSummaryResponse> getUpdateNovels(  int page, int size);
     Page<NovelSummaryResponse> searchNovelsByKeyword(String keyword, int page, int size, SortOrder sortOrder);
     List<NovelSummaryResponse> getTrendingNovels();
     NovelDetailResponse getDetailNovel(String id);
