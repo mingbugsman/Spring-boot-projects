@@ -34,7 +34,7 @@ public class ChapterRepositoryImpl implements IChapterRepository {
     }
 
     @Override
-    public Page<Chapter> getChaptersByNovelId(String novelId, Pageable pageable) {
+    public Page<Chapter>getChaptersByNovelId(String novelId, Pageable pageable) {
         var ids = chapterJpaRepository.getAllIdsByNovelId(novelId);
         return chapterJpaRepository.getChaptersByIds(ids, pageable);
     }

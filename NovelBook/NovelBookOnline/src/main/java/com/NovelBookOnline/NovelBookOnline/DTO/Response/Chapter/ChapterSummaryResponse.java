@@ -1,7 +1,5 @@
 package com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter;
 
-import java.time.LocalDateTime;
-
 public record ChapterSummaryResponse (
         String chapterId,
         String novelName,

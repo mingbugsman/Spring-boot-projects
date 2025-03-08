@@ -1,6 +1,5 @@
 package com.NovelBookOnline.NovelBookOnline.Service.Impl;
 
-import com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter.DailyRequest;
 import com.NovelBookOnline.NovelBookOnline.Entity.DailyRead;
 import com.NovelBookOnline.NovelBookOnline.Entity.Chapter;
 import com.NovelBookOnline.NovelBookOnline.Repository.IChapterRepository;
@@ -9,9 +8,7 @@ import com.NovelBookOnline.NovelBookOnline.Service.IDailyReadingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -20,10 +17,10 @@ public class DailyReadingService implements IDailyReadingService {
     private final IDailyReadingRepository dailyReadingRepository;
 
     @Override
-    public void recordRead(DailyRequest dailyRequest) {
+    public void recordRead(String chapterId) {
         LocalDate now = LocalDate.now();
-        Chapter chapter = chapterRepository.findChapterById(dailyRequest.getChapterId());
-        DailyRead dailyRead = dailyReadingRepository.findByChapterIdAndCreatedAt(dailyRequest.getChapterId(), now);
+        Chapter chapter = chapterRepository.findChapterById(chapterId);
+        DailyRead dailyRead = dailyReadingRepository.findByChapterIdAndCreatedAt(chapterId, now);
         if (dailyRead == null) {
             dailyRead = DailyRead.builder()
                     .chapter(chapter)

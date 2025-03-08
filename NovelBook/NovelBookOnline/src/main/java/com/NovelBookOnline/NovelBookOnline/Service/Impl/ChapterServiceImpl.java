@@ -11,6 +11,7 @@ import com.NovelBookOnline.NovelBookOnline.Service.IChapterService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,13 @@ public class ChapterServiceImpl implements IChapterService {
     CustomerMappingHelper customerMappingHelper;
 
     @Override
+    public Page<ChapterSummaryResponse> getChaptersByNovelId(String novelId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return chapterRepository.getChaptersByNovelId(novelId, pageable).map(customerMappingHelper::toChapterSummaryResponse);
+    }
+
+    @Override
     public ChapterDetailResponse getChapterDetail(String id) {
         return customerMappingHelper.toChapterDetailResponse(chapterRepository.findChapterById(id));
     }
@@ -37,13 +45,13 @@ public class ChapterServiceImpl implements IChapterService {
     }
 
     @Override
-    public List<ChapterSummaryResponse> getNewUpdateChapterDaily(int page, int size) {
+    public Page<ChapterSummaryResponse> getNewUpdateChapterDaily(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return chapterRepository.getNewUpdateChapter(pageable).map(customerMappingHelper::toChapterSummaryResponse).toList();
+        return chapterRepository.getNewUpdateChapter(pageable).map(customerMappingHelper::toChapterSummaryResponse);
     }
 
     @Override
-    public ChapterSummaryResponse addChapter(ChapterRequest request) {
+    public ChapterSummaryResponse addChapter(String novelId, ChapterRequest request) {
         if (chapterRepository.existsByChapterNameAndChapterNumber(request.getChapterName(), request.getChapterNumber())) {
             throw new IllegalArgumentException("already exists");
         }

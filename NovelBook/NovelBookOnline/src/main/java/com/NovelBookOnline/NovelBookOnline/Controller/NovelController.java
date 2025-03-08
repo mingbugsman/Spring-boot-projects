@@ -1,9 +1,12 @@
 package com.NovelBookOnline.NovelBookOnline.Controller;
 
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter.ChapterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
+import com.NovelBookOnline.NovelBookOnline.Service.IChapterService;
 import com.NovelBookOnline.NovelBookOnline.Service.INovelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +24,7 @@ import java.util.List;
 public class NovelController {
 
     private final INovelService novelService;
-
+    private final IChapterService chapterService;
     /**
      * getting trending novels
      */
@@ -80,4 +83,26 @@ public class NovelController {
         novelService.deleteNovel(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    @GetMapping("/{novelId}/chapters")
+    public ResponseEntity<Page<ChapterSummaryResponse>> getChaptersByNovelId(
+            @PathVariable String novelId,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "50") int size
+    ) {
+        return ResponseEntity.ok(chapterService.getChaptersByNovelId(novelId, page, size));
+    }
+
+
+    @PostMapping("/{novelId}/chapters")
+    public ResponseEntity<ChapterSummaryResponse> addChapter(
+            @PathVariable String novelId,
+            @RequestBody ChapterRequest request
+            ) {
+        return ResponseEntity.ok(chapterService.addChapter(novelId, request));
+    }
+
+
+
 }
