@@ -8,6 +8,8 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.AuthenticationRespo
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Auth.RegisterResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.RefreshToken;
 import com.NovelBookOnline.NovelBookOnline.Entity.User;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Repository.IInvalidTokenRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.IUserRepository;
 import com.NovelBookOnline.NovelBookOnline.Security.jwt.JwtProvider;
@@ -44,7 +46,7 @@ public class AuthenticationService implements IAuthenticationService {
         // 1. Lấy Access Token từ Header
         String accessToken = getAccessTokenFromHeader(httpServletRequest);
         if (accessToken == null) {
-            throw new IllegalArgumentException("Invalid authorization header");
+            throw new ApplicationException(ErrorCode.INVALID_AUTHORIZATION_HEADER);
         }
         // 2. Thu hồi (BlackList) Access Token
         try {
@@ -68,7 +70,7 @@ public class AuthenticationService implements IAuthenticationService {
         // check password
         boolean isMatchedPassword = passwordEncoder.matches(request.getPassword(), user.getPassword());
         if (!isMatchedPassword) {
-            throw new IllegalArgumentException("WRONG PASSWORD");
+            throw new ApplicationException(ErrorCode.PASSWORD_INVALID);
         }
         // check access token
         String existingAccessToken = getAccessTokenFromHeader(httpServletRequest);
@@ -77,7 +79,7 @@ public class AuthenticationService implements IAuthenticationService {
             String jwtId = signToken.getJWTClaimsSet().getJWTID();
             boolean isRevoked = blacklist.checkRevocationToken(jwtId);
             if (isRevoked) {
-                throw new IllegalArgumentException("UNAUTHENTICATED");
+                throw new ApplicationException(ErrorCode.UNAUTHENTICATED);
             }
         }
         String accessToken = jwtProvider.generateAccessToken(user);
@@ -96,7 +98,7 @@ public class AuthenticationService implements IAuthenticationService {
 
         var user = userRepository.findUserByUsername(foundRefreshToken.getUser().getUsername());
         if (user == null) {
-            throw new IllegalArgumentException("User not found");
+            throw new ApplicationException(ErrorCode.USER_NOT_EXISTED);
         }
 
         String accessToken = jwtProvider.generateAccessToken(user);
@@ -110,9 +112,8 @@ public class AuthenticationService implements IAuthenticationService {
 
     @Override
     public RegisterResponse register(RegisterRequest request) {
-        if (!userService.createNewUser(request)) {
-            throw new RuntimeException("Email already is exists");
-        }
+        userService.createNewUser(request);
+ 
         User user = userRepository.findUserByEmail(request.getEmail());
         String accessToken = jwtProvider.generateAccessToken(user);
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(user);

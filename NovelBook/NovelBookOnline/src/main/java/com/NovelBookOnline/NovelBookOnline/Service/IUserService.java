@@ -12,7 +12,7 @@ import java.io.IOException;
 public interface IUserService {
     UserDetailResponse getProfileUserById(String id);
     UserSummaryResponse getSummaryUser(String id);
-    boolean createNewUser(RegisterRequest request);
+    void createNewUser(RegisterRequest request);
     UserUpdateResponse updateUser(String id,UserUpdateRequest request) throws IOException;
     void deleteUser(String id);
 }

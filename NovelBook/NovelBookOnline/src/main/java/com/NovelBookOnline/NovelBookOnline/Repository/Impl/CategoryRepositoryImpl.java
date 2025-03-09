@@ -1,6 +1,8 @@
 package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 
 import com.NovelBookOnline.NovelBookOnline.Entity.Category;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Repository.ICategoryRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.CategoryJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +37,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 
     @Override
     public Category getCategory(String id) {
-        return categoryJpaRepository.getNonDeletedCategory(id).orElseThrow();
+        return categoryJpaRepository.getNonDeletedCategory(id).orElseThrow(() -> new ApplicationException(ErrorCode.CATEGORY_NOT_EXISTED));
     }
 
     @Override
@@ -44,16 +46,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
         return categoryJpaRepository.getAllNonDeletedCategoryByIds(sortOrder, ids, pageable);
     }
 
-    @Override
-    public Category getNovelsByCategoryId(String id) {
-        return categoryJpaRepository.findById(id).orElseThrow();
-    }
 
-    @Override
-    public List<Category> getCategoriesByNovelId(String novelId) {
-        List<String> ids = categoryJpaRepository.getCategoryIdsWithNovel(novelId);
-        return categoryJpaRepository.findAllById(ids).stream().toList();
-    }
 
     @Override
     public void delete(Category category) {

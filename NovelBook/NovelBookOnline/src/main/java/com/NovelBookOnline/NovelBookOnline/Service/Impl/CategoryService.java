@@ -35,7 +35,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public CategoryDetailResponse addCategory(CategoryRequest request) {
         if (categoryRepository.existsByCategoryName(request.getCategoryName())) {
-            return null;
+            throw new ApplicationException(ErrorCode.CATEGORY_EXISTED);
         }
         Category category = categoryMapper.toEntity(request);
         categoryRepository.save(category);
@@ -44,8 +44,10 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public CategoryDetailResponse updateCategory(String id, CategoryRequest request) {
-        if(categoryRepository.existsById(id))
-            return null;
+        if(!categoryRepository.existsById(id)) {
+            throw new ApplicationException(ErrorCode.CATEGORY_NOT_EXISTED);
+        }
+
         Category category = categoryRepository.getCategory(id);
         categoryMapper.updateEntity(category, request);
         categoryRepository.save(category);

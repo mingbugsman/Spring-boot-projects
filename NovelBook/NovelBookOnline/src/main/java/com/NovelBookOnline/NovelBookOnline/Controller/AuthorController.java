@@ -1,6 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Controller;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Author.AuthorRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.ApiResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
@@ -22,52 +23,65 @@ public class AuthorController {
     IAuthorService authorService;
 
     @GetMapping
-    public ResponseEntity<Page<AuthorSummaryResponse>> getAllAuthors(
+    public ApiResponse<Page<AuthorSummaryResponse>> getAllAuthors(
             @RequestParam(defaultValue = "DESC")SortOrder sortOrder,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size
             ) {
-        return ResponseEntity.ok(authorService.getAllAuthors(sortOrder, page, size));
+        return ApiResponse.<Page<AuthorSummaryResponse>>builder()
+                .message("successful")
+                .result(authorService.getAllAuthors(sortOrder, page, size))
+                .build();
     }
 
     @GetMapping("/top-rating")
-    public ResponseEntity<Page<AuthorSummaryResponse>> getTopAuthorByLike(
+    public ApiResponse<Page<AuthorSummaryResponse>> getTopAuthorByLike(
             @RequestParam(defaultValue = "DESC")SortOrder sortOrder,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        return ResponseEntity.ok(authorService.getTopAuthorByLike(sortOrder, page, size));
+        return ApiResponse.<Page<AuthorSummaryResponse>>builder()
+                .result(authorService.getTopAuthorByLike(sortOrder, page, size))
+                .build();
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Page<AuthorSummaryResponse>> findAuthorsByKeyWord(
+    public ApiResponse<Page<AuthorSummaryResponse>> findAuthorsByKeyWord(
             @RequestParam(defaultValue = "") String keyword,
             @RequestParam(defaultValue = "DESC")SortOrder sortOrder,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        return ResponseEntity.ok(authorService.findAuthorsByKeyWord(keyword,sortOrder, page, size));
+        return ApiResponse.<Page<AuthorSummaryResponse>>builder()
+                .result(authorService.findAuthorsByKeyWord(keyword,sortOrder, page, size))
+                .build();
     }
 
     @PostMapping
-    public ResponseEntity<AuthorDetailResponse> createAuthor(
+    public ApiResponse<AuthorDetailResponse> createAuthor(
             @RequestBody AuthorRequest request
             ) {
-        return ResponseEntity.ok(authorService.createAuthor(request));
+        return ApiResponse.<AuthorDetailResponse>builder()
+                .result(authorService.createAuthor(request))
+                .build();
     }
 
     @PutMapping("/edit/{authorId}")
-    public ResponseEntity<AuthorDetailResponse> updateAuthor(
+    public ApiResponse<AuthorDetailResponse> updateAuthor(
             @PathVariable String authorId,
             @RequestBody AuthorRequest request
     ) {
-        return ResponseEntity.ok(authorService.updateAuthor(authorId, request));
+        return ApiResponse.<AuthorDetailResponse>builder()
+                .result(authorService.updateAuthor(authorId, request))
+                .build();
     }
 
     @DeleteMapping("/delete/{authorId}")
-    public ResponseEntity<String> deleteAuthor(@PathVariable String authorId) {
+    public ApiResponse<String> deleteAuthor(@PathVariable String authorId) {
         authorService.deleteAuthor(authorId);
-        return ResponseEntity.ok("successfully deleted author");
+        return ApiResponse.<String>builder()
+                .result("successfully deleted id : " + authorId)
+                .build();
     }
 
 }

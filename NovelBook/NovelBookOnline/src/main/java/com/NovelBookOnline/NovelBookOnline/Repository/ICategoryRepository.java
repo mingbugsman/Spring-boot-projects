@@ -12,7 +12,5 @@ public interface ICategoryRepository {
     boolean existsByCategoryName(String categoryName);
     Category getCategory(String id);
     Page<Category> getCategories(String sortOrder, Pageable pageable);
-    Category getNovelsByCategoryId(String id);
-    List<Category> getCategoriesByNovelId(String novelId);
     void delete(Category category);
 }

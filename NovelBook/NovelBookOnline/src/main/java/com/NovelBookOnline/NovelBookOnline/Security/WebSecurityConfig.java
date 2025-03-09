@@ -7,6 +7,7 @@ import lombok.experimental.NonFinal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -17,6 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
@@ -34,7 +36,7 @@ public class WebSecurityConfig {
             "/api/novels/search",
             "/api/{novelId}/chapters",
             "/api/novels/{novelId}/categories",
-            "api/novels/search/by-category-names"
+            "/api/novels/search/by-category-names"
     };
     @NonFinal
     private final String[] PUBLIC_CHAPTER_ENDPOINT = {
@@ -61,6 +63,12 @@ public class WebSecurityConfig {
             "/api/authors/search"
     };
 
+    @NonFinal
+    private final String[] PUBLIC_USER_ENDPOINT = {
+            "/api/users/profile/{id}",
+            "/api/users/summary/{id}"
+    };
+
     private CustomJwtDecoder customJwtDecoder;
 
     @Bean
@@ -75,6 +83,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.GET,PUBLIC_CATEGORY_ENDPOINT).permitAll()
                         .requestMatchers(HttpMethod.GET,PUBLIC_COMMENT_ENDPOINT).permitAll()
                         .requestMatchers(HttpMethod.GET,PUBLIC_AUTHOR_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,PUBLIC_USER_ENDPOINT).permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2

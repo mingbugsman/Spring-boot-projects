@@ -1,7 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Controller;
 
-import com.NovelBookOnline.NovelBookOnline.DTO.Request.Auth.RegisterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.User.UserUpdateRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.ApiResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
@@ -9,7 +9,6 @@ import com.NovelBookOnline.NovelBookOnline.Service.IUserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -21,25 +20,30 @@ public class UserController {
     private final IUserService service;
 
     @GetMapping("/profile/{id}")
-    ResponseEntity<UserDetailResponse> getProfileUserById(@PathVariable String id) {
-        return ResponseEntity.ok(service.getProfileUserById(id));
+    public ApiResponse<UserDetailResponse> getProfileUserById(@PathVariable String id) {
+        return ApiResponse.<UserDetailResponse>builder()
+                .result(service.getProfileUserById(id))
+                .build();
     }
     @GetMapping("/summary/{id}")
-    ResponseEntity<UserSummaryResponse> getSummaryUser(@PathVariable String id){
-        return ResponseEntity.ok(service.getSummaryUser(id));
+    public ApiResponse<UserSummaryResponse> getSummaryUser(@PathVariable String id){
+        return ApiResponse.<UserSummaryResponse>builder()
+                .result(service.getSummaryUser(id))
+                .build();
     }
-    @PostMapping
-    ResponseEntity<Boolean> createNewUser(@RequestBody @Valid RegisterRequest request){
-        return ResponseEntity.ok(service.createNewUser(request));
-    }
+
     @PutMapping(value = "/setup-profile/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<UserUpdateResponse> updateUser(@PathVariable String id, @ModelAttribute @Valid UserUpdateRequest request) throws IOException{
+    public ApiResponse<UserUpdateResponse> updateUser(@PathVariable String id, @ModelAttribute @Valid UserUpdateRequest request) throws IOException{
         System.out.println("update user...");
-        return ResponseEntity.ok(service.updateUser(id, request));
+        return ApiResponse.<UserUpdateResponse>builder()
+                .result(service.updateUser(id, request))
+                .build();
     }
-    @DeleteMapping
-    ResponseEntity<String> deleteUser(String id){
-        service.deleteUser(id);
-        return ResponseEntity.ok("Successfully deleted");
+    @DeleteMapping("/{userId}")
+    public ApiResponse<String> deleteUser(@PathVariable String userId){
+        service.deleteUser(userId);
+        return ApiResponse.<String>builder()
+                .result("successfully deleted user id : " + userId)
+                .build();
     }
 }

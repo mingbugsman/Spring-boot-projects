@@ -76,18 +76,18 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
     """)
     List<String> findNovelIdsByKeyword(@Param("keyword") String keyword);
 
-    @Query("""
-    SELECT n FROM Novel n
+    @Query(value = """
+    SELECT n FROM novels n
     WHERE n.id IN :novelIds
-    ORDER BY n.createdAt DESC,
-    """)
+    ORDER BY n.created_at DESC,
+    """, nativeQuery = true)
     Page<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds, Pageable pageable);
 
-    @Query("""
-    SELECT n FROM Novel n
+    @Query(value = """
+    SELECT n FROM novels n
     WHERE n.id IN :novelIds
-    ORDER BY n.createdAt DESC,
-    """)
+    ORDER BY n.created_at DESC,
+    """, nativeQuery = true)
     List<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds);
 
 

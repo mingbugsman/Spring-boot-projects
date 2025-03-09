@@ -8,11 +8,14 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ErrorCode {
 
-    UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
     UNAUTHORIZED(444, "Unauthorized", HttpStatus.FORBIDDEN),
     UNAUTHENTICATED(555, "Unauthenticated", HttpStatus.BAD_REQUEST),
-    INVALID_KEY(1001, "Uncategorized", HttpStatus.BAD_REQUEST),
+    PASSWORD_INVALID(667,"Invalid password", HttpStatus.BAD_REQUEST),
+    INVALID_AUTHORIZATION_HEADER(777,"Invalid authorization header", HttpStatus.BAD_REQUEST),
+    UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
+
     INVALID_JSON_FORMAT(1000,"Invalid request format : ", HttpStatus.BAD_REQUEST),
+    INVALID_KEY(1001, "Uncategorized", HttpStatus.BAD_REQUEST),
     /**
      * HANDLING ERROR EXISTED
      */
@@ -27,11 +30,13 @@ public enum ErrorCode {
      * HANDLING ERROR : NOT FOUND
      */
     USER_NOT_EXISTED(1010, "User is not existed", HttpStatus.NOT_FOUND),
-    NOVEL_NOT_EXISTED(1011, "Novel is not existed", HttpStatus.NOT_FOUND),
-    CHAPTER_NOT_EXISTED(1012, "Chapter is not existed", HttpStatus.NOT_FOUND),
-    CATEGORY_NOT_EXISTED(1013, "Category is not existed", HttpStatus.NOT_FOUND),
-    AUTHOR_NOT_EXISTED(1014, "Author is not existed", HttpStatus.NOT_FOUND),
-    COMMENT_NOT_EXISTED(1015, "Comment is not existed", HttpStatus.NOT_FOUND),
+    USERNAME_NOT_EXISTED(1011, "Username is not existed", HttpStatus.NOT_FOUND),
+    EMAIL_NOT_EXISTED(1012, "Email is not existed", HttpStatus.NOT_FOUND),
+    NOVEL_NOT_EXISTED(1015, "Novel is not existed", HttpStatus.NOT_FOUND),
+    CHAPTER_NOT_EXISTED(1016, "Chapter is not existed", HttpStatus.NOT_FOUND),
+    CATEGORY_NOT_EXISTED(1017, "Category is not existed", HttpStatus.NOT_FOUND),
+    AUTHOR_NOT_EXISTED(1018, "Author is not existed", HttpStatus.NOT_FOUND),
+    COMMENT_NOT_EXISTED(1019, "Comment is not existed", HttpStatus.NOT_FOUND),
 
     /**
      * HANDLING ERROR : DELETED

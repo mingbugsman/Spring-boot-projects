@@ -1,14 +1,12 @@
 package com.NovelBookOnline.NovelBookOnline.Controller;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Category.CategoryRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.ApiResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
-import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategorySummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import com.NovelBookOnline.NovelBookOnline.Service.ICategoryService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,35 +19,45 @@ public class CategoryController {
     private final ICategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryDetailResponse> addCategory(@RequestBody CategoryRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.addCategory(request));
+    public ApiResponse<CategoryDetailResponse> addCategory(@RequestBody CategoryRequest request) {
+        return ApiResponse.<CategoryDetailResponse>builder()
+                .result(categoryService.addCategory(request))
+                .build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDetailResponse> updateCategory(@PathVariable String id, @RequestBody CategoryRequest request) {
-        return ResponseEntity.ok(categoryService.updateCategory(id, request));
+    public ApiResponse<CategoryDetailResponse> updateCategory(@PathVariable String id, @RequestBody CategoryRequest request) {
+        return ApiResponse.<CategoryDetailResponse>builder()
+                .result(categoryService.updateCategory(id, request))
+                .build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable String id) {
+    public ApiResponse<String> deleteCategory(@PathVariable String id) {
         categoryService.deleteCategory(id);
-        return ResponseEntity.noContent().build();
+        return ApiResponse.<String>builder()
+                .result("Successfully deleted category id : " + id)
+                .build();
     }
 
     @PostMapping("/{id}/novels")
-    public ResponseEntity<CategoryDetailResponse> addNovelsToCategory(
+    public ApiResponse<CategoryDetailResponse> addNovelsToCategory(
             @PathVariable String id, @RequestBody List<String> novelIds) {
-        return ResponseEntity.ok(categoryService.addNovelsToCategory(id, novelIds));
+        return ApiResponse.<CategoryDetailResponse>builder()
+                .result(categoryService.addNovelsToCategory(id, novelIds))
+                .build();
     }
 
 
     @GetMapping
-    public ResponseEntity<List<CategoryDetailResponse>> getAllCategories(
+    public ApiResponse<List<CategoryDetailResponse>> getAllCategories(
             @RequestParam(defaultValue = "ASC")SortOrder sortOrder,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
             ) {
-        return ResponseEntity.ok(categoryService.getAllCategories(sortOrder, page, size));
+        return ApiResponse.<List<CategoryDetailResponse>>builder()
+                .result(categoryService.getAllCategories(sortOrder, page, size))
+                .build();
     }
 
 

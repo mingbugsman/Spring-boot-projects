@@ -79,7 +79,7 @@ public final class CustomerMappingHelper {
     }
     // Detail
     public UserDetailResponse toUserDetail(User user) {
-
+        Author author = user.getAuthor();
         return new UserDetailResponse(
                 user.getId(),
                 user.getUsername(),
@@ -87,7 +87,7 @@ public final class CustomerMappingHelper {
                 user.getGender(),
                 user.getLikes().size(),
                 user.getComments().size(),
-                user.getAuthor().getNovels().stream().map(this::toNovelSummary).toList()
+                author == null ? null : author.getNovels().stream().map(this::toNovelSummary).toList()
         );
     }
 

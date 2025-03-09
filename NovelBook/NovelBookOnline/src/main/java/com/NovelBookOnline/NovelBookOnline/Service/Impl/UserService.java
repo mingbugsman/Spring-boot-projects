@@ -9,6 +9,8 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.Role;
 import com.NovelBookOnline.NovelBookOnline.Entity.User;
 import com.NovelBookOnline.NovelBookOnline.Enum.TypeRole;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper.CustomerMappingHelper;
 import com.NovelBookOnline.NovelBookOnline.Mapper.UserMapper;
 import com.NovelBookOnline.NovelBookOnline.Repository.IRoleRepository;
@@ -17,6 +19,10 @@ import com.NovelBookOnline.NovelBookOnline.Service.IUserService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,7 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Service
 @RequiredArgsConstructor
@@ -47,9 +53,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean createNewUser(RegisterRequest request) {
+    public void createNewUser(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            return false;
+            throw new ApplicationException(ErrorCode.EMAIL_EXISTED);
         }
         User user = userMapper.toEntity(request);
         user.setUsername("User"+Math.floor(Math.random()*1000+1000));
@@ -62,10 +68,10 @@ public class UserService implements IUserService {
         user.setRoles(new HashSet<>(roles));
 
         userRepository.save(user);
-        return true;
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or #id.equals(authentication.name)")
     public UserUpdateResponse updateUser(String id, UserUpdateRequest request) throws IOException {
         User user = userRepository.findUserById(id);
 
@@ -81,7 +87,9 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN') or #id.equals(authentication.name)")
     public void deleteUser(String id) {
+        String s = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserById(id);
         userRepository.deleteUser(user);
     }

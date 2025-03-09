@@ -13,14 +13,14 @@ import java.util.Optional;
 public interface UserJpaRepository extends JpaRepository<User,String> {
 
     @Query(value = """
-            SELECT u FROM users u
+            SELECT * FROM users u
             WHERE username = :username AND u.deleted_at IS NULL
             """, nativeQuery = true)
     Optional<User> findByUsername(@Param("username") String username);
 
     @Query(value = """
-            SELECT u FROM users u
-            WHERE username = :email AND u.deleted_at IS NULL
+            SELECT * FROM users u
+            WHERE email = :email AND u.deleted_at IS NULL
             """, nativeQuery = true)
     Optional<User> findByEmail(@Param("email") String email);
 

@@ -1,6 +1,8 @@
 package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 
 import com.NovelBookOnline.NovelBookOnline.Entity.User;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Repository.IUserRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,24 +23,20 @@ public class UserRepositoryImp  implements IUserRepository {
         return foundUser != null && foundUser.getDeletedAt() != null;
     }
 
-    @Override
-    public boolean existsById(String id) {
-        return findUserById(id) != null;
-    }
 
     @Override
     public User findUserById(String id) {
-        return userJpaRepository.findById(id).orElseThrow();
+        return userJpaRepository.findById(id).orElseThrow(() ->new ApplicationException(ErrorCode.USER_NOT_EXISTED));
     }
 
     @Override
     public User findUserByUsername(String username) {
-        return userJpaRepository.findByUsername(username).orElseThrow();
+        return userJpaRepository.findByUsername(username).orElseThrow(() -> new ApplicationException(ErrorCode.USERNAME_NOT_EXISTED));
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return userJpaRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("NOT FOUND EMAIL"));
+        return userJpaRepository.findByEmail(email).orElseThrow(() -> new ApplicationException(ErrorCode.EMAIL_NOT_EXISTED));
     }
 
     @Override

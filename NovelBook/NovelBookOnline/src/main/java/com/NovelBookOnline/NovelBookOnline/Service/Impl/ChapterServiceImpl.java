@@ -4,6 +4,8 @@ import com.NovelBookOnline.NovelBookOnline.Entity.Chapter;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter.ChapterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Mapper.ChapterMapper;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper.CustomerMappingHelper;
 import com.NovelBookOnline.NovelBookOnline.Repository.IChapterRepository;
@@ -30,7 +32,6 @@ public class ChapterServiceImpl implements IChapterService {
     @Override
     public Page<ChapterSummaryResponse> getChaptersByNovelId(String novelId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-
         return chapterRepository.getChaptersByNovelId(novelId, pageable).map(customerMappingHelper::toChapterSummaryResponse);
     }
 
@@ -53,7 +54,7 @@ public class ChapterServiceImpl implements IChapterService {
     @Override
     public ChapterSummaryResponse addChapter(String novelId, ChapterRequest request) {
         if (chapterRepository.existsByChapterNameAndChapterNumber(request.getChapterName(), request.getChapterNumber())) {
-            throw new IllegalArgumentException("already exists");
+            throw new ApplicationException(ErrorCode.CHAPTER_EXISTED);
         }
         Chapter chapter = chapterMapper.toEntity(request);
         chapterRepository.save(chapter);

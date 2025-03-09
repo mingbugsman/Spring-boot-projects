@@ -39,13 +39,18 @@ public interface ChapterJpaRepository extends JpaRepository<Chapter, String> {
 
 
     // BY TOP 10 HOTTEST CHAPTERS (base on first 12 days + total likes)
-    @Query("SELECT c.id FROM Chapter c " +
-            "LEFT JOIN DailyRead dr ON dr.chapter = c AND dr.readDate BETWEEN c.createdAt.toLocalDate() AND c.createdAt.toLocalDate().plusDays(11) " +
-            "WHERE c.createdAt <= :twelveDaysAgo AND c.deletedAt IS NULL " +
-            "GROUP BY c.id " +
-            "ORDER BY COALESCE(SUM(dr.readCount), 0) + SIZE(c.likes) DESC " +
-            "LIMIT 25")
+    @Query(value = """
+        SELECT c.id FROM chapters c
+        LEFT JOIN daily_read dr ON dr.chapter_id = c.id
+        WHERE c.created_at <= :twelveDaysAgo
+          AND c.deleted_at IS NULL
+          AND dr.read_date BETWEEN DATE(c.created_at) AND DATE(c.created_at) + INTERVAL 11 DAY
+        GROUP BY c.id
+        ORDER BY COALESCE(SUM(dr.read_count), 0) + (SELECT COUNT(*) FROM like_chapter lc WHERE lc.chapter_id = c.id) DESC
+        LIMIT 25
+    """, nativeQuery = true)
     List<String> findTop25HottestChapterIds(@Param("twelveDaysAgo") LocalDateTime twelveDaysAgo);
+
 
 
 

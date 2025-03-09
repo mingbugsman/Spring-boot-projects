@@ -1,5 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Repository.IChapterRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.ChapterJpaRepository;
 import lombok.AccessLevel;
@@ -40,7 +42,7 @@ public class ChapterRepositoryImpl implements IChapterRepository {
     }
 
     public Chapter findChapterById(String id) {
-        return chapterJpaRepository.getChapterById(id).orElseThrow();
+        return chapterJpaRepository.getChapterById(id).orElseThrow(() -> new ApplicationException(ErrorCode.CATEGORY_EXISTED));
     }
 
     @Override

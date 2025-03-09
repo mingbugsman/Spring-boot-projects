@@ -1,13 +1,14 @@
 package com.NovelBookOnline.NovelBookOnline.Controller;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter.ChapterRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.ApiResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Service.IChapterService;
 import com.NovelBookOnline.NovelBookOnline.Service.IDailyReadingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,38 +21,48 @@ public class ChapterController {
     private final IDailyReadingService dailyReadingService;
 
     @GetMapping("/detail/{chapterId}")
-    public ResponseEntity<ChapterDetailResponse> getChapterDetail(
+    public ApiResponse<ChapterDetailResponse> getChapterDetail(
             @PathVariable String chapterId
     ) {
         dailyReadingService.recordRead(chapterId);
-        return ResponseEntity.ok(chapterService.getChapterDetail(chapterId));
+        return ApiResponse.<ChapterDetailResponse>builder()
+                .result(chapterService.getChapterDetail(chapterId))
+                .build();
     }
 
     @GetMapping("/hottest")
-    public ResponseEntity<List<ChapterSummaryResponse>> getTop25HottestChapters() {
-        return ResponseEntity.ok(chapterService.getTop25HottestChapters());
+    public ApiResponse<List<ChapterSummaryResponse>> getTop25HottestChapters() {
+        return ApiResponse.<List<ChapterSummaryResponse>>builder()
+                .result(chapterService.getTop25HottestChapters())
+                .build();
     }
 
     @GetMapping("/updates")
-    public ResponseEntity<Page<ChapterSummaryResponse>> getNewUpdateChapterDaily(
+    public ApiResponse<Page<ChapterSummaryResponse>> getNewUpdateChapterDaily(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "25") int size
     ) {
-        return ResponseEntity.ok(chapterService.getNewUpdateChapterDaily(page ,size));
+        return ApiResponse.<Page<ChapterSummaryResponse>>builder()
+                .result(chapterService.getNewUpdateChapterDaily(page, size))
+                .build();
     }
 
     @PutMapping("/{chapterId}")
-    public ResponseEntity<ChapterSummaryResponse> updateChapter(
+    public ApiResponse<ChapterSummaryResponse> updateChapter(
             @PathVariable String chapterId,
             @RequestBody ChapterRequest request
             ) {
-        return ResponseEntity.ok(chapterService.updateChapter(chapterId, request));
+        return ApiResponse.<ChapterSummaryResponse>builder()
+                .result(chapterService.updateChapter(chapterId, request))
+                .build();
     }
 
     @DeleteMapping("/{chapterId}")
-    public ResponseEntity<String> deleteChapter(@PathVariable String chapterId) {
+    public ApiResponse<String> deleteChapter(@PathVariable String chapterId) {
         chapterService.deleteChapter(chapterId);
-        return ResponseEntity.ok("successfully deleted chapter with id : " + chapterId);
+        return ApiResponse.<String>builder()
+                .result("Successfully deleted chapter id : " + chapterId)
+                .build();
     }
 
 }
