@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,16 +34,20 @@ public class CategoryService implements ICategoryService {
     CategoryMapper categoryMapper;
     CustomerMappingHelper customerMappingHelper;
     @Override
+
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryDetailResponse addCategory(CategoryRequest request) {
         if (categoryRepository.existsByCategoryName(request.getCategoryName())) {
             throw new ApplicationException(ErrorCode.CATEGORY_EXISTED);
         }
         Category category = categoryMapper.toEntity(request);
+        System.out.println(request);
         categoryRepository.save(category);
-        return null;
+        return customerMappingHelper.toCategoryDetailResponse(category);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryDetailResponse updateCategory(String id, CategoryRequest request) {
         if(!categoryRepository.existsById(id)) {
             throw new ApplicationException(ErrorCode.CATEGORY_NOT_EXISTED);
@@ -55,12 +60,14 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteCategory(String id) {
         Category category = categoryRepository.getCategory(id);
         categoryRepository.delete(category);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public CategoryDetailResponse addNovelsToCategory(String id, List<String> novelIds) {
         Category category = categoryRepository.getCategory(id);
         for (String novelId : novelIds) {

@@ -53,7 +53,7 @@ public class CategoryController {
     public ApiResponse<List<CategoryDetailResponse>> getAllCategories(
             @RequestParam(defaultValue = "ASC")SortOrder sortOrder,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "3") int size
             ) {
         return ApiResponse.<List<CategoryDetailResponse>>builder()
                 .result(categoryService.getAllCategories(sortOrder, page, size))

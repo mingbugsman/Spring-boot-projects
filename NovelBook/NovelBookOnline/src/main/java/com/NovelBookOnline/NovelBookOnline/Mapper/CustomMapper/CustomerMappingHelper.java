@@ -21,9 +21,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -157,10 +155,13 @@ public final class CustomerMappingHelper {
 
     // CATEGORY
     public CategoryDetailResponse toCategoryDetailResponse(Category category) {
-        int totalNovelsOfCategory = category.getNovels().size();
-        List<NovelSummaryResponse> novels = category
+        Set<Novel> novelsSet = category.getNovels();
+        int totalNovelsOfCategory = (novelsSet != null) ?  category.getNovels().size() : 0;
+
+        List<NovelSummaryResponse> novels =  (novelsSet != null) ? category
                 .getNovels()
-                .stream().map(this::toNovelSummary).toList();
+                .stream().map(this::toNovelSummary).toList() : Collections.emptyList();
+
         return new CategoryDetailResponse(
                 category.getId(),
                 category.getCategoryName(),

@@ -29,6 +29,7 @@ public class Category {
     @Column(name = "category_name", unique = true)
     String categoryName;
 
+    @Column(name = "category_information", columnDefinition = "TEXT")
     String categoryInformation;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})

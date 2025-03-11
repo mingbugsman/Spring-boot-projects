@@ -8,6 +8,7 @@ import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.CategoryJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
 
     @Override
     public boolean existsByCategoryName(String categoryName) {
-        return categoryJpaRepository.existsByCategoryName(categoryName);
+        return categoryJpaRepository.existsByCategoryName(categoryName) != null;
     }
 
     @Override
@@ -51,6 +52,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
     @Override
     public void delete(Category category) {
         category.setDeleteAt(LocalDateTime.now());
+        categoryJpaRepository.save(category);
     }
 
 }
