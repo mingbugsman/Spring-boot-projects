@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -35,10 +36,10 @@ public class Author {
     byte[] authorAvatar;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    List<Novel> novels;
+    List<Novel> novels = new ArrayList<>();
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    List<LikeAuthor> likeAuthors;
+    List<LikeAuthor> likeAuthors = new ArrayList<>();
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

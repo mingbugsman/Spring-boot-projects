@@ -19,7 +19,7 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
     @Query(value = """
             SELECT 1 FROM novels n
             JOIN users u
-            WHERE u.username = :authorName AND n.novel_name = :novelName
+            WHERE u.username = :authorName AND n.novel_name = :novelName AND n.deleted_at IS NULL
             """, nativeQuery = true)
     boolean existsByAuthorIdAndNovelName(String authorName, String novelName);
 
@@ -77,14 +77,15 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
     List<String> findNovelIdsByKeyword(@Param("keyword") String keyword);
 
     @Query(value = """
-    SELECT n FROM novels n
+    SELECT *
+    FROM novels n
     WHERE n.id IN :novelIds
     ORDER BY n.created_at DESC,
     """, nativeQuery = true)
     Page<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds, Pageable pageable);
 
     @Query(value = """
-    SELECT n FROM novels n
+    SELECT * FROM novels n
     WHERE n.id IN :novelIds
     ORDER BY n.created_at DESC,
     """, nativeQuery = true)
@@ -92,7 +93,7 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
 
 
     @Query(value = """
-            SELECT n FROM novels
+            SELECT * FROM novels
             WHERE n.id = :novelId AND deleted_at IS NULL
             """, nativeQuery = true)
     Optional<Novel> findNovel(@Param("novelId") String novelId);

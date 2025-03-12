@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -39,12 +40,12 @@ public class Chapter {
     String ChapterContent;
 
     @OneToMany(mappedBy = "chapter", cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.REMOVE})
-    List<LikeChapter> likes;
+    List<LikeChapter> likes = new ArrayList<>();
     @OneToMany(mappedBy = "chapter", cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.REMOVE})
-    List<Comment> comments;
+    List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "chapter", cascade = {CascadeType.ALL})
-    List<DailyRead> dailyReads;
+    List<DailyRead> dailyReads = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "novel_id", nullable = false)

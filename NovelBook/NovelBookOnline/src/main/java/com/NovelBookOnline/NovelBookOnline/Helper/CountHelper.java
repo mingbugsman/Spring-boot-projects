@@ -38,11 +38,12 @@ public class CountHelper {
 
     // count Like
     public static int countTotalLikeOfNovel(Novel novel) {
-        return novel.getChapters()
+
+        return (novel.getChapters() != null ) ? novel.getChapters()
                 .stream()
                 .map(Chapter::getLikes)
                 .map(List::size)
-                .reduce(0, Integer::sum);
+                .reduce(0, Integer::sum) : 0;
     }
 
 

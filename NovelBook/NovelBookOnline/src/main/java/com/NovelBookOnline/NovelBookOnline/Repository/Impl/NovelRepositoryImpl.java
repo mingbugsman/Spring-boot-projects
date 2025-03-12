@@ -2,6 +2,8 @@ package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Repository.INovelRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.NovelJpaRepository;
 import lombok.AccessLevel;
@@ -44,7 +46,7 @@ public class NovelRepositoryImpl implements INovelRepository {
 
     @Override
     public Novel findNovelById(String id) {
-        return novelJpaRepository.findNovel(id).orElseThrow();
+        return novelJpaRepository.findNovel(id).orElseThrow(() -> new ApplicationException(ErrorCode.NOVEL_EXISTED));
     }
 
 

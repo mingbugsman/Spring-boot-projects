@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -53,13 +55,13 @@ public class Novel {
 
 
     @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    List<Chapter> chapters;
+    List<Chapter> chapters = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "category_novel",
             joinColumns = @JoinColumn(name = "novel_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    Set<Category> categories;
+    Set<Category> categories = new HashSet<>();
 
 
     @CreationTimestamp
