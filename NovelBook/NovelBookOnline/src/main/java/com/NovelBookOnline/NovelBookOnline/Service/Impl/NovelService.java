@@ -3,12 +3,15 @@ package com.NovelBookOnline.NovelBookOnline.Service.Impl;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
+import com.NovelBookOnline.NovelBookOnline.Entity.Category;
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
 import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Mapper.CustomMapper.CustomerMappingHelper;
 import com.NovelBookOnline.NovelBookOnline.Mapper.NovelMapper;
+import com.NovelBookOnline.NovelBookOnline.Repository.IAuthorRepository;
+import com.NovelBookOnline.NovelBookOnline.Repository.ICategoryRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.INovelRepository;
 import com.NovelBookOnline.NovelBookOnline.Service.INovelService;
 import lombok.AccessLevel;
@@ -20,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -28,7 +32,9 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class NovelService implements INovelService {
+    IAuthorRepository authorRepository;
     INovelRepository novelRepository;
+    ICategoryRepository categoryRepository;
     NovelMapper novelMapper;
     CustomerMappingHelper customMappingHelper;
 
@@ -60,11 +66,16 @@ public class NovelService implements INovelService {
 
     @Override
     public NovelSummaryResponse createNovel(NovelRequest creationRequest) throws IOException {
-        if (novelRepository.existsByAuthorIdAndNovelName(creationRequest.getAuthor_id(), creationRequest.getNovelName())) {
+        if (novelRepository.existsByAuthorIdAndNovelName(creationRequest.getAuthorId(), creationRequest.getNovelName())) {
             throw new ApplicationException(ErrorCode.NOVEL_EXISTED);
         }
-        byte[] dataImage = creationRequest.getImageNovel().getBytes();
+        byte[] dataImage = creationRequest.getNovelCoverImage().getBytes();
         Novel novel = novelMapper.toEntity(creationRequest);
+        novel.setAuthor(authorRepository.getAuthor(creationRequest.getAuthorId()));
+
+        List<Category> categories = creationRequest.getCategoryIds().stream().map(categoryRepository::getCategory).toList();
+        novel.setCategories(new HashSet<>(categories));
+
         novel.setNovelCoverImage(dataImage);
         novelRepository.save(novel);
         return customMappingHelper.toNovelSummary(novel);
@@ -75,7 +86,7 @@ public class NovelService implements INovelService {
         if (!novelRepository.existsById(id)) {
             throw new ApplicationException(ErrorCode.NOVEL_NOT_EXISTED);
         }
-        byte[] dataImage = updateRequest.getImageNovel().getBytes();
+        byte[] dataImage = updateRequest.getNovelCoverImage().getBytes();
         Novel novel = novelRepository.findNovelById(id);
         novelMapper.updateEntity(novel, updateRequest);
         novel.setNovelCoverImage(dataImage);
@@ -87,4 +98,5 @@ public class NovelService implements INovelService {
         Novel novel = novelRepository.findNovelById(id);
         novelRepository.deleteNovel(novel);
     }
+
 }

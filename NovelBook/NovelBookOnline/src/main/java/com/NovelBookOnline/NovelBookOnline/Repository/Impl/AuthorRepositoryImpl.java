@@ -1,6 +1,8 @@
 package com.NovelBookOnline.NovelBookOnline.Repository.Impl;
 
 import com.NovelBookOnline.NovelBookOnline.Entity.Author;
+import com.NovelBookOnline.NovelBookOnline.Exception.ApplicationException;
+import com.NovelBookOnline.NovelBookOnline.Exception.ErrorCode;
 import com.NovelBookOnline.NovelBookOnline.Repository.IAuthorRepository;
 import com.NovelBookOnline.NovelBookOnline.Repository.Jpa.AuthorJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,9 @@ public class AuthorRepositoryImpl implements IAuthorRepository {
 
     @Override
     public Author getAuthor(String id) {
-        return authorJpaRepository.getAuthor(id).orElseThrow();
+        return authorJpaRepository.getAuthor(id).orElseThrow(() ->  new ApplicationException(
+                ErrorCode.AUTHOR_NOT_EXISTED
+        ));
     }
 
     @Override

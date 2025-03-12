@@ -6,14 +6,16 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorDetailRespo
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Author.AuthorSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import com.NovelBookOnline.NovelBookOnline.Service.IAuthorService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/authors")
@@ -57,20 +59,21 @@ public class AuthorController {
                 .build();
     }
 
-    @PostMapping
+    @PostMapping(value = "/register-author", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<AuthorDetailResponse> createAuthor(
-            @RequestBody AuthorRequest request
-            ) {
+            @ModelAttribute @Valid AuthorRequest request
+            ) throws IOException {
+        System.out.println(request.toString());
         return ApiResponse.<AuthorDetailResponse>builder()
                 .result(authorService.createAuthor(request))
                 .build();
     }
 
-    @PutMapping("/edit/{authorId}")
+    @PutMapping(value = "/edit/{authorId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<AuthorDetailResponse> updateAuthor(
             @PathVariable String authorId,
-            @RequestBody AuthorRequest request
-    ) {
+            @ModelAttribute @Valid AuthorRequest request
+    ) throws IOException {
         return ApiResponse.<AuthorDetailResponse>builder()
                 .result(authorService.updateAuthor(authorId, request))
                 .build();

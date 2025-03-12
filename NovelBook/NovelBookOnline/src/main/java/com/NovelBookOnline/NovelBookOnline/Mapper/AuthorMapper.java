@@ -12,10 +12,20 @@ public interface AuthorMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "novels", ignore = true)
+    @Mapping(target = "authorAvatar", ignore = true)
+    @Mapping(target = "likeAuthors", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     Author toEntity(AuthorRequest request);
 
     @Mapping(target = "novels", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "authorAvatar", ignore = true)
+    @Mapping(target = "likeAuthors", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     void updateAuthor(@MappingTarget Author author, AuthorRequest request);
 
 }

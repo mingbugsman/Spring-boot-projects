@@ -32,6 +32,8 @@ public class UserController {
                 .build();
     }
 
+
+
     @PutMapping(value = "/setup-profile/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<UserUpdateResponse> updateUser(@PathVariable String id, @ModelAttribute @Valid UserUpdateRequest request) throws IOException{
         System.out.println("update user...");

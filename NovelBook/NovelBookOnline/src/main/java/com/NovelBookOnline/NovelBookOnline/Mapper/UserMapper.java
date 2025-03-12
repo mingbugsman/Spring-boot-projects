@@ -17,6 +17,7 @@ public interface UserMapper {
     @Mapping(target = "gender", ignore = true)
     @Mapping(target = "userImageData", ignore = true)
     @Mapping(target = "description", ignore = true)
+    @Mapping(target = "roles", ignore = true)
     @Mapping(target = "likes", ignore = true)
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "author", ignore = true)
@@ -26,7 +27,17 @@ public interface UserMapper {
     User toEntity(RegisterRequest request);
 
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "email", ignore = true)
     @Mapping(target = "userImageData", ignore = true)
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "roles", ignore = true)
+    @Mapping(target = "author", ignore = true)
+    @Mapping(target = "likes", ignore = true)
+    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     void updateUser(@MappingTarget User user, UserUpdateRequest request);
 
 

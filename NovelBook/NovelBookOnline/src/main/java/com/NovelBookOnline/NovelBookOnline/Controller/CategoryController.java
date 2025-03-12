@@ -3,6 +3,7 @@ package com.NovelBookOnline.NovelBookOnline.Controller;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Category.CategoryRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.ApiResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategoryDetailResponse;
+import com.NovelBookOnline.NovelBookOnline.DTO.Response.Category.CategorySummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Enum.SortOrder;
 import com.NovelBookOnline.NovelBookOnline.Service.ICategoryService;
 
@@ -50,12 +51,12 @@ public class CategoryController {
 
 
     @GetMapping
-    public ApiResponse<List<CategoryDetailResponse>> getAllCategories(
+    public ApiResponse<List<CategorySummaryResponse>> getAllCategories(
             @RequestParam(defaultValue = "ASC")SortOrder sortOrder,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size
             ) {
-        return ApiResponse.<List<CategoryDetailResponse>>builder()
+        return ApiResponse.<List<CategorySummaryResponse>>builder()
                 .result(categoryService.getAllCategories(sortOrder, page, size))
                 .build();
     }

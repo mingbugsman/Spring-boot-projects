@@ -19,12 +19,12 @@ public class NovelRequest {
     @NotNull(message = "Novel name is required")
     String novelName;
 
-    MultipartFile imageNovel;
+    MultipartFile novelCoverImage;
 
     String novelDescription;
 
     @NotNull(message = "author id is required")
-    String author_id;
+    String authorId;
 
     @NotNull(message = "category ids is required")
     List<String> categoryIds;

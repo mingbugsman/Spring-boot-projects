@@ -40,8 +40,6 @@ public class Novel {
     @Column(name = "novel_description", columnDefinition = "TEXT")
     String novelDescription;
 
-    @Column(name = "total_reading", nullable = false)
-    Integer totalReading = 0;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "novel_status", nullable = false)
@@ -50,8 +48,6 @@ public class Novel {
     @ManyToOne
     @JoinColumn(name = "author_id")
     Author author;
-
-
 
 
     @OneToMany(mappedBy = "novel", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})

@@ -58,6 +58,7 @@ public class NovelRepositoryImpl implements INovelRepository {
     @Override
     public void deleteNovel(Novel novel) {
         novel.setDeletedAt(LocalDateTime.now());
+        novelJpaRepository.save(novel);
 
     }
 
@@ -68,6 +69,6 @@ public class NovelRepositoryImpl implements INovelRepository {
 
     @Override
     public boolean existsByAuthorIdAndNovelName(String authorId, String novelName) {
-        return novelJpaRepository.existsByAuthorIdAndNovelName(authorId, novelName);
+        return novelJpaRepository.existsByAuthorIdAndNovelName(authorId, novelName) != null;
     }
 }

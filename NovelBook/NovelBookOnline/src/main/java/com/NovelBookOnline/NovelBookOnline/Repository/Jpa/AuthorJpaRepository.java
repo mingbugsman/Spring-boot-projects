@@ -28,7 +28,7 @@ public interface AuthorJpaRepository extends JpaRepository<Author, String> {
     Page<Author> findAuthorsByKeyWord(@Param("keyword") String keyword, Pageable pageable);
 
     @Query(value = """
-            SELECT a FROM authors a
+            SELECT * FROM authors a
             WHERE a.deleted_at IS NULL AND a.id = :authorId
             """, nativeQuery = true)
     Optional<Author> getAuthor(@Param("authorId") String authorId);

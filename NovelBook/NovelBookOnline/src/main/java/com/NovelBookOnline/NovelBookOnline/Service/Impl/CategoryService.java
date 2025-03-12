@@ -78,10 +78,10 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public List<CategoryDetailResponse> getAllCategories(SortOrder sortOrder, int page, int size) {
+    public List<CategorySummaryResponse> getAllCategories(SortOrder sortOrder, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return categoryRepository.getCategories(sortOrder.name(), pageable).stream()
-                .map(customerMappingHelper::toCategoryDetailResponse)
+                .map(categoryMapper::toSummaryEntity)
                 .toList();
     }
 

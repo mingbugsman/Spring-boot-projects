@@ -44,6 +44,7 @@ public class CategoryRepositoryImpl implements ICategoryRepository {
     @Override
     public Page<Category> getCategories(String sortOrder, Pageable pageable) {
         List<String> ids= categoryJpaRepository.getAllNonDeletedCategoryIds();
+        System.out.println("total ids :::" + ids.size());
         return categoryJpaRepository.getAllNonDeletedCategoryByIds(sortOrder, ids, pageable);
     }
 

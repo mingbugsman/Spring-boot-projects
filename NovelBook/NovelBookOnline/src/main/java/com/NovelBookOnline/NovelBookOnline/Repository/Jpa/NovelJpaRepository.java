@@ -17,11 +17,11 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
 
 
     @Query(value = """
-            SELECT 1 FROM novels n
+            SELECT n.id FROM novels n
             JOIN users u
             WHERE u.username = :authorName AND n.novel_name = :novelName AND n.deleted_at IS NULL
             """, nativeQuery = true)
-    boolean existsByAuthorIdAndNovelName(String authorName, String novelName);
+    String existsByAuthorIdAndNovelName(String authorName, String novelName);
 
     @Query(value = """
         SELECT DISTINCT n.id

@@ -14,7 +14,7 @@ import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserSummaryResponse
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.User.UserUpdateResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.*;
 import com.NovelBookOnline.NovelBookOnline.Helper.CountHelper;
-import com.NovelBookOnline.NovelBookOnline.Mapper.ChapterMapper;
+
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,6 @@ import java.util.*;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Component
 public final class CustomerMappingHelper {
-    ChapterMapper chapterMapper;
-
     // AUTHOR
 
     // Summary

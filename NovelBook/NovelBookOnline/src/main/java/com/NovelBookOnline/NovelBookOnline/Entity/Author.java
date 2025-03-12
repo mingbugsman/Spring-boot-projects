@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@DynamicInsert
 @Table(name = "authors", indexes = {
         @Index(columnList = "deleted_at")
 })
@@ -27,9 +29,9 @@ public class Author {
 
     @Column(name = "author_name", nullable = false)
     String authorName;
-
     @Column(name = "author_description")
     String authorDescription;
+
 
     @Lob
     @Column(name = "author_avatar", columnDefinition = "LONGBLOB")
