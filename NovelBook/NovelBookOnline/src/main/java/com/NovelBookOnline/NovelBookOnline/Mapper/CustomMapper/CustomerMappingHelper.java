@@ -34,7 +34,7 @@ public final class CustomerMappingHelper {
         return new AuthorSummaryResponse(
                 author.getId(),
                 author.getAuthorName(),
-                Base64.getEncoder().encodeToString(author.getAuthorAvatar()),
+                getBase64StringImage(author.getAuthorAvatar()),
                 author.getAuthorDescription()
         );
     }
@@ -58,7 +58,7 @@ public final class CustomerMappingHelper {
         return new UserSummaryResponse(
                 user.getId(),
                 user.getUsername(),
-                Base64.getEncoder().encodeToString(user.getUserImageData()),
+                getBase64StringImage(user.getUserImageData()),
                 user.getCreatedAt()
         );
     }
@@ -69,7 +69,7 @@ public final class CustomerMappingHelper {
                 user.getUsername(),
                 user.getEmail(),
                 user.getGender(),
-                Base64.getEncoder().encodeToString(user.getUserImageData()),
+                getBase64StringImage(user.getUserImageData()),
                 user.getUpdatedAt()
         );
     }
@@ -79,7 +79,7 @@ public final class CustomerMappingHelper {
         return new UserDetailResponse(
                 user.getId(),
                 user.getUsername(),
-                Base64.getEncoder().encodeToString(user.getUserImageData()),
+                getBase64StringImage(user.getUserImageData()),
                 user.getGender(),
                 user.getLikes().size(),
                 user.getComments().size(),
@@ -89,20 +89,18 @@ public final class CustomerMappingHelper {
 
 
     // NOVEL
-
     // Summary
     public NovelSummaryResponse toNovelSummary(Novel novel) {
         return new NovelSummaryResponse(
                 novel.getId(),
                 novel.getNovelName(),
-                Base64.getEncoder().encodeToString(novel.getNovelCoverImage()),
+                getBase64StringImage(novel.getNovelCoverImage()),
                 novel.getCreatedAt()
         );
     }
 
     // Detail
     public NovelDetailResponse toNovelDetail(Novel novel) {
-        String base64Data = Base64.getEncoder().encodeToString(novel.getNovelCoverImage());
 
         List<String> categoryNames = novel.getCategories().stream().map(Category::getCategoryName).toList();
 
@@ -120,7 +118,7 @@ public final class CustomerMappingHelper {
 
         return new NovelDetailResponse(
                 novel.getId(),
-                base64Data,
+                getBase64StringImage(novel.getNovelCoverImage()),
                 novel.getNovelName(),
                 novel.getNovelDescription(),
                 novel.getAuthor().getAuthorName(),
@@ -138,7 +136,7 @@ public final class CustomerMappingHelper {
         return new CommentResponse(
                 comment.getUser().getUsername(),
                 comment.getContent(),
-                Base64.getEncoder().encodeToString(comment.getFileDataComment()),
+                getBase64StringImage(comment.getFileDataComment()),
                 comment.getLikeComments().size(),
                 CountHelper.countSubComment(comment)
         );
@@ -192,5 +190,12 @@ public final class CustomerMappingHelper {
                 chapter.getLikes().size(),
                 toListCommentResponse(chapter)
         );
+    }
+
+    private String getBase64StringImage(byte[] dataFile) {
+        if (dataFile != null) {
+            return Base64.getEncoder().encodeToString(dataFile);
+        }
+        return null;
     }
 }

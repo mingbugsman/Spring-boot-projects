@@ -19,7 +19,7 @@ public interface ChapterJpaRepository extends JpaRepository<Chapter, String> {
 
     // GET SPECIFIC CHAPTER
     @Query(value = """
-            SELECT c FROM chapters
+            SELECT * FROM chapters c
              WHERE c.id = :id AND c.delete_at IS NULL""", nativeQuery = true)
     Optional<Chapter> getChapterById(@Param("id")String id);
 
@@ -56,14 +56,14 @@ public interface ChapterJpaRepository extends JpaRepository<Chapter, String> {
 
     // GET NOVELS BY Ids
     @Query(value = """
-            SELECT c FROM chapters
+            SELECT * FROM chapters c
             WHERE c.id IN :ids
             ORDER BY c.created_at DESC
             """, nativeQuery = true)
     Page<Chapter> getChaptersByIds(@Param("ids") List<String> ids, Pageable pageable);
 
     @Query(value = """
-            SELECT c FROM chapters
+            SELECT * FROM chapters c
             WHERE c.id IN :ids
             ORDER BY c.created_at DESC
             """, nativeQuery = true)

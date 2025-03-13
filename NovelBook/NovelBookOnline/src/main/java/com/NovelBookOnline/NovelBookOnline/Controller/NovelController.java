@@ -2,6 +2,7 @@ package com.NovelBookOnline.NovelBookOnline.Controller;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Chapter.ChapterRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelUpdateRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.ApiResponse;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Chapter.ChapterSummaryResponse;
@@ -13,9 +14,7 @@ import com.NovelBookOnline.NovelBookOnline.Service.INovelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -76,7 +75,7 @@ public class NovelController {
      * update novel by id
      */
     @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse<NovelSummaryResponse> updateNovel(@PathVariable String id, @ModelAttribute @Valid NovelRequest request) throws IOException {
+    public ApiResponse<NovelSummaryResponse> updateNovel(@PathVariable String id, @ModelAttribute @Valid NovelUpdateRequest request) throws IOException {
         return ApiResponse.<NovelSummaryResponse>builder()
                 .result(novelService.updateNovel(id, request))
                 .build();
@@ -119,7 +118,7 @@ public class NovelController {
 
     @GetMapping("/search/by-category-names")
     public ApiResponse<Page<NovelSummaryResponse>> NovelWithCategoryName(@RequestBody List<String> listCategoryName,
-                                                                            @RequestParam(defaultValue = "1") int page,
+                                                                            @RequestParam(defaultValue = "0") int page,
                                                                             @RequestParam(defaultValue = "20") int size) {
         return ApiResponse.<Page<NovelSummaryResponse>>builder()
                 .result(novelService.getNovelsByListCategoryName(listCategoryName, page, size))

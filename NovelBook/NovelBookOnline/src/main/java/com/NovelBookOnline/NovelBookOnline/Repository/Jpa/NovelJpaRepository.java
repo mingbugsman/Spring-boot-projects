@@ -24,15 +24,15 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
     String existsByAuthorIdAndNovelName(String authorName, String novelName);
 
     @Query(value = """
-        SELECT DISTINCT n.id
+     SELECT n.id
         FROM novels n
-        WHERE EXISTS (
-            SELECT 1 FROM category_novel cn
-            JOIN categories c ON cn.category_id = c.id
-            WHERE cn.novel_id = n.id AND c.name IN :listCategoryName
-        )
+        JOIN category_novel cn ON n.id = cn.novel_id
+        JOIN categories c ON cn.category_id = c.id
+        WHERE c.category_name IN (:listCategoryName)
+        GROUP BY n.id
+        HAVING COUNT(DISTINCT c.category_name) = :categoryCount
     """, nativeQuery = true)
-    List<String> getAllIdsByListCategoryName(@Param("listCategoryName") List<String> listCategoryName);
+    List<String> getAllIdsByListCategoryName(@Param("listCategoryName") List<String> listCategoryName, @Param("categoryCount") int categoryCount);
 
     @Query(value = """
         SELECT n.id
@@ -80,20 +80,20 @@ public interface NovelJpaRepository extends JpaRepository<Novel,String> {
     SELECT *
     FROM novels n
     WHERE n.id IN :novelIds
-    ORDER BY n.created_at DESC,
+    ORDER BY n.created_at DESC
     """, nativeQuery = true)
     Page<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds, Pageable pageable);
 
     @Query(value = """
     SELECT * FROM novels n
     WHERE n.id IN :novelIds
-    ORDER BY n.created_at DESC,
+    ORDER BY n.created_at DESC
     """, nativeQuery = true)
     List<Novel> findNovelsByIds(@Param("novelIds") List<String> novelIds);
 
 
     @Query(value = """
-            SELECT * FROM novels
+            SELECT * FROM novels n
             WHERE n.id = :novelId AND deleted_at IS NULL
             """, nativeQuery = true)
     Optional<Novel> findNovel(@Param("novelId") String novelId);

@@ -2,6 +2,7 @@ package com.NovelBookOnline.NovelBookOnline.Service;
 
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelUpdateRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
@@ -18,6 +19,6 @@ public interface INovelService {
     NovelDetailResponse getDetailNovel(String id);
     Page<NovelSummaryResponse> getNovelsByListCategoryName(List<String> listCategoryName, int page, int size);
     NovelSummaryResponse createNovel(NovelRequest creationRequest) throws IOException;
-    NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest) throws IOException;
+    NovelSummaryResponse updateNovel(String id, NovelUpdateRequest updateRequest) throws IOException;
     void deleteNovel(String id);
 }

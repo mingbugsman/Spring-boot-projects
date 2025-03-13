@@ -34,7 +34,7 @@ public class WebSecurityConfig {
             "/api/novels/trending",
             "/api/novels/{id}",
             "/api/novels/search",
-            "/api/{novelId}/chapters",
+            "/api/novels/{novelId}/chapters",
             "/api/novels/{novelId}/categories",
             "/api/novels/search/by-category-names"
     };

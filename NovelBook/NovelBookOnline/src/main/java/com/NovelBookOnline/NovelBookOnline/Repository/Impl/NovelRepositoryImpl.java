@@ -25,8 +25,8 @@ public class NovelRepositoryImpl implements INovelRepository {
 
 
     @Override
-    public Page<Novel> NovelWithCategoryName(List<String> listCategoryName, Pageable pageable) {
-        var ids = novelJpaRepository.getAllIdsByListCategoryName(listCategoryName);
+    public Page<Novel> NovelWithCategoryName(List<String> listCategoryName, Pageable pageable, int categoryCount) {
+        var ids = novelJpaRepository.getAllIdsByListCategoryName(listCategoryName,categoryCount);
         return novelJpaRepository.findNovelsByIds(ids, pageable);
     }
 

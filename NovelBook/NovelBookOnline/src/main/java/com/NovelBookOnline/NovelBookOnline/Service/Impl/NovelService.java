@@ -1,6 +1,7 @@
 package com.NovelBookOnline.NovelBookOnline.Service.Impl;
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelUpdateRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelDetailResponse;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.Category;
@@ -61,7 +62,7 @@ public class NovelService implements INovelService {
     @Override
     public Page<NovelSummaryResponse> getNovelsByListCategoryName(List<String> listCategoryName, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return novelRepository.NovelWithCategoryName(listCategoryName, pageable).map(customMappingHelper::toNovelSummary);
+        return novelRepository.NovelWithCategoryName(listCategoryName, pageable, listCategoryName.size()).map(customMappingHelper::toNovelSummary);
     }
 
     @Override
@@ -82,14 +83,17 @@ public class NovelService implements INovelService {
     }
 
     @Override
-    public NovelSummaryResponse updateNovel(String id, NovelRequest updateRequest) throws IOException {
+    public NovelSummaryResponse updateNovel(String id, NovelUpdateRequest updateRequest) throws IOException {
         if (!novelRepository.existsById(id)) {
             throw new ApplicationException(ErrorCode.NOVEL_NOT_EXISTED);
         }
-        byte[] dataImage = updateRequest.getNovelCoverImage().getBytes();
         Novel novel = novelRepository.findNovelById(id);
         novelMapper.updateEntity(novel, updateRequest);
-        novel.setNovelCoverImage(dataImage);
+        if (updateRequest.getNovelCoverImage() != null) {
+            System.out.println("Co ton tai file");
+            var dataImage = updateRequest.getNovelCoverImage().getBytes();
+            novel.setNovelCoverImage(dataImage);
+        }
         return customMappingHelper.toNovelSummary(novelRepository.save(novel));
     }
 
@@ -98,5 +102,4 @@ public class NovelService implements INovelService {
         Novel novel = novelRepository.findNovelById(id);
         novelRepository.deleteNovel(novel);
     }
-
 }

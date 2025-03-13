@@ -2,6 +2,7 @@ package com.NovelBookOnline.NovelBookOnline.Mapper;
 
 
 import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelRequest;
+import com.NovelBookOnline.NovelBookOnline.DTO.Request.Novel.NovelUpdateRequest;
 import com.NovelBookOnline.NovelBookOnline.DTO.Response.Novel.NovelSummaryResponse;
 import com.NovelBookOnline.NovelBookOnline.Entity.Novel;
 import org.mapstruct.Mapper;
@@ -33,6 +34,6 @@ public interface NovelMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "deletedAt", ignore =true)
     @Mapping(target = "novelCoverImage", ignore = true)
-    void updateEntity(@MappingTarget Novel novel, NovelRequest updateRequest);
+    void updateEntity(@MappingTarget Novel novel, NovelUpdateRequest updateRequest);
 
 }
