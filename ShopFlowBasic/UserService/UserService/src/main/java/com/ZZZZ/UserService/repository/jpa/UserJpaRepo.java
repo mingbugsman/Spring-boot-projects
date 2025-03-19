@@ -1,4 +1,4 @@
-package com.ZZZZ.UserService.repository.jpa;
+package com.ZZZZ.UserService.repository.Jpa;
 
 import com.ZZZZ.UserService.entity.User;
 import org.springframework.data.domain.Page;
@@ -11,8 +11,7 @@ import java.util.Optional;
 @Repository
 public interface UserJpaRepo extends JpaRepository<User, String> {
     Page<User> findByDeleteAtIsNull(Pageable pageable);
-
-
+    
     Optional<User> findByIdAndDeleteAtIsNull(String id);
     Optional<User> findByEmailAndDeleteAtIsNull(String email);
 

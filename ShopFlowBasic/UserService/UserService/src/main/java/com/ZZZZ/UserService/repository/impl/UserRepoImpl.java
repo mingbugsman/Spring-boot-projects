@@ -1,9 +1,9 @@
-package com.ZZZZ.UserService.repository.impl;
+package com.ZZZZ.UserService.repository.Impl;
+
 
 import com.ZZZZ.UserService.entity.User;
+import com.ZZZZ.UserService.repository.Jpa.UserJpaRepo;
 import com.ZZZZ.UserService.repository.UserRepo;
-import com.ZZZZ.UserService.repository.jpa.UserJpaRepo;
-
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -12,9 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-
 import java.util.Optional;
-
 
 @Repository
 @RequiredArgsConstructor
@@ -31,6 +29,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void softDeleteUser(User user) {
         user.setDeleteAt(LocalDateTime.now());
+        userJpaRepo.save(user);
     }
 
     @Override

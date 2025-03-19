@@ -12,6 +12,9 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,27 +36,47 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse updateUser(UserUpdateInformationRequest request) {
-        return null;
+    public UserResponse updateUser(String id, UserUpdateInformationRequest request) {
+        User foundUser = userRepo.getUser(id);
+        if (foundUser == null) {
+            throw new RuntimeException("User is not existed");
+        }
+        userMapper.updateUser(foundUser, request);
+        userRepo.save(foundUser);
+        return userMapper.toUserResponse(foundUser);
     }
 
     @Override
     public void softDeleteUser(String id) {
+        User foundUser = userRepo.getUser(id);
+        if (foundUser == null) {
+            throw new RuntimeException("User is not existed");
+        }
+        userRepo.softDeleteUser(foundUser);
 
     }
 
     @Override
     public void absoluteDeleteUser(String id) {
-
+        User foundUser = userRepo.getUser(id);
+        if (foundUser == null) {
+            throw new RuntimeException("User is not existed");
+        }
+        userRepo.deleteUserByAdmin(foundUser);
     }
 
     @Override
     public UserResponse getUser(String id) {
-        return null;
+        User foundUser = userRepo.getUser(id);
+        if (foundUser == null) {
+            throw new RuntimeException("User is not existed");
+        }
+        return userMapper.toUserResponse(foundUser);
     }
 
     @Override
-    public Page<UserResponse> getAll() {
-        return null;
+    public Page<UserResponse> getAll(int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
+        return userRepo.getAll(pageable).map(userMapper::toUserResponse);
     }
 }

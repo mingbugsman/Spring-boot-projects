@@ -11,36 +11,31 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Entity
 @Table(name = "users")
-@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    String id;
 
-    @Column(unique = true)
-    String email;
-
-    @Column(nullable = false)
     String username;
-
+    @Column(nullable = false)
+    String email;
     @Column(nullable = false)
     String password;
 
-    @CreationTimestamp
-    @Column(name = "creation_at", nullable = false, updatable = false)
-    private LocalDateTime creationAt;
-
-
-    @UpdateTimestamp
-    @Column(name = "update_at", nullable = false)
-    private LocalDateTime updateAt;
 
     @Column(name = "delete_at")
-    private LocalDateTime deleteAt;
+    LocalDateTime deleteAt;
+
+    @Column(name = "created_at", updatable = false)
+    @CreationTimestamp
+    LocalDateTime createdAt;
+
+    @Column(name = "update_at", updatable = false)
+    @UpdateTimestamp
+    LocalDateTime updateAt;
 }

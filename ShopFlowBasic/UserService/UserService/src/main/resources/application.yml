@@ -1,5 +1,5 @@
-server :
-  port : 9007
+server:
+  port:3008
 
 spring:
   datasource:
@@ -8,18 +8,12 @@ spring:
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-jpa:
-  hibernate:
-    ddl-auto: update
-    format-sql: true
-  show-sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format-sql: true
+    show-sql: true
   servlet:
     multipart:
       max-file-size: 500KB
       max-request-size: 500KB
-
-      logging:
-        level:
-          org.hibernate: DEBUG
-          org.springframework.orm.jpa: DEBUG
-          org.springframework.transaction: DEBUG

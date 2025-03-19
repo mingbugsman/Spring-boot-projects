@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
     public User toUser(UserCreationRequest request) {
-         return User.builder()
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .build();
+        User user = new User();
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        return user;
     }
 
     public void updateUser(User user, UserUpdateInformationRequest request) {
-        user.setUsername(user.getUsername());
-        user.setEmail(user.getEmail());
+        user.setUsername(request.getUsername() != null  ? request.getUsername() : user.getEmail());
+        user.setEmail(request.getEmail() != null  ? request.getEmail() : user.getEmail());
     }
 
     public UserResponse toUserResponse(User user) {
