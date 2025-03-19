@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ab813769-9d51-431d-b55f-1fa93d0e6787" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docker-compose-kafka-redis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ShopFlowBasic.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Request/UserChangePasswordRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Request/UserCreationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Request/UserUpdateInformationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Response/UserResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/Enum/SortType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/UserServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/mapper/UserMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/UserRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/impl/UserRepoImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/jpa/UserJpaRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/impl/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/test/java/com/ZZZZ/UserService/Helper/RandomGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mingbugsman&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mingbugsman/Spring-boot-projects.git&quot;,
+    &quot;accountId&quot;: &quot;afbb37c8-664a-4941-9b8b-9b2ad6ebe3ce&quot;
+  }
+}</component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2uWXsMqYkJnrreOyH6wUYSdGwSK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.UserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.createUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.getAll.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.getUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.softDeleteUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.updateUser.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ADMIN/Desktop/springboot/Project_2/ShopFlowBasic&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
+  }
+}</component>
+  <component name="RunManager" selected="JUnit.UserServiceTest.getAll">
+    <configuration name="UserServiceTest.createUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="createUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.getAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="getAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.getUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="getUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.softDeleteUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="softDeleteUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.updateUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="updateUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UserServiceTest.getAll" />
+        <item itemvalue="JUnit.UserServiceTest.createUser" />
+        <item itemvalue="JUnit.UserServiceTest.getUser" />
+        <item itemvalue="JUnit.UserServiceTest.softDeleteUser" />
+        <item itemvalue="JUnit.UserServiceTest.updateUser" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ab813769-9d51-431d-b55f-1fa93d0e6787" name="Changes" comment="" />
+      <created>1742365511478</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742365511478</updated>
+    </task>
+    <servers />
+  </component>
+</project>

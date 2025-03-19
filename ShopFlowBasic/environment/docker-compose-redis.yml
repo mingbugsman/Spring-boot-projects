@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+  redis:
+    container_name: my-redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - redis-network
+
+  redis-exporter:
+    container_name: redis-exporter
+    image: oliver006/redis_exporter:latest
+    command: -redis.addr=redis://redis:6379
+    ports:
+      - "9121:9121"
+    networks:
+      - redis-network
+    depends_on:
+      - redis
+
+networks:
+  redis-network:
+    driver: bridge
