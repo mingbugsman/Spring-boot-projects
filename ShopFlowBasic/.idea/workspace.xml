@@ -5,48 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83ebfb34-964a-443c-b0eb-e53df0761512" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/environment/docker-compose-redis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/DTO/request/ProductCreationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/DTO/request/ProductUpdateRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/DTO/response/ProductResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/config/RedisConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/entity/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/mapper/ProductMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/ProductRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/impl/ProductRepoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/jpa/ProductJpaRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Request/UserChangePasswordRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Request/UserCreationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Request/UserUpdateInformationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Response/UserResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/Enum/SortType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/UserServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/mapper/UserMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/UserRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/impl/UserRepoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/jpa/UserJpaRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/impl/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/test/java/com/ZZZZ/UserService/Helper/RandomGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceTest.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Enum/EventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEvenConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/config/KafkaConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ShopFlowBasic.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.index" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.index" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.log" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.timeindex" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.timeindex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/leader-epoch-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/leader-epoch-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/quorum-state" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/quorum-state" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/recovery-point-offset-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/recovery-point-offset-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/replication-offset-checkpoint" beforeDir="false" afterPath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/replication-offset-checkpoint" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -64,43 +48,46 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mingbugsman"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mingbugsman&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mingbugsman/Spring-boot-projects.git",
-    "accountId": "afbb37c8-664a-4941-9b8b-9b2ad6ebe3ce"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mingbugsman/Spring-boot-projects.git&quot;,
+    &quot;accountId&quot;: &quot;afbb37c8-664a-4941-9b8b-9b2ad6ebe3ce&quot;
   }
-}]]></component>
+}</component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2uXQilDfW6AGXRH67XbRUeDljIy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ProductServiceApplication.executor": "Run",
-    "JUnit.ProductServiceTest.createProduct.executor": "Run",
-    "Maven.ProductService [clean].executor": "Run",
-    "Maven.ProductService [install].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ADMIN/Desktop/springboot/Project_2/ShopFlowBasic",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ProductServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ProductServiceTest.createProduct.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ProductService [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.ProductService [install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ADMIN/Desktop/springboot/Project_2/ShopFlowBasic&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ADMIN\Desktop\springboot\Project_2\ShopFlowBasic\environment" />

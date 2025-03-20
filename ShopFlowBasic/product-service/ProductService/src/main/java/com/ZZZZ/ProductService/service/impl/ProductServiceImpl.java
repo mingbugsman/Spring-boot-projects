@@ -1,9 +1,12 @@
 package com.ZZZZ.ProductService.service.impl;
 
 
+import com.ZZZZ.ProductService.Kafka.ProductEvent;
+import com.ZZZZ.ProductService.Kafka.ProductEventProducer;
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
 import com.ZZZZ.ProductService.DTO.response.ProductResponse;
+import com.ZZZZ.ProductService.Enum.EventType;
 import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.ProductService.mapper.ProductMapper;
 import com.ZZZZ.ProductService.repository.ProductRepo;
@@ -11,7 +14,6 @@ import com.ZZZZ.ProductService.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.query.SortDirection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +30,8 @@ public class ProductServiceImpl implements ProductService {
     ProductRepo productRepo;
     ProductMapper productMapper;
     RedisTemplate<String, Object> redisTemplate;
+    ProductEventProducer productEventProducer;
+
     @Override
     public ProductResponse createProduct(ProductCreationRequest request) {
         Product product = productMapper.toProduct(request);
@@ -35,6 +39,8 @@ public class ProductServiceImpl implements ProductService {
 
         // caching product
         redisTemplate.opsForValue().set("product:" + product.getId(), product);
+        ProductEvent productEvent = new ProductEvent(product.getId(), EventType.CREATED, "New product added: " + product.getName());
+        productEventProducer.sendProductEvent(productEvent);
         return productMapper.toProductResponse(product);
     }
 
@@ -68,6 +74,12 @@ public class ProductServiceImpl implements ProductService {
         productMapper.updateProduct(product, request);
         productRepo.save(product);
         redisTemplate.opsForValue().set("product:" + id, product);
+
+        if (product.getStock() == 0) {
+            ProductEvent event = new ProductEvent(product.getId(), EventType.OUT_OF_STOCK, "Product is out of stock: " + product.getName());
+            productEventProducer.sendProductEvent(event);
+        }
+
         return productMapper.toProductResponse(product);
     }
 

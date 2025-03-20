@@ -15,7 +15,7 @@ public class ProductServiceTest {
 
     @Test
     public void createProduct() {
-        ProductCreationRequest request = new ProductCreationRequest("Fumo Cirno", null, 5000000, 20);
+        ProductCreationRequest request = new ProductCreationRequest("Tyler the creator - flower boy", null, 5000000, 100);
         ProductResponse response = productService.createProduct(request);
         System.out.println(response);
     }
