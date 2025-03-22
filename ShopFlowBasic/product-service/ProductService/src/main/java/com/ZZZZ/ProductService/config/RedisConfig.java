@@ -1,6 +1,7 @@
 package com.ZZZZ.ProductService.config;
 
 
+import com.ZZZZ.ProductService.entity.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -15,20 +16,19 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
+    public RedisTemplate<String, Product> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Product> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
-        // Tạo và cấu hình ObjectMapper
+        // Cấu hình ObjectMapper
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-        // Tạo serializer với ObjectMapper đã cấu hình
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
+        // Sử dụng chung Jackson serializer
+        Jackson2JsonRedisSerializer<Product> serializer = new Jackson2JsonRedisSerializer<>(objectMapper, Product.class);
 
         // Cấu hình serializer cho RedisTemplate
-        template.setDefaultSerializer(serializer);
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(serializer);
         template.setHashKeySerializer(new StringRedisSerializer());
@@ -36,4 +36,5 @@ public class RedisConfig {
 
         return template;
     }
+
 }

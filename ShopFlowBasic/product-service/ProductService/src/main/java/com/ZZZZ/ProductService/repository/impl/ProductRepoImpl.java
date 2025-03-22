@@ -41,4 +41,9 @@ public class ProductRepoImpl implements ProductRepo {
     public void absoluteDelete(Product product) {
         productJpaRepo.delete(product);
     }
+
+    @Override
+    public void decreaseStock(String id, int stock) {
+        productJpaRepo.decreaseStock(id, stock);
+    }
 }

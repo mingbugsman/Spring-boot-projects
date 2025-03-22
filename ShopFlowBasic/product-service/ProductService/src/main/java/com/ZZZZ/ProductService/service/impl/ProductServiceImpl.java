@@ -1,8 +1,8 @@
 package com.ZZZZ.ProductService.service.impl;
 
 
-import com.ZZZZ.ProductService.Kafka.ProductEvent;
-import com.ZZZZ.ProductService.Kafka.ProductEventProducer;
+import com.ZZZZ.ProductService.kafka.ProductEvent;
+import com.ZZZZ.ProductService.kafka.ProductEventProducer;
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
 import com.ZZZZ.ProductService.DTO.response.ProductResponse;
@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
     ProductRepo productRepo;
     ProductMapper productMapper;
-    RedisTemplate<String, Object> redisTemplate;
+    RedisTemplate<String, Product> redisTemplate;
     ProductEventProducer productEventProducer;
 
     @Override

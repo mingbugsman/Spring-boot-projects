@@ -11,4 +11,6 @@ public interface ProductRepo {
     void save(Product product);
     void softDelete(Product product);
     void absoluteDelete(Product product);
+
+    void decreaseStock(String id, int stock);
 }

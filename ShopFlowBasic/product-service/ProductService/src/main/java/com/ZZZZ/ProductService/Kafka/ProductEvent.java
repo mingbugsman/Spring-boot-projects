@@ -1,4 +1,4 @@
-package com.ZZZZ.ProductService.Kafka;
+package com.ZZZZ.ProductService.kafka;
 
 import com.ZZZZ.ProductService.Enum.EventType;
 import lombok.*;

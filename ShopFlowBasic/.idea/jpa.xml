@@ -4,4 +4,18 @@
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
   </component>
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit moduleName="ProductService" name="Default">
+        <packages>
+          <package value="com.ZZZZ.ProductService" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="OrderService" name="Default">
+        <packages>
+          <package value="com.ZZZZ.OrderService" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
 </project>

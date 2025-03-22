@@ -11,7 +11,7 @@ services:
         condition: service_healthy
     environment:
       KAFKA_CLUSTERS_0_NAME: env-ddd      # Cluster name
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka1:9092  # Cluster bootstrap servers
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka2:9092  # Cluster bootstrap servers
       DYNAMIC_CONFIG_ENABLED: 'true'
   #    networks:
   #      - local-network-2025
@@ -19,7 +19,7 @@ services:
   # Kafka cluster
   kafka1:
     image: 'bitnami/kafka:3.5'
-    container_name: kafka1
+    container_name: kafka2
     ports:
       - 9192:9092  # Broker port
       - 9193:9094    # Controller port
@@ -33,7 +33,7 @@ services:
       # Define security protocols
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
       # Set advertised listener
-      - KAFKA_CFG_ADVERTISED_LISTENERS=EXTERNAL://192.168.1.6:9193,PLAINTEXT://kafka1:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=EXTERNAL://192.168.1.10:9193,PLAINTEXT://kafka2:9092
       # Interbroker listener name
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
       # Cluster ID for Kafka, must be the same across the cluster. Use a generated UUID

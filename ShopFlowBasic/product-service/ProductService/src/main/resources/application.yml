@@ -22,8 +22,10 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-        spring.json.trusted.packages: "com.ZZZZ.ProductService.Kafka"
-
+        spring:
+          json:
+            trusted:
+              packages: "com.ZZZZ.ProductService.kafka,com.ZZZZ.OrderService.kafka"
     listener:
       missing-topics-fatal: false
       ack-mode: manual_immediate
