@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${subject}">Email Template</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .container {
+            font-size: 16px;
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .brand {
+            font-size: 1.5em;
+            color: green !important;
+            text-decoration: none;
+            font-weight: 800;
+        }
+        .email-info {
+            display : flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items: center;
+            font-size: 14px;
+            color: #555;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        .welcome-from-fumo {
+            width:50%;
+            border-radius:5px;
+        }
+        .footer {
+            color: #aaa;
+            font-size: 0.8em;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="#" class="brand">Ming's Software Marketplace</a>
+    </div>
+    <h3>Hello, <span th:text="${name}"></span>!</h3>
+    <p th:text="${message}"></p>
+    <p><strong>From:</strong> <span th:text="${senderEmail}"></span></p>
+    <p><strong>Reply to:</strong> <span th:text="${replyTo}"></span></p>
+    <div class="email-info">
+        <img class="welcome-from-fumo" src="../static/HelloFromFumo.gif" alt="Fumo Hello">
+        <p>
+            Xin chúc mừng! Bạn đã được đăng ký thành công trên Ming Software Marketplace. Bây giờ, bạn có thể bắt đầu mua và tải các phần mềm, công cụ lập trình và tiếp cận hàng ngàn khách hàng tiềm năng.
+
+            Gợi ý bước tiếp theo để của bạn:
+            <br>
+            1. Hoàn thiện hồ sơ – Cập nhật thông tin của bạn.
+            <br>
+            2. Tạo các danh sách yêu thích mặt hàng.
+            <br>
+            3. Thiết lập phương thức thanh toán – Đảm bảo bạn có thể nhận thanh toán một cách dễ dàng.
+            <br>
+            4. Tìm và khám phá các sản phẩm trên Ming's Software Marketplace.
+            <br>
+            📌 Nếu bạn có bất kỳ câu hỏi nào, đội ngũ hỗ trợ của chúng tôi luôn sẵn sàng giúp đỡ.
+            <br>
+            Cảm ơn bạn đã tham gia cùng chúng tôi!
+        </p>
+    </div>
+    <div class="footer">
+        <p>Thank You</p>
+        <p>TM Team.</p>
+    </div>
+</div>
+</body>
+</html>

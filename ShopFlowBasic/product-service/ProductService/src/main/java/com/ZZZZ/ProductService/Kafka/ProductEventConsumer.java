@@ -49,7 +49,7 @@ public class ProductEventConsumer {
             log.warn("Received out-of-stock product. Ignoring...");
             return;  // Không throw exception để tránh Kafka retry
         }
-        log.info("Receive message, product id : " + productId);
+        log.info("Receive message, product id : {}", productId);
         Product product = productRepo.getProduct(productId);
         if (product == null) {
             log.warn("Product {} not found. Ignoring event...", productId);

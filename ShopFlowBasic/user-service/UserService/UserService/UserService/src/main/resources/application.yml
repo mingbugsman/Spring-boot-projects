@@ -2,6 +2,28 @@ server:
   port:3008
 
 spring:
+  kafka:
+    bootstrap-servers: localhost:9193
+    admin:
+      properties:
+        request.timeout.ms: 300000
+        default.api.timeout.ms: 300000
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: myGroup
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      missing-topics-fatal: false
+      ack-mode: manual_immediate
   datasource:
     url: "jdbc:mysql://localhost:3308/shopflow_user"
     username: root

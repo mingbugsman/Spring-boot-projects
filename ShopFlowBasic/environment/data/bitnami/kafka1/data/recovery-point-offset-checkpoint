@@ -1,5 +1,5 @@
 0
-56
+59
 __consumer_offsets 22 0
 __consumer_offsets 30 0
 __consumer_offsets 8 0
@@ -9,7 +9,7 @@ product-events 2 0
 __consumer_offsets 27 0
 __consumer_offsets 7 0
 __consumer_offsets 9 0
-__consumer_offsets 46 0
+__consumer_offsets 46 23
 __consumer_offsets 25 0
 __consumer_offsets 35 0
 __consumer_offsets 41 0
@@ -22,7 +22,7 @@ __consumer_offsets 28 0
 order-created 2 1
 __consumer_offsets 31 0
 __consumer_offsets 36 0
-__consumer_offsets 42 1
+__consumer_offsets 42 3
 __consumer_offsets 3 0
 __consumer_offsets 18 0
 order-created 0 1
@@ -35,6 +35,7 @@ __consumer_offsets 48 0
 product-events 0 0
 __consumer_offsets 19 0
 __consumer_offsets 11 0
+user-created 1 0
 __consumer_offsets 13 0
 __consumer_offsets 2 0
 __consumer_offsets 43 0
@@ -47,12 +48,14 @@ __consumer_offsets 44 0
 __consumer_offsets 39 0
 __consumer_offsets 12 0
 product-events 1 0
-__consumer_offsets 45 16
+__consumer_offsets 45 17
 __consumer_offsets 1 0
 __consumer_offsets 5 0
-__consumer_offsets 26 17
+__consumer_offsets 26 18
+user-created 2 0
 __consumer_offsets 29 0
 __consumer_offsets 34 0
 __consumer_offsets 10 0
-__consumer_offsets 32 12
+__consumer_offsets 32 13
 __consumer_offsets 40 0
+user-created 0 0

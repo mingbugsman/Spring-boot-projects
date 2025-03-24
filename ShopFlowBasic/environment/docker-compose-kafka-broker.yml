@@ -33,7 +33,7 @@ services:
       # Define security protocols
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
       # Set advertised listener
-      - KAFKA_CFG_ADVERTISED_LISTENERS=EXTERNAL://192.168.1.10:9193,PLAINTEXT://kafka2:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=EXTERNAL://192.168.1.19:9193,PLAINTEXT://kafka2:9092
       # Interbroker listener name
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
       # Cluster ID for Kafka, must be the same across the cluster. Use a generated UUID
