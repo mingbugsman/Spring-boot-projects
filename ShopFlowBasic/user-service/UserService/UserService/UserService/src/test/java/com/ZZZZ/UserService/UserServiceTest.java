@@ -21,11 +21,9 @@ public class UserServiceTest {
 
     @Test
     public void createUser() {
-        for (int i = 0; i < 1000; i++) {
-            UserCreationRequest request = new UserCreationRequest(RandomGenerator.generateRandomEmail(), RandomGenerator.generateRandomPassword());
-            UserResponse response = userService.createUser(request);
-            System.out.println(response);
-        }
+        UserCreationRequest request = new UserCreationRequest(RandomGenerator.generateRandomEmail(), RandomGenerator.generateRandomPassword());
+        UserResponse response = userService.createUser(request);
+        System.out.println(response);
     }
 
     @Test

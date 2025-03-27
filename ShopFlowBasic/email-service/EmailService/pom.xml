@@ -63,6 +63,11 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<version>3.4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ZZZZ.common</groupId>
+			<artifactId>common-dto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

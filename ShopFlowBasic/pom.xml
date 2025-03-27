@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ZZZZ</groupId>
+  <artifactId>ShopFlowBasic</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>product-service/ProductService</module>
+    <module>email-service/EmailService</module>
+    <module>order-service/OrderService</module>
+    <module>user-service/UserService/UserService/UserService</module>
+    <module>common-dto</module>
+  </modules>
+  <name>ShopFlowBasic</name>
+  <description>Spring Boot Multi-Module Project</description>
+</project>

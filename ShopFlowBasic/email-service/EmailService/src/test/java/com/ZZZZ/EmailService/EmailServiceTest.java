@@ -1,8 +1,8 @@
 package com.ZZZZ.EmailService;
 
 
-import com.ZZZZ.EmailService.DTO.EmailRequest;
 import com.ZZZZ.EmailService.service.EmailService;
+import com.ZZZZ.commonDTO.EmailRequest;
 import jakarta.mail.MessagingException;
 import lombok.experimental.NonFinal;
 import org.junit.jupiter.api.Test;
@@ -24,16 +24,13 @@ public class EmailServiceTest {
 
     @Test
     public void sendEmail() {
-        EmailRequest emailRequest = new EmailRequest("ming18380@gmail.com","Welcome user", "Welcome to shop service", "Nguyen Hoang Thuong Anh");
+        EmailRequest emailRequest = new EmailRequest("ming18380@gmail.com", "Nguyen Hoang Thuong Anh");
         Context context = new Context();
         context.setVariable("senderEmail", sender);
         context.setVariable("replyTo", emailRequest.getTo());
         context.setVariable("name", emailRequest.getName());
-        context.setVariable("message", emailRequest.getMessage());
-        context.setVariable("subject", emailRequest.getSubject());
-
         try {
-            emailService.sendWelcomeUserEmail( emailRequest.getSubject(), "emailTemplate", context);
+            emailService.sendWelcomeUserEmail("Welcome to shop service", "emailTemplate", context);
             System.out.println("email sent successfully");
         } catch (MessagingException e) {
             System.out.println( "Error sending email: " + e.getMessage());

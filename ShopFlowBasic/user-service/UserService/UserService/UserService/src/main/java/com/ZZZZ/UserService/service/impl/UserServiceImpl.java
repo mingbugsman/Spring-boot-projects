@@ -5,9 +5,11 @@ import com.ZZZZ.UserService.DTO.Request.UserCreationRequest;
 import com.ZZZZ.UserService.DTO.Request.UserUpdateInformationRequest;
 import com.ZZZZ.UserService.DTO.Response.UserResponse;
 import com.ZZZZ.UserService.entity.User;
+import com.ZZZZ.UserService.kafka.UserEventProducer;
 import com.ZZZZ.UserService.mapper.UserMapper;
 import com.ZZZZ.UserService.repository.UserRepo;
 import com.ZZZZ.UserService.service.UserService;
+import com.ZZZZ.commonDTO.EmailRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     UserRepo userRepo;
     UserMapper userMapper;
+    UserEventProducer userEventProducer;
 
     @Override
     public UserResponse createUser(UserCreationRequest request) {
@@ -32,6 +35,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toUser(request);
         userRepo.save(user);
+        userEventProducer.sendUserCreatedEvent(new EmailRequest(request.getEmail(), "user001"));
         return userMapper.toUserResponse(user);
     }
 
