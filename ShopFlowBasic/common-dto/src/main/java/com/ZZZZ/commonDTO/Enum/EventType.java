@@ -1,4 +1,4 @@
-package com.ZZZZ.ProductService.Enum;
+package com.ZZZZ.commonDTO.Enum;
 
 public enum EventType {
     CREATED,

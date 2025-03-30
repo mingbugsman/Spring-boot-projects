@@ -3,15 +3,18 @@ package com.ZZZZ.ProductService.kafka;
 
 import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.ProductService.repository.ProductRepo;
+import com.ZZZZ.commonDTO.Order.OrderCreatedEvent;
+import com.ZZZZ.commonDTO.Order.OrderFailedEvent;
+import com.ZZZZ.commonDTO.Product.ProductEvent;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 
 @Slf4j
@@ -20,7 +23,8 @@ import java.util.Objects;
 public class ProductEventConsumer {
     private final ProductRepo productRepo;
     private final RedisTemplate<String, Product> redisTemplate;
-
+    private final EntityManager entityManager;
+    private final KafkaTemplate<String, OrderFailedEvent> failedOrderEvent;
 
    @KafkaListener(topics = "product-events", groupId = "product-group")
     public void consumeProductEvent(ProductEvent event) {
@@ -44,25 +48,21 @@ public class ProductEventConsumer {
     }
 
     @KafkaListener(topics = "order-created", groupId = "inventory-group")
-    public void consumeOrderEvent(String productId) {
-        if (productId.equals("out of stock")) {
-            log.warn("Received out-of-stock product. Ignoring...");
-            return;  // Không throw exception để tránh Kafka retry
-        }
-        log.info("Receive message, product id : {}", productId);
-        Product product = productRepo.getProduct(productId);
+    public void consumeOrderEvent(OrderCreatedEvent event) {
+       log.info("received a message:{}",event.toString());
+        Product product = productRepo.getProduct(event.getProductId());
         if (product == null) {
-            log.warn("Product {} not found. Ignoring event...", productId);
+            log.warn("Product {} not found. Ignoring event...", event.getProductId());
+            return;
+        }
+        if (product.getStock() <= 0 || product.getStock() < event.getQuantity()) {
+            failedOrderEvent.send("failed-order", new OrderFailedEvent(event.getOrderId(), "Product is out of stock or insufficient stock"));
             return;
         }
 
-        Product cachedProduct = (Product) redisTemplate.opsForValue().get("product:" + productId);
-        if (cachedProduct != null) {
-            product.setStock(cachedProduct.getStock());
-        }
-
-        productRepo.save(product);
-        redisTemplate.opsForValue().set("product:" + productId, product);
+        productRepo.decreaseStock(event.getProductId(), event.getQuantity());
+        entityManager.clear();
+        Product updatedProduct = productRepo.getProduct(event.getProductId());
+        redisTemplate.opsForValue().set("product:" + updatedProduct.getId(), updatedProduct);
     }
-
 }

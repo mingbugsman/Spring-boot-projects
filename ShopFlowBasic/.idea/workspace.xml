@@ -5,301 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83ebfb34-964a-443c-b0eb-e53df0761512" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/EmailRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/KafkaConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/kafka/UserEventProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Enum/EventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Order/OrderCreatedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Order/OrderFailedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/kafka/UserEventConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/DTO/EmailRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/config/KafkaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/kafka/EmailEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/kafka/EmailEventConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/resources/templates/EmailTemplate.html" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/resources/templates/EmailTemplate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/test/java/com/ZZZZ/EmailService/EmailServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/test/java/com/ZZZZ/EmailService/EmailServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__cluster_metadata-0/quorum-state" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-0/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-0/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-0/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-0/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-0/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-1/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-1/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-1/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-1/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-1/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-10/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-10/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-10/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-10/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-10/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-11/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-11/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-11/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-11/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-11/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-12/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-12/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-12/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-12/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-12/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-13/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-13/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-13/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-13/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-13/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-14/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-14/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-14/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-14/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-14/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-15/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-15/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-15/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-15/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-15/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-16/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-16/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-16/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-16/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-16/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-17/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-17/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-17/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-17/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-17/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-18/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-18/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-18/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-18/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-18/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-19/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-19/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-19/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-19/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-19/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-2/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-2/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-2/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-2/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-2/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-20/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-20/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-20/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-20/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-20/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-21/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-21/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-21/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-21/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-21/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-22/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-22/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-22/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-22/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-22/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-23/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-23/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-23/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-23/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-23/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-24/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-24/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-24/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-24/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-24/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-25/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-25/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-25/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-25/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-25/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-26/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-26/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-26/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-26/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-26/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-27/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-27/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-27/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-27/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-27/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-28/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-28/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-28/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-28/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-28/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-29/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-29/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-29/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-29/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-29/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-3/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-3/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-3/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-3/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-3/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-30/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-30/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-30/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-30/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-30/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-31/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-31/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-31/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-31/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-31/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-32/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-32/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-32/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-32/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-32/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-33/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-33/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-33/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-33/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-33/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-34/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-34/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-34/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-34/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-34/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-35/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-35/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-35/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-35/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-35/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-36/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-36/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-36/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-36/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-36/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-37/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-37/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-37/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-37/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-37/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-38/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-38/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-38/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-38/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-38/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-39/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-39/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-39/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-39/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-39/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-4/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-4/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-4/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-4/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-4/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-40/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-40/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-40/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-40/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-40/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-41/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-41/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-41/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-41/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-41/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-42/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-42/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-42/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-42/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-42/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-43/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-43/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-43/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-43/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-43/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-44/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-44/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-44/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-44/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-44/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-45/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-45/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-45/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-45/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-45/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-46/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-46/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-46/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-46/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-46/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-47/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-47/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-47/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-47/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-47/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-48/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-48/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-48/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-48/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-48/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-49/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-49/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-49/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-49/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-49/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-5/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-5/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-5/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-5/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-5/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-6/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-6/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-6/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-6/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-6/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-7/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-7/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-7/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-7/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-7/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-8/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-8/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-8/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-8/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-8/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-9/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-9/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-9/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-9/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/__consumer_offsets-9/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/bootstrap.checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/cleaner-offset-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/log-start-offset-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/meta.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-0/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-0/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-0/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-0/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-0/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-1/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-1/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-1/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-1/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-1/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-2/00000000000000000000.index" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-2/00000000000000000000.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-2/00000000000000000000.timeindex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-2/leader-epoch-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/product-events-2/partition.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/recovery-point-offset-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/data/bitnami/kafka1/data/replication-offset-checkpoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-dto/src/test/java/com/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/Enum/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/Enum/OrderStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/config/KafkaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Product/ProductEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/mapper/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/mapper/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/test/java/com/ZZZZ/OrderService/OrderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/test/java/com/ZZZZ/OrderService/OrderServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Enum/EventType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/jpa/ProductJpaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/jpa/ProductJpaRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/kafka/UserEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/kafka/UserEventProducer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,6 +95,8 @@
     &quot;JUnit.ProductServiceTest.createProduct.executor&quot;: &quot;Run&quot;,
     &quot;Maven.ProductService [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.ProductService [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.common-dto [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.common-dto [install].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -389,12 +126,12 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.UserServiceApplication">
-    <configuration name="EmailServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.EmailService.EmailServiceApplication" />
-      <module name="EmailService" />
+    <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceApplication" />
+      <module name="OrderService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.EmailService.*" />
+          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -428,23 +165,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmailServiceTest.sendEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="EmailService" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ZZZZ.EmailService.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.EmailService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.EmailService.EmailServiceTest" />
-      <option name="METHOD_NAME" value="sendEmail" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="OrderServiceTest.createOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OrderService" />
       <extension name="coverage">
         <pattern>
@@ -454,7 +175,24 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ZZZZ.OrderService" />
       <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="createOrder" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductServiceTest.createProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProductService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.ProductService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.ProductService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.ProductService.ProductServiceTest" />
+      <option name="METHOD_NAME" value="createProduct" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -473,10 +211,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.EmailServiceApplication" />
-        <item itemvalue="JUnit.EmailServiceTest.sendEmail" />
-        <item itemvalue="JUnit.OrderServiceTest" />
+        <item itemvalue="Application.OrderServiceApplication" />
+        <item itemvalue="JUnit.OrderServiceTest.createOrder" />
         <item itemvalue="Application.ProductServiceApplication" />
+        <item itemvalue="JUnit.ProductServiceTest.createProduct" />
       </list>
     </recent_temporary>
   </component>

@@ -1,12 +1,12 @@
 package com.ZZZZ.ProductService.service.impl;
 
 
-import com.ZZZZ.ProductService.kafka.ProductEvent;
+import com.ZZZZ.commonDTO.Enum.EventType;
+import com.ZZZZ.commonDTO.Product.ProductEvent;
 import com.ZZZZ.ProductService.kafka.ProductEventProducer;
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
 import com.ZZZZ.ProductService.DTO.response.ProductResponse;
-import com.ZZZZ.ProductService.Enum.EventType;
 import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.ProductService.mapper.ProductMapper;
 import com.ZZZZ.ProductService.repository.ProductRepo;

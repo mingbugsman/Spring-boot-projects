@@ -1,15 +1,14 @@
-package com.ZZZZ.OrderService.kafka;
-
+package com.ZZZZ.commonDTO.Order;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderEvent {
+public class OrderCreatedEvent {
+    String orderId;
     String productId;
     String userId;
     int quantity;

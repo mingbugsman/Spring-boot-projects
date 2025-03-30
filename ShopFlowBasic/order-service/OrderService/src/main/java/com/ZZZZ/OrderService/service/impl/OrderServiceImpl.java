@@ -4,11 +4,11 @@ import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
 import com.ZZZZ.OrderService.entity.Order;
-import com.ZZZZ.OrderService.kafka.OrderEvent;
 import com.ZZZZ.OrderService.kafka.OrderEventProducer;
 import com.ZZZZ.OrderService.mapper.OrderMapper;
 import com.ZZZZ.OrderService.repository.OrderRepo;
 import com.ZZZZ.OrderService.service.OrderService;
+import com.ZZZZ.commonDTO.Order.OrderCreatedEvent;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -30,20 +30,19 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponse createOrder(OrderCreationRequest request) {
-        boolean stockUpdated = checkAndUpdateStock(request.getProductId(), request.getQuantity());
+      /*  boolean stockUpdated = checkAndUpdateStock(request.getProductId(), request.getQuantity());
         if (!stockUpdated) {
-
-            producer.sendOrderCreatedEvent("out of stock");
+            producer.sendOrderCreatedEvent(orderMapper.toOrderCreatedEvent(null, "out of stock"));
             throw new RuntimeException("Not enough stock");
-        }
+        }*/
 
         // Mapping và lưu order
         Order order = orderMapper.toOrder(request);
         orderRepo.save(order);
 
         // Gửi sự kiện thành công
-        //OrderEvent successEvent = orderMapper.toOrderEvent(order, "order-created");
-        producer.sendOrderCreatedEvent(order.getProductId());
+        OrderCreatedEvent event = orderMapper.toOrderCreatedEvent(order, "sending message created order");
+        producer.sendOrderCreatedEvent(event);
 
         return orderMapper.toOrderResponse(order);
     }
@@ -53,6 +52,8 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponse updateInformationOrder(OrderUpdateRequest request) {
         return null;
     }
+
+
 
     @Override
     public String cancelOrder(String id) {

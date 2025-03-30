@@ -35,7 +35,7 @@ public class Order {
     int quantity;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "order_status", nullable = false)
+    @Column(name = "order_status", nullable = false, columnDefinition = "VARCHAR(50)")
     OrderStatus orderStatus = OrderStatus.PENDING;
 
     @Enumerated(EnumType.STRING)

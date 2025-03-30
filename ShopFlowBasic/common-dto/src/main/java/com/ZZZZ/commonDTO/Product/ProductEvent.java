@@ -1,6 +1,7 @@
-package com.ZZZZ.ProductService.kafka;
+package com.ZZZZ.commonDTO.Product;
 
-import com.ZZZZ.ProductService.Enum.EventType;
+
+import com.ZZZZ.commonDTO.Enum.EventType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

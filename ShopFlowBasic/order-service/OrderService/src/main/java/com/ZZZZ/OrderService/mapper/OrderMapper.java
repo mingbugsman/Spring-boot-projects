@@ -4,9 +4,8 @@ package com.ZZZZ.OrderService.mapper;
 import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
-import com.ZZZZ.OrderService.Enum.MessageStatus;
 import com.ZZZZ.OrderService.entity.Order;
-import com.ZZZZ.OrderService.kafka.OrderEvent;
+import com.ZZZZ.commonDTO.Order.OrderCreatedEvent;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -42,9 +41,10 @@ public class OrderMapper {
         );
     }
 
-    public OrderEvent toOrderEvent(Order order, String message) {
-        if (order == null) return new OrderEvent(null, null, 0, null, message);
-        return new OrderEvent(
+    public OrderCreatedEvent toOrderCreatedEvent(Order order, String message) {
+        if (order == null) return new OrderCreatedEvent(null, null, null, 0, null, message);
+        return new OrderCreatedEvent(
+                order.getId(),
                 order.getProductId(),
                 order.getUserId(),
                 order.getQuantity(),

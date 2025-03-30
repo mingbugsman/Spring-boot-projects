@@ -1,6 +1,5 @@
 package com.ZZZZ.UserService.kafka;
 
-
 import com.ZZZZ.commonDTO.EmailRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -25,7 +25,7 @@ spring:
         spring:
           json:
             trusted:
-              packages: "com.ZZZZ.OrderService.kafka"
+              packages: "com.ZZZZ.commonDTO.*"
 
     listener:
       missing-topics-fatal: false
@@ -35,8 +35,6 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-
 
   jpa:
     hibernate:
