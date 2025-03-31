@@ -8,7 +8,7 @@ public interface ProductRepo {
     Product getProduct(String id);
     Page<Product> getAll(Pageable pageable);
 
-    void save(Product product);
+    Product save(Product product);
     void softDelete(Product product);
     void absoluteDelete(Product product);
 

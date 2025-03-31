@@ -5,16 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83ebfb34-964a-443c-b0eb-e53df0761512" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Order/OrderCanceledEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Product/DeletedProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Order/OrderFailedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Order/OrderFailedEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/DTO/request/OrderUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/DTO/request/OrderUpdateRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/config/KafkaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/mapper/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/mapper/OrderMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/impl/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/test/java/com/ZZZZ/OrderService/OrderServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/test/java/com/ZZZZ/OrderService/OrderServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/repository/OrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/repository/OrderRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/config/KafkaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/mapper/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/ProductRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/ProductRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/impl/ProductRepoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/impl/ProductRepoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,10 +73,14 @@
     "Application.UserServiceApplication.executor": "Run",
     "JUnit.EmailServiceTest.sendEmail.executor": "Run",
     "JUnit.OrderServiceTest.createOrder.executor": "Run",
+    "JUnit.OrderServiceTest.deleteOrder.executor": "Run",
     "JUnit.OrderServiceTest.executor": "Run",
-    "JUnit.OrderServiceTest.getAllOrder.executor": "Debug",
+    "JUnit.OrderServiceTest.getAllOrder.executor": "Run",
     "JUnit.OrderServiceTest.getOrdersByProductId.executor": "Run",
+    "JUnit.OrderServiceTest.getOrdersByUserId.executor": "Run",
     "JUnit.ProductServiceTest.createProduct.executor": "Run",
+    "JUnit.ProductServiceTest.deleteProduct.executor": "Run",
+    "JUnit.ProductServiceTest.updateProduct_ShouldUpdateStockAndCache.executor": "Run",
     "Maven.ProductService [clean].executor": "Run",
     "Maven.ProductService [install].executor": "Run",
     "Maven.common-dto [clean].executor": "Run",
@@ -107,13 +113,13 @@
       <recent name="com.ZZZZ.OrderService.DTO.request" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderServiceTest.getAllOrder">
-    <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceApplication" />
-      <module name="UserService" />
+  <component name="RunManager" selected="JUnit.ProductServiceTest.updateProduct_ShouldUpdateStockAndCache">
+    <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceApplication" />
+      <module name="OrderService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
+          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -153,33 +159,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderServiceTest.getOrdersByProductId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OrderService" />
+    <configuration name="ProductServiceTest.deleteProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProductService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
+          <option name="PATTERN" value="com.ZZZZ.ProductService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.OrderService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceTest" />
-      <option name="METHOD_NAME" value="getOrdersByProductId" />
+      <option name="PACKAGE_NAME" value="com.ZZZZ.ProductService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.ProductService.ProductServiceTest" />
+      <option name="METHOD_NAME" value="deleteProduct" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderServiceTest.getOrdersByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OrderService" />
+    <configuration name="ProductServiceTest.updateProduct_ShouldUpdateStockAndCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProductService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
+          <option name="PATTERN" value="com.ZZZZ.ProductService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.OrderService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceTest" />
-      <option name="METHOD_NAME" value="getOrdersByUserId" />
+      <option name="PACKAGE_NAME" value="com.ZZZZ.ProductService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.ProductService.ProductServiceTest" />
+      <option name="METHOD_NAME" value="updateProduct_ShouldUpdateStockAndCache" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -198,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProductServiceTest.updateProduct_ShouldUpdateStockAndCache" />
+        <item itemvalue="JUnit.ProductServiceTest.deleteProduct" />
+        <item itemvalue="Application.OrderServiceApplication" />
         <item itemvalue="JUnit.OrderServiceTest.getAllOrder" />
         <item itemvalue="JUnit.OrderServiceTest.deleteOrder" />
-        <item itemvalue="JUnit.OrderServiceTest.getOrdersByUserId" />
-        <item itemvalue="JUnit.OrderServiceTest.getOrdersByProductId" />
-        <item itemvalue="Application.UserServiceApplication" />
       </list>
     </recent_temporary>
   </component>

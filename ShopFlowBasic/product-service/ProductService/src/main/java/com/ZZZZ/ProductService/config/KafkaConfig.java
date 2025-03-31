@@ -15,6 +15,9 @@ public class KafkaConfig {
         return new NewTopic("product-events", 3, (short) 1);
     }
 
-
+    @Bean
+    public NewTopic deletedProduct() {
+        return new NewTopic("deleted-product", 3, (short) 1);
+    }
 
 }

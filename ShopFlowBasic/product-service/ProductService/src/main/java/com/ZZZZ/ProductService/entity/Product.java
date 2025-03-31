@@ -46,4 +46,7 @@ public class Product {
 
     @Column(name = "deleted_at")
     LocalDateTime deleteAt;
+
+    @Version
+    private Long version;
 }

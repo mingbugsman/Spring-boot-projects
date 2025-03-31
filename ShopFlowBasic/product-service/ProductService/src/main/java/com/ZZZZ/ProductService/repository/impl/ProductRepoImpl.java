@@ -27,8 +27,9 @@ public class ProductRepoImpl implements ProductRepo {
     }
 
     @Override
-    public void save(Product product) {
-        productJpaRepo.save(product);
+    public Product save(Product product) {
+        product = productJpaRepo.save(product);
+        return product;
     }
 
     @Override

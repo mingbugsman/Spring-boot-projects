@@ -11,6 +11,7 @@ import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.ProductService.mapper.ProductMapper;
 import com.ZZZZ.ProductService.repository.ProductRepo;
 import com.ZZZZ.ProductService.service.ProductService;
+import jakarta.persistence.EntityManager;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -31,6 +33,7 @@ public class ProductServiceImpl implements ProductService {
     ProductMapper productMapper;
     RedisTemplate<String, Product> redisTemplate;
     ProductEventProducer productEventProducer;
+    EntityManager entityManager;
 
     @Override
     public ProductResponse createProduct(ProductCreationRequest request) {
@@ -56,7 +59,6 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("Not found product");
         }
         return productMapper.toProductResponse(product);
-
     }
 
     @Override
@@ -66,13 +68,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductResponse updateProduct(String id, ProductUpdateRequest request) {
         Product product = productRepo.getProduct(id);
         if (product == null) {
             throw new RuntimeException("Not found product");
         }
         productMapper.updateProduct(product, request);
-        productRepo.save(product);
+        product = productRepo.save(product);
         redisTemplate.opsForValue().set("product:" + id, product);
 
         if (product.getStock() == 0) {
@@ -91,5 +94,6 @@ public class ProductServiceImpl implements ProductService {
         }
         productRepo.softDelete(product);
         redisTemplate.delete("product:"+id);
+        productEventProducer.sendDeletedProductEvent(productMapper.toDeletedProduct(product));
     }
 }

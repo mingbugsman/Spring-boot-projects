@@ -5,7 +5,10 @@ import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
 import com.ZZZZ.ProductService.DTO.response.ProductResponse;
 import com.ZZZZ.ProductService.entity.Product;
+import com.ZZZZ.commonDTO.Product.DeletedProduct;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 public final class ProductMapper {
@@ -32,5 +35,12 @@ public final class ProductMapper {
         product.setDescription(request.getDescription() != null ? request.getDescription() : product.getDescription());
         product.setPrice(request.getPrice());
         product.setStock(request.getStock());
+    }
+
+    public DeletedProduct toDeletedProduct(Product product) {
+        return new DeletedProduct(
+                product.getId(),
+                LocalDateTime.now()
+        );
     }
 }
