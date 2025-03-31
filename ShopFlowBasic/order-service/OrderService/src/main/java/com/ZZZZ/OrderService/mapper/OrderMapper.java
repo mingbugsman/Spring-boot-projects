@@ -5,8 +5,11 @@ import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
 import com.ZZZZ.OrderService.entity.Order;
+import com.ZZZZ.commonDTO.Order.OrderCanceledEvent;
 import com.ZZZZ.commonDTO.Order.OrderCreatedEvent;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 public class OrderMapper {
@@ -23,7 +26,7 @@ public class OrderMapper {
     }
 
     public void updateOrder(Order order, OrderUpdateRequest request) {
-        order.setOrderStatus(request.getOrderStatus() != null ? request.getOrderStatus() : order.getOrderStatus());
+
         order.setPaymentMethod(request.getPaymentMethod() != null ? request.getPaymentMethod() : order.getPaymentMethod());
         order.setLocationShipping(request.getLocationShipping() != null ? request.getLocationShipping() : order.getLocationShipping());
         order.setQuantity(request.getQuantity());
@@ -50,6 +53,15 @@ public class OrderMapper {
                 order.getQuantity(),
                 order.getLocationShipping(),
                 message
+        );
+    }
+
+    public OrderCanceledEvent toOrderCanceledEvent(Order order) {
+        return new OrderCanceledEvent(
+                order.getId(),
+                order.getUserId(),
+                "Khong co nhu cau",
+                LocalDateTime.now()
         );
     }
 

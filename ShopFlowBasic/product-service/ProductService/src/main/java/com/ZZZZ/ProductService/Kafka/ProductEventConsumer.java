@@ -16,6 +16,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 
 @Slf4j
 @Service
@@ -56,7 +58,7 @@ public class ProductEventConsumer {
             return;
         }
         if (product.getStock() <= 0 || product.getStock() < event.getQuantity()) {
-            failedOrderEvent.send("failed-order", new OrderFailedEvent(event.getOrderId(), "Product is out of stock or insufficient stock"));
+            failedOrderEvent.send("failed-order", new OrderFailedEvent(event.getOrderId(), "Product is out of stock or insufficient stock", LocalDateTime.now()));
             return;
         }
 

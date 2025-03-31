@@ -3,20 +3,27 @@ package com.ZZZZ.OrderService.service.impl;
 import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
+import com.ZZZZ.OrderService.Enum.OrderStatus;
 import com.ZZZZ.OrderService.entity.Order;
 import com.ZZZZ.OrderService.kafka.OrderEventProducer;
 import com.ZZZZ.OrderService.mapper.OrderMapper;
 import com.ZZZZ.OrderService.repository.OrderRepo;
 import com.ZZZZ.OrderService.service.OrderService;
+import com.ZZZZ.commonDTO.Order.OrderCanceledEvent;
 import com.ZZZZ.commonDTO.Order.OrderCreatedEvent;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 @RequiredArgsConstructor
@@ -27,20 +34,14 @@ public class OrderServiceImpl implements OrderService {
     OrderRepo orderRepo;
     OrderEventProducer producer;
     RedisTemplate<String, Object> redisTemplate;
+    KafkaTemplate<String, OrderCanceledEvent> orderCanceledEventKafkaTemplate;
 
     @Override
     public OrderResponse createOrder(OrderCreationRequest request) {
-      /*  boolean stockUpdated = checkAndUpdateStock(request.getProductId(), request.getQuantity());
-        if (!stockUpdated) {
-            producer.sendOrderCreatedEvent(orderMapper.toOrderCreatedEvent(null, "out of stock"));
-            throw new RuntimeException("Not enough stock");
-        }*/
 
-        // Mapping và lưu order
         Order order = orderMapper.toOrder(request);
         orderRepo.save(order);
 
-        // Gửi sự kiện thành công
         OrderCreatedEvent event = orderMapper.toOrderCreatedEvent(order, "sending message created order");
         producer.sendOrderCreatedEvent(event);
 
@@ -49,35 +50,59 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public OrderResponse updateInformationOrder(OrderUpdateRequest request) {
-        return null;
+    public OrderResponse updateInformationOrder(String id, OrderUpdateRequest request) {
+        Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
+        if (order == null) {
+            throw new RuntimeException("Not found order");
+        }
+        order.setLocationShipping(request.getLocationShipping());
+        order.setQuantity(request.getQuantity());
+        order.setPaymentMethod(request.getPaymentMethod());
+        orderRepo.save(order);
+        return orderMapper.toOrderResponse(order);
     }
 
 
 
     @Override
     public String cancelOrder(String id) {
-        return "";
+        Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
+        if (order == null) {
+            throw new RuntimeException("Not found order");
+        }
+        order.setOrderStatus(OrderStatus.CANCELLED);
+        orderRepo.save(order);
+
+        orderCanceledEventKafkaTemplate.send("canceled-order", orderMapper.toOrderCanceledEvent(order));
+        return "your order is successfully canceled";
     }
 
     @Override
     public void deleteOrder(String id) {
-
+        Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
+        if (order == null) {
+            throw new RuntimeException("Not found order");
+        }
+        order.setDeletedAt(LocalDateTime.now());
+        orderRepo.save(order);
     }
 
     @Override
     public Page<OrderResponse> getAllOrder(int page, int size, String sortBy) {
-        return null;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
+        return orderRepo.findByDeletedAtIsNull(pageable).map(orderMapper::toOrderResponse);
     }
 
     @Override
     public Page<OrderResponse> getOrdersByProductId(String productId, int page, int size, String sortBy) {
-        return null;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
+        return orderRepo.findByProductIdAndDeletedAtIsNull(productId, pageable).map(orderMapper::toOrderResponse);
     }
 
     @Override
     public Page<OrderResponse> getOrdersByUserId(String userId, int page, int size, String sortBy) {
-        return null;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
+        return orderRepo.findByUserIdAndDeletedAtIsNull(userId, pageable).map(orderMapper::toOrderResponse);
     }
 
     private static final String CHECK_AND_UPDATE_STOCK_SCRIPT =

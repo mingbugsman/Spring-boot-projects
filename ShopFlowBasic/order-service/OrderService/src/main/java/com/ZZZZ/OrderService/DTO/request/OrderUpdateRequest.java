@@ -22,6 +22,4 @@ public class OrderUpdateRequest {
     @NotBlank(message = "location is not blank")
     String locationShipping;
     PaymentMethod paymentMethod;
-    OrderStatus orderStatus;
-
 }

@@ -8,12 +8,14 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
+
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderFailedEvent {
+public class OrderCanceledEvent {
     String orderId;
+    String userId;
     String reason;
     LocalDateTime createdAt;
 }

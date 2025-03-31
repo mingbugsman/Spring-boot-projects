@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 public interface OrderService {
     public OrderResponse createOrder(OrderCreationRequest request);
-    public OrderResponse updateInformationOrder(OrderUpdateRequest request);
+    public OrderResponse updateInformationOrder(String id, OrderUpdateRequest request);
     public String cancelOrder(String id);
     public void deleteOrder(String id);
     // get
