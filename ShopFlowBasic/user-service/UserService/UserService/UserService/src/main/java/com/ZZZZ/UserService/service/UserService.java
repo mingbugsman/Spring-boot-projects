@@ -13,4 +13,5 @@ public interface UserService {
     void absoluteDeleteUser(String id);
     UserResponse getUser(String id);
     Page<UserResponse> getAll(int page, int size, String sortBy);
+    boolean verifyEmail(String email, String otp);
 }

@@ -1,4 +1,4 @@
-package com.ZZZZ.ProductService.DTO.response;
+package com.ZZZZ.ProductService.DTO.response.product;
 
 
 public record ProductResponse (

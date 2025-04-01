@@ -13,6 +13,6 @@ public interface UserJpaRepo extends JpaRepository<User, String> {
     Page<User> findByDeleteAtIsNull(Pageable pageable);
     
     Optional<User> findByIdAndDeleteAtIsNull(String id);
-    Optional<User> findByEmailAndDeleteAtIsNull(String email);
+    User findByEmailAndDeleteAtIsNull(String email);
 
 }

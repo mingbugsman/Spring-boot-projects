@@ -5,18 +5,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83ebfb34-964a-443c-b0eb-e53df0761512" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common-dto/src/main/java/com/ZZZZ/commonDTO/Product/DeletedProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/base/util/EmailUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/base/util/Generator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/config/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/resources/templates/EmailOTP.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/DTO/response/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/base/exception/ApplicationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/base/exception/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/base/exception/ErrorDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/base/exception/ErrorResponseBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/base/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/DTO/response/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/base/exception/ApplicationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/base/exception/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/base/exception/ErrorDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/base/exception/ErrorResponseBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/base/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/DTO/Response/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base/exception/ApplicationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base/exception/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base/exception/ErrorDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base/exception/ErrorResponseBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base/util/Generator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/RedisConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/kafka/OrderEventConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/repository/OrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/repository/OrderRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/Kafka/ProductEventProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/config/KafkaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email-service/EmailService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/kafka/EmailEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/kafka/EmailEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/service/impl/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/main/java/com/ZZZZ/EmailService/service/impl/EmailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/email-service/EmailService/src/test/java/com/ZZZZ/EmailService/EmailServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/email-service/EmailService/src/test/java/com/ZZZZ/EmailService/EmailServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/OrderService/src/main/java/com/ZZZZ/OrderService/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/DTO/response/ProductResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/DTO/response/product/ProductResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/mapper/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/ProductRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/ProductRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/impl/ProductRepoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/repository/impl/ProductRepoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/main/java/com/ZZZZ/ProductService/service/impl/ProductServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/ProductService/src/test/java/com/ZZZZ/ProductService/ProductServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/KafkaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/kafka/UserEventProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/kafka/UserEventProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Impl/UserRepoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Impl/UserRepoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Jpa/UserJpaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Jpa/UserJpaRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/UserRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/UserRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/test/java/com/ZZZZ/UserService/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +62,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -68,10 +104,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.EmailServiceApplication.executor": "Run",
+    "Application.EmailUtil.executor": "Run",
+    "Application.Generator.executor": "Run",
     "Application.OrderServiceApplication.executor": "Run",
     "Application.ProductServiceApplication.executor": "Run",
     "Application.UserServiceApplication.executor": "Run",
     "JUnit.EmailServiceTest.sendEmail.executor": "Run",
+    "JUnit.EmailServiceTest.sendOTP.executor": "Run",
     "JUnit.OrderServiceTest.createOrder.executor": "Run",
     "JUnit.OrderServiceTest.deleteOrder.executor": "Run",
     "JUnit.OrderServiceTest.executor": "Run",
@@ -81,6 +120,8 @@
     "JUnit.ProductServiceTest.createProduct.executor": "Run",
     "JUnit.ProductServiceTest.deleteProduct.executor": "Run",
     "JUnit.ProductServiceTest.updateProduct_ShouldUpdateStockAndCache.executor": "Run",
+    "JUnit.UserServiceTest.createUser.executor": "Run",
+    "JUnit.UserServiceTest.verifyEmailTesting.executor": "Run",
     "Maven.ProductService [clean].executor": "Run",
     "Maven.ProductService [install].executor": "Run",
     "Maven.common-dto [clean].executor": "Run",
@@ -90,7 +131,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ADMIN/Desktop/springboot/Project_2/ShopFlowBasic/email-service/EmailService/src/main/resources/static",
+    "last_opened_file_path": "C:/Users/ADMIN/Desktop/springboot/Project_2/ShopFlowBasic/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/base",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -102,24 +143,28 @@
       <recent name="com.ZZZZ.OrderService.Enum" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ADMIN\Desktop\springboot\Project_2\ShopFlowBasic\user-service\UserService\UserService\UserService\src\main\java\com\ZZZZ\UserService\base" />
+      <recent name="C:\Users\ADMIN\Desktop\springboot\Project_2\ShopFlowBasic\order-service\OrderService\src\main\java\com\ZZZZ\OrderService\base" />
       <recent name="C:\Users\ADMIN\Desktop\springboot\Project_2\ShopFlowBasic\email-service\EmailService\src\main\resources\static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ADMIN\Desktop\springboot\Project_2\ShopFlowBasic\environment" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ZZZZ.OrderService.DTO.response" />
+      <recent name="com.ZZZZ.UserService.DTO.Response" />
+      <recent name="com.ZZZZ.UserService.config" />
       <recent name="com.ZZZZ.ProductService.kafka" />
       <recent name="com.ZZZZ.ProductService.Kafka" />
-      <recent name="com.ZZZZ.OrderService.DTO.request" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProductServiceTest.updateProduct_ShouldUpdateStockAndCache">
-    <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceApplication" />
-      <module name="OrderService" />
+  <component name="RunManager" selected="JUnit.UserServiceTest.verifyEmailTesting">
+    <configuration name="EmailServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.EmailService.EmailServiceApplication" />
+      <module name="EmailService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
+          <option name="PATTERN" value="com.ZZZZ.EmailService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -127,65 +172,62 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderServiceTest.deleteOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OrderService" />
+    <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceApplication" />
+      <module name="UserService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.OrderService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceTest" />
-      <option name="METHOD_NAME" value="deleteOrder" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailServiceTest.sendOTP" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EmailService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ZZZZ.EmailService.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ZZZZ.EmailService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.EmailService.EmailServiceTest" />
+      <option name="METHOD_NAME" value="sendOTP" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderServiceTest.getAllOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="OrderService" />
+    <configuration name="UserServiceTest.createUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.OrderService.*" />
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.OrderService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.OrderService.OrderServiceTest" />
-      <option name="METHOD_NAME" value="getAllOrder" />
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="createUser" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductServiceTest.deleteProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProductService" />
+    <configuration name="UserServiceTest.verifyEmailTesting" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="UserService" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ZZZZ.ProductService.*" />
+          <option name="PATTERN" value="com.ZZZZ.UserService.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.ProductService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.ProductService.ProductServiceTest" />
-      <option name="METHOD_NAME" value="deleteProduct" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProductServiceTest.updateProduct_ShouldUpdateStockAndCache" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProductService" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ZZZZ.ProductService.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ZZZZ.ProductService" />
-      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.ProductService.ProductServiceTest" />
-      <option name="METHOD_NAME" value="updateProduct_ShouldUpdateStockAndCache" />
+      <option name="PACKAGE_NAME" value="com.ZZZZ.UserService" />
+      <option name="MAIN_CLASS_NAME" value="com.ZZZZ.UserService.UserServiceTest" />
+      <option name="METHOD_NAME" value="verifyEmailTesting" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -204,11 +246,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProductServiceTest.updateProduct_ShouldUpdateStockAndCache" />
-        <item itemvalue="JUnit.ProductServiceTest.deleteProduct" />
-        <item itemvalue="Application.OrderServiceApplication" />
-        <item itemvalue="JUnit.OrderServiceTest.getAllOrder" />
-        <item itemvalue="JUnit.OrderServiceTest.deleteOrder" />
+        <item itemvalue="JUnit.UserServiceTest.verifyEmailTesting" />
+        <item itemvalue="Application.EmailServiceApplication" />
+        <item itemvalue="JUnit.UserServiceTest.createUser" />
+        <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="JUnit.EmailServiceTest.sendOTP" />
       </list>
     </recent_temporary>
   </component>

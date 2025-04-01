@@ -1,9 +1,11 @@
 package com.ZZZZ.EmailService.service;
 
 
+import com.ZZZZ.commonDTO.EmailRequest;
 import jakarta.mail.MessagingException;
 import org.thymeleaf.context.Context;
 
 public interface EmailService {
-    public void sendWelcomeUserEmail(String subject, String template, Context context) throws MessagingException;
+     void sendWelcomeUserEmail(EmailRequest request) throws MessagingException;
+     void sendOTP(EmailRequest request) throws MessagingException;
 }

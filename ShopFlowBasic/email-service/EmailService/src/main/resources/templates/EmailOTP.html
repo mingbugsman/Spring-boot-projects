@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${subject}">Email OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+        h2 {
+            color: #333;
+        }
+        .otp-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e63946;
+            padding: 10px 20px;
+            border: 2px dashed #e63946;
+            text-align: center;
+            margin: 15px 0;
+        }
+        .footer {
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Verify Account</h2>
+    <p>Hi <strong th:text="${username}"></strong>,</p>
+    <p><strong>From:</strong> <span th:text="${senderEmail}"></span></p>
+    <p><strong>Reply to:</strong> <span th:text="${replyTo}"></span></p>
+    <p>Here is your OTP code to verify your account:</p>
+    <div class="otp-code"><p th:text="${OTPCode}"></p></div>
+    <p>The OTP code is valid for <strong>10 minutes</strong>. Please do not share this code with anyone.</p>
+    <p>Best regards,<br>TM  Support Team</p>
+    <div class="footer">
+        <p>if you did not request this OTP code, please ignore this email.</p>
+    </div>
+</div>
+</body>
+</html>

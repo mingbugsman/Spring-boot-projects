@@ -15,15 +15,26 @@ import org.thymeleaf.context.Context;
 public class EmailEventConsumer {
     private final EmailService emailService;
 
-    @KafkaListener(topics = "user-created", groupId = "email-service-group")
-    public String emailServiceListen(EmailRequest emailRequest) {
-        log.info("Received message: {}", emailRequest);
-        Context context = new Context();
+    @KafkaListener(topics = "send-otp-event", groupId = "email-service-group")
+    public String verifyEmailConsume(EmailRequest emailRequest) {
+        log.info("Received message to verify email: {}", emailRequest);
         try {
-            emailService.sendWelcomeUserEmail("Welcome to shop service", "emailTemplate", context);
+            emailService.sendOTP(emailRequest);
             return "Email sent successfully";
         } catch (MessagingException e) {
             return "Error sending email: " + e.getMessage();
         }
     }
+
+    @KafkaListener(topics = "user-created-event", groupId = "email-service-group")
+    public String emailServiceListen(EmailRequest emailRequest) {
+        log.info("Received message: {}", emailRequest);
+        try {
+            emailService.sendWelcomeUserEmail(emailRequest);
+            return "Email sent successfully";
+        } catch (MessagingException e) {
+            return "Error sending email: " + e.getMessage();
+        }
+    }
+
 }

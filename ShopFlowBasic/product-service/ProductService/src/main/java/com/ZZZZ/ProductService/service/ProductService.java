@@ -3,7 +3,7 @@ package com.ZZZZ.ProductService.service;
 
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
-import com.ZZZZ.ProductService.DTO.response.ProductResponse;
+import com.ZZZZ.ProductService.DTO.response.product.ProductResponse;
 import org.springframework.data.domain.Page;
 
 

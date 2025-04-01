@@ -1,6 +1,8 @@
 package com.ZZZZ.UserService.repository.Impl;
 
 
+import com.ZZZZ.UserService.base.exception.ApplicationException;
+import com.ZZZZ.UserService.base.exception.ErrorCode;
 import com.ZZZZ.UserService.entity.User;
 import com.ZZZZ.UserService.repository.Jpa.UserJpaRepo;
 import com.ZZZZ.UserService.repository.UserRepo;
@@ -40,16 +42,18 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public User getUser(String id) {
         Optional<User> foundUser = userJpaRepo.findByIdAndDeleteAtIsNull(id);
-        if (foundUser.isPresent()) {
-            return foundUser.get();
-        }
-        return null; // throw error;
+        return foundUser.orElseThrow(() -> new ApplicationException(ErrorCode.USER_NOT_EXISTED));
+    }
+
+    @Override
+    public boolean existsUserByEmail(String email) {
+        User foundUser = userJpaRepo.findByEmailAndDeleteAtIsNull(email);
+        return foundUser != null;
     }
 
     @Override
     public User getUserByEmail(String email) {
-        Optional<User> foundUser = userJpaRepo.findByEmailAndDeleteAtIsNull(email);
-        return foundUser.orElse(null);
+        return userJpaRepo.findByEmailAndDeleteAtIsNull(email);
     }
 
     @Override

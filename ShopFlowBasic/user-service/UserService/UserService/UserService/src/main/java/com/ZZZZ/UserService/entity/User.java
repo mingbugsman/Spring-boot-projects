@@ -27,6 +27,8 @@ public class User {
     @Column(nullable = false)
     String password;
 
+    @Column(name = "account_verified", nullable = false)
+    boolean verified = false;
 
     @Column(name = "delete_at")
     LocalDateTime deleteAt;

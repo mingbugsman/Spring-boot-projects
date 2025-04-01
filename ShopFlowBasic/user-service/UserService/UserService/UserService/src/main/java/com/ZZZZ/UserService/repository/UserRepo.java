@@ -5,6 +5,7 @@ import com.ZZZZ.UserService.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Optional;
 
 
 public interface UserRepo {
@@ -12,6 +13,7 @@ public interface UserRepo {
     void softDeleteUser(User user);
     void deleteUserByAdmin(User user);
     User getUser(String id);
+    boolean existsUserByEmail(String email);
     User getUserByEmail(String email);
     Page<User> getAll(Pageable pageable);
 }

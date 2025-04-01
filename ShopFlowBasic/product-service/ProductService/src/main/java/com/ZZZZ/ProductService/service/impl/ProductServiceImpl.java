@@ -1,12 +1,14 @@
 package com.ZZZZ.ProductService.service.impl;
 
 
+import com.ZZZZ.ProductService.base.exception.ApplicationException;
+import com.ZZZZ.ProductService.base.exception.ErrorCode;
 import com.ZZZZ.commonDTO.Enum.EventType;
 import com.ZZZZ.commonDTO.Product.ProductEvent;
 import com.ZZZZ.ProductService.kafka.ProductEventProducer;
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
-import com.ZZZZ.ProductService.DTO.response.ProductResponse;
+import com.ZZZZ.ProductService.DTO.response.product.ProductResponse;
 import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.ProductService.mapper.ProductMapper;
 import com.ZZZZ.ProductService.repository.ProductRepo;
@@ -33,7 +35,6 @@ public class ProductServiceImpl implements ProductService {
     ProductMapper productMapper;
     RedisTemplate<String, Product> redisTemplate;
     ProductEventProducer productEventProducer;
-    EntityManager entityManager;
 
     @Override
     public ProductResponse createProduct(ProductCreationRequest request) {
@@ -50,13 +51,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse getProduct(String id) {
         // get cached product
-        Product cachedProduct = (Product) redisTemplate.opsForValue().get("product:"+id);
+        Product cachedProduct = redisTemplate.opsForValue().get("product:"+id);
         if (cachedProduct != null) return productMapper.toProductResponse(cachedProduct);
 
         // if it doesn't exist in caching product, checking in db
         Product product = productRepo.getProduct(id);
         if (product == null) {
-            throw new RuntimeException("Not found product");
+            throw new ApplicationException(ErrorCode.PRODUCT_NOT_EXISTED);
         }
         return productMapper.toProductResponse(product);
     }
@@ -72,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse updateProduct(String id, ProductUpdateRequest request) {
         Product product = productRepo.getProduct(id);
         if (product == null) {
-            throw new RuntimeException("Not found product");
+            throw new ApplicationException(ErrorCode.PRODUCT_NOT_EXISTED);
         }
         productMapper.updateProduct(product, request);
         product = productRepo.save(product);
@@ -90,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(String id) {
         Product product = productRepo.getProduct(id);
         if (product == null) {
-            throw new RuntimeException("Not found product");
+            throw new ApplicationException(ErrorCode.PRODUCT_NOT_EXISTED);
         }
         productRepo.softDelete(product);
         redisTemplate.delete("product:"+id);

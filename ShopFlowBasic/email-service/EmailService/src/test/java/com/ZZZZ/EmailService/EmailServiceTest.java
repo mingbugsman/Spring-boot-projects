@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.thymeleaf.context.Context;
+
+import java.util.UUID;
 
 @SpringBootTest
 public class EmailServiceTest {
@@ -25,15 +26,22 @@ public class EmailServiceTest {
     @Test
     public void sendEmail() {
         EmailRequest emailRequest = new EmailRequest("ming18380@gmail.com", "Nguyen Hoang Thuong Anh");
-        Context context = new Context();
-        context.setVariable("senderEmail", sender);
-        context.setVariable("replyTo", emailRequest.getTo());
-        context.setVariable("name", emailRequest.getName());
         try {
-            emailService.sendWelcomeUserEmail("Welcome to shop service", "emailTemplate", context);
+            emailService.sendWelcomeUserEmail(emailRequest);
             System.out.println("email sent successfully");
         } catch (MessagingException e) {
             System.out.println( "Error sending email: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void sendOTP() {
+        EmailRequest emailRequest = new EmailRequest( "1250080116@sv.hcmunre.edu.vn", "Nguyen Hoang Thuong Anh");
+        try {
+            emailService.sendOTP(emailRequest);
+            System.out.println("email sent successfully");
+        } catch (MessagingException e) {
+            System.out.println("Error sending email:" + e.getMessage());
         }
     }
 

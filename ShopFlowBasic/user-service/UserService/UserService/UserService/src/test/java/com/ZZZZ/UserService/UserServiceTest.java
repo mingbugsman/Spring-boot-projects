@@ -21,7 +21,7 @@ public class UserServiceTest {
 
     @Test
     public void createUser() {
-        UserCreationRequest request = new UserCreationRequest(RandomGenerator.generateRandomEmail(), RandomGenerator.generateRandomPassword());
+        UserCreationRequest request = new UserCreationRequest("1250080116@sv.hcmunre.edu.vn", RandomGenerator.generateRandomPassword());
         UserResponse response = userService.createUser(request);
         System.out.println(response);
     }
@@ -62,4 +62,16 @@ public class UserServiceTest {
             System.out.println(user);
         }
     }
+
+
+    @Test
+    public void verifyEmailTesting() {
+        if(userService.verifyEmail("1250080116@sv.hcmunre.edu.vn","462917")) {
+            System.out.println("Completed verified email");
+        } else {
+            System.out.println("Your email suck");
+        }
+
+    }
 }
+

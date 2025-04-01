@@ -14,6 +14,13 @@ public class UserEventProducer {
 
     public void sendUserCreatedEvent(EmailRequest request) {
         log.info("send message: {}", request);
-        kafkaTemplate.send("user-created",request);
+        kafkaTemplate.send("user-created-event",request);
     }
+
+
+    public void sendUserOTPEmailEvent(EmailRequest request) {
+        log.info("send verify message: {}", request);
+        kafkaTemplate.send("send-otp-event",request);
+    }
+
 }

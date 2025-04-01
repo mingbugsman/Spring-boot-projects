@@ -4,6 +4,8 @@ import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
 import com.ZZZZ.OrderService.Enum.OrderStatus;
+import com.ZZZZ.OrderService.base.exception.ApplicationException;
+import com.ZZZZ.OrderService.base.exception.ErrorCode;
 import com.ZZZZ.OrderService.entity.Order;
 import com.ZZZZ.OrderService.kafka.OrderEventProducer;
 import com.ZZZZ.OrderService.mapper.OrderMapper;
@@ -53,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponse updateInformationOrder(String id, OrderUpdateRequest request) {
         Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
         if (order == null) {
-            throw new RuntimeException("Not found order");
+            throw new ApplicationException(ErrorCode.ORDER_NOT_EXISTED);
         }
         order.setLocationShipping(request.getLocationShipping());
         order.setQuantity(request.getQuantity());
@@ -68,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     public String cancelOrder(String id) {
         Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
         if (order == null) {
-            throw new RuntimeException("Not found order");
+            throw new ApplicationException(ErrorCode.ORDER_NOT_EXISTED);
         }
         order.setOrderStatus(OrderStatus.CANCELLED);
         orderRepo.save(order);
@@ -81,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(String id) {
         Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
         if (order == null) {
-            throw new RuntimeException("Not found order");
+            throw new ApplicationException(ErrorCode.ORDER_NOT_EXISTED);
         }
         order.setDeletedAt(LocalDateTime.now());
         orderRepo.save(order);

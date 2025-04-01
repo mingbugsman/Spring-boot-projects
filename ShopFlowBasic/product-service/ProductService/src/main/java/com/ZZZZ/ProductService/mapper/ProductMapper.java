@@ -3,7 +3,7 @@ package com.ZZZZ.ProductService.mapper;
 
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
-import com.ZZZZ.ProductService.DTO.response.ProductResponse;
+import com.ZZZZ.ProductService.DTO.response.product.ProductResponse;
 import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.commonDTO.Product.DeletedProduct;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,7 @@ package com.ZZZZ.ProductService;
 
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
 import com.ZZZZ.ProductService.DTO.request.ProductUpdateRequest;
-import com.ZZZZ.ProductService.DTO.response.ProductResponse;
+import com.ZZZZ.ProductService.DTO.response.product.ProductResponse;
 import com.ZZZZ.ProductService.entity.Product;
 import com.ZZZZ.ProductService.repository.jpa.ProductJpaRepo;
 import com.ZZZZ.ProductService.service.ProductService;
@@ -12,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 

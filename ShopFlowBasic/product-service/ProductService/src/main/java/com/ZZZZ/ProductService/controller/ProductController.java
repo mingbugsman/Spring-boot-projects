@@ -2,17 +2,14 @@ package com.ZZZZ.ProductService.controller;
 
 
 import com.ZZZZ.ProductService.DTO.request.ProductCreationRequest;
-import com.ZZZZ.ProductService.DTO.response.ProductResponse;
+import com.ZZZZ.ProductService.DTO.response.product.ProductResponse;
 import com.ZZZZ.ProductService.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -24,4 +21,6 @@ public class ProductController {
     public ResponseEntity<ProductResponse> create(@RequestBody @Valid ProductCreationRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(request));
     }
+
+
 }
