@@ -21,6 +21,7 @@ public class Permission {
 
     @Column(unique = true, nullable = false)
     String name;
+
     String description;
 
     @ManyToMany(mappedBy = "permissions")

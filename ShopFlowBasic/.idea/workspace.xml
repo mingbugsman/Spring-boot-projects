@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83ebfb34-964a-443c-b0eb-e53df0761512" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/DataInitializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/Security/CustomUserDetailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/Security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/Permission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Jpa/PermissionJpaRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Jpa/RoleJpaRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/environment/docker-compose-kafka-broker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Jpa/UserJpaRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/repository/Jpa/UserJpaRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/DataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/config/DataInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/Permission.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/java/com/ZZZZ/UserService/entity/Permission.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/UserService/UserService/UserService/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
