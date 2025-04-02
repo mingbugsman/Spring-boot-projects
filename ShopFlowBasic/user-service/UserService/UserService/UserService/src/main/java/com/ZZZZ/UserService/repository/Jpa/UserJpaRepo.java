@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface UserJpaRepo extends JpaRepository<User, String> {
     Page<User> findByDeleteAtIsNull(Pageable pageable);
-    
+    User findByUsername(String username);
     Optional<User> findByIdAndDeleteAtIsNull(String id);
     User findByEmailAndDeleteAtIsNull(String email);
 
