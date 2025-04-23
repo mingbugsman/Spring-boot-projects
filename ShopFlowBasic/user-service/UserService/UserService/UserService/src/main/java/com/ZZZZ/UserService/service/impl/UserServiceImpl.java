@@ -11,6 +11,7 @@ import com.ZZZZ.UserService.entity.User;
 import com.ZZZZ.UserService.kafka.UserEventProducer;
 import com.ZZZZ.UserService.mapper.UserMapper;
 import com.ZZZZ.UserService.repository.UserRepo;
+import com.ZZZZ.UserService.service.KeycloakService;
 import com.ZZZZ.UserService.service.UserService;
 import com.ZZZZ.commonDTO.EmailRequest;
 import lombok.AccessLevel;
@@ -21,8 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,24 +35,7 @@ public class UserServiceImpl implements UserService {
     RedisTemplate<String, String> redisTemplate;
 
     @Override
-    public UserResponse createUser(UserCreationRequest request) {
-
-        if (userRepo.existsUserByEmail(request.getEmail())) {
-            throw new ApplicationException(ErrorCode.EMAIL_EXISTED);
-        }
-        User user = userMapper.toUser(request);
-        user.setUsername( Generator.generatorUsername());
-
-        // hash password
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepo.save(user);
-        userEventProducer.sendUserOTPEmailEvent(new EmailRequest(request.getEmail(), user.getUsername()));
-        return userMapper.toUserResponse(user);
-    }
-
-    @Override
+    @PreAuthorize("hasRole('ADMIN') or id.equals(authentication.name)")
     public UserResponse updateUser(String id, UserUpdateInformationRequest request) {
         User foundUser = userRepo.getUser(id);
         userMapper.updateUser(foundUser, request);
@@ -61,6 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('USER','ADMIN') or id.equals(authentication.name)")
     public void softDeleteUser(String id) {
         User foundUser = userRepo.getUser(id);
         userRepo.softDeleteUser(foundUser);
@@ -68,6 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void absoluteDeleteUser(String id) {
         User foundUser = userRepo.getUser(id);
         userRepo.deleteUserByAdmin(foundUser);
@@ -80,6 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Page<UserResponse> getAll(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
         return userRepo.getAll(pageable).map(userMapper::toUserResponse);
@@ -102,5 +88,19 @@ public class UserServiceImpl implements UserService {
         }
         userEventProducer.sendUserCreatedEvent(new EmailRequest(email, user.getUsername()));
         return true;
+    }
+
+    @Override
+    public String sendOTP(EmailRequest request) {
+        if (request.getTo().isEmpty() || request.getTo().isBlank()) {
+            throw new ApplicationException(ErrorCode.EMAIL_NOT_EXISTED);
+        }
+        User foundUser = userRepo.getUserByEmail(request.getTo());
+        if (foundUser.isVerified()) {
+            throw new ApplicationException(ErrorCode.EMAIL_IS_VERIFIED);
+        }
+        request.setName(foundUser.getUsername());
+        userEventProducer.sendUserOTPEmailEvent(request);
+        return "Successfully sent email, if email is existed, check our OTP";
     }
 }

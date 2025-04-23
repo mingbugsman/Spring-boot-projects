@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.KafkaListener;
 
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,7 +30,7 @@ public class ProductEventConsumer {
     private final KafkaTemplate<String, OrderFailedEvent> failedOrderEvent;
 
    @KafkaListener(topics = "product-events", groupId = "product-group")
-    public void consumeProductEvent(ProductEvent event) {
+    public void consumeProductEvent(ProductEvent event, Acknowledgment acknowledgment) {
         log.info("Received product: {}", event);
 
         switch (event.getEventType()) {
@@ -47,10 +48,11 @@ public class ProductEventConsumer {
             default:
                 log.warn("Unknown event type received: {}", event.getEventType());
         }
+        acknowledgment.acknowledge();
     }
 
     @KafkaListener(topics = "order-created", groupId = "inventory-group")
-    public void consumeOrderEvent(OrderCreatedEvent event) {
+    public void consumeOrderEvent(OrderCreatedEvent event, Acknowledgment acknowledgment) {
        log.info("received a message:{}",event.toString());
         Product product = productRepo.getProduct(event.getProductId());
         if (product == null) {
@@ -66,5 +68,6 @@ public class ProductEventConsumer {
         entityManager.clear();
         Product updatedProduct = productRepo.getProduct(event.getProductId());
         redisTemplate.opsForValue().set("product:" + updatedProduct.getId(), updatedProduct);
+        acknowledgment.acknowledge();
     }
 }

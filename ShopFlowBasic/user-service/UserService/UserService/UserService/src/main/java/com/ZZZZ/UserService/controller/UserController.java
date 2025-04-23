@@ -1,21 +1,40 @@
 package com.ZZZZ.UserService.controller;
 
 
-import com.ZZZZ.UserService.DTO.Request.UserCreationRequest;
+
 import com.ZZZZ.UserService.DTO.Request.UserUpdateInformationRequest;
+import com.ZZZZ.UserService.DTO.Request.VerifiedEmailRequest;
+import com.ZZZZ.UserService.DTO.Response.ApiResponse;
 import com.ZZZZ.UserService.DTO.Response.UserResponse;
 import com.ZZZZ.UserService.service.UserService;
+import com.ZZZZ.commonDTO.EmailRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
 
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @GetMapping("/roles")
+    public Mono<Object> getRoles(@AuthenticationPrincipal Jwt jwt) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Authorities: " + auth.getAuthorities());
+        System.out.println("Authentication name:::" + auth.getName());
+
+        Object roles = jwt.getClaimAsMap("realm_access").get("roles");
+        return Mono.just(roles);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable String id) {
@@ -31,11 +50,20 @@ public class UserController {
         return ResponseEntity.ok(userService.getAll(page, size, sortBy));
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserCreationRequest request) {
-        return ResponseEntity.ok(userService.createUser(request));
+    @PostMapping("send-otp")
+    public ApiResponse<String> sendOTP(@RequestBody @Valid EmailRequest request) {
+        return ApiResponse.<String>builder()
+                .message(userService.sendOTP(request))
+                .build();
     }
 
+    @PostMapping("verify-email")
+    public ApiResponse<String> verifyEmail(@RequestBody VerifiedEmailRequest request) {
+        boolean isVerified = userService.verifyEmail(request.getEmail(), request.getOtp());
+        return ApiResponse.<String>builder()
+                .result(isVerified ? "Your email is verified" : "Wrong otp")
+                .build();
+    }
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> updateInformationUser(@PathVariable String id, @RequestBody @Valid UserUpdateInformationRequest request) {
         return ResponseEntity.ok(userService.updateUser(id, request));
@@ -52,5 +80,7 @@ public class UserController {
         userService.absoluteDeleteUser(id);
         return ResponseEntity.ok("Successfully deleted user id : " + id);
     }
+
+
 
 }

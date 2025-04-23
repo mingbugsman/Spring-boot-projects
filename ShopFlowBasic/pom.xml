@@ -9,9 +9,12 @@
     <module>email-service/EmailService</module>
     <module>order-service/OrderService</module>
     <module>user-service/UserService/UserService/UserService</module>
+    <module>discovery-server</module>
+    <module>config-server</module>
+    <module>gateaway-service</module>
     <module>common-dto</module>
   </modules>
   <name>ShopFlowBasic</name>
-  <description>Spring Boot Multi-Module Project</description>
+  <description>Spring Boot Microservice Project</description>
 </project>
 

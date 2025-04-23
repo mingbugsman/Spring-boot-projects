@@ -15,7 +15,7 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <java.version>23</java.version>  <!-- Java 23 chưa chính thức support -->
+    <java.version>23</java.version>  
   </properties>
 
   <dependencies>

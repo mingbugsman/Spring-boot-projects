@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
     ProductEventProducer productEventProducer;
 
     @Override
+    @PreAuthorize("(hasRole('ADMIN') or (hasRole('PRODUCT_MANAGER'))")
     public ProductResponse createProduct(ProductCreationRequest request) {
         Product product = productMapper.toProduct(request);
         productRepo.save(product);
@@ -70,6 +72,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @PreAuthorize("(hasRole('ADMIN') or (hasRole('PRODUCT_MANAGER') and #id.equals(authentication.name)))")
     public ProductResponse updateProduct(String id, ProductUpdateRequest request) {
         Product product = productRepo.getProduct(id);
         if (product == null) {
@@ -88,6 +91,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @PreAuthorize("(hasRole('ADMIN') or (hasRole('PRODUCT_MANAGER') and #id.equals(authentication.name)))")
     public void deleteProduct(String id) {
         Product product = productRepo.getProduct(id);
         if (product == null) {

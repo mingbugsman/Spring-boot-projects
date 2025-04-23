@@ -10,6 +10,7 @@ import com.ZZZZ.commonDTO.Product.DeletedProduct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +24,14 @@ public class OrderEventConsumer {
 
     @KafkaListener(topics = "order-created", groupId = "order-service-group")
     @Transactional
-    public void consumeOrderResponseEvent(OrderCreatedEvent message) {
+    public void consumeOrderResponseEvent(OrderCreatedEvent message, Acknowledgment acknowledgment) {
         log.info("Received order created: {}", message);
+        acknowledgment.acknowledge();
     }
 
     @KafkaListener(topics = "failed-order", groupId = "order-update-group")
     @Transactional
-    public void consumeCancelOrderEvent(OrderFailedEvent event) {
+    public void consumeCancelOrderEvent(OrderFailedEvent event, Acknowledgment acknowledgment) {
         System.out.println(event.toString());
         Order order = orderRepo.findByIdAndDeletedAtIsNull(event.getOrderId());
         if (order == null) {
@@ -38,17 +40,19 @@ public class OrderEventConsumer {
         }
         order.setOrderStatus(OrderStatus.FAILED);
         orderRepo.save(order);
+        acknowledgment.acknowledge();
     }
 
     @KafkaListener(topics = "deleted-product", groupId = "order-delete-service-group")
     @Transactional
-    public void consumeDeleteProductEvent(DeletedProduct event) {
+    public void consumeDeleteProductEvent(DeletedProduct event, Acknowledgment acknowledgment) {
         log.info("Receive a message: {}", event);
         List<Order> orders = orderRepo.findByProductIdAndDeletedAtIsNull(event.getProductId());
         for (Order order : orders) {
             order.setDeletedAt(event.getDeletedAt());
         }
         orderRepo.saveAll(orders);
+        acknowledgment.acknowledge();
     }
 
 }

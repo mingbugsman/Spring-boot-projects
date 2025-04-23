@@ -3,6 +3,7 @@ package com.ZZZZ.OrderService.mapper;
 
 import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
+import com.ZZZZ.OrderService.DTO.response.OrderDetailResponse;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
 import com.ZZZZ.OrderService.entity.Order;
 import com.ZZZZ.commonDTO.Order.OrderCanceledEvent;
@@ -32,10 +33,21 @@ public class OrderMapper {
         order.setQuantity(request.getQuantity());
     }
 
+    public OrderDetailResponse toOrderDetailResponse(Order order) {
+        return new OrderDetailResponse(
+                order.getId(),
+                order.getProductId(),
+                order.getUserId(),
+                order.getQuantity(),
+                order.getLocationShipping(),
+                order.getOrderStatus(),
+                order.getPaymentMethod()
+        );
+    }
+
     public OrderResponse toOrderResponse(Order order) {
         return new OrderResponse(
                 order.getId(),
-                order.getProductId(),
                 order.getUserId(),
                 order.getQuantity(),
                 order.getLocationShipping(),

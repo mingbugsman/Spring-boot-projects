@@ -22,6 +22,8 @@ public enum ErrorCode {
     USER_EXISTED(1002, "Already existed user", HttpStatus.BAD_REQUEST),
     USERNAME_EXISTED(1003, "Already existed username", HttpStatus.BAD_REQUEST),
     EMAIL_EXISTED(1004, "Already existed email", HttpStatus.BAD_REQUEST),
+    EMAIL_IS_VERIFIED(1005, "Email has been verified", HttpStatus.BAD_REQUEST),
+
     /**
      * HANDLING ERROR : NOT FOUND
      */

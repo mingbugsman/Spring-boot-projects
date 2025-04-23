@@ -1,6 +1,6 @@
 package com.ZZZZ.OrderService.base.exception;
 
-import com.ZZZZ.ProductService.DTO.response.ApiResponse;
+import com.ZZZZ.OrderService.DTO.response.ApiResponse;
 
 import java.util.List;
 

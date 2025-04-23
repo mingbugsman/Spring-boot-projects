@@ -2,6 +2,7 @@ package com.ZZZZ.OrderService.service.impl;
 
 import com.ZZZZ.OrderService.DTO.request.OrderCreationRequest;
 import com.ZZZZ.OrderService.DTO.request.OrderUpdateRequest;
+import com.ZZZZ.OrderService.DTO.response.OrderDetailResponse;
 import com.ZZZZ.OrderService.DTO.response.OrderResponse;
 import com.ZZZZ.OrderService.Enum.OrderStatus;
 import com.ZZZZ.OrderService.base.exception.ApplicationException;
@@ -23,6 +24,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +34,7 @@ import java.util.Collections;
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class OrderServiceImpl implements OrderService {
+
     OrderMapper orderMapper;
     OrderRepo orderRepo;
     OrderEventProducer producer;
@@ -39,20 +42,21 @@ public class OrderServiceImpl implements OrderService {
     KafkaTemplate<String, OrderCanceledEvent> orderCanceledEventKafkaTemplate;
 
     @Override
-    public OrderResponse createOrder(OrderCreationRequest request) {
-
+    @PreAuthorize("hasAnyRole('USER','ADMIN') and #id.equals(authentication.name)")
+    public OrderDetailResponse createOrder(OrderCreationRequest request) {
         Order order = orderMapper.toOrder(request);
         orderRepo.save(order);
 
         OrderCreatedEvent event = orderMapper.toOrderCreatedEvent(order, "sending message created order");
         producer.sendOrderCreatedEvent(event);
 
-        return orderMapper.toOrderResponse(order);
+        return orderMapper.toOrderDetailResponse(order);
     }
 
 
     @Override
-    public OrderResponse updateInformationOrder(String id, OrderUpdateRequest request) {
+    @PreAuthorize("hasAnyRole('USER','ADMIN') and #id.equals(authentication.name)")
+    public OrderDetailResponse updateInformationOrder(String id, OrderUpdateRequest request) {
         Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
         if (order == null) {
             throw new ApplicationException(ErrorCode.ORDER_NOT_EXISTED);
@@ -61,12 +65,13 @@ public class OrderServiceImpl implements OrderService {
         order.setQuantity(request.getQuantity());
         order.setPaymentMethod(request.getPaymentMethod());
         orderRepo.save(order);
-        return orderMapper.toOrderResponse(order);
+        return orderMapper.toOrderDetailResponse(order);
     }
 
 
 
     @Override
+    @PreAuthorize("hasAnyRole('USER','ADMIN') and #id.equals(authentication.name)")
     public String cancelOrder(String id) {
         Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
         if (order == null) {
@@ -80,6 +85,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteOrder(String id) {
         Order order = orderRepo.findByIdAndDeletedAtIsNull(id);
         if (order == null) {
@@ -90,21 +96,25 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<OrderResponse> getAllOrder(int page, int size, String sortBy) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public Page<OrderDetailResponse> getAllOrder(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
-        return orderRepo.findByDeletedAtIsNull(pageable).map(orderMapper::toOrderResponse);
+        return orderRepo.findByDeletedAtIsNull(pageable).map(orderMapper::toOrderDetailResponse);
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ADMIN','PRODUCT_MANAGER')")
     public Page<OrderResponse> getOrdersByProductId(String productId, int page, int size, String sortBy) {
+        System.out.println("productId:::"+productId);
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
         return orderRepo.findByProductIdAndDeletedAtIsNull(productId, pageable).map(orderMapper::toOrderResponse);
     }
 
     @Override
-    public Page<OrderResponse> getOrdersByUserId(String userId, int page, int size, String sortBy) {
+    @PreAuthorize("(hasRole('ADMIN') or (hasRole('USER') and #userId.equals(authentication.name)))")
+    public Page<OrderDetailResponse> getOrdersByUserId(String userId, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sortBy));
-        return orderRepo.findByUserIdAndDeletedAtIsNull(userId, pageable).map(orderMapper::toOrderResponse);
+        return orderRepo.findByUserIdAndDeletedAtIsNull(userId, pageable).map(orderMapper::toOrderDetailResponse);
     }
 
     private static final String CHECK_AND_UPDATE_STOCK_SCRIPT =

@@ -4,7 +4,6 @@ package com.ZZZZ.UserService;
 import com.ZZZZ.UserService.DTO.Request.UserCreationRequest;
 import com.ZZZZ.UserService.DTO.Request.UserUpdateInformationRequest;
 import com.ZZZZ.UserService.DTO.Response.UserResponse;
-import com.ZZZZ.UserService.Enum.SortType;
 import com.ZZZZ.UserService.Helper.RandomGenerator;
 import com.ZZZZ.UserService.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -66,7 +65,7 @@ public class UserServiceTest {
 
     @Test
     public void verifyEmailTesting() {
-        if(userService.verifyEmail("1250080116@sv.hcmunre.edu.vn","462917")) {
+        if(userService.verifyEmail("kujojotaro722@gmail.com","431979")) {
             System.out.println("Completed verified email");
         } else {
             System.out.println("Your email suck");

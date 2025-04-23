@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     UNAUTHORIZED(444, "Unauthorized", HttpStatus.FORBIDDEN),
+    SERVER_OVERLOAD(555, "server overload, please wait a few minutes", HttpStatus.SERVICE_UNAVAILABLE),
     INVALID_AUTHORIZATION_HEADER(777,"Invalid authorization header", HttpStatus.BAD_REQUEST),
     UNCATEGORIZED_EXCEPTION(9999, "Uncategorized error", HttpStatus.INTERNAL_SERVER_ERROR),
 

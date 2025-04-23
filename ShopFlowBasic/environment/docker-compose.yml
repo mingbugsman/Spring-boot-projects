@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+#  redis:
+#    container_name: my-redis
+#    image: redis:latest
+#    ports:
+#      - "6379:6379"
+#    networks:
+#      - redis-network
+#
+#  redis-exporter:
+#    container_name: redis-exporter
+#    image: oliver006/redis_exporter:latest
+#    command: -redis.addr=redis://redis:6379
+#    ports:
+#      - "9121:9121"
+#    networks:
+#      - redis-network
+#    depends_on:
+#      - redis
+
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "9001:3000"
+    networks:
+      - monitoring
+  keycloak-mysql:
+    container_name: keycloak-mysql
+    image: mysql:8
+    volumes:
+      - ./volume-data/mysql_keycloak_data:/var/lib/mysql
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+
+
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:24.0.1
+    command: [ "start-dev", "--import-realm" ]
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: mysql
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8181:8080"
+    volumes:
+      - ./docker/keycloak/realms/:/opt/keycloak/data/import/
+    depends_on:
+      - keycloak-mysql
+networks:
+  monitoring:
+    driver: bridge

@@ -1,0 +1,118 @@
+server:
+  port: 3010
+
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      probability: 1.0
+  kafka:
+    bootstrap-servers: localhost:9193
+    admin:
+      properties:
+        request.timeout.ms: 300000
+        default.api.timeout.ms: 300000
+    producer:
+      retries: 0
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: myGroup
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.ZZZZ.commonDTO.*"
+
+    listener:
+      missing-topics-fatal: false
+      ack-mode: manual_immediate
+  datasource:
+    url: "jdbc:mysql://localhost:3308/shopflow_order"
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format-sql: true
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 500KB
+      max-request-size: 500KB
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      orderService:
+        registerHealthIndicator: true
+        slidingWindowSize: 3
+        minimumNumberOfCalls: 4
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        recordExceptions:
+          - java.net.UnknownHostException
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - java.lang.RuntimeException
+
+  ratelimiter:
+    instances:
+      orderService:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0
+
+  timelimiter:
+    instances:
+      orderService:
+        timeoutDuration: 3s
+
+  bulkhead:
+    instances:
+      orderService:
+        maxConcurrentCalls: 10
+        maxWaitDuration: 0
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans,circuitbreakers
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+
+keycloak:
+  server-url: http://localhost:8181
+  realm: shopflow
+  client-id: gateway-client
+  client-secret: X2wyPoIg59fp2cnIeKZ5D2fqhsTktSiA
+  admin-username: admin
+  admin-password: admin
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG

@@ -13,6 +13,8 @@ target/
 *.ipr
 
 environment/data
+environment/docker
+environment/volume-data
 
 ### Eclipse ###
 .apt_generated

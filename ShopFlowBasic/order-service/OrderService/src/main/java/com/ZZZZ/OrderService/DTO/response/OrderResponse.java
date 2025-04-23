@@ -5,10 +5,10 @@ import com.ZZZZ.OrderService.Enum.PaymentMethod;
 
 public record OrderResponse(
         String id,
-        String productId,
         String userId,
         int quantity,
         String locationShipping,
         OrderStatus orderStatus,
         PaymentMethod paymentMethod
-) {}
+) {
+}
